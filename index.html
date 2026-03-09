@@ -13,25 +13,25 @@
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{background:var(--cream);color:var(--brown);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;}
 
-  .header{background:var(--brown);padding:28px 20px 20px;text-align:center;position:relative;overflow:hidden;}
+  .header{background:var(--brown);padding:24px 20px 18px;text-align:center;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 18px,rgba(201,169,110,0.05) 18px,rgba(201,169,110,0.05) 19px);}
-  .header-border{border:1px solid rgba(201,169,110,0.35);border-radius:3px;padding:18px 16px 14px;position:relative;}
-  .header-ornament{color:var(--gold);font-size:12px;letter-spacing:5px;opacity:0.6;margin-bottom:8px;display:block;}
-  .header h1{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1.1;}
+  .header-border{border:1px solid rgba(201,169,110,0.35);border-radius:3px;padding:16px 16px 12px;position:relative;}
+  .header-ornament{color:var(--gold);font-size:11px;letter-spacing:5px;opacity:0.6;margin-bottom:6px;display:block;}
+  .header h1{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold);line-height:1.1;}
   .header h1 span{color:rgba(201,169,110,0.45);font-weight:400;}
-  .header-sub{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(250,246,239,0.6);margin-top:7px;}
-  .header-dates{display:inline-block;margin-top:10px;background:rgba(201,169,110,0.13);border:1px solid rgba(201,169,110,0.3);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
+  .header-sub{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(250,246,239,0.6);margin-top:6px;}
+  .header-dates{display:inline-block;margin-top:8px;background:rgba(201,169,110,0.13);border:1px solid rgba(201,169,110,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
 
-  .progress-wrap{background:var(--brown);padding:0 20px 14px;}
+  .progress-wrap{background:var(--brown);padding:0 20px 12px;}
   .progress-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(201,169,110,0.55);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
   .progress-bar{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
   .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E8C87A);border-radius:2px;transition:width 0.5s ease;}
 
-  .city-banner{margin:14px 14px 6px;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+  .city-banner{margin:12px 14px 6px;border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:10px;}
   .city-banner.vienna{background:var(--red);color:white;}
   .city-banner.budapest{background:var(--teal);color:white;}
-  .city-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;}
-  .city-icon{font-size:22px;}
+  .city-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;}
+  .city-icon{font-size:20px;}
   .city-info{font-size:11px;font-weight:300;opacity:0.75;margin-top:1px;}
 
   .day-card{margin:6px 14px;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);background:white;}
@@ -58,11 +58,50 @@
   .act-time{font-size:11px;font-weight:500;color:var(--red);letter-spacing:0.5px;margin-bottom:2px;}
   .act-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--brown);line-height:1.25;transition:all 0.2s;}
   .act-desc{font-size:13px;color:var(--soft);margin-top:4px;line-height:1.5;}
+  .act-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
+  .act-tag{font-size:10.5px;padding:2px 8px;border-radius:10px;font-weight:500;}
+  .tag-photo{background:#FFF3E0;color:#E65100;}
+  .tag-food{background:#E8F5E9;color:#2E7D32;}
+  .tag-museum{background:#E3F2FD;color:#1565C0;}
+  .tag-hotel{background:#F3E5F5;color:#6A1B9A;}
+  .tag-night{background:#1A1A2E;color:#C9A96E;}
+  .tag-transport{background:#ECEFF1;color:#37474F;}
   .act-map{display:inline-flex;align-items:center;gap:5px;margin-top:7px;font-size:12px;color:var(--teal);text-decoration:none;background:rgba(26,82,96,0.07);padding:4px 10px;border-radius:20px;font-weight:500;}
   .act-map:active{background:rgba(26,82,96,0.15);}
 
   .tip-box{margin:6px 14px 2px;background:#FFFBF0;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12.5px;color:#6B5020;font-style:italic;line-height:1.55;}
 
+  /* MAP TAB */
+  .map-controls{padding:10px 14px;background:white;margin:6px 14px;border-radius:12px;box-shadow:0 2px 10px var(--shadow);}
+  .map-controls-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--brown);margin-bottom:8px;}
+  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+  .filter-btn{padding:5px 12px;border-radius:20px;border:1.5px solid #D4C4A8;background:white;font-size:12px;cursor:pointer;color:var(--soft);transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+  .filter-btn.active{border-color:var(--gold);background:var(--gold);color:white;}
+  .filter-btn.day-btn.d1.active{background:#8B2020;border-color:#8B2020;}
+  .filter-btn.day-btn.d2.active{background:#A0522D;border-color:#A0522D;}
+  .filter-btn.day-btn.d3.active{background:#6B4226;border-color:#6B4226;}
+  .filter-btn.day-btn.d4.active{background:#1A5260;border-color:#1A5260;}
+  .filter-btn.day-btn.d5.active{background:#154360;border-color:#154360;}
+  .filter-btn.day-btn.d6.active{background:#0E2954;border-color:#0E2954;}
+
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--soft);}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+  #map{width:100%;height:calc(100vh - 280px);min-height:350px;border-radius:12px;overflow:hidden;margin:0 14px;width:calc(100% - 28px);}
+
+  /* INFO POPUP */
+  .gm-style .info-window{padding:0!important;}
+  .iw-content{padding:12px;min-width:200px;max-width:260px;}
+  .iw-time{font-size:11px;color:#8B2020;font-weight:600;letter-spacing:0.5px;margin-bottom:3px;}
+  .iw-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:5px;}
+  .iw-desc{font-size:12px;color:#6B5B4E;line-height:1.4;margin-bottom:8px;}
+  .iw-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
+  .iw-tag{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:500;}
+  .iw-photo-badge{background:#FFF3E0;color:#E65100;font-size:11px;padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;font-weight:500;margin-bottom:6px;}
+  .iw-map-btn{display:block;text-align:center;background:#1A5260;color:white;padding:7px 10px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:500;}
+
+  /* TRAIN & INFO */
   .train-card{margin:6px 14px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);}
   .train-header{background:#2A3A4A;color:white;padding:12px 16px;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;}
   .train-row{display:flex;align-items:center;padding:9px 16px;border-bottom:1px solid #F5F0E8;gap:10px;font-size:13px;}
@@ -72,7 +111,7 @@
   .train-val a{color:var(--teal);}
 
   .info-section{margin:6px 14px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);}
-  .info-section-title{background:var(--ivory);padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid #E8E0D0;display:flex;align-items:center;gap:8px;}
+  .info-section-title{background:var(--ivory);padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid #E8E0D0;}
   .info-row{display:flex;padding:9px 14px;border-bottom:1px solid #F5F0E8;gap:10px;font-size:13px;align-items:flex-start;}
   .info-row:last-child{border-bottom:none;}
   .info-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
@@ -84,13 +123,6 @@
   .food-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--brown);margin-bottom:2px;}
   .food-desc{font-size:11.5px;color:var(--soft);line-height:1.4;}
 
-  .maps-list{padding:4px 0;}
-  .maps-item{display:flex;align-items:center;padding:9px 14px;gap:10px;border-bottom:1px solid #F5F0E8;text-decoration:none;color:var(--brown);}
-  .maps-item:last-child{border-bottom:none;}
-  .maps-item:active{background:var(--ivory);}
-  .maps-name{flex:1;font-size:13.5px;}
-  .maps-arrow{color:var(--teal);font-size:16px;}
-
   .budget-wrap{padding:0 14px 14px;}
   .budget-table{width:100%;border-collapse:collapse;font-size:13px;}
   .budget-table th{background:var(--brown);color:var(--gold);padding:8px 10px;text-align:left;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;}
@@ -99,8 +131,8 @@
   .budget-table tr:nth-child(even) td{background:#FAFAF5;}
 
   .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--brown);display:flex;border-top:1px solid rgba(201,169,110,0.15);z-index:100;}
-  .nav-btn{flex:1;padding:10px 6px;text-align:center;cursor:pointer;color:rgba(201,169,110,0.45);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border:none;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.15s;}
-  .nav-btn .nav-icon{font-size:19px;}
+  .nav-btn{flex:1;padding:9px 4px;text-align:center;cursor:pointer;color:rgba(201,169,110,0.45);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border:none;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color 0.15s;}
+  .nav-btn .nav-icon{font-size:18px;}
   .nav-btn.active{color:var(--gold);}
 
   .tab-content{display:none;padding-bottom:80px;}
@@ -132,7 +164,7 @@
   <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
 </div>
 
-<!-- TAB: PLAN -->
+<!-- ══ TAB: PLAN ══ -->
 <div class="tab-content active" id="tab-plan">
 <div class="top-gap"></div>
 
@@ -158,52 +190,49 @@
       <div class="act-content">
         <div class="act-time">12:00</div>
         <div class="act-title">✈️ Viyana'ya Varış</div>
-        <div class="act-desc">Birlikte iniş! CAT treniyle havalimanından şehir merkezine 16 dakika. Otele bagaj bırakın.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Vienna+International+Airport" target="_blank">📍 Viyana Havalimanı</a>
+        <div class="act-desc">Birlikte iniş! CAT treniyle havalimanından şehir merkezine 16 dakika.</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚇 Ulaşım</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Vienna+International+Airport" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-1-2">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">13:30</div>
-        <div class="act-title">🍽️ İlk Öğle</div>
-        <div class="act-desc">Otel yakınında hafif bir şeyler. Wiener sandwich veya küçük bir kafe.</div>
+        <div class="act-time">15:00</div>
+        <div class="act-title">🏛️ Stephansdom & Graben</div>
+        <div class="act-desc">Viyana'nın kalbi. Gotik katedrali içten-dıştan görün, Graben sokağında yürüyün.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Stephansdom+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-1-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">15:00</div>
-        <div class="act-title">🏛️ Stephansdom & Graben</div>
-        <div class="act-desc">Viyana'nın kalbi. Gotik katedrali içten-dıştan görün, Graben sokağında yürüyün. Şehrin ilk nefesi.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Stephansdom+Vienna" target="_blank">📍 Stephansdom</a>
+        <div class="act-time">16:30</div>
+        <div class="act-title">🏯 Hofburg & Heldenplatz</div>
+        <div class="act-desc">Görkemli mimari, meydanda fotoğraf durağı.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Hofburg+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-1-4">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">16:30</div>
-        <div class="act-title">🏯 Hofburg & Heldenplatz</div>
-        <div class="act-desc">Dışarıdan gezmek yeterli — görkemli mimari, meydanda fotoğraf durağı.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Hofburg+Palace+Vienna" target="_blank">📍 Hofburg Sarayı</a>
+        <div class="act-time">18:30</div>
+        <div class="act-title">☕ Café Landtmann</div>
+        <div class="act-desc">Freud'un favori kafesi. Einspänner (çift espresso üstü krema).</div>
+        <div class="act-tags"><span class="act-tag tag-food">☕ Kafe</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Cafe+Landtmann+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-1-5">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">18:30</div>
-        <div class="act-title">☕ Café Landtmann</div>
-        <div class="act-desc">Freud'un favori kafesi. Einspänner (çift espresso üstü krema) veya sıcak çikolata. Şehrin ruhunu hissedin.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Cafe+Landtmann+Vienna" target="_blank">📍 Café Landtmann</a>
-      </div>
-    </div>
-    <div class="activity" id="a-1-6">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">20:00</div>
         <div class="act-title">🥩 Figlmüller — İlk Akşam Yemeği</div>
-        <div class="act-desc">1905'ten beri açık, Viyana'nın efsane Schnitzel'i. Tabaktan taşan dev porsiyon. Rezervasyon öneririz!</div>
-        <a class="act-map" href="https://maps.google.com/?q=Figlmuller+Backerstrasse+Vienna" target="_blank">📍 Figlmüller</a>
+        <div class="act-desc">1905'ten beri açık, Viyana'nın efsane Schnitzel'i. Rezervasyon öneririz!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Figlmuller+Backerstrasse+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
@@ -225,64 +254,51 @@
     <div class="activity" id="a-2-1">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">09:30</div>
-        <div class="act-title">☕ Café Landtmann — Kahvaltı</div>
-        <div class="act-desc">Klasik Viyana kahvaltısı: ekmek, peynir, jambon, reçel. Sizi sarıp sarmalasın.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Cafe+Landtmann+Vienna" target="_blank">📍 Café Landtmann</a>
+        <div class="act-time">11:00</div>
+        <div class="act-title">🏯 Schönbrunn Sarayı</div>
+        <div class="act-desc">1441 odalı Habsburg sarayı. Gloriette'e çık — tepeden Viyana panoraması. Nisan'da bahar çiçekleri.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Schonbrunn+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-2-2">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">11:00</div>
-        <div class="act-title">🏯 Schönbrunn Sarayı</div>
-        <div class="act-desc">1441 odalı Habsburg sarayı. Bahçelerde yürüyüş ve Gloriette'e çıkış şart — tepeden Viyana panoraması. Nisan'da bahar çiçekleri açar. ~1.5–2 saat.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Schonbrunn+Palace+Vienna" target="_blank">📍 Schönbrunn</a>
+        <div class="act-time">15:30</div>
+        <div class="act-title">🎨 Belvedere Sarayı</div>
+        <div class="act-desc">Gustav Klimt'in "Öpücük" tablosu burada. İlk buluşmada mutlaka görülmeli.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🎨 Müze</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Belvedere+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-2-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">13:30</div>
-        <div class="act-title">🍽️ Café Residenz — Öğle</div>
-        <div class="act-desc">Schönbrunn içindeki tarihi kafede öğle. Saray atmosferinde Avusturya mutfağı.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Cafe+Residenz+Schonbrunn+Vienna" target="_blank">📍 Café Residenz</a>
+        <div class="act-time">17:30</div>
+        <div class="act-title">🌿 Stadtpark Yürüyüşü</div>
+        <div class="act-desc">Johann Strauss heykeli önünde fotoğraf. Tuna kanalı boyunca akşam yürüyüşü.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Stadtpark+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-2-4">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">15:30</div>
-        <div class="act-title">🎨 Belvedere Sarayı</div>
-        <div class="act-desc">Gustav Klimt'in "Öpücük" tablosu burada. İlk buluşmada mutlaka görülmeli. Bahçeler de nefes kesici.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Belvedere+Palace+Vienna" target="_blank">📍 Belvedere</a>
+        <div class="act-time">20:00</div>
+        <div class="act-title">🍷 Meixner's — Akşam Yemeği</div>
+        <div class="act-desc">Otantik Viyana şarap evi. Lokal Grüner Veltliner şarabı.</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Meixners+Gastwirtschaft+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-2-5">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">17:30</div>
-        <div class="act-title">🌿 Stadtpark Yürüyüşü</div>
-        <div class="act-desc">Johann Strauss heykeli önünde fotoğraf. Tuna kanalı boyunca akşam yürüyüşü.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Stadtpark+Vienna" target="_blank">📍 Stadtpark</a>
-      </div>
-    </div>
-    <div class="activity" id="a-2-6">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
-        <div class="act-time">20:00</div>
-        <div class="act-title">🍷 Meixner's — Akşam Yemeği</div>
-        <div class="act-desc">Otantik Viyana şarap evi. Lokal Grüner Veltliner şarabı ve geleneksel Avusturya yemekleri.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Meixners+Gastwirtschaft+Vienna" target="_blank">📍 Meixner's</a>
-      </div>
-    </div>
-    <div class="activity" id="a-2-7">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">22:00</div>
         <div class="act-title">🎵 Gürtel Bar Sokağı</div>
-        <div class="act-desc">Viyana'nın en canlı gece hayatı. Köprü altlarında sıralanan barlar. Flux, Chelsea veya Loco.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Gurtel+Vienna+Bars" target="_blank">📍 Gürtel</a>
+        <div class="act-desc">Viyana'nın en canlı gece hayatı. Köprü altlarında barlar.</div>
+        <div class="act-tags"><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Gurtel+Vienna+Bars" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
@@ -305,57 +321,44 @@
       <div class="act-content">
         <div class="act-time">10:00</div>
         <div class="act-title">🛒 Naschmarkt</div>
-        <div class="act-desc">Viyana'nın açık hava pazarı — 120+ dükkan, 1500m. Pazar günü en canlı! Peynir, zeytin, meyve tadımı.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Naschmarkt+Vienna" target="_blank">📍 Naschmarkt</a>
+        <div class="act-desc">120+ dükkan, pazar günü en canlı! Peynir, zeytin, meyve tadımı.</div>
+        <div class="act-tags"><span class="act-tag tag-food">🛒 Pazar</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Naschmarkt+Vienna" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-3-2">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">12:00</div>
-        <div class="act-title">🌭 Würstelstand — Öğle</div>
-        <div class="act-desc">Viyana sokak yemeği: Käsekrainer (peynirli sosis). Naschmarkt yakınındaki bir stantta yiyin.</div>
+        <div class="act-time">13:30</div>
+        <div class="act-title">🎠 Prater & Riesenrad</div>
+        <div class="act-desc">1766'dan beri dönen efsane dönme dolap. Prater'de yürüyüş.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Prater+Vienna+Riesenrad" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-3-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">13:30</div>
-        <div class="act-title">🎠 Prater & Riesenrad</div>
-        <div class="act-desc">1766'dan beri dönen efsane dönme dolap. Prater'de yürüyüş, nisan havası.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Prater+Vienna+Riesenrad" target="_blank">📍 Prater</a>
+        <div class="act-time">17:27</div>
+        <div class="act-title">🚂 Railjet — Viyana → Budapeşte</div>
+        <div class="act-desc">Hauptbahnhof'tan kalkış. ~2.5 saat konforlu yolculuk.</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚂 Tren</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Vienna+Hauptbahnhof" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-3-4">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">15:30</div>
-        <div class="act-title">🏨 Otele Dönüş & Bagaj</div>
-        <div class="act-desc">Check-out ve bagajları toparla. Hauptbahnhof'ta emanet dolabı kullanabilirsiniz.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Vienna+Hauptbahnhof" target="_blank">📍 Hauptbahnhof</a>
-      </div>
-    </div>
-    <div class="activity" id="a-3-5">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
-        <div class="act-time">17:27</div>
-        <div class="act-title">🚂 Railjet — Viyana → Budapeşte</div>
-        <div class="act-desc">Hauptbahnhof'tan kalkış. ~2.5 saat konforlu yolculuk. Büfede bir şeyler alın, yolculuğun tadını çıkarın.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Vienna+Hauptbahnhof" target="_blank">📍 Hauptbahnhof</a>
-      </div>
-    </div>
-    <div class="activity" id="a-3-6">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">~20:00</div>
         <div class="act-title">🌆 Budapeşte Keleti — Varış</div>
-        <div class="act-desc">Otele yerleşme, hafif akşam yemeği veya hotel bar. Bugün yorucuydu — dinlenin!</div>
-        <a class="act-map" href="https://maps.google.com/?q=Budapest+Keleti+Station" target="_blank">📍 Budapeşte Keleti</a>
+        <div class="act-desc">Otele yerleşme, hafif akşam. Bugün yorucuydu — dinlenin!</div>
+        <div class="act-tags"><span class="act-tag tag-hotel">🏨 Konaklama</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Keleti+Station" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
 </div>
-<div class="tip-box">🚂 Trene 15 dk önce gidin. Pasaport yanınızda olsun. Bilet: oebb.at — önceden alın, ucuzlar!</div>
+<div class="tip-box">🚂 Trene 15 dk önce gidin. Pasaport yanınızda olsun. Bilet: oebb.at</div>
 
 <div class="section-gap"></div>
 
@@ -379,54 +382,51 @@
     <div class="activity" id="a-4-1">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">10:00</div>
-        <div class="act-title">☕ Kahvaltı</div>
-        <div class="act-desc">Otel kahvaltısı veya yakın bir kafe. Budapeşte'nin havasına alışın.</div>
+        <div class="act-time">12:00</div>
+        <div class="act-title">🏪 Nagyvásárcsarnok</div>
+        <div class="act-desc">Büyük Pazar Salonu. Lángos yemek zorunlu!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🛒 Pazar</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Great+Market+Hall+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-4-2">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">12:00</div>
-        <div class="act-title">🏪 Nagyvásárcsarnok</div>
-        <div class="act-desc">1897'den beri açık efsane Büyük Pazar Salonu. Lángos (kızarmış hamur + ekşi krema + peynir) yemek zorunlu!</div>
-        <a class="act-map" href="https://maps.google.com/?q=Great+Market+Hall+Budapest" target="_blank">📍 Büyük Pazar Salonu</a>
+        <div class="act-time">14:00</div>
+        <div class="act-title">🏰 Buda Kalesi</div>
+        <div class="act-desc">Sikló ile kale tepesine. Matthias Kilisesi + kale avlusu.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Buda+Castle+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-4-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">14:00</div>
-        <div class="act-title">🏰 Buda Kalesi</div>
-        <div class="act-desc">Sikló (funicular) ile kale tepesine çıkın. Matthias Kilisesi + kale avlusu turu.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Buda+Castle+Budapest" target="_blank">📍 Buda Kalesi</a>
+        <div class="act-time">15:30</div>
+        <div class="act-title">🗼 Balıkçı Kulesi</div>
+        <div class="act-desc">En ikonik fotoğraf noktası! Tuna + Parlamento manzarası. Gün batımı öncesi ışık harika.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Fishermans+Bastion+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-4-4">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">15:30</div>
-        <div class="act-title">🗼 Balıkçı Kulesi</div>
-        <div class="act-desc">Budapeşte'nin en ikonik noktası. Pembe-beyaz kuleler, Tuna + Parlamento manzarası. Gün batımı öncesi ışık harika!</div>
-        <a class="act-map" href="https://maps.google.com/?q=Fishermans+Bastion+Budapest" target="_blank">📍 Balıkçı Kulesi</a>
+        <div class="act-time">19:30</div>
+        <div class="act-title">🚢 Spoon Restoran</div>
+        <div class="act-desc">Tuna üzerinde yüzen teknede akşam yemeği!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Spoon+The+Boat+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-4-5">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">19:30</div>
-        <div class="act-title">🚢 Spoon Restoran</div>
-        <div class="act-desc">Tuna üzerinde yüzen teknede akşam yemeği! Zincir Köprü karşısında. Gece Budapeştesi'ni izleyin.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Spoon+The+Boat+Budapest" target="_blank">📍 Spoon The Boat</a>
-      </div>
-    </div>
-    <div class="activity" id="a-4-6">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">21:30</div>
         <div class="act-title">🍺 Szimpla Kert</div>
-        <div class="act-desc">Budapeşte'nin en ünlü ruin barı. Eski fabrika, her oda farklı dekore edilmiş. Unicum veya yerel bira!</div>
-        <a class="act-map" href="https://maps.google.com/?q=Szimpla+Kert+Budapest" target="_blank">📍 Szimpla Kert</a>
+        <div class="act-desc">Budapeşte'nin en ünlü ruin barı. Unicum veya yerel bira!</div>
+        <div class="act-tags"><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Szimpla+Kert+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
@@ -449,44 +449,29 @@
       <div class="act-content">
         <div class="act-time">10:00</div>
         <div class="act-title">♨️ Széchenyi Hamamı</div>
-        <div class="act-desc">1913'ten beri açık, dünyanın en büyük termal komplekslerinden biri. Açık havuz + sauna. Online bilet alın (~25-30€). Havlu + mayo yanınızda olsun.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Szechenyi+Thermal+Bath+Budapest" target="_blank">📍 Széchenyi Hamamı</a>
+        <div class="act-desc">Online bilet alın (~25-30€). Havlu + mayo yanınızda olsun.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Szechenyi+Thermal+Bath+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-5-2">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">13:30</div>
-        <div class="act-title">🥂 Gerloczy Café — Öğle</div>
-        <div class="act-desc">Hamam çıkışı şık bistro. Taze meyve suyu, krep ya da sandviç. İç avlusu çok şirin.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Gerloczy+Cafe+Budapest" target="_blank">📍 Gerloczy</a>
+        <div class="act-time">15:00</div>
+        <div class="act-title">🌳 Andrássy Bulvarı & Hősök</div>
+        <div class="act-desc">Budapeşte'nin Champs-Élysées'i. Hősök Meydanı'nda fotoğraf.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span><span class="act-tag tag-museum">🏛️ Tarihi</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Heroes+Square+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-5-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">15:00</div>
-        <div class="act-title">🌳 Andrássy Bulvarı</div>
-        <div class="act-desc">Budapeşte'nin Champs-Élysées'i. Zarif binalar, kafeler. Opera House önünde fotoğraf.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Andrassy+Avenue+Budapest" target="_blank">📍 Andrássy</a>
-      </div>
-    </div>
-    <div class="activity" id="a-5-4">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
-        <div class="act-time">16:30</div>
-        <div class="act-title">🏛️ Hősök Meydanı & City Park</div>
-        <div class="act-desc">Binlerce Yıl Anıtı ve arkasında Vajdahunyad Kalesi. City Park'ta yürüyüş.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Heroes+Square+Budapest" target="_blank">📍 Hősök Tere</a>
-      </div>
-    </div>
-    <div class="activity" id="a-5-5">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">20:30</div>
         <div class="act-title">🚢✨ Tuna Gece Turu</div>
-        <div class="act-desc">Seyahatin en romantik anı! Parlamento, Zincir Köprü, Buda Kalesi hepsi ışıl ışıl. Şampanya eşliğinde ~1.5 saat. Önceden rezervasyon şart! (~20-30€/kişi, legenda.hu)</div>
-        <a class="act-map" href="https://maps.google.com/?q=Budapest+Vigado+Pier+River+Cruise" target="_blank">📍 Cruise İskele</a>
+        <div class="act-desc">Parlamento, Zincir Köprü, Buda Kalesi hepsi ışıl ışıl. Şampanya eşliğinde ~1.5 saat. legenda.hu</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Vigado+Pier+River+Cruise" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
@@ -509,9 +494,10 @@
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
         <div class="act-time">09:00</div>
-        <div class="act-title">☕ New York Café — Son Kahvaltı</div>
-        <div class="act-desc">1894'ten beri açık, dünyanın en güzel kafelerinden biri. Freskler, altın süslemeler. Son sabaha layık!</div>
-        <a class="act-map" href="https://maps.google.com/?q=New+York+Cafe+Budapest" target="_blank">📍 New York Café</a>
+        <div class="act-title">☕ New York Café</div>
+        <div class="act-desc">1894'ten beri açık, dünyanın en güzel kafelerinden biri. Son sabaha layık!</div>
+        <div class="act-tags"><span class="act-tag tag-food">☕ Kafe</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=New+York+Cafe+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-6-2">
@@ -519,33 +505,19 @@
       <div class="act-content">
         <div class="act-time">11:00</div>
         <div class="act-title">🌉 Zincir Köprü — Son Yürüyüş</div>
-        <div class="act-desc">Lánchíd üzerinde son yürüyüş. Tuna fotoğrafları. Buda'ya geçip gelin.</div>
-        <a class="act-map" href="https://maps.google.com/?q=Chain+Bridge+Budapest" target="_blank">📍 Zincir Köprü</a>
+        <div class="act-desc">Lánchíd üzerinde son yürüyüş. Tuna fotoğrafları.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Chain+Bridge+Budapest" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
     <div class="activity" id="a-6-3">
       <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
       <div class="act-content">
-        <div class="act-time">12:00</div>
-        <div class="act-title">🛍️ Son Alışveriş & Hafif Öğle</div>
-        <div class="act-desc">Macar paprika, Tokaj şarabı veya Unicum. Lángos veya çorba ile hafif öğle — ağır yemeyin!</div>
-      </div>
-    </div>
-    <div class="activity" id="a-6-4">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
         <div class="act-time">13:30</div>
         <div class="act-title">🚕 Havalimanına Transfer</div>
-        <div class="act-desc">Taksi ~30-40 dk, Uber çalışıyor. Ya da 100E otobüsü Keleti'den kalkar (~45 dk, ucuz).</div>
-        <a class="act-map" href="https://maps.google.com/?q=Budapest+Ferenc+Liszt+International+Airport" target="_blank">📍 BUD Havalimanı</a>
-      </div>
-    </div>
-    <div class="activity" id="a-6-5">
-      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
-      <div class="act-content">
-        <div class="act-time">15:00</div>
-        <div class="act-title">✈️ Havalimanı & Uçuş 17:00</div>
-        <div class="act-desc">Check-in, güvenlik, son bir kahve. Seyahat bitti — ama anılar başlıyor. 🌹</div>
+        <div class="act-desc">Taksi ~30-40 dk. Uçuş 17:00!</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚕 Ulaşım</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Ferenc+Liszt+International+Airport" target="_blank">📍 Haritada Gör</a>
       </div>
     </div>
   </div>
@@ -554,7 +526,40 @@
 
 </div><!-- /tab-plan -->
 
-<!-- TAB: BİLGİ -->
+<!-- ══ TAB: HARİTA ══ -->
+<div class="tab-content" id="tab-map">
+<div class="top-gap"></div>
+
+<div class="map-controls">
+  <div class="map-controls-title">🗺️ Rotayı Filtrele</div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterMap('all',this)">Tümü</button>
+    <button class="filter-btn day-btn d1" onclick="filterMap('day1',this)">Gün 1</button>
+    <button class="filter-btn day-btn d2" onclick="filterMap('day2',this)">Gün 2</button>
+    <button class="filter-btn day-btn d3" onclick="filterMap('day3',this)">Gün 3</button>
+    <button class="filter-btn day-btn d4" onclick="filterMap('day4',this)">Gün 4</button>
+    <button class="filter-btn day-btn d5" onclick="filterMap('day5',this)">Gün 5</button>
+    <button class="filter-btn day-btn d6" onclick="filterMap('day6',this)">Gün 6</button>
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn" onclick="filterCat('photo',this)">📸 Fotoğraf</button>
+    <button class="filter-btn" onclick="filterCat('food',this)">🍽️ Yemek</button>
+    <button class="filter-btn" onclick="filterCat('museum',this)">🏛️ Tarihi</button>
+    <button class="filter-btn" onclick="filterCat('night',this)">🌙 Gece</button>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#E65100"></div>📸 Fotoğraf</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2E7D32"></div>🍽️ Yemek</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1565C0"></div>🏛️ Tarihi</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4A148C"></div>🌙 Gece</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#37474F"></div>🚇 Ulaşım</div>
+  </div>
+</div>
+
+<div id="map"></div>
+</div><!-- /tab-map -->
+
+<!-- ══ TAB: BİLGİ ══ -->
 <div class="tab-content" id="tab-info">
 <div class="top-gap"></div>
 
@@ -563,27 +568,23 @@
   <div class="train-row"><span class="train-label">Kalkış</span><span class="train-val">17:27 — Viyana Hauptbahnhof</span></div>
   <div class="train-row"><span class="train-label">Varış</span><span class="train-val">~20:00 — Budapeşte Keleti</span></div>
   <div class="train-row"><span class="train-label">Süre</span><span class="train-val">~2 saat 30 dakika</span></div>
-  <div class="train-row"><span class="train-label">Ücret</span><span class="train-val">20–45€ (önceden al!)</span></div>
-  <div class="train-row"><span class="train-label">Bilet</span><span class="train-val"><a href="https://www.oebb.at" target="_blank">oebb.at</a> veya raileurope.com</span></div>
-  <div class="train-row"><span class="train-label">Not</span><span class="train-val">Pasaport yanınızda olsun</span></div>
+  <div class="train-row"><span class="train-label">Bilet</span><span class="train-val"><a href="https://www.oebb.at" target="_blank">oebb.at</a></span></div>
 </div>
 
 <div class="info-section">
   <div class="info-section-title">🏰 Viyana</div>
-  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Vienna Card al — tüm toplu taşıma dahil. Havalimanından CAT treni (16 dk).</span></div>
-  <div class="info-row"><span class="info-icon">💶</span><span class="info-text"><b>Para:</b> Euro. Çoğu yerde kart geçer, biraz nakit bulundurun.</span></div>
-  <div class="info-row"><span class="info-icon">🌡️</span><span class="info-text"><b>Hava:</b> ~14-16°C. Hafif mont ve küçük şemsiye önerilir.</span></div>
-  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> WienMobil (toplu taşıma).</span></div>
-  <div class="info-row"><span class="info-icon">🏨</span><span class="info-text"><b>Otel:</b> 1. Bölge (Innere Stadt) veya Mariahilf (6. Bölge).</span></div>
+  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Vienna Card — tüm toplu taşıma dahil.</span></div>
+  <div class="info-row"><span class="info-icon">💶</span><span class="info-text"><b>Para:</b> Euro. Biraz nakit bulundurun.</span></div>
+  <div class="info-row"><span class="info-icon">🌡️</span><span class="info-text"><b>Hava:</b> ~14-16°C. Hafif mont önerilir.</span></div>
+  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> WienMobil.</span></div>
 </div>
 
 <div class="info-section">
   <div class="info-section-title">🌊 Budapeşte</div>
-  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Budapest Card al — metro + otobüs dahil.</span></div>
-  <div class="info-row"><span class="info-icon">💱</span><span class="info-text"><b>Para:</b> Macar Forinti (HUF). Bazı yerler nakit istiyor.</span></div>
-  <div class="info-row"><span class="info-icon">♨️</span><span class="info-text"><b>Hamam:</b> Mutlaka çevrimiçi bilet alın! Széchenyi veya Gellért.</span></div>
-  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> BKK Futár (metro), Bolt/Uber (taksi).</span></div>
-  <div class="info-row"><span class="info-icon">🏨</span><span class="info-text"><b>Otel:</b> Belváros (5. Bölge) veya Erzsébetváros (7. Bölge).</span></div>
+  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Budapest Card — metro + otobüs dahil.</span></div>
+  <div class="info-row"><span class="info-icon">💱</span><span class="info-text"><b>Para:</b> Macar Forinti (HUF). Nakit lazım.</span></div>
+  <div class="info-row"><span class="info-icon">♨️</span><span class="info-text"><b>Hamam:</b> Çevrimiçi bilet alın! (~25-30€)</span></div>
+  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> BKK Futár, Bolt/Uber.</span></div>
 </div>
 
 <div class="info-section">
@@ -594,7 +595,6 @@
       <tr><td>🏨 Otel</td><td>80–120€/gece</td><td>60–100€/gece</td></tr>
       <tr><td>🍽️ Yemek</td><td>40–60€/gün</td><td>25–40€/gün</td></tr>
       <tr><td>🎫 Aktivite</td><td>30–50€/gün</td><td>40–60€/gün</td></tr>
-      <tr><td>🚇 Ulaşım</td><td>15–20€</td><td>10–15€</td></tr>
       <tr><td>🚂 Tren</td><td colspan="2" style="text-align:center">~35–45€</td></tr>
       <tr><td><b>TOPLAM</b></td><td colspan="2" style="text-align:center"><b>~1.100–1.400€</b></td></tr>
     </table>
@@ -606,7 +606,7 @@
   <div class="food-grid">
     <div class="food-item"><div class="food-name">Wiener Schnitzel</div><div class="food-desc">Tabaktan taşan dana. Limon sık!</div></div>
     <div class="food-item"><div class="food-name">Apfelstrudel</div><div class="food-desc">Elmalı börek + vanilyalı dondurma.</div></div>
-    <div class="food-item"><div class="food-name">Sachertorte</div><div class="food-desc">Çikolatalı kek. Café Demel'de dene.</div></div>
+    <div class="food-item"><div class="food-name">Sachertorte</div><div class="food-desc">Çikolatalı kek. Café Demel'de.</div></div>
     <div class="food-item"><div class="food-name">Einspänner</div><div class="food-desc">Çift espresso + çırpılmış krema.</div></div>
     <div class="food-item"><div class="food-name">Kaiserschmarrn</div><div class="food-desc">Karamelizeli krep + meyve sosu.</div></div>
     <div class="food-item"><div class="food-name">Käsekrainer</div><div class="food-desc">Peynirli sosis. Sokak lezzeti.</div></div>
@@ -624,134 +624,231 @@
     <div class="food-item"><div class="food-name">Unicum</div><div class="food-desc">Otlu likör. Harika hediye.</div></div>
   </div>
 </div>
-
 </div><!-- /tab-info -->
-
-<!-- TAB: HARİTA -->
-<div class="tab-content" id="tab-maps">
-<div class="top-gap"></div>
-
-<div class="info-section">
-  <div class="info-section-title">🏰 Viyana</div>
-  <div class="maps-list">
-    <a class="maps-item" href="https://maps.google.com/?q=Vienna+International+Airport" target="_blank"><span>📍</span><span class="maps-name">Viyana Havalimanı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Vienna+Hauptbahnhof" target="_blank"><span>📍</span><span class="maps-name">Hauptbahnhof (Tren)</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Stephansdom+Vienna" target="_blank"><span>📍</span><span class="maps-name">Stephansdom</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Hofburg+Palace+Vienna" target="_blank"><span>📍</span><span class="maps-name">Hofburg Sarayı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Schonbrunn+Palace+Vienna" target="_blank"><span>📍</span><span class="maps-name">Schönbrunn Sarayı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Belvedere+Palace+Vienna" target="_blank"><span>📍</span><span class="maps-name">Belvedere Sarayı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Naschmarkt+Vienna" target="_blank"><span>📍</span><span class="maps-name">Naschmarkt</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Prater+Vienna+Riesenrad" target="_blank"><span>📍</span><span class="maps-name">Prater & Riesenrad</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Stadtpark+Vienna" target="_blank"><span>📍</span><span class="maps-name">Stadtpark</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Cafe+Landtmann+Vienna" target="_blank"><span>📍</span><span class="maps-name">Café Landtmann</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Figlmuller+Backerstrasse+Vienna" target="_blank"><span>📍</span><span class="maps-name">Figlmüller (Schnitzel)</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Gurtel+Vienna+Bars" target="_blank"><span>📍</span><span class="maps-name">Gürtel Bar Sokağı</span><span class="maps-arrow">↗</span></a>
-  </div>
-</div>
-
-<div class="info-section">
-  <div class="info-section-title">🌊 Budapeşte</div>
-  <div class="maps-list">
-    <a class="maps-item" href="https://maps.google.com/?q=Budapest+Keleti+Station" target="_blank"><span>📍</span><span class="maps-name">Keleti İstasyonu</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Budapest+Ferenc+Liszt+International+Airport" target="_blank"><span>📍</span><span class="maps-name">BUD Havalimanı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Great+Market+Hall+Budapest" target="_blank"><span>📍</span><span class="maps-name">Büyük Pazar Salonu</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Buda+Castle+Budapest" target="_blank"><span>📍</span><span class="maps-name">Buda Kalesi</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Fishermans+Bastion+Budapest" target="_blank"><span>📍</span><span class="maps-name">Balıkçı Kulesi</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Chain+Bridge+Budapest" target="_blank"><span>📍</span><span class="maps-name">Zincir Köprü</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Hungarian+Parliament+Building+Budapest" target="_blank"><span>📍</span><span class="maps-name">Parlamento Binası</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Szechenyi+Thermal+Bath+Budapest" target="_blank"><span>📍</span><span class="maps-name">Széchenyi Hamamı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Andrassy+Avenue+Budapest" target="_blank"><span>📍</span><span class="maps-name">Andrássy Bulvarı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Heroes+Square+Budapest" target="_blank"><span>📍</span><span class="maps-name">Hősök Meydanı</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Szimpla+Kert+Budapest" target="_blank"><span>📍</span><span class="maps-name">Szimpla Kert (Ruin Bar)</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=New+York+Cafe+Budapest" target="_blank"><span>📍</span><span class="maps-name">New York Café</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Spoon+The+Boat+Budapest" target="_blank"><span>📍</span><span class="maps-name">Spoon Restoran (Tekne)</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Gerloczy+Cafe+Budapest" target="_blank"><span>📍</span><span class="maps-name">Gerloczy Café</span><span class="maps-arrow">↗</span></a>
-    <a class="maps-item" href="https://maps.google.com/?q=Budapest+Vigado+Pier+River+Cruise" target="_blank"><span>📍</span><span class="maps-name">Tuna Cruise İskele</span><span class="maps-arrow">↗</span></a>
-  </div>
-</div>
-</div><!-- /tab-maps -->
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <button class="nav-btn active" id="nav-plan" onclick="switchTab('plan')">
-    <span class="nav-icon">📅</span>Plan
-  </button>
-  <button class="nav-btn" id="nav-info" onclick="switchTab('info')">
-    <span class="nav-icon">ℹ️</span>Bilgi
-  </button>
-  <button class="nav-btn" id="nav-maps" onclick="switchTab('maps')">
-    <span class="nav-icon">📍</span>Harita
-  </button>
+  <button class="nav-btn active" id="nav-plan" onclick="switchTab('plan')"><span class="nav-icon">📅</span>Plan</button>
+  <button class="nav-btn" id="nav-map" onclick="switchTab('map')"><span class="nav-icon">🗺️</span>Harita</button>
+  <button class="nav-btn" id="nav-info" onclick="switchTab('info')"><span class="nav-icon">ℹ️</span>Bilgi</button>
 </div>
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-  const TOTAL = 6;
-  let state = {days:{}, acts:{}};
-  try { state = JSON.parse(localStorage.getItem('trip_v2') || '{"days":{},"acts":{}}'); } catch(e){}
+// ── STATE ──────────────────────────────────────────────────────
+const TOTAL = 6;
+let state = {days:{}, acts:{}};
+try { state = JSON.parse(localStorage.getItem('trip_v3') || '{"days":{},"acts":{}}'); } catch(e){}
+function save() { localStorage.setItem('trip_v3', JSON.stringify(state)); }
 
-  function save() { localStorage.setItem('trip_v2', JSON.stringify(state)); }
-
-  function restoreState() {
-    Object.keys(state.days).forEach(d => { if(state.days[d]) setDayDone(+d, true, false); });
-    Object.keys(state.acts).forEach(id => {
-      if(state.acts[id]) {
-        const el = document.getElementById(id);
-        if(el) { el.querySelector('.act-check').classList.add('done'); el.classList.add('checked'); }
-      }
-    });
-    updateProgress();
-  }
-
-  function setDayDone(n, done, animate) {
-    const card = document.getElementById('day-'+n);
-    const check = document.getElementById('check-'+n);
-    if(!card) return;
-    card.classList.toggle('completed', done);
-    check.classList.toggle('done', done);
-  }
-
-  function markDay(e, n) {
-    e.stopPropagation();
-    const done = !state.days[n];
-    state.days[n] = done;
-    save();
-    setDayDone(n, done, true);
-    updateProgress();
-  }
-
-  function toggleAct(checkEl) {
-    const act = checkEl.closest('.activity');
-    const done = !checkEl.classList.contains('done');
-    checkEl.classList.toggle('done', done);
-    act.classList.toggle('checked', done);
-    if(act.id) { state.acts[act.id] = done; save(); }
-  }
-
-  function toggleDay(n) {
-    document.getElementById('day-'+n).classList.toggle('open');
-  }
-
-  function updateProgress() {
-    const done = Object.values(state.days).filter(Boolean).length;
-    document.getElementById('progress-text').textContent = done + ' / ' + TOTAL + ' gün';
-    document.getElementById('progress-fill').style.width = (done/TOTAL*100) + '%';
-  }
-
-  function switchTab(name) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-'+name).classList.add('active');
-    document.getElementById('nav-'+name).classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+function restoreState() {
+  Object.keys(state.days).forEach(d => { if(state.days[d]) setDayDone(+d,true); });
+  Object.keys(state.acts).forEach(id => {
+    if(state.acts[id]) {
+      const el = document.getElementById(id);
+      if(el) { el.querySelector('.act-check').classList.add('done'); el.classList.add('checked'); }
+    }
   });
+  updateProgress();
+}
+function setDayDone(n,done) {
+  document.getElementById('day-'+n)?.classList.toggle('completed',done);
+  document.getElementById('check-'+n)?.classList.toggle('done',done);
+}
+function markDay(e,n) {
+  e.stopPropagation();
+  state.days[n] = !state.days[n];
+  save(); setDayDone(n,state.days[n]); updateProgress();
+}
+function toggleAct(el) {
+  const act = el.closest('.activity');
+  const done = !el.classList.contains('done');
+  el.classList.toggle('done',done);
+  act.classList.toggle('checked',done);
+  if(act.id) { state.acts[act.id]=done; save(); }
+}
+function toggleDay(n) { document.getElementById('day-'+n).classList.toggle('open'); }
+function updateProgress() {
+  const done = Object.values(state.days).filter(Boolean).length;
+  document.getElementById('progress-text').textContent = done+' / '+TOTAL+' gün';
+  document.getElementById('progress-fill').style.width = (done/TOTAL*100)+'%';
+}
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.getElementById('nav-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='map' && !mapInitialized) initMap();
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
 
-  restoreState();
+// ── MAP DATA ───────────────────────────────────────────────────
+const PLACES = [
+  // GÜN 1 — Viyana
+  {day:1, lat:48.2082, lng:16.3738, title:'Stephansdom', time:'15:00', desc:'Viyana\'nın kalbi. Gotik katedral + Graben yürüyüşü.', cats:['museum','photo'], best:false},
+  {day:1, lat:48.2065, lng:16.3642, title:'Hofburg Sarayı', time:'16:30', desc:'Habsburg sarayı — dışarıdan harika fotoğraf.', cats:['museum','photo'], best:false},
+  {day:1, lat:48.2139, lng:16.3566, title:'Café Landtmann', time:'18:30', desc:'Freud\'un favori kafesi. Einspänner sipariş et!', cats:['food'], best:false},
+  {day:1, lat:48.2081, lng:16.3736, title:'Figlmüller', time:'20:00', desc:'Viyana\'nın efsane Schnitzel\'i. Rezervasyon şart!', cats:['food'], best:false},
+
+  // GÜN 2 — Viyana
+  {day:2, lat:48.1845, lng:16.3122, title:'Schönbrunn Sarayı', time:'11:00', desc:'1441 odalı saray. Gloriette\'den Viyana panoraması!', cats:['museum','photo'], best:true},
+  {day:2, lat:48.1914, lng:16.3806, title:'Belvedere Sarayı', time:'15:30', desc:'Klimt\'in "Öpücük" tablosu burada!', cats:['museum','photo'], best:false},
+  {day:2, lat:48.2004, lng:16.3795, title:'Stadtpark', time:'17:30', desc:'Johann Strauss heykeli önünde fotoğraf.', cats:['photo'], best:false},
+  {day:2, lat:48.1988, lng:16.3572, title:'Meixner\'s Gastwirtschaft', time:'20:00', desc:'Otantik şarap evi. Grüner Veltliner dene!', cats:['food'], best:false},
+  {day:2, lat:48.2042, lng:16.3391, title:'Gürtel Bar Sokağı', time:'22:00', desc:'Viyana\'nın en canlı gece hayatı.', cats:['night'], best:false},
+
+  // GÜN 3 — Viyana → Budapeşte
+  {day:3, lat:48.1990, lng:16.3671, title:'Naschmarkt', time:'10:00', desc:'120+ dükkan. Pazar günü en canlı hali!', cats:['food','photo'], best:false},
+  {day:3, lat:48.2167, lng:16.3960, title:'Prater & Riesenrad', time:'13:30', desc:'1766\'dan beri dönen efsane dönme dolap.', cats:['photo'], best:false},
+  {day:3, lat:48.1851, lng:16.3788, title:'Viyana Hauptbahnhof', time:'17:27', desc:'Buradan Railjet ile Budapeşte\'ye!', cats:['transport'], best:false},
+  {day:3, lat:47.5001, lng:19.0836, title:'Budapeşte Keleti', time:'~20:00', desc:'Varış! Otele git, dinlen.', cats:['transport'], best:false},
+
+  // GÜN 4 — Budapeşte
+  {day:4, lat:47.4615, lng:19.0567, title:'Nagyvásárcsarnok', time:'12:00', desc:'Büyük Pazar Salonu. Lángos yemeden gitme!', cats:['food','photo'], best:false},
+  {day:4, lat:47.4961, lng:19.0397, title:'Buda Kalesi', time:'14:00', desc:'Sikló ile kale tepesine çık.', cats:['museum','photo'], best:false},
+  {day:4, lat:47.5017, lng:19.0347, title:'Balıkçı Kulesi', time:'15:30', desc:'En ikonik fotoğraf noktası! Gün batımı öncesi gel.', cats:['museum','photo'], best:true},
+  {day:4, lat:47.4983, lng:19.0490, title:'Spoon Restoran', time:'19:30', desc:'Tuna üzerinde yüzen teknede akşam yemeği!', cats:['food'], best:false},
+  {day:4, lat:47.4993, lng:19.0627, title:'Szimpla Kert', time:'21:30', desc:'Budapeşte\'nin efsane ruin barı.', cats:['night'], best:false},
+
+  // GÜN 5 — Budapeşte
+  {day:5, lat:47.5186, lng:19.0823, title:'Széchenyi Hamamı', time:'10:00', desc:'Online bilet al! Açık havuz + sauna.', cats:['photo'], best:false},
+  {day:5, lat:47.5056, lng:19.0602, title:'Andrássy Bulvarı', time:'15:00', desc:'Budapeşte\'nin Champs-Élysées\'i.', cats:['photo'], best:false},
+  {day:5, lat:47.5145, lng:19.0789, title:'Hősök Meydanı', time:'16:30', desc:'Binlerce Yıl Anıtı — muhteşem fotoğraf.', cats:['museum','photo'], best:false},
+  {day:5, lat:47.4980, lng:19.0450, title:'Tuna Cruise İskele', time:'20:30', desc:'Gece turu! Şampanya + Parlamento + Zincir Köprü.', cats:['photo','night'], best:true},
+
+  // GÜN 6 — Budapeşte
+  {day:6, lat:47.4963, lng:19.0693, title:'New York Café', time:'09:00', desc:'Dünyanın en güzel kafelerinden biri. Son kahvaltı!', cats:['food','photo'], best:false},
+  {day:6, lat:47.4983, lng:19.0456, title:'Zincir Köprü', time:'11:00', desc:'Son yürüyüş. Tuna fotoğrafları burada!', cats:['photo'], best:true},
+  {day:6, lat:47.4298, lng:19.2611, title:'Budapeşte Havalimanı', time:'15:00', desc:'Uçuş 17:00. En geç 13:30\'da çık!', cats:['transport'], best:false},
+];
+
+// ── MAP ────────────────────────────────────────────────────────
+let map, markers=[], infoWindow, mapInitialized=false;
+let activeDay='all', activeCat=null;
+
+const CAT_COLORS = {
+  photo:   {bg:'#E65100', text:'white'},
+  food:    {bg:'#2E7D32', text:'white'},
+  museum:  {bg:'#1565C0', text:'white'},
+  night:   {bg:'#4A148C', text:'white'},
+  transport:{bg:'#37474F', text:'white'},
+};
+const DAY_COLORS = ['','#8B2020','#A0522D','#6B4226','#1A5260','#154360','#0E2954'];
+
+function getPinColor(place) {
+  if(activeCat) return CAT_COLORS[activeCat]?.bg || '#888';
+  return DAY_COLORS[place.day] || '#888';
+}
+
+function makeSVGPin(color, isBest) {
+  const star = isBest ? `<text x="12" y="16" text-anchor="middle" fill="gold" font-size="10">★</text>` : '';
+  return {
+    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+        <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" stroke="white" stroke-width="1.5"/>
+        <circle cx="14" cy="14" r="6" fill="white" opacity="0.9"/>
+        ${star}
+      </svg>`),
+    scaledSize: {width:28, height:36},
+    anchor: {x:14, y:36}
+  };
+}
+
+function buildIWContent(p) {
+  const catLabels = {photo:'📸 Fotoğraf',food:'🍽️ Yemek',museum:'🏛️ Tarihi',night:'🌙 Gece',transport:'🚇 Ulaşım'};
+  const tagStyles = {photo:'background:#FFF3E0;color:#E65100',food:'background:#E8F5E9;color:#2E7D32',museum:'background:#E3F2FD;color:#1565C0',night:'background:#1A1A2E;color:#C9A96E',transport:'background:#ECEFF1;color:#37474F'};
+  const tags = p.cats.map(c=>`<span class="iw-tag" style="${tagStyles[c]||''}">${catLabels[c]||c}</span>`).join('');
+  const photoBadge = p.cats.includes('photo') ? `<div class="iw-photo-badge">📸 Fotoğraf çekilecek${p.best?' — En iyi nokta!':''}</div>` : '';
+  const mapsUrl = `https://maps.google.com/?q=${p.lat},${p.lng}`;
+  return `<div class="iw-content">
+    <div class="iw-time">${p.time} · Gün ${p.day}</div>
+    <div class="iw-title">${p.title}</div>
+    <div class="iw-tags">${tags}</div>
+    ${photoBadge}
+    <div class="iw-desc">${p.desc}</div>
+    <a class="iw-map-btn" href="${mapsUrl}" target="_blank">📍 Google Maps\'te Aç</a>
+  </div>`;
+}
+
+function initMap() {
+  const viennaCenter = {lat:48.2082, lng:16.3738};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: viennaCenter,
+    zoom: 6,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    styles: [
+      {featureType:'poi',elementType:'labels',stylers:[{visibility:'off'}]},
+      {featureType:'transit',elementType:'labels',stylers:[{visibility:'simplified'}]},
+    ]
+  });
+  infoWindow = new google.maps.InfoWindow({maxWidth:280});
+  PLACES.forEach(p => {
+    const marker = new google.maps.Marker({
+      position:{lat:p.lat, lng:p.lng},
+      map: map,
+      title: p.title,
+      icon: makeSVGPin(getPinColor(p), p.best),
+      animation: google.maps.Animation.DROP,
+    });
+    marker.placeData = p;
+    marker.addListener('click', ()=>{
+      infoWindow.setContent(buildIWContent(p));
+      infoWindow.open(map, marker);
+    });
+    markers.push(marker);
+  });
+  fitMapToBounds();
+  mapInitialized = true;
+}
+
+function fitMapToBounds() {
+  const bounds = new google.maps.LatLngBounds();
+  let count = 0;
+  markers.forEach(m => {
+    if(m.getVisible()) { bounds.extend(m.getPosition()); count++; }
+  });
+  if(count > 0) map.fitBounds(bounds);
+}
+
+function filterMap(day, btn) {
+  activeDay = day;
+  activeCat = null;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  markers.forEach(m => {
+    const show = day==='all' || m.placeData.day===parseInt(day.replace('day',''));
+    m.setVisible(show);
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best));
+  });
+  infoWindow.close();
+  fitMapToBounds();
+}
+
+function filterCat(cat, btn) {
+  activeCat = activeCat===cat ? null : cat;
+  activeDay = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(activeCat) btn.classList.add('active');
+  else document.querySelector('.filter-btn').classList.add('active');
+  markers.forEach(m => {
+    const show = !activeCat || m.placeData.cats.includes(activeCat);
+    m.setVisible(show);
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best));
+  });
+  infoWindow.close();
+  fitMapToBounds();
+}
+
+window.initMapCallback = initMap;
+restoreState();
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlY9iRmb2y6lf-tpkmN4OBTib0pPxgBRI&callback=initMapCallback&loading=async" async defer></script>
 </body>
 </html>
