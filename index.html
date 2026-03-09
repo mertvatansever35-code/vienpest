@@ -22,6 +22,14 @@
   .header-sub{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(250,246,239,0.6);margin-top:6px;}
   .header-dates{display:inline-block;margin-top:8px;background:rgba(201,169,110,0.13);border:1px solid rgba(201,169,110,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
 
+  .countdown{background:var(--brown);padding:0 20px 16px;text-align:center;}
+  .countdown-boxes{display:flex;justify-content:center;gap:8px;margin-bottom:6px;}
+  .cd-box{background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.25);border-radius:10px;padding:8px 10px;min-width:58px;}
+  .cd-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
+  .cd-label{font-size:9px;color:rgba(201,169,110,0.55);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
+  .cd-msg{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(250,246,239,0.5);}
+  .cd-msg.started{color:#4CAF80;font-style:normal;font-size:14px;}
+
   .progress-wrap{background:var(--brown);padding:0 20px 12px;}
   .progress-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(201,169,110,0.55);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
   .progress-bar{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
@@ -74,8 +82,9 @@
   /* MAP TAB */
   .map-controls{padding:10px 14px;background:white;margin:6px 14px;border-radius:12px;box-shadow:0 2px 10px var(--shadow);}
   .map-controls-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--brown);margin-bottom:8px;}
-  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-  .filter-btn{padding:5px 12px;border-radius:20px;border:1.5px solid #D4C4A8;background:white;font-size:12px;cursor:pointer;color:var(--soft);transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+  .filter-row{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .filter-row::-webkit-scrollbar{display:none;}
+  .filter-btn{padding:6px 13px;border-radius:20px;border:1.5px solid #D4C4A8;background:white;font-size:12px;cursor:pointer;color:var(--soft);transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0;min-height:34px;}
   .filter-btn.active{border-color:var(--gold);background:var(--gold);color:white;}
   .filter-btn.day-btn.d1.active{background:#8B2020;border-color:#8B2020;}
   .filter-btn.day-btn.d2.active{background:#A0522D;border-color:#A0522D;}
@@ -88,7 +97,7 @@
   .legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--soft);}
   .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 
-  #map{width:100%;height:calc(100vh - 280px);min-height:350px;border-radius:12px;overflow:hidden;margin:0 14px;width:calc(100% - 28px);}
+  #map{width:calc(100% - 28px);margin:0 14px;height:55vh;min-height:320px;border-radius:12px;overflow:hidden;}
 
   /* INFO POPUP */
   .gm-style .info-window{padding:0!important;}
@@ -154,6 +163,16 @@
     <div class="header-sub">İlk Buluşma Seyahati &#128145;</div>
     <div class="header-dates">18 – 23 Nisan</div>
   </div>
+</div>
+
+<div class="countdown" id="countdown-wrap">
+  <div class="countdown-boxes" id="countdown-boxes">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Gün</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Saat</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Dakika</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Saniye</div></div>
+  </div>
+  <div class="cd-msg" id="cd-msg">✈️ Viyana'ya kadar kalan süre</div>
 </div>
 
 <div class="progress-wrap">
@@ -689,41 +708,41 @@ window.addEventListener('scroll',()=>{
 // ── MAP DATA ───────────────────────────────────────────────────
 const PLACES = [
   // GÜN 1 — Viyana
-  {day:1, lat:48.2082, lng:16.3738, title:'Stephansdom', time:'15:00', desc:'Viyana\'nın kalbi. Gotik katedral + Graben yürüyüşü.', cats:['museum','photo'], best:false},
-  {day:1, lat:48.2065, lng:16.3642, title:'Hofburg Sarayı', time:'16:30', desc:'Habsburg sarayı — dışarıdan harika fotoğraf.', cats:['museum','photo'], best:false},
-  {day:1, lat:48.2139, lng:16.3566, title:'Café Landtmann', time:'18:30', desc:'Freud\'un favori kafesi. Einspänner sipariş et!', cats:['food'], best:false},
-  {day:1, lat:48.2081, lng:16.3736, title:'Figlmüller', time:'20:00', desc:'Viyana\'nın efsane Schnitzel\'i. Rezervasyon şart!', cats:['food'], best:false},
+  {day:1, ord:1, lat:48.2082, lng:16.3738, title:'Stephansdom', time:'15:00', desc:'Viyana\'nın kalbi. Gotik katedral + Graben yürüyüşü.', cats:['museum','photo'], best:false},
+  {day:1, ord:2, lat:48.2065, lng:16.3642, title:'Hofburg Sarayı', time:'16:30', desc:'Habsburg sarayı — dışarıdan harika fotoğraf.', cats:['museum','photo'], best:false},
+  {day:1, ord:3, lat:48.2139, lng:16.3566, title:'Café Landtmann', time:'18:30', desc:'Freud\'un favori kafesi. Einspänner sipariş et!', cats:['food'], best:false},
+  {day:1, ord:4, lat:48.2081, lng:16.3736, title:'Figlmüller', time:'20:00', desc:'Viyana\'nın efsane Schnitzel\'i. Rezervasyon şart!', cats:['food'], best:false},
 
   // GÜN 2 — Viyana
-  {day:2, lat:48.1845, lng:16.3122, title:'Schönbrunn Sarayı', time:'11:00', desc:'1441 odalı saray. Gloriette\'den Viyana panoraması!', cats:['museum','photo'], best:true},
-  {day:2, lat:48.1914, lng:16.3806, title:'Belvedere Sarayı', time:'15:30', desc:'Klimt\'in "Öpücük" tablosu burada!', cats:['museum','photo'], best:false},
-  {day:2, lat:48.2004, lng:16.3795, title:'Stadtpark', time:'17:30', desc:'Johann Strauss heykeli önünde fotoğraf.', cats:['photo'], best:false},
-  {day:2, lat:48.1988, lng:16.3572, title:'Meixner\'s Gastwirtschaft', time:'20:00', desc:'Otantik şarap evi. Grüner Veltliner dene!', cats:['food'], best:false},
-  {day:2, lat:48.2042, lng:16.3391, title:'Gürtel Bar Sokağı', time:'22:00', desc:'Viyana\'nın en canlı gece hayatı.', cats:['night'], best:false},
+  {day:2, ord:1, lat:48.1845, lng:16.3122, title:'Schönbrunn Sarayı', time:'11:00', desc:'1441 odalı saray. Gloriette\'den Viyana panoraması!', cats:['museum','photo'], best:true},
+  {day:2, ord:2, lat:48.1914, lng:16.3806, title:'Belvedere Sarayı', time:'15:30', desc:'Klimt\'in "Öpücük" tablosu burada!', cats:['museum','photo'], best:false},
+  {day:2, ord:3, lat:48.2004, lng:16.3795, title:'Stadtpark', time:'17:30', desc:'Johann Strauss heykeli önünde fotoğraf.', cats:['photo'], best:false},
+  {day:2, ord:4, lat:48.1988, lng:16.3572, title:'Meixner\'s Gastwirtschaft', time:'20:00', desc:'Otantik şarap evi. Grüner Veltliner dene!', cats:['food'], best:false},
+  {day:2, ord:5, lat:48.2042, lng:16.3391, title:'Gürtel Bar Sokağı', time:'22:00', desc:'Viyana\'nın en canlı gece hayatı.', cats:['night'], best:false},
 
   // GÜN 3 — Viyana → Budapeşte
-  {day:3, lat:48.1990, lng:16.3671, title:'Naschmarkt', time:'10:00', desc:'120+ dükkan. Pazar günü en canlı hali!', cats:['food','photo'], best:false},
-  {day:3, lat:48.2167, lng:16.3960, title:'Prater & Riesenrad', time:'13:30', desc:'1766\'dan beri dönen efsane dönme dolap.', cats:['photo'], best:false},
-  {day:3, lat:48.1851, lng:16.3788, title:'Viyana Hauptbahnhof', time:'17:27', desc:'Buradan Railjet ile Budapeşte\'ye!', cats:['transport'], best:false},
-  {day:3, lat:47.5001, lng:19.0836, title:'Budapeşte Keleti', time:'~20:00', desc:'Varış! Otele git, dinlen.', cats:['transport'], best:false},
+  {day:3, ord:1, lat:48.1990, lng:16.3671, title:'Naschmarkt', time:'10:00', desc:'120+ dükkan. Pazar günü en canlı hali!', cats:['food','photo'], best:false},
+  {day:3, ord:2, lat:48.2167, lng:16.3960, title:'Prater & Riesenrad', time:'13:30', desc:'1766\'dan beri dönen efsane dönme dolap.', cats:['photo'], best:false},
+  {day:3, ord:3, lat:48.1851, lng:16.3788, title:'Viyana Hauptbahnhof', time:'17:27', desc:'Buradan Railjet ile Budapeşte\'ye!', cats:['transport'], best:false},
+  {day:3, ord:4, lat:47.5001, lng:19.0836, title:'Budapeşte Keleti', time:'~20:00', desc:'Varış! Otele git, dinlen.', cats:['transport'], best:false},
 
   // GÜN 4 — Budapeşte
-  {day:4, lat:47.4615, lng:19.0567, title:'Nagyvásárcsarnok', time:'12:00', desc:'Büyük Pazar Salonu. Lángos yemeden gitme!', cats:['food','photo'], best:false},
-  {day:4, lat:47.4961, lng:19.0397, title:'Buda Kalesi', time:'14:00', desc:'Sikló ile kale tepesine çık.', cats:['museum','photo'], best:false},
-  {day:4, lat:47.5017, lng:19.0347, title:'Balıkçı Kulesi', time:'15:30', desc:'En ikonik fotoğraf noktası! Gün batımı öncesi gel.', cats:['museum','photo'], best:true},
-  {day:4, lat:47.4983, lng:19.0490, title:'Spoon Restoran', time:'19:30', desc:'Tuna üzerinde yüzen teknede akşam yemeği!', cats:['food'], best:false},
-  {day:4, lat:47.4993, lng:19.0627, title:'Szimpla Kert', time:'21:30', desc:'Budapeşte\'nin efsane ruin barı.', cats:['night'], best:false},
+  {day:4, ord:1, lat:47.4615, lng:19.0567, title:'Nagyvásárcsarnok', time:'12:00', desc:'Büyük Pazar Salonu. Lángos yemeden gitme!', cats:['food','photo'], best:false},
+  {day:4, ord:2, lat:47.4961, lng:19.0397, title:'Buda Kalesi', time:'14:00', desc:'Sikló ile kale tepesine çık.', cats:['museum','photo'], best:false},
+  {day:4, ord:3, lat:47.5017, lng:19.0347, title:'Balıkçı Kulesi', time:'15:30', desc:'En ikonik fotoğraf noktası! Gün batımı öncesi gel.', cats:['museum','photo'], best:true},
+  {day:4, ord:4, lat:47.4983, lng:19.0490, title:'Spoon Restoran', time:'19:30', desc:'Tuna üzerinde yüzen teknede akşam yemeği!', cats:['food'], best:false},
+  {day:4, ord:5, lat:47.4993, lng:19.0627, title:'Szimpla Kert', time:'21:30', desc:'Budapeşte\'nin efsane ruin barı.', cats:['night'], best:false},
 
   // GÜN 5 — Budapeşte
-  {day:5, lat:47.5186, lng:19.0823, title:'Széchenyi Hamamı', time:'10:00', desc:'Online bilet al! Açık havuz + sauna.', cats:['photo'], best:false},
-  {day:5, lat:47.5056, lng:19.0602, title:'Andrássy Bulvarı', time:'15:00', desc:'Budapeşte\'nin Champs-Élysées\'i.', cats:['photo'], best:false},
-  {day:5, lat:47.5145, lng:19.0789, title:'Hősök Meydanı', time:'16:30', desc:'Binlerce Yıl Anıtı — muhteşem fotoğraf.', cats:['museum','photo'], best:false},
-  {day:5, lat:47.4980, lng:19.0450, title:'Tuna Cruise İskele', time:'20:30', desc:'Gece turu! Şampanya + Parlamento + Zincir Köprü.', cats:['photo','night'], best:true},
+  {day:5, ord:1, lat:47.5186, lng:19.0823, title:'Széchenyi Hamamı', time:'10:00', desc:'Online bilet al! Açık havuz + sauna.', cats:['photo'], best:false},
+  {day:5, ord:2, lat:47.5056, lng:19.0602, title:'Andrássy Bulvarı', time:'15:00', desc:'Budapeşte\'nin Champs-Élysées\'i.', cats:['photo'], best:false},
+  {day:5, ord:3, lat:47.5145, lng:19.0789, title:'Hősök Meydanı', time:'16:30', desc:'Binlerce Yıl Anıtı — muhteşem fotoğraf.', cats:['museum','photo'], best:false},
+  {day:5, ord:4, lat:47.4980, lng:19.0450, title:'Tuna Cruise İskele', time:'20:30', desc:'Gece turu! Şampanya + Parlamento + Zincir Köprü.', cats:['photo','night'], best:true},
 
   // GÜN 6 — Budapeşte
-  {day:6, lat:47.4963, lng:19.0693, title:'New York Café', time:'09:00', desc:'Dünyanın en güzel kafelerinden biri. Son kahvaltı!', cats:['food','photo'], best:false},
-  {day:6, lat:47.4983, lng:19.0456, title:'Zincir Köprü', time:'11:00', desc:'Son yürüyüş. Tuna fotoğrafları burada!', cats:['photo'], best:true},
-  {day:6, lat:47.4298, lng:19.2611, title:'Budapeşte Havalimanı', time:'15:00', desc:'Uçuş 17:00. En geç 13:30\'da çık!', cats:['transport'], best:false},
+  {day:6, ord:1, lat:47.4963, lng:19.0693, title:'New York Café', time:'09:00', desc:'Dünyanın en güzel kafelerinden biri. Son kahvaltı!', cats:['food','photo'], best:false},
+  {day:6, ord:2, lat:47.4983, lng:19.0456, title:'Zincir Köprü', time:'11:00', desc:'Son yürüyüş. Tuna fotoğrafları burada!', cats:['photo'], best:true},
+  {day:6, ord:3, lat:47.4298, lng:19.2611, title:'Budapeşte Havalimanı', time:'15:00', desc:'Uçuş 17:00. En geç 13:30\'da çık!', cats:['transport'], best:false},
 ];
 
 // ── MAP ────────────────────────────────────────────────────────
@@ -744,17 +763,18 @@ function getPinColor(place) {
   return DAY_COLORS[place.day] || '#888';
 }
 
-function makeSVGPin(color, isBest) {
-  const star = isBest ? `<text x="12" y="16" text-anchor="middle" fill="gold" font-size="10">★</text>` : '';
+function makeSVGPin(color, isBest, orderNum) {
+  const label = isBest ? '★' : (orderNum || '');
+  const fontSize = isBest ? 12 : 10;
   return {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
-        <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" stroke="white" stroke-width="1.5"/>
-        <circle cx="14" cy="14" r="6" fill="white" opacity="0.9"/>
-        ${star}
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="42" viewBox="0 0 32 42">
+        <path d="M16 0C7.16 0 0 7.16 0 16c0 12 16 26 16 26S32 28 32 16C32 7.16 24.84 0 16 0z" fill="${color}" stroke="white" stroke-width="2"/>
+        <circle cx="16" cy="16" r="9" fill="white" opacity="0.95"/>
+        <text x="16" y="${isBest?20:20}" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-weight="bold" font-family="Arial,sans-serif">${label}</text>
       </svg>`),
-    scaledSize: {width:28, height:36},
-    anchor: {x:14, y:36}
+    scaledSize: {width:32, height:42},
+    anchor: {x:16, y:42}
   };
 }
 
@@ -782,6 +802,7 @@ function initMap() {
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
+    gestureHandling: 'greedy',
     styles: [
       {featureType:'poi',elementType:'labels',stylers:[{visibility:'off'}]},
       {featureType:'transit',elementType:'labels',stylers:[{visibility:'simplified'}]},
@@ -793,7 +814,7 @@ function initMap() {
       position:{lat:p.lat, lng:p.lng},
       map: map,
       title: p.title,
-      icon: makeSVGPin(getPinColor(p), p.best),
+      icon: makeSVGPin(getPinColor(p), p.best, p.ord),
       animation: google.maps.Animation.DROP,
     });
     marker.placeData = p;
@@ -803,8 +824,37 @@ function initMap() {
     });
     markers.push(marker);
   });
+  drawRouteLines('all');
   fitMapToBounds();
   mapInitialized = true;
+}
+
+let polylines = [];
+function clearPolylines() { polylines.forEach(l=>l.setMap(null)); polylines=[]; }
+
+function drawRouteLines(dayFilter) {
+  clearPolylines();
+  const days = dayFilter==='all' ? [1,2,3,4,5,6] : [parseInt(dayFilter.replace('day',''))];
+  days.forEach(d => {
+    const pts = PLACES.filter(p=>p.day===d && (activeCat===null || p.cats.includes(activeCat)))
+                      .sort((a,b)=>a.ord-b.ord)
+                      .map(p=>({lat:p.lat,lng:p.lng}));
+    if(pts.length>1) {
+      const line = new google.maps.Polyline({
+        path: pts,
+        geodesic: true,
+        strokeColor: DAY_COLORS[d],
+        strokeOpacity: 0.55,
+        strokeWeight: 3,
+        map: map,
+        icons: [{
+          icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale:3, strokeColor: DAY_COLORS[d]},
+          offset:'50%'
+        }]
+      });
+      polylines.push(line);
+    }
+  });
 }
 
 function fitMapToBounds() {
@@ -824,8 +874,9 @@ function filterMap(day, btn) {
   markers.forEach(m => {
     const show = day==='all' || m.placeData.day===parseInt(day.replace('day',''));
     m.setVisible(show);
-    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best));
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best, m.placeData.ord));
   });
+  drawRouteLines(day);
   infoWindow.close();
   fitMapToBounds();
 }
@@ -839,11 +890,47 @@ function filterCat(cat, btn) {
   markers.forEach(m => {
     const show = !activeCat || m.placeData.cats.includes(activeCat);
     m.setVisible(show);
-    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best));
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best, m.placeData.ord));
   });
+  drawRouteLines('all');
   infoWindow.close();
   fitMapToBounds();
 }
+
+// ── COUNTDOWN ─────────────────────────────────────────────────
+function updateCountdown() {
+  const target = new Date('2025-04-18T12:00:00');
+  const end    = new Date('2025-04-23T15:00:00');
+  const now    = new Date();
+  const boxes  = document.getElementById('countdown-boxes');
+  const msg    = document.getElementById('cd-msg');
+
+  if(now >= end) {
+    boxes.innerHTML = '<div style="font-size:32px;">🌹</div>';
+    msg.textContent = 'Unutulmaz bir seyahatti!';
+    msg.className = 'cd-msg started';
+    return;
+  }
+  if(now >= target) {
+    boxes.innerHTML = '<div style="font-size:28px;color:var(--gold);">🎉</div>';
+    msg.textContent = 'Seyahat başladı! İyi eğlenceler!';
+    msg.className = 'cd-msg started';
+    return;
+  }
+
+  const diff = target - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
 window.initMapCallback = initMap;
 restoreState();
