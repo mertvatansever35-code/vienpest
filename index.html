@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Viyana & Budapeşte — Gezi Rehberi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#F7F1E8; --ivory:#EFE8D8; --gold:#C9A96E; --gold2:#E8C87A;
+    --brown:#1E0F06; --brown2:#2C1A0E; --red:#7A1C1C; --teal:#0E3D4D;
+    --soft:#7A6A5A; --shadow:rgba(30,15,6,0.13); --card:#FFFCF7;
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+  @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+  @keyframes shimmer  { 0%,100%{opacity:.6} 50%{opacity:1} }
+  @keyframes pulse    { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+  @keyframes checkPop { 0%{transform:scale(0.5)} 70%{transform:scale(1.2)} 100%{transform:scale(1)} }
+  @keyframes slideIn  { from{transform:translateX(-8px);opacity:0} to{transform:none;opacity:1} }
+  @keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+  body{
+    background:var(--cream);
+    background-image:var(--grain);
+    color:var(--brown);
+    font-family:'Outfit',sans-serif;
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  /* ── HEADER ── */
+  .header{
+    background:var(--brown);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,169,110,0.18) 0%, transparent 70%),
+      var(--grain);
+    padding:28px 20px 20px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .header::before{
+    content:'';position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(45deg,transparent,transparent 22px,rgba(201,169,110,0.04) 22px,rgba(201,169,110,0.04) 23px),
+      repeating-linear-gradient(-45deg,transparent,transparent 22px,rgba(201,169,110,0.025) 22px,rgba(201,169,110,0.025) 23px);
+  }
+  .header::after{
+    content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);
+  }
+  .header-border{
+    border:1px solid rgba(201,169,110,0.3);
+    border-radius:4px;
+    padding:18px 16px 14px;
+    position:relative;
+    animation:fadeIn 0.8s ease;
+  }
+  .header-ornament{
+    color:var(--gold);font-size:10px;letter-spacing:7px;opacity:0.5;
+    margin-bottom:8px;display:block;
+    animation:fadeIn 1s ease 0.2s both;
+  }
+  .header h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:36px;font-weight:700;color:var(--gold);line-height:1.05;
+    text-shadow:0 2px 20px rgba(201,169,110,0.25);
+    animation:fadeUp 0.7s ease 0.1s both;
+  }
+  .header h1 span{color:rgba(201,169,110,0.35);font-weight:300;}
+  .header-sub{
+    font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;
+    color:rgba(250,246,239,0.55);margin-top:7px;
+    animation:fadeUp 0.7s ease 0.25s both;
+  }
+  .header-dates{
+    display:inline-block;margin-top:10px;
+    background:rgba(201,169,110,0.1);
+    border:1px solid rgba(201,169,110,0.28);
+    border-radius:20px;padding:4px 14px;
+    font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;
+    animation:fadeUp 0.7s ease 0.35s both;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown{
+    background:var(--brown);
+    background-image:var(--grain);
+    padding:0 20px 18px;text-align:center;
+    border-bottom:1px solid rgba(201,169,110,0.1);
+  }
+  .countdown-boxes{display:flex;justify-content:center;gap:8px;margin-bottom:8px;flex-wrap:nowrap;}
+  .cd-box{
+    background:rgba(201,169,110,0.09);
+    border:1px solid rgba(201,169,110,0.2);
+    border-radius:12px;padding:8px 0;
+    flex:1;max-width:72px;min-width:0;
+    position:relative;overflow:hidden;
+    transition:transform 0.2s;
+  }
+  .cd-box::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,169,110,0.35),transparent);
+  }
+  .cd-num{
+    font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;
+    color:var(--gold);line-height:1;
+    text-shadow:0 0 20px rgba(201,169,110,0.3);
+  }
+  .cd-label{font-size:8px;color:rgba(201,169,110,0.5);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px;font-family:'Outfit',sans-serif;}
+  .cd-msg{font-family:'Cormorant Garamond',serif;font-size:13.5px;font-style:italic;color:rgba(250,246,239,0.45);}
+  .cd-msg.started{color:#5DBF8A;font-style:normal;}
+
+  /* ── PROGRESS ── */
+  .progress-wrap{background:var(--brown);padding:0 20px 14px;}
+  .progress-label{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(201,169,110,0.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:1.2px;font-family:'Outfit',sans-serif;}
+  .progress-bar{height:2px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width 0.6s cubic-bezier(.4,0,.2,1);}
+
+  /* ── CITY BANNER ── */
+  .city-banner{
+    margin:10px 14px 5px;border-radius:14px;
+    padding:13px 16px;display:flex;align-items:center;gap:12px;
+    position:relative;overflow:hidden;
+  }
+  .city-banner::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(255,255,255,0.03) 12px,rgba(255,255,255,0.03) 13px);
+  }
+  .city-banner::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:rgba(255,255,255,0.15);
+  }
+  .city-banner.vienna{background:linear-gradient(135deg,#7A1C1C,#A0282A);}
+  .city-banner.budapest{background:linear-gradient(135deg,#0E3D4D,#1A5C70);}
+  .city-banner.vienna,.city-banner.budapest{color:white;}
+  .city-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;letter-spacing:1px;}
+  .city-icon{font-size:22px;position:relative;}
+  .city-info{font-size:11px;font-weight:300;opacity:0.7;margin-top:2px;font-family:'Outfit',sans-serif;letter-spacing:0.5px;}
+
+  /* ── DAY CARDS ── */
+  .day-card{
+    margin:5px 14px;border-radius:16px;overflow:hidden;
+    box-shadow:0 2px 16px var(--shadow);
+    background:var(--card);
+    border:1px solid rgba(201,169,110,0.1);
+    animation:fadeUp 0.5s ease both;
+    transition:box-shadow 0.2s, transform 0.2s;
+  }
+  .day-card:nth-child(2){animation-delay:0.05s;}
+  .day-card:nth-child(3){animation-delay:0.1s;}
+  .day-card:nth-child(4){animation-delay:0.15s;}
+  .day-card.completed{opacity:0.65;}
+  .day-header{
+    display:flex;align-items:center;padding:14px 15px;
+    cursor:pointer;user-select:none;gap:12px;
+    background:var(--card);
+    position:relative;
+  }
+  .day-header:active{background:var(--ivory);}
+  .day-check{
+    width:28px;height:28px;border-radius:50%;
+    border:2px solid #D4C4A8;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;font-size:13px;color:transparent;
+    transition:all 0.25s cubic-bezier(.4,0,.2,1);cursor:pointer;
+  }
+  .day-check.done{
+    background:linear-gradient(135deg,#4CAF80,#3D9A6D);
+    border-color:transparent;color:white;
+    animation:checkPop 0.35s ease;
+    box-shadow:0 2px 8px rgba(76,175,128,0.4);
+  }
+  .day-header-info{flex:1;min-width:0;}
+  .day-title{
+    font-family:'Cormorant Garamond',serif;font-size:17.5px;font-weight:700;
+    color:var(--brown);line-height:1.2;transition:all 0.3s;
+  }
+  .day-subtitle{font-size:11px;color:var(--soft);font-style:italic;margin-top:2px;letter-spacing:0.3px;}
+  .day-date{font-size:10.5px;color:#BBB;text-align:right;flex-shrink:0;line-height:1.5;font-family:'Outfit',sans-serif;}
+  .day-chevron{width:20px;height:20px;color:#CCC;flex-shrink:0;transition:transform 0.3s cubic-bezier(.4,0,.2,1);}
+  .day-card.open .day-chevron{transform:rotate(180deg);color:var(--gold);}
+  .day-body{
+    display:none;border-top:1px solid rgba(201,169,110,0.12);
+    background:var(--card);
+  }
+  .day-card.open .day-body{display:block;animation:fadeIn 0.25s ease;}
+
+  /* ── ACTIVITIES ── */
+  .activity{
+    padding:11px 15px 10px;border-bottom:1px solid rgba(201,169,110,0.08);
+    display:flex;gap:12px;align-items:flex-start;
+    transition:background 0.15s;
+  }
+  .activity:last-child{border-bottom:none;}
+  .activity:active{background:var(--ivory);}
+  .act-check{
+    width:20px;height:20px;border-radius:5px;
+    border:1.5px solid #D4C4A8;
+    flex-shrink:0;margin-top:4px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;color:transparent;
+    transition:all 0.2s cubic-bezier(.4,0,.2,1);
+  }
+  .act-check.done{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    border-color:transparent;color:white;
+    animation:checkPop 0.3s ease;
+    box-shadow:0 2px 6px rgba(201,169,110,0.4);
+  }
+  .activity.checked .act-title{text-decoration:line-through;opacity:0.35;}
+  .act-content{flex:1;min-width:0;}
+  .act-time{
+    font-size:10.5px;font-weight:600;color:var(--red);
+    letter-spacing:0.8px;margin-bottom:2px;
+    font-family:'Outfit',sans-serif;
+  }
+  .act-title{
+    font-family:'Cormorant Garamond',serif;font-size:16.5px;font-weight:600;
+    color:var(--brown);line-height:1.25;transition:all 0.25s;
+  }
+  .act-desc{font-size:12.5px;color:var(--soft);margin-top:4px;line-height:1.55;}
+  .act-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
+  .act-tag{font-size:10px;padding:2px 9px;border-radius:20px;font-weight:500;letter-spacing:0.3px;}
+  .tag-photo{background:#FFF3E0;color:#C84A00;}
+  .tag-food{background:#E8F5E9;color:#256B2B;}
+  .tag-museum{background:#E3F2FD;color:#0D4F8C;}
+  .tag-hotel{background:#F3E5F5;color:#5C1375;}
+  .tag-night{background:#16101E;color:#C9A96E;}
+  .tag-transport{background:#ECEFF1;color:#37474F;}
+  .act-map{
+    display:inline-flex;align-items:center;gap:5px;margin-top:8px;
+    font-size:11.5px;color:var(--teal);text-decoration:none;
+    background:rgba(14,61,77,0.07);
+    padding:5px 11px;border-radius:20px;font-weight:500;
+    transition:all 0.2s;border:1px solid rgba(14,61,77,0.1);
+    font-family:'Outfit',sans-serif;
+  }
+  .act-map:active{background:rgba(14,61,77,0.15);transform:scale(0.97);}
+
+  /* ── TIP BOX ── */
+  .tip-box{
+    margin:5px 14px 2px;
+    background:linear-gradient(135deg,#FFFBF0,#FFF8E8);
+    border-left:3px solid var(--gold);
+    border-radius:0 10px 10px 0;
+    padding:10px 14px;
+    font-size:12.5px;color:#6B5020;
+    font-style:italic;line-height:1.6;
+    box-shadow:0 1px 6px rgba(201,169,110,0.1);
+  }
+
+  /* ── MAP CONTROLS ── */
+  .map-controls{
+    padding:12px 14px;background:var(--card);
+    margin:6px 14px;border-radius:14px;
+    box-shadow:0 2px 12px var(--shadow);
+    border:1px solid rgba(201,169,110,0.1);
+  }
+  .map-controls-title{
+    font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;
+    color:var(--brown);margin-bottom:10px;
+  }
+  .filter-row{
+    display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;
+    margin-bottom:8px;padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .filter-row::-webkit-scrollbar{display:none;}
+  .filter-btn{
+    padding:7px 14px;border-radius:22px;
+    border:1.5px solid rgba(201,169,110,0.25);
+    background:white;font-size:12px;cursor:pointer;
+    color:var(--soft);transition:all 0.2s;
+    font-family:'Outfit',sans-serif;white-space:nowrap;
+    flex-shrink:0;min-height:36px;
+  }
+  .filter-btn:active{transform:scale(0.95);}
+  .filter-btn.active{border-color:var(--gold);background:var(--gold);color:white;box-shadow:0 2px 8px rgba(201,169,110,0.35);}
+  .filter-btn.day-btn.d1.active{background:#7A1C1C;border-color:#7A1C1C;box-shadow:0 2px 8px rgba(122,28,28,0.35);}
+  .filter-btn.day-btn.d2.active{background:#9B4D1A;border-color:#9B4D1A;}
+  .filter-btn.day-btn.d3.active{background:#6B4226;border-color:#6B4226;}
+  .filter-btn.day-btn.d4.active{background:#0E3D4D;border-color:#0E3D4D;box-shadow:0 2px 8px rgba(14,61,77,0.35);}
+  .filter-btn.day-btn.d5.active{background:#0A2E3D;border-color:#0A2E3D;}
+  .filter-btn.day-btn.d6.active{background:#061E28;border-color:#061E28;}
+
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+  .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--soft);}
+  .legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+
+  #map{
+    width:calc(100% - 28px);margin:0 14px;
+    height:55vh;min-height:320px;
+    border-radius:14px;overflow:hidden;
+    box-shadow:0 4px 20px var(--shadow);
+  }
+
+  /* ── INFO POPUP ── */
+  .iw-content{padding:13px;min-width:200px;max-width:265px;}
+  .iw-time{font-size:10.5px;color:var(--red);font-weight:600;letter-spacing:0.8px;margin-bottom:3px;font-family:'Outfit',sans-serif;}
+  .iw-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);line-height:1.2;margin-bottom:6px;}
+  .iw-desc{font-size:12px;color:var(--soft);line-height:1.45;margin-bottom:8px;}
+  .iw-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
+  .iw-tag{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:500;}
+  .iw-photo-badge{background:#FFF3E0;color:#C84A00;font-size:11px;padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;font-weight:500;margin-bottom:7px;}
+  .iw-map-btn{display:block;text-align:center;background:var(--teal);color:white;padding:8px 10px;border-radius:9px;text-decoration:none;font-size:12px;font-weight:500;}
+
+  /* ── INFO TAB CARDS ── */
+  .train-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .train-header{background:linear-gradient(135deg,#1E2D3A,#2A3D4D);color:white;padding:13px 16px;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;display:flex;align-items:center;gap:8px;}
+  .train-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(201,169,110,0.08);gap:10px;font-size:13px;}
+  .train-row:last-child{border-bottom:none;}
+  .train-label{color:#BBB;width:70px;flex-shrink:0;font-size:11px;font-family:'Outfit',sans-serif;text-transform:uppercase;letter-spacing:0.5px;}
+  .train-val{color:var(--brown);font-weight:500;}
+  .train-val a{color:var(--teal);}
+
+  .info-section{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .info-section-title{
+    background:var(--ivory);padding:11px 15px;
+    font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;
+    color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.15);
+  }
+  .info-row{display:flex;padding:10px 15px;border-bottom:1px solid rgba(201,169,110,0.07);gap:11px;font-size:13px;align-items:flex-start;}
+  .info-row:last-child{border-bottom:none;}
+  .info-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .info-text{color:var(--soft);flex:1;line-height:1.55;}
+  .info-text b{color:var(--brown);}
+
+  .food-grid{padding:10px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .food-item{
+    background:var(--ivory);border-radius:10px;padding:10px 11px;
+    border:1px solid rgba(201,169,110,0.1);
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .food-item:active{transform:scale(0.97);}
+  .food-name{font-family:'Cormorant Garamond',serif;font-size:14.5px;font-weight:700;color:var(--brown);margin-bottom:2px;}
+  .food-desc{font-size:11.5px;color:var(--soft);line-height:1.4;}
+
+  .budget-wrap{padding:0 14px 14px;}
+  .budget-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .budget-table th{background:var(--brown);color:var(--gold);padding:9px 11px;text-align:left;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;font-family:'Outfit',sans-serif;}
+  .budget-table td{padding:9px 11px;border-bottom:1px solid rgba(201,169,110,0.1);}
+  .budget-table tr:last-child td{border-bottom:none;background:var(--ivory);font-weight:600;}
+  .budget-table tr:nth-child(even) td{background:#FAFAF4;}
+
+  /* ── NAV ── */
+  .bottom-nav{
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--brown);
+    background-image:var(--grain);
+    display:flex;
+    border-top:1px solid rgba(201,169,110,0.12);
+    z-index:100;
+    padding-bottom:env(safe-area-inset-bottom,0);
+  }
+  .nav-btn{
+    flex:1;padding:10px 4px 8px;text-align:center;cursor:pointer;
+    color:rgba(201,169,110,0.38);font-size:9.5px;text-transform:uppercase;
+    letter-spacing:0.8px;border:none;background:none;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    transition:color 0.2s;font-family:'Outfit',sans-serif;
+    position:relative;
+  }
+  .nav-btn .nav-icon{font-size:19px;transition:transform 0.2s;}
+  .nav-btn.active{color:var(--gold);}
+  .nav-btn.active .nav-icon{transform:translateY(-1px);}
+  .nav-btn.active::before{
+    content:'';position:absolute;top:0;left:20%;right:20%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    border-radius:2px;
+  }
+
+  .tab-content{display:none;padding-bottom:85px;}
+  .tab-content.active{display:block;}
+
+  .scroll-top{
+    position:fixed;bottom:72px;right:14px;
+    width:38px;height:38px;
+    background:var(--brown);color:var(--gold);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:16px;cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,0.3);
+    opacity:0;transition:opacity 0.3s,transform 0.3s;
+    z-index:99;border:1px solid rgba(201,169,110,0.2);
+  }
+  .scroll-top.visible{opacity:1;}
+  .scroll-top:active{transform:scale(0.9);}
+
+  .section-gap{height:6px;}
+  .top-gap{height:10px;}
+
+  /* ── WEATHER ── */
+  .weather-card{
+    margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;
+    box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);
+    animation:fadeUp 0.5s ease both;
+  }
+  .weather-city{
+    background:var(--ivory);padding:11px 15px;
+    font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;
+    color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);
+    display:flex;align-items:center;gap:8px;
+  }
+  .weather-row{display:flex;align-items:center;padding:14px 15px;gap:14px;}
+  .weather-icon{font-size:42px;flex-shrink:0;animation:pulse 3s ease infinite;}
+  .weather-temp{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--brown);}
+  .weather-details{flex:1;}
+  .weather-desc{font-size:13px;color:var(--soft);text-transform:capitalize;font-weight:500;}
+  .weather-meta{font-size:11.5px;color:#AAA;margin-top:3px;}
+  .weather-loading{padding:18px;text-align:center;color:var(--soft);font-size:13px;animation:shimmer 1.5s ease infinite;}
+
+  /* ── CURRENCY ── */
+  .currency-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .currency-header{background:var(--ivory);padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);}
+  .currency-body{padding:12px 15px;}
+  .currency-rate{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(201,169,110,0.08);font-size:13px;}
+  .currency-rate:last-of-type{border-bottom:none;}
+  .cur-label{color:var(--soft);}
+  .cur-val{font-weight:600;color:var(--brown);}
+  .cur-calc{margin-top:12px;border-top:1px solid rgba(201,169,110,0.15);padding-top:12px;}
+  .cur-calc-title{font-size:11px;color:var(--soft);margin-bottom:9px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Outfit',sans-serif;}
+  .cur-input-row{display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap;}
+  .cur-input{border:1.5px solid rgba(201,169,110,0.3);border-radius:9px;padding:9px 11px;font-size:14px;width:90px;font-family:'Outfit',sans-serif;color:var(--brown);background:white;}
+  .cur-input:focus{outline:none;border-color:var(--gold);}
+  .cur-select{border:1.5px solid rgba(201,169,110,0.3);border-radius:9px;padding:9px 11px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--brown);background:white;}
+  .cur-select:focus{outline:none;border-color:var(--gold);}
+  .cur-result{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--teal);margin-top:6px;}
+
+  /* ── PACKING ── */
+  .pack-section{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .pack-header{background:var(--ivory);padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);display:flex;justify-content:space-between;align-items:center;}
+  .pack-reset{font-size:11px;color:var(--soft);cursor:pointer;font-family:'Outfit',sans-serif;font-weight:400;background:none;border:none;padding:3px 8px;border-radius:6px;border:1px solid rgba(201,169,110,0.2);}
+  .pack-cat{padding:9px 15px 2px;font-size:10.5px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:1.2px;font-family:'Outfit',sans-serif;}
+  .pack-item{display:flex;align-items:center;padding:10px 15px;border-bottom:1px solid rgba(201,169,110,0.07);gap:11px;cursor:pointer;transition:background 0.15s;}
+  .pack-item:last-child{border-bottom:none;}
+  .pack-item:active{background:var(--ivory);}
+  .pack-cb{width:21px;height:21px;border-radius:5px;border:1.5px solid #D4C4A8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all 0.2s;}
+  .pack-cb.done{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:transparent;color:white;animation:checkPop 0.3s ease;}
+  .pack-label{font-size:13.5px;color:var(--brown);flex:1;transition:all 0.2s;}
+  .pack-item.checked .pack-label{text-decoration:line-through;opacity:0.35;}
+  .pack-progress{padding:10px 15px;font-size:12px;color:var(--soft);border-top:1px solid rgba(201,169,110,0.12);}
+
+  /* ── PACK ADD ROW ── */
+  .pack-add-row{display:flex;gap:7px;padding:10px 15px;border-bottom:1px solid rgba(201,169,110,0.12);align-items:center;background:var(--ivory);}
+  .pack-add-input{flex:1;border:1.5px solid rgba(201,169,110,0.3);border-radius:9px;padding:8px 11px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--brown);background:white;min-width:0;}
+  .pack-add-input:focus{outline:none;border-color:var(--gold);}
+  .pack-add-input::placeholder{color:#BBA;}
+  .pack-add-select{border:1.5px solid rgba(201,169,110,0.3);border-radius:9px;padding:8px 7px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--soft);background:white;flex-shrink:0;max-width:110px;}
+  .pack-add-select:focus{outline:none;border-color:var(--gold);}
+  .pack-add-btn{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--brown),var(--brown2));color:var(--gold);border:none;font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(30,15,6,0.25);line-height:1;}
+  .pack-add-btn:active{transform:scale(0.9);box-shadow:none;}
+  .pack-item-delete{width:24px;height:24px;border-radius:50%;border:none;background:none;color:#CCC;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:color 0.15s,background 0.15s;padding:0;line-height:1;}
+  .pack-item-delete:active{color:#e55;background:rgba(220,50,50,0.1);}
+
+  /* ── LETTER ── */
+  .letter-wrap{
+    margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;
+    box-shadow:0 4px 20px var(--shadow);
+    border:1px solid rgba(201,169,110,0.15);
+  }
+  .letter-locked{
+    padding:36px 24px;text-align:center;
+    background:linear-gradient(180deg,#1E0F06,#2C1A0E);
+  }
+  .letter-lock-icon{
+    font-size:52px;margin-bottom:14px;display:block;
+    animation:pulse 2.5s ease infinite;
+  }
+  .letter-lock-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .letter-lock-desc{font-size:13px;color:rgba(250,246,239,0.5);line-height:1.6;margin-bottom:18px;}
+  .letter-countdown{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold);font-style:italic;opacity:0.7;}
+  .letter-open{
+    padding:28px 22px;
+    background:linear-gradient(180deg,#FFFDF8,#FFF8EE);
+    position:relative;
+  }
+  .letter-open::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .letter-open-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--brown);margin-bottom:18px;text-align:center;}
+  .letter-text{font-family:'Cormorant Garamond',serif;font-size:16.5px;color:var(--soft);line-height:1.9;font-style:italic;}
+  .letter-sig{text-align:right;margin-top:22px;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);font-style:italic;}
+
+  /* ── SPONTANEOUS ── */
+  .spont-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .spont-header{background:var(--ivory);padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);}
+  .spont-body{padding:18px 15px;text-align:center;}
+  .spont-idea{
+    font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--brown);
+    line-height:1.5;min-height:64px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;font-style:italic;
+    transition:opacity 0.2s;
+  }
+  .spont-btn{
+    background:linear-gradient(135deg,var(--brown),var(--brown2));
+    color:var(--gold);border:none;border-radius:12px;
+    padding:13px 24px;font-size:14px;font-family:'Outfit',sans-serif;
+    cursor:pointer;width:100%;font-weight:500;letter-spacing:0.3px;
+    transition:all 0.2s;box-shadow:0 3px 12px rgba(30,15,6,0.25);
+  }
+  .spont-btn:active{transform:scale(0.97);box-shadow:none;}
+
+  /* ── PHRASES ── */
+  .phrases-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .phrases-tabs{display:flex;border-bottom:1px solid rgba(201,169,110,0.12);}
+  .phrases-tab{flex:1;padding:11px;text-align:center;font-size:13px;cursor:pointer;color:var(--soft);border:none;background:none;font-family:'Outfit',sans-serif;transition:all 0.2s;}
+  .phrases-tab.active{color:var(--brown);font-weight:600;border-bottom:2px solid var(--gold);}
+  .phrase-item{padding:11px 15px;border-bottom:1px solid rgba(201,169,110,0.07);display:flex;justify-content:space-between;align-items:center;gap:12px;animation:slideIn 0.3s ease both;}
+  .phrase-item:last-child{border-bottom:none;}
+  .phrase-tr{font-size:12.5px;color:var(--soft);}
+  .phrase-local{font-size:14px;font-weight:600;color:var(--brown);text-align:right;}
+  .phrase-phonetic{font-size:10.5px;color:#AAA;font-style:italic;margin-top:1px;text-align:right;}
+
+  /* ── EMERGENCY ── */
+  .emrg-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .emrg-header{background:linear-gradient(135deg,#6B1515,#8B2020);color:white;padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;}
+  .emrg-item{display:flex;align-items:center;padding:11px 15px;border-bottom:1px solid rgba(201,169,110,0.07);gap:11px;}
+  .emrg-item:last-child{border-bottom:none;}
+  .emrg-icon{font-size:18px;flex-shrink:0;}
+  .emrg-info{flex:1;}
+  .emrg-name{font-size:13px;font-weight:600;color:var(--brown);}
+  .emrg-num{font-size:11.5px;color:var(--soft);}
+  .emrg-call{
+    background:linear-gradient(135deg,var(--teal),#1A5C70);
+    color:white;border:none;border-radius:9px;
+    padding:7px 13px;font-size:12px;cursor:pointer;
+    text-decoration:none;display:inline-block;
+    font-family:'Outfit',sans-serif;font-weight:500;
+    transition:transform 0.15s;
+  }
+  .emrg-call:active{transform:scale(0.95);}
+
+  /* ── TRANSIT ── */
+  .transit-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .transit-header{background:var(--ivory);padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);}
+  .transit-line{display:flex;align-items:center;padding:9px 15px;border-bottom:1px solid rgba(201,169,110,0.07);gap:11px;font-size:13px;}
+  .transit-line:last-child{border-bottom:none;}
+  .transit-badge{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+  .transit-stops{flex:1;color:var(--soft);}
+  .transit-tip{font-size:11px;color:#AAA;margin-top:1px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-border">
+    <span class="header-ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</span>
+    <h1>Viyana <span>&amp;</span> Budapeşte</h1>
+    <div class="header-sub">İlk Buluşma Seyahati &#128145;</div>
+    <div class="header-dates">18 – 23 Nisan</div>
+  </div>
+</div>
+
+<div class="countdown" id="countdown-wrap">
+  <div class="countdown-boxes" id="countdown-boxes">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Gün</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Saat</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Dakika</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Saniye</div></div>
+  </div>
+  <div class="cd-msg" id="cd-msg">✈️ Viyana'ya kadar kalan süre</div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>İlerleme</span>
+    <span id="progress-text">0 / 6 gün</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+</div>
+
+<!-- ══ TAB: PLAN ══ -->
+<div class="tab-content active" id="tab-plan">
+<div class="top-gap"></div>
+
+<div class="city-banner vienna">
+  <span class="city-icon">🏰</span>
+  <div><div class="city-name">VİYANA</div><div class="city-info">18 – 20 Nisan &nbsp;·&nbsp; 2 Gece</div></div>
+</div>
+
+<!-- DAY 1 -->
+<div class="day-card open" id="day-1">
+  <div class="day-header" onclick="toggleDay(1)">
+    <div class="day-check" id="check-1" onclick="markDay(event,1)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 1 — İlk Bakış</div>
+      <div class="day-subtitle">Varış · Stephansdom · Akşam Yemeği</div>
+    </div>
+    <div class="day-date">Cum<br>18 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-1-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">12:00</div>
+        <div class="act-title">✈️ Viyana'ya Varış</div>
+        <div class="act-desc">Birlikte iniş! CAT treniyle havalimanından şehir merkezine 16 dakika.</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚇 Ulaşım</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Vienna+International+Airport" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-1-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">15:00</div>
+        <div class="act-title">🏛️ Stephansdom & Graben</div>
+        <div class="act-desc">Viyana'nın kalbi. Gotik katedrali içten-dıştan görün, Graben sokağında yürüyün.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Stephansdom+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-1-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">16:30</div>
+        <div class="act-title">🏯 Hofburg & Heldenplatz</div>
+        <div class="act-desc">Görkemli mimari, meydanda fotoğraf durağı.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Hofburg+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-1-4">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">18:30</div>
+        <div class="act-title">☕ Café Landtmann</div>
+        <div class="act-desc">Freud'un favori kafesi. Einspänner (çift espresso üstü krema).</div>
+        <div class="act-tags"><span class="act-tag tag-food">☕ Kafe</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Cafe+Landtmann+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-1-5">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">20:00</div>
+        <div class="act-title">🥩 Figlmüller — İlk Akşam Yemeği</div>
+        <div class="act-desc">1905'ten beri açık, Viyana'nın efsane Schnitzel'i. Rezervasyon öneririz!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Figlmuller+Backerstrasse+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tip-box">💡 İlk gün fazla program yok — tanışmak, konuşmak, şehri birlikte solumak başlı başına bir macera.</div>
+
+<!-- DAY 2 -->
+<div class="day-card" id="day-2">
+  <div class="day-header" onclick="toggleDay(2)">
+    <div class="day-check" id="check-2" onclick="markDay(event,2)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 2 — Saraylar & Şarap</div>
+      <div class="day-subtitle">Schönbrunn · Belvedere · Gürtel</div>
+    </div>
+    <div class="day-date">Cmt<br>19 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-2-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">11:00</div>
+        <div class="act-title">🏯 Schönbrunn Sarayı</div>
+        <div class="act-desc">1441 odalı Habsburg sarayı. Gloriette'e çık — tepeden Viyana panoraması. Nisan'da bahar çiçekleri.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Schonbrunn+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-2-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">15:30</div>
+        <div class="act-title">🎨 Belvedere Sarayı</div>
+        <div class="act-desc">Gustav Klimt'in "Öpücük" tablosu burada. İlk buluşmada mutlaka görülmeli.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🎨 Müze</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Belvedere+Palace+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-2-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">17:30</div>
+        <div class="act-title">🌿 Stadtpark Yürüyüşü</div>
+        <div class="act-desc">Johann Strauss heykeli önünde fotoğraf. Tuna kanalı boyunca akşam yürüyüşü.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Stadtpark+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-2-4">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">20:00</div>
+        <div class="act-title">🍷 Meixner's — Akşam Yemeği</div>
+        <div class="act-desc">Otantik Viyana şarap evi. Lokal Grüner Veltliner şarabı.</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Meixners+Gastwirtschaft+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-2-5">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">22:00</div>
+        <div class="act-title">🎵 Gürtel Bar Sokağı</div>
+        <div class="act-desc">Viyana'nın en canlı gece hayatı. Köprü altlarında barlar.</div>
+        <div class="act-tags"><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Gurtel+Vienna+Bars" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-card" id="day-3">
+  <div class="day-header" onclick="toggleDay(3)">
+    <div class="day-check" id="check-3" onclick="markDay(event,3)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 3 — Pazar & Tren</div>
+      <div class="day-subtitle">Naschmarkt · Prater · 17:27 Railjet</div>
+    </div>
+    <div class="day-date">Paz<br>20 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-3-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">10:00</div>
+        <div class="act-title">🛒 Naschmarkt</div>
+        <div class="act-desc">120+ dükkan, pazar günü en canlı! Peynir, zeytin, meyve tadımı.</div>
+        <div class="act-tags"><span class="act-tag tag-food">🛒 Pazar</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Naschmarkt+Vienna" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-3-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">13:30</div>
+        <div class="act-title">🎠 Prater & Riesenrad</div>
+        <div class="act-desc">1766'dan beri dönen efsane dönme dolap. Prater'de yürüyüş.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Prater+Vienna+Riesenrad" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-3-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">17:27</div>
+        <div class="act-title">🚂 Railjet — Viyana → Budapeşte</div>
+        <div class="act-desc">Hauptbahnhof'tan kalkış. ~2.5 saat konforlu yolculuk.</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚂 Tren</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Vienna+Hauptbahnhof" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-3-4">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">~20:00</div>
+        <div class="act-title">🌆 Budapeşte Keleti — Varış</div>
+        <div class="act-desc">Otele yerleşme, hafif akşam. Bugün yorucuydu — dinlenin!</div>
+        <div class="act-tags"><span class="act-tag tag-hotel">🏨 Konaklama</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Keleti+Station" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tip-box">🚂 Trene 15 dk önce gidin. Pasaport yanınızda olsun. Bilet: oebb.at</div>
+
+<div class="section-gap"></div>
+
+<div class="city-banner budapest">
+  <span class="city-icon">🌊</span>
+  <div><div class="city-name">BUDAPEŞTE</div><div class="city-info">20 – 23 Nisan &nbsp;·&nbsp; 2 Gece</div></div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-card" id="day-4">
+  <div class="day-header" onclick="toggleDay(4)">
+    <div class="day-check" id="check-4" onclick="markDay(event,4)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 4 — Kale & Tuna</div>
+      <div class="day-subtitle">Buda Kalesi · Balıkçı Kulesi · Ruin Bar</div>
+    </div>
+    <div class="day-date">Pzt<br>21 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-4-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">12:00</div>
+        <div class="act-title">🏪 Nagyvásárcsarnok</div>
+        <div class="act-desc">Büyük Pazar Salonu. Lángos yemek zorunlu!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🛒 Pazar</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Great+Market+Hall+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-4-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">14:00</div>
+        <div class="act-title">🏰 Buda Kalesi</div>
+        <div class="act-desc">Sikló ile kale tepesine. Matthias Kilisesi + kale avlusu.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Buda+Castle+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-4-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">15:30</div>
+        <div class="act-title">🗼 Balıkçı Kulesi</div>
+        <div class="act-desc">En ikonik fotoğraf noktası! Tuna + Parlamento manzarası. Gün batımı öncesi ışık harika.</div>
+        <div class="act-tags"><span class="act-tag tag-museum">🏛️ Tarihi</span><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Fishermans+Bastion+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-4-4">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">19:30</div>
+        <div class="act-title">🚢 Spoon Restoran</div>
+        <div class="act-desc">Tuna üzerinde yüzen teknede akşam yemeği!</div>
+        <div class="act-tags"><span class="act-tag tag-food">🍽️ Yemek</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Spoon+The+Boat+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-4-5">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">21:30</div>
+        <div class="act-title">🍺 Szimpla Kert</div>
+        <div class="act-desc">Budapeşte'nin en ünlü ruin barı. Unicum veya yerel bira!</div>
+        <div class="act-tags"><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Szimpla+Kert+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-card" id="day-5">
+  <div class="day-header" onclick="toggleDay(5)">
+    <div class="day-check" id="check-5" onclick="markDay(event,5)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 5 — En Romantik Gün</div>
+      <div class="day-subtitle">Hamam · Andrássy · Tuna Gece Turu</div>
+    </div>
+    <div class="day-date">Sal<br>22 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-5-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">10:00</div>
+        <div class="act-title">♨️ Széchenyi Hamamı</div>
+        <div class="act-desc">Online bilet alın (~25-30€). Havlu + mayo yanınızda olsun.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Szechenyi+Thermal+Bath+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-5-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">15:00</div>
+        <div class="act-title">🌳 Andrássy Bulvarı & Hősök</div>
+        <div class="act-desc">Budapeşte'nin Champs-Élysées'i. Hősök Meydanı'nda fotoğraf.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 Fotoğraf</span><span class="act-tag tag-museum">🏛️ Tarihi</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Heroes+Square+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-5-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">20:30</div>
+        <div class="act-title">🚢✨ Tuna Gece Turu</div>
+        <div class="act-desc">Parlamento, Zincir Köprü, Buda Kalesi hepsi ışıl ışıl. Şampanya eşliğinde ~1.5 saat. legenda.hu</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span><span class="act-tag tag-night">🌙 Gece</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Vigado+Pier+River+Cruise" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tip-box">✨ Tuna turunda güverte başında şampanya — bu anı önceden planlayın.</div>
+
+<!-- DAY 6 -->
+<div class="day-card" id="day-6">
+  <div class="day-header" onclick="toggleDay(6)">
+    <div class="day-check" id="check-6" onclick="markDay(event,6)">&#10003;</div>
+    <div class="day-header-info">
+      <div class="day-title">Gün 6 — Veda Sabahı</div>
+      <div class="day-subtitle">New York Café · Zincir Köprü · Uçuş</div>
+    </div>
+    <div class="day-date">Çar<br>23 Nis</div>
+    <svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="day-body">
+    <div class="activity" id="a-6-1">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">09:00</div>
+        <div class="act-title">☕ New York Café</div>
+        <div class="act-desc">1894'ten beri açık, dünyanın en güzel kafelerinden biri. Son sabaha layık!</div>
+        <div class="act-tags"><span class="act-tag tag-food">☕ Kafe</span><span class="act-tag tag-photo">📸 Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=New+York+Cafe+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-6-2">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">11:00</div>
+        <div class="act-title">🌉 Zincir Köprü — Son Yürüyüş</div>
+        <div class="act-desc">Lánchíd üzerinde son yürüyüş. Tuna fotoğrafları.</div>
+        <div class="act-tags"><span class="act-tag tag-photo">📸 En İyi Fotoğraf</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Chain+Bridge+Budapest" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+    <div class="activity" id="a-6-3">
+      <div class="act-check" onclick="toggleAct(this)">&#10003;</div>
+      <div class="act-content">
+        <div class="act-time">13:30</div>
+        <div class="act-title">🚕 Havalimanına Transfer</div>
+        <div class="act-desc">Taksi ~30-40 dk. Uçuş 17:00!</div>
+        <div class="act-tags"><span class="act-tag tag-transport">🚕 Ulaşım</span></div>
+        <a class="act-map" href="https://maps.google.com/?q=Budapest+Ferenc+Liszt+International+Airport" target="_blank">📍 Haritada Gör</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tip-box">⚠️ Uçuş 17:00 — en geç 13:30'da otelden çıkın!</div>
+
+</div><!-- /tab-plan -->
+
+<!-- ══ TAB: HARİTA ══ -->
+<div class="tab-content" id="tab-map">
+<div class="top-gap"></div>
+
+<div class="map-controls">
+  <div class="map-controls-title">🗺️ Rotayı Filtrele</div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterMap('all',this)">Tümü</button>
+    <button class="filter-btn day-btn d1" onclick="filterMap('day1',this)">Gün 1</button>
+    <button class="filter-btn day-btn d2" onclick="filterMap('day2',this)">Gün 2</button>
+    <button class="filter-btn day-btn d3" onclick="filterMap('day3',this)">Gün 3</button>
+    <button class="filter-btn day-btn d4" onclick="filterMap('day4',this)">Gün 4</button>
+    <button class="filter-btn day-btn d5" onclick="filterMap('day5',this)">Gün 5</button>
+    <button class="filter-btn day-btn d6" onclick="filterMap('day6',this)">Gün 6</button>
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn" onclick="filterCat('photo',this)">📸 Fotoğraf</button>
+    <button class="filter-btn" onclick="filterCat('food',this)">🍽️ Yemek</button>
+    <button class="filter-btn" onclick="filterCat('museum',this)">🏛️ Tarihi</button>
+    <button class="filter-btn" onclick="filterCat('night',this)">🌙 Gece</button>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#E65100"></div>📸 Fotoğraf</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2E7D32"></div>🍽️ Yemek</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1565C0"></div>🏛️ Tarihi</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4A148C"></div>🌙 Gece</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#37474F"></div>🚇 Ulaşım</div>
+  </div>
+</div>
+
+<div id="map"></div>
+</div><!-- /tab-map -->
+
+<!-- ══ TAB: BİLGİ ══ -->
+<div class="tab-content" id="tab-info">
+<div class="top-gap"></div>
+
+<div class="train-card">
+  <div class="train-header">🚂 Railjet — 20 Nisan</div>
+  <div class="train-row"><span class="train-label">Kalkış</span><span class="train-val">17:27 — Viyana Hauptbahnhof</span></div>
+  <div class="train-row"><span class="train-label">Varış</span><span class="train-val">~20:00 — Budapeşte Keleti</span></div>
+  <div class="train-row"><span class="train-label">Süre</span><span class="train-val">~2 saat 30 dakika</span></div>
+  <div class="train-row"><span class="train-label">Bilet</span><span class="train-val"><a href="https://www.oebb.at" target="_blank">oebb.at</a></span></div>
+</div>
+
+<div class="info-section">
+  <div class="info-section-title">🏰 Viyana</div>
+  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Vienna Card — tüm toplu taşıma dahil.</span></div>
+  <div class="info-row"><span class="info-icon">💶</span><span class="info-text"><b>Para:</b> Euro. Biraz nakit bulundurun.</span></div>
+  <div class="info-row"><span class="info-icon">🌡️</span><span class="info-text"><b>Hava:</b> ~14-16°C. Hafif mont önerilir.</span></div>
+  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> WienMobil.</span></div>
+</div>
+
+<div class="info-section">
+  <div class="info-section-title">🌊 Budapeşte</div>
+  <div class="info-row"><span class="info-icon">🚇</span><span class="info-text"><b>Ulaşım:</b> Budapest Card — metro + otobüs dahil.</span></div>
+  <div class="info-row"><span class="info-icon">💱</span><span class="info-text"><b>Para:</b> Macar Forinti (HUF). Nakit lazım.</span></div>
+  <div class="info-row"><span class="info-icon">♨️</span><span class="info-text"><b>Hamam:</b> Çevrimiçi bilet alın! (~25-30€)</span></div>
+  <div class="info-row"><span class="info-icon">📱</span><span class="info-text"><b>Uygulama:</b> BKK Futár, Bolt/Uber.</span></div>
+</div>
+
+<div class="info-section">
+  <div class="info-section-title">💰 Tahmini Bütçe (Kişi Başı)</div>
+  <div class="budget-wrap">
+    <table class="budget-table">
+      <tr><th>Kalem</th><th>Viyana</th><th>Budapeşte</th></tr>
+      <tr><td>🏨 Otel</td><td>80–120€/gece</td><td>60–100€/gece</td></tr>
+      <tr><td>🍽️ Yemek</td><td>40–60€/gün</td><td>25–40€/gün</td></tr>
+      <tr><td>🎫 Aktivite</td><td>30–50€/gün</td><td>40–60€/gün</td></tr>
+      <tr><td>🚂 Tren</td><td colspan="2" style="text-align:center">~35–45€</td></tr>
+      <tr><td><b>TOPLAM</b></td><td colspan="2" style="text-align:center"><b>~1.100–1.400€</b></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="info-section">
+  <div class="info-section-title">🍽️ Viyana'da Mutlaka Ye</div>
+  <div class="food-grid">
+    <div class="food-item"><div class="food-name">Wiener Schnitzel</div><div class="food-desc">Tabaktan taşan dana. Limon sık!</div></div>
+    <div class="food-item"><div class="food-name">Apfelstrudel</div><div class="food-desc">Elmalı börek + vanilyalı dondurma.</div></div>
+    <div class="food-item"><div class="food-name">Sachertorte</div><div class="food-desc">Çikolatalı kek. Café Demel'de.</div></div>
+    <div class="food-item"><div class="food-name">Einspänner</div><div class="food-desc">Çift espresso + çırpılmış krema.</div></div>
+    <div class="food-item"><div class="food-name">Kaiserschmarrn</div><div class="food-desc">Karamelizeli krep + meyve sosu.</div></div>
+    <div class="food-item"><div class="food-name">Käsekrainer</div><div class="food-desc">Peynirli sosis. Sokak lezzeti.</div></div>
+  </div>
+</div>
+
+<div class="info-section">
+  <div class="info-section-title">🍽️ Budapeşte'de Mutlaka Ye</div>
+  <div class="food-grid">
+    <div class="food-item"><div class="food-name">Lángos</div><div class="food-desc">Kızarmış hamur + ekşi krema + peynir.</div></div>
+    <div class="food-item"><div class="food-name">Gulyás</div><div class="food-desc">Zengin baharatlı Macar güveci.</div></div>
+    <div class="food-item"><div class="food-name">Kürtőskalács</div><div class="food-desc">Sarmal tatlı ekmek + tarçın.</div></div>
+    <div class="food-item"><div class="food-name">Dobos Torta</div><div class="food-desc">Çok katlı çikolata pastası.</div></div>
+    <div class="food-item"><div class="food-name">Pálinka</div><div class="food-desc">Meyve brandysi. Bir shot şart!</div></div>
+    <div class="food-item"><div class="food-name">Unicum</div><div class="food-desc">Otlu likör. Harika hediye.</div></div>
+  </div>
+</div>
+</div><!-- /tab-info -->
+
+<!-- ══ TAB: EKSTRA ══ -->
+<div class="tab-content" id="tab-extras">
+<div class="top-gap"></div>
+
+<!-- GİZLİ MEKTUP -->
+<div class="letter-wrap">
+  <div id="letter-content"></div>
+</div>
+
+<!-- HAVA DURUMU -->
+<div class="weather-card">
+  <div class="weather-city">🌤️ Viyana Hava Durumu</div>
+  <div id="weather-vienna"><div class="weather-loading">Yükleniyor...</div></div>
+</div>
+<div class="weather-card">
+  <div class="weather-city">🌤️ Budapeşte Hava Durumu</div>
+  <div id="weather-budapest"><div class="weather-loading">Yükleniyor...</div></div>
+</div>
+
+<!-- DÖVİZ -->
+<div class="currency-card">
+  <div class="currency-header">💱 Döviz & Hesaplayıcı</div>
+  <div class="currency-body">
+    <div class="currency-rate"><span class="cur-label">1 EUR =</span><span class="cur-val" id="eur-try">-- TL</span></div>
+    <div class="currency-rate"><span class="cur-label">1 EUR =</span><span class="cur-val" id="eur-huf">-- HUF</span></div>
+    <div class="currency-rate"><span class="cur-label">1 GBP =</span><span class="cur-val" id="gbp-eur">-- EUR</span></div>
+    <div class="cur-calc">
+      <div class="cur-calc-title">Hızlı Çeviri</div>
+      <div class="cur-input-row">
+        <input class="cur-input" type="number" id="cur-amount" value="10" oninput="calcCurrency()">
+        <select class="cur-select" id="cur-from" onchange="calcCurrency()">
+          <option value="EUR">EUR €</option>
+          <option value="HUF">HUF Ft</option>
+          <option value="GBP">GBP £</option>
+          <option value="TRY">TRY ₺</option>
+        </select>
+        <span style="color:var(--soft)">→</span>
+        <select class="cur-select" id="cur-to" onchange="calcCurrency()">
+          <option value="HUF">HUF Ft</option>
+          <option value="EUR">EUR €</option>
+          <option value="GBP">GBP £</option>
+          <option value="TRY">TRY ₺</option>
+        </select>
+      </div>
+      <div class="cur-result" id="cur-result">--</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPONTANE FİKİR -->
+<div class="spont-card">
+  <div class="spont-header">🎲 Ne Yapsak?</div>
+  <div class="spont-body">
+    <div class="spont-idea" id="spont-idea">Butona bas, sürpriz bir fikir gelsin!</div>
+    <button class="spont-btn" onclick="getSpont()">🎲 Yeni Fikir</button>
+  </div>
+</div>
+
+<!-- BAVUL LİSTESİ -->
+<div class="pack-section">
+  <div class="pack-header">
+    🧳 Bavul Listesi
+    <button class="pack-reset" onclick="resetPacking()">Sıfırla</button>
+  </div>
+  <div class="pack-add-row">
+    <input class="pack-add-input" id="pack-new-text" type="text" placeholder="Yeni eşya ekle..." maxlength="50" onkeydown="if(event.key==='Enter')addPackItem()">
+    <select class="pack-add-select" id="pack-new-cat">
+      <option value="📄 Belgeler">📄 Belgeler</option>
+      <option value="👔 Kıyafet">👔 Kıyafet</option>
+      <option value="🔌 Teknoloji">🔌 Teknoloji</option>
+      <option value="💊 Sağlık">💊 Sağlık</option>
+      <option value="🧴 Bakım">🧴 Bakım</option>
+      <option value="🎒 Diğer" selected>🎒 Diğer</option>
+    </select>
+    <button class="pack-add-btn" onclick="addPackItem()">+</button>
+  </div>
+  <div id="pack-list"></div>
+  <div class="pack-progress" id="pack-progress"></div>
+</div>
+
+<!-- TEMEL KELİMELER -->
+<div class="phrases-card">
+  <div style="padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--brown);border-bottom:1px solid #E8E0D0;">🗣️ Temel Kelimeler</div>
+  <div class="phrases-tabs">
+    <button class="phrases-tab active" onclick="switchPhrase('de',this)">🇦🇹 Almanca</button>
+    <button class="phrases-tab" onclick="switchPhrase('hu',this)">🇭🇺 Macarca</button>
+  </div>
+  <div id="phrases-content"></div>
+</div>
+
+<!-- TOPLU TAŞIMA -->
+<div class="transit-card">
+  <div class="transit-header">🚇 Toplu Taşıma Rehberi</div>
+  <div style="padding:6px 14px 2px;font-size:11px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:1px;">Viyana</div>
+  <div class="transit-line"><div class="transit-badge" style="background:#E30613">U1</div><div><div class="transit-stops">Stephansplatz → Hauptbahnhof</div><div class="transit-tip">Şehir merkezi ↔ Tren garı</div></div></div>
+  <div class="transit-line"><div class="transit-badge" style="background:#9B59B6">U2</div><div><div class="transit-stops">Karlsplatz → Schottenring</div><div class="transit-tip">Müzeler bölgesi</div></div></div>
+  <div class="transit-line"><div class="transit-badge" style="background:#F39C12">U4</div><div><div class="transit-stops">Schönbrunn → Stadtpark</div><div class="transit-tip">Saraylar hattı</div></div></div>
+  <div style="padding:6px 14px 2px;font-size:11px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:1px;border-top:1px solid #F0EAE0;">Budapeşte</div>
+  <div class="transit-line"><div class="transit-badge" style="background:#FFCC00;color:#333">M1</div><div><div class="transit-stops">Vörösmarty → Hősök tere</div><div class="transit-tip">Andrássy Bulvarı boyunca</div></div></div>
+  <div class="transit-line"><div class="transit-badge" style="background:#E30613">M2</div><div><div class="transit-stops">Keleti → Déak</div><div class="transit-tip">Tren garından merkeze</div></div></div>
+  <div class="transit-line"><div class="transit-badge" style="background:#0078D4">M3</div><div><div class="transit-stops">Deák → Kálvin tér</div><div class="transit-tip">Büyük Pazar'a</div></div></div>
+  <div class="transit-line"><div class="transit-badge" style="background:#2ECC71">100E</div><div><div class="transit-stops">Havalimanı → Keleti</div><div class="transit-tip">~45 dk, en ucuz seçenek</div></div></div>
+</div>
+
+<!-- ACİL BİLGİLER -->
+<div class="emrg-card">
+  <div class="emrg-header">🆘 Acil Bilgiler</div>
+  <div class="emrg-item"><span class="emrg-icon">🚨</span><div class="emrg-info"><div class="emrg-name">Avrupa Acil (AB geneli)</div><div class="emrg-num">Polis, Ambulans, İtfaiye</div></div><a class="emrg-call" href="tel:112">112</a></div>
+  <div class="emrg-item"><span class="emrg-icon">🏥</span><div class="emrg-info"><div class="emrg-name">Viyana Acil Servis</div><div class="emrg-num">AKH Wien — Währinger Gürtel 18-20</div></div><a class="emrg-call" href="tel:+431404000">Ara</a></div>
+  <div class="emrg-item"><span class="emrg-icon">🏥</span><div class="emrg-info"><div class="emrg-name">Budapeşte Acil Servis</div><div class="emrg-num">Semmelweis Üniversitesi Hastanesi</div></div><a class="emrg-call" href="tel:104">104</a></div>
+  <div class="emrg-item"><span class="emrg-icon">🇹🇷</span><div class="emrg-info"><div class="emrg-name">T.C. Viyana Büyükelçiliği</div><div class="emrg-num">Prinz-Eugen-Str. 40, Viyana</div></div><a class="emrg-call" href="tel:+431505735">Ara</a></div>
+  <div class="emrg-item"><span class="emrg-icon">🇹🇷</span><div class="emrg-info"><div class="emrg-name">T.C. Budapeşte Büyükelçiliği</div><div class="emrg-num">Andrássy út 123, Budapeşte</div></div><a class="emrg-call" href="tel:+3613440100">Ara</a></div>
+  <div class="emrg-item"><span class="emrg-icon">💳</span><div class="emrg-info"><div class="emrg-name">Kayıp Kart (Visa/MC)</div><div class="emrg-num">Kartının arkasındaki numarayı ara</div></div><a class="emrg-call" href="tel:+18007270753">Visa</a></div>
+</div>
+
+</div><!-- /tab-extras -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn active" id="nav-plan" onclick="switchTab('plan')"><span class="nav-icon">📅</span>Plan</button>
+  <button class="nav-btn" id="nav-map" onclick="switchTab('map')"><span class="nav-icon">🗺️</span>Harita</button>
+  <button class="nav-btn" id="nav-extras" onclick="switchTab('extras')"><span class="nav-icon">✨</span>Ekstra</button>
+  <button class="nav-btn" id="nav-info" onclick="switchTab('info')"><span class="nav-icon">ℹ️</span>Bilgi</button>
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+const TOTAL = 6;
+let state = {days:{}, acts:{}};
+try { state = JSON.parse(localStorage.getItem('trip_v3') || '{"days":{},"acts":{}}'); } catch(e){}
+function save() { localStorage.setItem('trip_v3', JSON.stringify(state)); }
+
+function restoreState() {
+  Object.keys(state.days).forEach(d => { if(state.days[d]) setDayDone(+d,true); });
+  Object.keys(state.acts).forEach(id => {
+    if(state.acts[id]) {
+      const el = document.getElementById(id);
+      if(el) { el.querySelector('.act-check').classList.add('done'); el.classList.add('checked'); }
+    }
+  });
+  updateProgress();
+}
+function setDayDone(n,done) {
+  document.getElementById('day-'+n)?.classList.toggle('completed',done);
+  document.getElementById('check-'+n)?.classList.toggle('done',done);
+}
+function markDay(e,n) {
+  e.stopPropagation();
+  state.days[n] = !state.days[n];
+  save(); setDayDone(n,state.days[n]); updateProgress();
+}
+function toggleAct(el) {
+  const act = el.closest('.activity');
+  const done = !el.classList.contains('done');
+  el.classList.toggle('done',done);
+  act.classList.toggle('checked',done);
+  if(act.id) { state.acts[act.id]=done; save(); }
+}
+function toggleDay(n) { document.getElementById('day-'+n).classList.toggle('open'); }
+function updateProgress() {
+  const done = Object.values(state.days).filter(Boolean).length;
+  document.getElementById('progress-text').textContent = done+' / '+TOTAL+' gün';
+  document.getElementById('progress-fill').style.width = (done/TOTAL*100)+'%';
+}
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.getElementById('nav-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='map' && !mapInitialized) initMap();
+  if(name==='extras' && !extrasLoaded) { initExtras(); extrasLoaded=true; }
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+
+// ── MAP DATA ───────────────────────────────────────────────────
+const PLACES = [
+  // GÜN 1 — Viyana
+  {day:1, ord:1, lat:48.2082, lng:16.3738, title:'Stephansdom', time:'15:00', desc:'Viyana\'nın kalbi. Gotik katedral + Graben yürüyüşü.', cats:['museum','photo'], best:false},
+  {day:1, ord:2, lat:48.2065, lng:16.3642, title:'Hofburg Sarayı', time:'16:30', desc:'Habsburg sarayı — dışarıdan harika fotoğraf.', cats:['museum','photo'], best:false},
+  {day:1, ord:3, lat:48.2139, lng:16.3566, title:'Café Landtmann', time:'18:30', desc:'Freud\'un favori kafesi. Einspänner sipariş et!', cats:['food'], best:false},
+  {day:1, ord:4, lat:48.2081, lng:16.3736, title:'Figlmüller', time:'20:00', desc:'Viyana\'nın efsane Schnitzel\'i. Rezervasyon şart!', cats:['food'], best:false},
+
+  // GÜN 2 — Viyana
+  {day:2, ord:1, lat:48.1845, lng:16.3122, title:'Schönbrunn Sarayı', time:'11:00', desc:'1441 odalı saray. Gloriette\'den Viyana panoraması!', cats:['museum','photo'], best:true},
+  {day:2, ord:2, lat:48.1914, lng:16.3806, title:'Belvedere Sarayı', time:'15:30', desc:'Klimt\'in "Öpücük" tablosu burada!', cats:['museum','photo'], best:false},
+  {day:2, ord:3, lat:48.2004, lng:16.3795, title:'Stadtpark', time:'17:30', desc:'Johann Strauss heykeli önünde fotoğraf.', cats:['photo'], best:false},
+  {day:2, ord:4, lat:48.1988, lng:16.3572, title:'Meixner\'s Gastwirtschaft', time:'20:00', desc:'Otantik şarap evi. Grüner Veltliner dene!', cats:['food'], best:false},
+  {day:2, ord:5, lat:48.2042, lng:16.3391, title:'Gürtel Bar Sokağı', time:'22:00', desc:'Viyana\'nın en canlı gece hayatı.', cats:['night'], best:false},
+
+  // GÜN 3 — Viyana → Budapeşte
+  {day:3, ord:1, lat:48.1990, lng:16.3671, title:'Naschmarkt', time:'10:00', desc:'120+ dükkan. Pazar günü en canlı hali!', cats:['food','photo'], best:false},
+  {day:3, ord:2, lat:48.2167, lng:16.3960, title:'Prater & Riesenrad', time:'13:30', desc:'1766\'dan beri dönen efsane dönme dolap.', cats:['photo'], best:false},
+  {day:3, ord:3, lat:48.1851, lng:16.3788, title:'Viyana Hauptbahnhof', time:'17:27', desc:'Buradan Railjet ile Budapeşte\'ye!', cats:['transport'], best:false},
+  {day:3, ord:4, lat:47.5001, lng:19.0836, title:'Budapeşte Keleti', time:'~20:00', desc:'Varış! Otele git, dinlen.', cats:['transport'], best:false},
+
+  // GÜN 4 — Budapeşte
+  {day:4, ord:1, lat:47.4615, lng:19.0567, title:'Nagyvásárcsarnok', time:'12:00', desc:'Büyük Pazar Salonu. Lángos yemeden gitme!', cats:['food','photo'], best:false},
+  {day:4, ord:2, lat:47.4961, lng:19.0397, title:'Buda Kalesi', time:'14:00', desc:'Sikló ile kale tepesine çık.', cats:['museum','photo'], best:false},
+  {day:4, ord:3, lat:47.5017, lng:19.0347, title:'Balıkçı Kulesi', time:'15:30', desc:'En ikonik fotoğraf noktası! Gün batımı öncesi gel.', cats:['museum','photo'], best:true},
+  {day:4, ord:4, lat:47.4983, lng:19.0490, title:'Spoon Restoran', time:'19:30', desc:'Tuna üzerinde yüzen teknede akşam yemeği!', cats:['food'], best:false},
+  {day:4, ord:5, lat:47.4993, lng:19.0627, title:'Szimpla Kert', time:'21:30', desc:'Budapeşte\'nin efsane ruin barı.', cats:['night'], best:false},
+
+  // GÜN 5 — Budapeşte
+  {day:5, ord:1, lat:47.5186, lng:19.0823, title:'Széchenyi Hamamı', time:'10:00', desc:'Online bilet al! Açık havuz + sauna.', cats:['photo'], best:false},
+  {day:5, ord:2, lat:47.5056, lng:19.0602, title:'Andrássy Bulvarı', time:'15:00', desc:'Budapeşte\'nin Champs-Élysées\'i.', cats:['photo'], best:false},
+  {day:5, ord:3, lat:47.5145, lng:19.0789, title:'Hősök Meydanı', time:'16:30', desc:'Binlerce Yıl Anıtı — muhteşem fotoğraf.', cats:['museum','photo'], best:false},
+  {day:5, ord:4, lat:47.4980, lng:19.0450, title:'Tuna Cruise İskele', time:'20:30', desc:'Gece turu! Şampanya + Parlamento + Zincir Köprü.', cats:['photo','night'], best:true},
+
+  // GÜN 6 — Budapeşte
+  {day:6, ord:1, lat:47.4963, lng:19.0693, title:'New York Café', time:'09:00', desc:'Dünyanın en güzel kafelerinden biri. Son kahvaltı!', cats:['food','photo'], best:false},
+  {day:6, ord:2, lat:47.4983, lng:19.0456, title:'Zincir Köprü', time:'11:00', desc:'Son yürüyüş. Tuna fotoğrafları burada!', cats:['photo'], best:true},
+  {day:6, ord:3, lat:47.4298, lng:19.2611, title:'Budapeşte Havalimanı', time:'15:00', desc:'Uçuş 17:00. En geç 13:30\'da çık!', cats:['transport'], best:false},
+];
+
+// ── MAP ────────────────────────────────────────────────────────
+let map, markers=[], infoWindow, mapInitialized=false;
+let activeDay='all', activeCat=null;
+
+const CAT_COLORS = {
+  photo:   {bg:'#E65100', text:'white'},
+  food:    {bg:'#2E7D32', text:'white'},
+  museum:  {bg:'#1565C0', text:'white'},
+  night:   {bg:'#4A148C', text:'white'},
+  transport:{bg:'#37474F', text:'white'},
+};
+const DAY_COLORS = ['','#8B2020','#A0522D','#6B4226','#1A5260','#154360','#0E2954'];
+
+function getPinColor(place) {
+  if(activeCat) return CAT_COLORS[activeCat]?.bg || '#888';
+  return DAY_COLORS[place.day] || '#888';
+}
+
+function makeSVGPin(color, isBest, orderNum) {
+  const label = isBest ? '★' : (orderNum || '');
+  const fontSize = isBest ? 12 : 10;
+  return {
+    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="42" viewBox="0 0 32 42">
+        <path d="M16 0C7.16 0 0 7.16 0 16c0 12 16 26 16 26S32 28 32 16C32 7.16 24.84 0 16 0z" fill="${color}" stroke="white" stroke-width="2"/>
+        <circle cx="16" cy="16" r="9" fill="white" opacity="0.95"/>
+        <text x="16" y="${isBest?20:20}" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-weight="bold" font-family="Arial,sans-serif">${label}</text>
+      </svg>`),
+    scaledSize: {width:32, height:42},
+    anchor: {x:16, y:42}
+  };
+}
+
+function buildIWContent(p) {
+  const catLabels = {photo:'📸 Fotoğraf',food:'🍽️ Yemek',museum:'🏛️ Tarihi',night:'🌙 Gece',transport:'🚇 Ulaşım'};
+  const tagStyles = {photo:'background:#FFF3E0;color:#E65100',food:'background:#E8F5E9;color:#2E7D32',museum:'background:#E3F2FD;color:#1565C0',night:'background:#1A1A2E;color:#C9A96E',transport:'background:#ECEFF1;color:#37474F'};
+  const tags = p.cats.map(c=>`<span class="iw-tag" style="${tagStyles[c]||''}">${catLabels[c]||c}</span>`).join('');
+  const photoBadge = p.cats.includes('photo') ? `<div class="iw-photo-badge">📸 Fotoğraf çekilecek${p.best?' — En iyi nokta!':''}</div>` : '';
+  const mapsUrl = `https://maps.google.com/?q=${p.lat},${p.lng}`;
+  return `<div class="iw-content">
+    <div class="iw-time">${p.time} · Gün ${p.day}</div>
+    <div class="iw-title">${p.title}</div>
+    <div class="iw-tags">${tags}</div>
+    ${photoBadge}
+    <div class="iw-desc">${p.desc}</div>
+    <a class="iw-map-btn" href="${mapsUrl}" target="_blank">📍 Google Maps\'te Aç</a>
+  </div>`;
+}
+
+function initMap() {
+  const viennaCenter = {lat:48.2082, lng:16.3738};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: viennaCenter,
+    zoom: 6,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    gestureHandling: 'greedy',
+    styles: [
+      {featureType:'poi',elementType:'labels',stylers:[{visibility:'off'}]},
+      {featureType:'transit',elementType:'labels',stylers:[{visibility:'simplified'}]},
+    ]
+  });
+  infoWindow = new google.maps.InfoWindow({maxWidth:280});
+  PLACES.forEach(p => {
+    const marker = new google.maps.Marker({
+      position:{lat:p.lat, lng:p.lng},
+      map: map,
+      title: p.title,
+      icon: makeSVGPin(getPinColor(p), p.best, p.ord),
+      animation: google.maps.Animation.DROP,
+    });
+    marker.placeData = p;
+    marker.addListener('click', ()=>{
+      infoWindow.setContent(buildIWContent(p));
+      infoWindow.open(map, marker);
+    });
+    markers.push(marker);
+  });
+  drawRouteLines('all');
+  fitMapToBounds();
+  mapInitialized = true;
+}
+
+let polylines = [];
+function clearPolylines() { polylines.forEach(l=>l.setMap(null)); polylines=[]; }
+
+function drawRouteLines(dayFilter) {
+  clearPolylines();
+  const days = dayFilter==='all' ? [1,2,3,4,5,6] : [parseInt(dayFilter.replace('day',''))];
+  days.forEach(d => {
+    const pts = PLACES.filter(p=>p.day===d && (activeCat===null || p.cats.includes(activeCat)))
+                      .sort((a,b)=>a.ord-b.ord)
+                      .map(p=>({lat:p.lat,lng:p.lng}));
+    if(pts.length>1) {
+      const line = new google.maps.Polyline({
+        path: pts,
+        geodesic: true,
+        strokeColor: DAY_COLORS[d],
+        strokeOpacity: 0.55,
+        strokeWeight: 3,
+        map: map,
+        icons: [{
+          icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale:3, strokeColor: DAY_COLORS[d]},
+          offset:'50%'
+        }]
+      });
+      polylines.push(line);
+    }
+  });
+}
+
+function fitMapToBounds() {
+  const bounds = new google.maps.LatLngBounds();
+  let count = 0;
+  markers.forEach(m => {
+    if(m.getVisible()) { bounds.extend(m.getPosition()); count++; }
+  });
+  if(count > 0) map.fitBounds(bounds);
+}
+
+function filterMap(day, btn) {
+  activeDay = day;
+  activeCat = null;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  markers.forEach(m => {
+    const show = day==='all' || m.placeData.day===parseInt(day.replace('day',''));
+    m.setVisible(show);
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best, m.placeData.ord));
+  });
+  drawRouteLines(day);
+  infoWindow.close();
+  fitMapToBounds();
+}
+
+function filterCat(cat, btn) {
+  activeCat = activeCat===cat ? null : cat;
+  activeDay = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(activeCat) btn.classList.add('active');
+  else document.querySelector('.filter-btn').classList.add('active');
+  markers.forEach(m => {
+    const show = !activeCat || m.placeData.cats.includes(activeCat);
+    m.setVisible(show);
+    m.setIcon(makeSVGPin(getPinColor(m.placeData), m.placeData.best, m.placeData.ord));
+  });
+  drawRouteLines('all');
+  infoWindow.close();
+  fitMapToBounds();
+}
+
+// ── LETTER ────────────────────────────────────────────────────
+function renderLetter() {
+  const target = new Date('2026-04-18T12:00:00');
+  const now = new Date();
+  const el = document.getElementById('letter-content');
+  if(now >= target) {
+    el.innerHTML = `<div class="letter-open">
+      <div class="letter-open-title">💌 İlk Buluşma Mektubu</div>
+      <div class="letter-text">
+        Merhaba,<br><br>
+        Sana bir story'de yazmak bu kadar büyük bir şeye dönüşür mü, bilmiyordum.<br><br>
+        Yıllardır tanıdığım biri vardı — ama bir gün bir şey değişti. Belki ben değiştim, belki sen. Belki o mesaj sadece bahaneydi, zaten kaçınılmazdı.<br><br>
+        Ve şimdi buradayız. Aynı anda, aynı yerde, sonunda.<br><br>
+        O story'e teşekkürler. 🌹
+      </div>
+      <div class="letter-sig">— Uçuş öncesi yazıldı ✈️</div>
+    </div>`;
+  } else {
+    const diff = target - now;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    el.innerHTML = `<div class="letter-locked">
+      <div class="letter-lock-icon">🔒</div>
+      <div class="letter-lock-title">Gizli Mektup</div>
+      <div class="letter-lock-desc">Bu mektup 18 Nisan saat 12:00'de, Viyana'ya varışında açılacak. O ana kadar kilitli kalacak.</div>
+      <div class="letter-countdown">⏳ ${d} gün ${h} saat sonra açılıyor...</div>
+    </div>`;
+  }
+}
+
+// ── WEATHER ───────────────────────────────────────────────────
+const WX_ICONS = {
+  0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',
+  51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',
+  71:'❄️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',
+  95:'⛈️',96:'⛈️',99:'⛈️'
+};
+const WX_DESC = {
+  0:'Açık',1:'Az bulutlu',2:'Parçalı bulutlu',3:'Bulutlu',45:'Sisli',48:'Sisli',
+  51:'Hafif çiseleyen',53:'Çiseleyen',55:'Yoğun çiseleyen',61:'Hafif yağmurlu',63:'Yağmurlu',65:'Kuvvetli yağmur',
+  71:'Hafif karlı',73:'Karlı',75:'Yoğun kar',80:'Sağanak',81:'Kuvvetli sağanak',82:'Şiddetli sağanak',
+  95:'Fırtınalı',96:'Fırtınalı',99:'Şiddetli fırtına'
+};
+async function fetchWeather(lat, lng, elId) {
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weathercode,windspeed_10m,relativehumidity_2m&timezone=auto`);
+    const d = await r.json();
+    const c = d.current;
+    const icon = WX_ICONS[c.weathercode] || '🌡️';
+    const desc = WX_DESC[c.weathercode] || '';
+    document.getElementById(elId).innerHTML = `
+      <div class="weather-row">
+        <div class="weather-icon">${icon}</div>
+        <div>
+          <div class="weather-temp">${Math.round(c.temperature_2m)}°C</div>
+          <div class="weather-details">
+            <div class="weather-desc">${desc}</div>
+            <div class="weather-meta">💧 ${c.relativehumidity_2m}% nem &nbsp;·&nbsp; 💨 ${Math.round(c.windspeed_10m)} km/s rüzgar</div>
+          </div>
+        </div>
+      </div>`;
+  } catch(e) {
+    document.getElementById(elId).innerHTML = '<div class="weather-loading">Hava durumu alınamadı.</div>';
+  }
+}
+
+// ── CURRENCY ──────────────────────────────────────────────────
+let rates = {EUR:1, HUF:400, GBP:0.86, TRY:36};
+async function fetchRates() {
+  try {
+    const r = await fetch('https://api.frankfurter.app/latest?base=EUR&symbols=HUF,GBP,TRY');
+    const d = await r.json();
+    rates = {EUR:1, HUF:d.rates.HUF, GBP:d.rates.GBP, TRY:d.rates.TRY};
+    document.getElementById('eur-try').textContent = rates.TRY.toFixed(2)+' ₺';
+    document.getElementById('eur-huf').textContent = Math.round(rates.HUF)+' Ft';
+    document.getElementById('gbp-eur').textContent = (1/rates.GBP).toFixed(4)+' €';
+    calcCurrency();
+  } catch(e) {}
+}
+function calcCurrency() {
+  const amount = parseFloat(document.getElementById('cur-amount').value)||0;
+  const from = document.getElementById('cur-from').value;
+  const to = document.getElementById('cur-to').value;
+  const symbols = {EUR:'€',HUF:'Ft',GBP:'£',TRY:'₺'};
+  const inEur = amount / (from==='EUR'?1:rates[from]);
+  const result = inEur * (to==='EUR'?1:rates[to]);
+  const fmt = to==='HUF' ? Math.round(result).toLocaleString('tr') : result.toFixed(2);
+  document.getElementById('cur-result').textContent = `${fmt} ${symbols[to]}`;
+}
+
+// ── SPONTANEOUS ───────────────────────────────────────────────
+const SPONT_IDEAS = [
+  '☕ En yakın küçük kafede oturun, sadece sohbet edin.',
+  '📸 Birbirinizin fotoğrafını çekin — ama önce poz yok, doğal!',
+  '🎵 Sokak müzisyenini bulun ve bir süre dinleyin.',
+  '🍦 Dondurma alın ve yürüyerek yiyin.',
+  '🗺️ Haritayı kapatın, sezgilerinize göre 10 dk yürüyün.',
+  '💌 Birbirinize o anı anlatan kısa bir not yazın.',
+  '🌅 Tuna kenarında oturun, sadece nehri izleyin.',
+  '🎠 Şehrin en renkli köşesini bulun ve fotoğraf çekin.',
+  '🥐iki farklı pastane bulun, ikisinden de bir şey tadın.',
+  '🪑 Parkta bir bankta oturun ve gelip geçenleri izleyin.',
+  '🛍️ Bir hediyelik eşya dükkanına girin, 5 euroya bir şey alın.',
+  '🌺 Çiçekçiden tek bir çiçek al.',
+  '🎭 Bir sanat galerisine ya da kiliseye uğrayın.',
+  '🌙 Geceyi balkon ya da açık havada bitirin.',
+  '📖 Birlikte aynı menüden sipariş verin — görmeden seçin!',
+];
+function getSpont() {
+  const el = document.getElementById('spont-idea');
+  el.style.opacity='0';
+  setTimeout(()=>{
+    el.textContent = SPONT_IDEAS[Math.floor(Math.random()*SPONT_IDEAS.length)];
+    el.style.opacity='1';
+  },200);
+}
+
+// ── PACKING ───────────────────────────────────────────────────
+const PACK_ITEMS = {
+  '📄 Belgeler': ['Pasaport','Uçak bileti (print/dijital)','Sigorta belgesi','Otel rezervasyonları','Tren bileti (Railjet)'],
+  '👔 Kıyafet': ['Hafif mont / trençkot','Kazak / sweatshirt','3x üst','3x alt','Rahat yürüyüş ayakkabısı','Şık bir kombin (akşam yemeği)','Mayo (hamam için!)','Çorap & iç çamaşır'],
+  '🔌 Teknoloji': ['Telefon şarj aleti','Powerbank','Kamera / kablo','Kulaklık','Seyahat adaptörü (AB tipi)'],
+  '💊 Sağlık': ['Ağrı kesici','Mide ilacı','Yara bandı','Güneş kremi','El dezenfektanı'],
+  '🧴 Bakım': ['Diş fırçası & macun','Şampuan & duş jeli','Deodorant','Makyaj malzemeleri','Havlu (küçük)'],
+  '🎒 Diğer': ['Şemsiye (küçük)','Su şişesi','Snack (uzun yolculuk için)','Uyku maskesi'],
+};
+
+// packData: { checked: {id:bool}, custom: [{id, cat, label}] }
+let packData = {checked:{}, custom:[]};
+try {
+  const saved = localStorage.getItem('pack_v2');
+  if(saved) packData = JSON.parse(saved);
+} catch(e){}
+function savePack() { localStorage.setItem('pack_v2', JSON.stringify(packData)); }
+
+function makePackId(str) { return 'pk_' + str.replace(/\W/g,'').substring(0,30) + '_' + Math.random().toString(36).substr(2,4); }
+
+function renderPacking() {
+  const list = document.getElementById('pack-list');
+  let html = '';
+  let total=0, done=0;
+
+  // Build combined structure: default + custom per category
+  const allCats = Object.keys(PACK_ITEMS);
+  // collect custom cats not in default
+  const customCats = [...new Set((packData.custom||[]).map(c=>c.cat))].filter(c=>!allCats.includes(c));
+  const cats = [...allCats, ...customCats];
+
+  cats.forEach(cat => {
+    const defaultItems = (PACK_ITEMS[cat]||[]).map(label => ({
+      id: 'pk_'+label.replace(/\W/g,''),
+      label,
+      isCustom: false
+    }));
+    const customItems = (packData.custom||[]).filter(c=>c.cat===cat).map(c=>({
+      id: c.id, label: c.label, isCustom: true
+    }));
+    const items = [...defaultItems, ...customItems];
+    if(!items.length) return;
+
+    html += `<div class="pack-cat">${cat}</div>`;
+    items.forEach(item => {
+      total++;
+      const checked = packData.checked[item.id];
+      if(checked) done++;
+      const deleteBtn = item.isCustom
+        ? `<button class="pack-item-delete" onclick="deletePackItem(event,'${item.id}')" title="Sil">×</button>`
+        : '';
+      html += `<div class="pack-item${checked?' checked':''}" onclick="togglePack(event,'${item.id}')">
+        <div class="pack-cb${checked?' done':''}">✓</div>
+        <div class="pack-label">${item.label}</div>
+        ${deleteBtn}
+      </div>`;
+    });
+  });
+
+  list.innerHTML = html;
+  document.getElementById('pack-progress').textContent = `✅ ${done} / ${total} hazır`;
+}
+
+function togglePack(e, id) {
+  if(e.target.classList.contains('pack-item-delete')) return;
+  packData.checked[id] = !packData.checked[id];
+  savePack(); renderPacking();
+}
+
+function deletePackItem(e, id) {
+  e.stopPropagation();
+  packData.custom = (packData.custom||[]).filter(c=>c.id!==id);
+  delete packData.checked[id];
+  savePack(); renderPacking();
+}
+
+function addPackItem() {
+  const input = document.getElementById('pack-new-text');
+  const catEl = document.getElementById('pack-new-cat');
+  const label = input.value.trim();
+  if(!label) { input.focus(); return; }
+  const cat = catEl.value;
+  const id = makePackId(label);
+  if(!packData.custom) packData.custom = [];
+  packData.custom.push({id, cat, label});
+  savePack();
+  input.value = '';
+  input.focus();
+  renderPacking();
+  // scroll to bottom of list to show new item
+  setTimeout(()=>{ document.getElementById('pack-list').lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'}); },100);
+}
+
+function resetPacking() {
+  if(confirm('Tüm işaretler ve eklenen maddeler silinsin mi?')) {
+    packData = {checked:{}, custom:[]};
+    savePack(); renderPacking();
+  }
+}
+
+// ── PHRASES ───────────────────────────────────────────────────
+const PHRASES = {
+  de: [
+    {tr:'Merhaba',local:'Hallo / Grüß Gott',ph:'Ha-lo / Grüss Gott'},
+    {tr:'Teşekkürler',local:'Danke schön',ph:'Dan-ke şön'},
+    {tr:'Lütfen',local:'Bitte',ph:'Bi-te'},
+    {tr:'Özür dilerim',local:'Entschuldigung',ph:'Ent-şul-di-gung'},
+    {tr:'Hesap lütfen',local:'Die Rechnung, bitte',ph:'Di Reç-nung, bi-te'},
+    {tr:'Nerede?',local:'Wo ist...?',ph:'Vo ist?'},
+    {tr:'Ne kadar?',local:'Wie viel kostet das?',ph:'Vi fil kos-tet das?'},
+    {tr:'Çok güzel',local:'Sehr schön',ph:'Zer şön'},
+    {tr:'Anlamıyorum',local:'Ich verstehe nicht',ph:'İç fer-şte-e niçt'},
+    {tr:'İngilizce biliyor musunuz?',local:'Sprechen Sie Englisch?',ph:'Şpreç-en zi İng-liş?'},
+  ],
+  hu: [
+    {tr:'Merhaba',local:'Szia / Jó napot',ph:'Si-ya / Yo na-pot'},
+    {tr:'Teşekkürler',local:'Köszönöm',ph:'Kö-sö-nöm'},
+    {tr:'Lütfen',local:'Kérem',ph:'Ke-rem'},
+    {tr:'Özür dilerim',local:'Elnézést',ph:'El-ne-zest'},
+    {tr:'Hesap lütfen',local:'Kérem a számlát',ph:'Ke-rem a sam-lat'},
+    {tr:'Nerede?',local:'Hol van...?',ph:'Hol van?'},
+    {tr:'Ne kadar?',local:'Mennyibe kerül?',ph:'Men-yi-be ke-rül?'},
+    {tr:'Çok güzel',local:'Nagyon szép',ph:'Na-dyon sep'},
+    {tr:'Anlamıyorum',local:'Nem értem',ph:'Nem er-tem'},
+    {tr:'İngilizce biliyor musunuz?',local:'Beszél angolul?',ph:'Be-sel an-go-lul?'},
+  ]
+};
+let activePhraseTab = 'de';
+function switchPhrase(lang, btn) {
+  activePhraseTab = lang;
+  document.querySelectorAll('.phrases-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPhrases();
+}
+function renderPhrases() {
+  const items = PHRASES[activePhraseTab];
+  document.getElementById('phrases-content').innerHTML = items.map(p=>`
+    <div class="phrase-item">
+      <div><div class="phrase-tr">${p.tr}</div><div class="phrase-phonetic">${p.ph}</div></div>
+      <div class="phrase-local">${p.local}</div>
+    </div>`).join('');
+}
+
+// ── EXTRAS INIT ───────────────────────────────────────────────
+function initExtras() {
+  fetchWeather(48.2082, 16.3738, 'weather-vienna');
+  fetchWeather(47.4979, 19.0402, 'weather-budapest');
+  fetchRates();
+  renderPacking();
+  renderPhrases();
+  renderLetter();
+  getSpont();
+}
+let extrasLoaded = false;
+
+// ── COUNTDOWN ─────────────────────────────────────────────────
+function updateCountdown() {
+  const target = new Date('2026-04-18T12:00:00');
+  const end    = new Date('2026-04-23T15:00:00');
+  const now    = new Date();
+  const boxes  = document.getElementById('countdown-boxes');
+  const msg    = document.getElementById('cd-msg');
+
+  if(now >= end) {
+    boxes.innerHTML = '<div style="font-size:32px;">🌹</div>';
+    msg.textContent = 'Unutulmaz bir seyahatti!';
+    msg.className = 'cd-msg started';
+    return;
+  }
+  if(now >= target) {
+    boxes.innerHTML = '<div style="font-size:28px;color:var(--gold);">🎉</div>';
+    msg.textContent = 'Seyahat başladı! İyi eğlenceler!';
+    msg.className = 'cd-msg started';
+    return;
+  }
+
+  const diff = target - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+window.initMapCallback = initMap;
+restoreState();
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlY9iRmb2y6lf-tpkmN4OBTib0pPxgBRI&callback=initMapCallback&loading=async" async defer></script>
+</body>
+</html>
