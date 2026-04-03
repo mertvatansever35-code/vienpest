@@ -14,37 +14,69 @@
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
   @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{min-height:100svh;background:var(--brown);background-image:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(201,169,110,0.14) 0%,transparent 65%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 24px;font-family:'Georgia',serif;}
+
+  html, body {
+    width:100%;height:100%;
+    overflow:hidden;
+    background:var(--brown);
+  }
+
+  /* ── LOGIN ── */
+  #login-screen{
+    position:fixed;inset:0;z-index:100;
+    background:var(--brown);
+    background-image:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(201,169,110,0.14) 0%,transparent 65%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:30px 24px;
+    transition:opacity 0.4s ease;
+  }
+  #login-screen.hidden{opacity:0;pointer-events:none;}
+
   .logo{font-size:52px;margin-bottom:10px;animation:pulse 3s ease infinite;}
-  .site-name{font-size:13px;color:rgba(201,169,110,0.4);letter-spacing:4px;text-transform:uppercase;margin-bottom:32px;animation:fadeIn 1s ease 0.3s both;}
+  .site-name{font-size:13px;color:rgba(201,169,110,0.4);letter-spacing:4px;text-transform:uppercase;margin-bottom:32px;animation:fadeIn 1s ease 0.3s both;font-family:'Georgia',serif;}
   .login-box{width:100%;max-width:320px;background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.18);border-radius:18px;padding:28px 22px;position:relative;animation:fadeUp 0.6s ease 0.1s both;}
   .login-box::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.4),transparent);}
   .login-box.shake{animation:shake 0.4s ease;}
-  .login-label{display:block;font-size:10px;color:rgba(201,169,110,0.5);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:12px;}
+  .login-label{display:block;font-size:10px;color:rgba(201,169,110,0.5);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:12px;font-family:'Georgia',serif;}
   .login-input{width:100%;background:rgba(255,255,255,0.04);border:1.5px solid rgba(201,169,110,0.18);border-radius:10px;padding:14px 16px;font-size:16px;color:var(--gold);font-family:'Georgia',serif;letter-spacing:4px;outline:none;transition:border-color 0.2s;margin-bottom:16px;text-align:center;-webkit-appearance:none;}
   .login-input:focus{border-color:rgba(201,169,110,0.45);}
   .login-input::placeholder{color:rgba(201,169,110,0.2);letter-spacing:1px;font-size:14px;}
   .login-btn{width:100%;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);border-radius:10px;padding:13px;font-size:13px;color:var(--gold);font-family:'Georgia',serif;letter-spacing:1.5px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;touch-action:manipulation;}
   .login-btn:active{transform:scale(0.97);opacity:0.8;}
-  .login-error{font-size:12px;color:#E57373;text-align:center;margin-top:10px;opacity:0;transition:opacity 0.25s;min-height:18px;}
+  .login-error{font-size:12px;color:#E57373;text-align:center;margin-top:10px;opacity:0;transition:opacity 0.25s;min-height:18px;font-family:'Georgia',serif;}
   .login-error.show{opacity:1;}
-  .footer{margin-top:28px;font-size:12px;color:rgba(201,169,110,0.25);letter-spacing:2px;text-transform:uppercase;animation:fadeIn 1s ease 0.5s both;}
+  .footer{margin-top:28px;font-size:12px;color:rgba(201,169,110,0.25);letter-spacing:2px;text-transform:uppercase;font-family:'Georgia',serif;}
+
+  /* ── IFRAME ── */
+  #app-frame{
+    position:fixed;inset:0;
+    width:100%;height:100%;
+    border:none;
+    display:none;
+    background:var(--brown);
+  }
+  #app-frame.visible{display:block;}
 </style>
 </head>
 <body>
 
-<div class="logo">🦔</div>
-<div class="site-name">kirpi.online</div>
-
-<div class="login-box" id="login-box">
-  <label class="login-label">Şifre</label>
-  <input class="login-input" id="login-input" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="off">
-  <button class="login-btn" onclick="doLogin()">Giriş</button>
-  <div class="login-error" id="login-error">Yanlış şifre</div>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="logo">🦔</div>
+  <div class="site-name">kirpi.online</div>
+  <div class="login-box" id="login-box">
+    <label class="login-label">Şifre</label>
+    <input class="login-input" id="login-input" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="off">
+    <button class="login-btn" onclick="doLogin()">Giriş</button>
+    <div class="login-error" id="login-error">Yanlış şifre</div>
+  </div>
+  <div class="footer">kirpi.online</div>
 </div>
 
-<div class="footer">kirpi.online</div>
+<!-- APP FRAME -->
+<iframe id="app-frame" allowfullscreen></iframe>
 
 <script>
 const ROUTES = {
@@ -59,23 +91,44 @@ function doLogin() {
 
   if(ROUTES[val]) {
     localStorage.setItem('kirpi_auth', val);
-    window.location.href = ROUTES[val];
+    loadApp(ROUTES[val]);
   } else {
     err.classList.add('show');
     document.getElementById('login-input').value = '';
     document.getElementById('login-input').focus();
     box.classList.remove('shake');
-    void box.offsetWidth; // reflow for re-trigger
+    void box.offsetWidth;
     box.classList.add('shake');
     setTimeout(()=>{ err.classList.remove('show'); box.classList.remove('shake'); }, 2500);
   }
 }
 
-// Already logged in — redirect to correct page
+function loadApp(url) {
+  const frame = document.getElementById('app-frame');
+  const screen = document.getElementById('login-screen');
+  frame.src = url;
+  frame.classList.add('visible');
+  screen.classList.add('hidden');
+  setTimeout(()=>{ screen.style.display='none'; }, 400);
+}
+
+function logout() {
+  localStorage.removeItem('kirpi_auth');
+  const frame = document.getElementById('app-frame');
+  const screen = document.getElementById('login-screen');
+  frame.src = '';
+  frame.classList.remove('visible');
+  screen.style.display = 'flex';
+  screen.classList.remove('hidden');
+  document.getElementById('login-input').value = '';
+  setTimeout(()=>document.getElementById('login-input').focus(), 300);
+}
+
+// Already logged in
 (function(){
   const saved = localStorage.getItem('kirpi_auth');
   if(saved && ROUTES[saved]) {
-    window.location.href = ROUTES[saved];
+    loadApp(ROUTES[saved]);
   } else {
     setTimeout(()=>document.getElementById('login-input').focus(), 300);
   }
