@@ -1,456 +1,1481 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nürburgring Trip — May 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nürburgring — Haziran 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--red:#C0392B;--red2:#E74C3C;--yellow:#F1C40F;--black:#0D0D0D;--dark:#1A1A1A;--mid:#2C2C2C;--mid2:#3a3a3a;--gray:#888;--lgray:#1e1e1e;--white:#fff;--blue:#2471A3;--green:#1E8449;--text:#e8e8e8;--text2:#aaa;--text3:#666;--border:#2a2a2a;--border2:#3a3a3a;--card:#141414;--card2:#1a1a1a;--radius:8px;--radius-sm:5px}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
-.hero{position:relative;padding:70px 20px 52px;text-align:center;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:repeating-conic-gradient(#1a1a1a 0% 25%,#0d0d0d 0% 50%);background-size:22px 22px;opacity:.7}
-.hero-stripe-top{position:absolute;top:0;left:0;right:0;height:5px;background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 18px,transparent 18px,transparent 36px)}
-.hero-stripe-bot{position:absolute;bottom:0;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 18px,var(--mid) 18px,var(--mid) 36px)}
-.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
-.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,9vw,84px);font-weight:900;line-height:.95;text-transform:uppercase;letter-spacing:-1px;color:var(--white)}
-.hero h1 em{color:var(--red);font-style:normal}
-.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:17px;color:var(--text2);margin-top:14px;letter-spacing:.5px}
-.crew-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
-.pill{background:var(--mid);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:7px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600}
-.pill span{color:var(--red);margin-right:5px}
-.pill small{display:block;color:var(--text3);font-weight:400;font-size:11px;margin-top:1px}
-.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;margin:24px auto 0}
-.cd-box{background:rgba(0,0,0,.4);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:12px 6px;text-align:center}
-.cd-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700;color:var(--red);line-height:1}
-.cd-lbl{font-size:10px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
-nav a{flex-shrink:0;padding:13px 16px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);text-decoration:none;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
-nav a:hover{color:var(--white);border-bottom-color:var(--border2)}
-.wrap{max-width:900px;margin:0 auto;padding:0 18px}
-section{padding:44px 0 28px;border-bottom:1px solid var(--border)}
-.sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.chk-sq{width:18px;height:18px;flex-shrink:0;background-image:repeating-conic-gradient(var(--white) 0% 25%,var(--red) 0% 50%);background-size:9px 9px;border-radius:2px}
-.sec-hdr h2{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.sec-hdr h2 em{color:var(--red);font-style:normal}
-.day-switcher{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
-.day-btn{padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;border:1px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;background:var(--card);color:var(--text2);transition:all .15s}
-.day-btn.active{background:var(--red);color:var(--white);border-color:var(--red)}
-.day-btn:hover:not(.active){border-color:var(--gray);color:var(--white)}
-.itin-list{display:flex;flex-direction:column}
-.itin-row{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
-.itin-row:last-child{border-bottom:none}
-.itin-time{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--red);min-width:70px;padding-top:2px}
-.itin-body{flex:1;font-size:14px;color:var(--text)}
-.itin-body small{display:block;color:var(--text3);font-size:12px;margin-top:2px}
-.crew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:16px}
-.crew-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:border-color .15s}
-.crew-card:hover{border-color:var(--border2)}
-.crew-card.active{border-color:var(--red);border-width:1.5px}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px}
-.crew-name{font-size:15px;font-weight:600}
-.crew-car{font-size:12px;color:var(--text2);margin-top:3px}
-.crew-from{font-size:12px;color:var(--text3);margin-top:2px}
-.crew-detail{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--radius);padding:18px;margin-top:4px}
-.crew-detail h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:14px}
-.crew-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px}
-.crew-tbl td{padding:6px 0;vertical-align:top;border-bottom:1px solid var(--border)}
-.crew-tbl td:first-child{color:var(--text3);width:80px;padding-right:12px}
-.pc-lbl{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.pc-item{font-size:13px;padding:5px 0;border-bottom:1px solid var(--border);color:var(--text2)}
-.weather-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-.w-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-.w-temp{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:700;line-height:1}
-.w-desc{font-size:14px;color:var(--text2);margin-top:3px}
-.w-loc{font-size:12px;color:var(--text3);margin-top:2px}
-.w-icon{font-size:48px;line-height:1}
-.w-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.w-cell{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center}
-.w-cell .val{font-size:16px;font-weight:600;margin-bottom:2px}
-.w-cell .lbl{font-size:11px;color:var(--text3)}
-.w-tip{background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--yellow);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 13px;font-size:13px;color:var(--text2)}
-.w-refresh{font-size:12px;color:var(--text3);margin-top:10px;cursor:pointer;text-align:right;text-decoration:underline}
-.w-loading{text-align:center;padding:40px;color:var(--text3);font-size:14px}
-.map-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.map-tabs{display:flex;border-bottom:1px solid var(--border)}
-.map-tab{flex:1;padding:10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;text-align:center;cursor:pointer;color:var(--text3);border:none;background:none;transition:all .15s}
-.map-tab.active{color:var(--red);background:var(--card2)}
-.map-tab:hover:not(.active){color:var(--white);background:var(--lgray)}
-.map-svg-area{padding:16px}
-.route-svg{width:100%;display:block;max-width:580px;margin:0 auto}
-.map-info{padding:0 16px 14px;font-size:13px;color:var(--text2)}
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead tr{background:var(--red)}
-thead th{padding:9px 13px;text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--white);white-space:nowrap}
-tbody tr:nth-child(odd){background:var(--card)}
-tbody tr:nth-child(even){background:var(--card2)}
-tbody tr:hover{background:var(--lgray)}
-tbody td{padding:8px 13px;color:var(--text);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
-tbody td:first-child{font-weight:600;white-space:nowrap}
-.tips{display:flex;flex-direction:column;gap:6px}
-.tip{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--border2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:9px 12px;font-size:13px;color:var(--text2)}
-.tip-icon{flex-shrink:0;font-size:14px;width:20px}
-.spot-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px;margin-bottom:8px}
-.spot-name{font-size:14px;font-weight:600;margin-bottom:4px}
-.spot-desc{font-size:13px;color:var(--text2);margin-bottom:6px}
-.spot-dir{font-size:12px;color:var(--red)}
-.info-box{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin:14px 0}
-.info-box-hdr{background:var(--mid);padding:9px 13px;font-size:13px;font-weight:600}
-.info-box-body{background:var(--card);padding:12px 13px}
-.info-box-body p{font-size:13px;color:var(--text2);margin-bottom:5px}
-.info-box-body p:last-child{margin:0}
-.info-box.danger{border-color:var(--red)}.info-box.danger .info-box-hdr{border-left:3px solid var(--red)}
-.info-box.warn{border-color:var(--yellow)}.info-box.warn .info-box-hdr{border-left:3px solid var(--yellow)}
-.info-box.info{border-color:var(--blue)}.info-box.info .info-box-hdr{border-left:3px solid var(--blue)}
-.budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.budget-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.budget-hdr{background:var(--mid);padding:11px 15px;font-size:14px;font-weight:600}
-.budget-hdr small{display:block;font-size:11px;color:var(--text3);font-weight:400;margin-top:2px}
-.b-row{display:flex;justify-content:space-between;padding:7px 15px;border-bottom:1px solid var(--border);font-size:13px;gap:10px}
-.b-row .item{color:var(--text2);flex:1}.b-row .cost{font-weight:600;white-space:nowrap}
-.budget-total{display:flex;justify-content:space-between;padding:10px 15px;background:var(--red);font-size:13px;font-weight:600;color:var(--white)}
-.progress-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 15px;margin-bottom:12px}
-.progress-text{font-size:13px;color:var(--text2);margin-bottom:8px}
-.progress-text b{color:var(--red)}
-.progress-track{height:5px;background:var(--mid2);border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;background:var(--red);border-radius:3px;transition:width .3s}
-.progress-note{font-size:12px;color:var(--text3);margin-top:6px}
-.cl-list{display:flex;flex-direction:column;gap:5px}
-.cl-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:background .1s}
-.cl-item:hover{background:var(--card2)}
-.cl-item.done{opacity:.5}.cl-item.done .cl-label{text-decoration:line-through;color:var(--text3)}
-.cl-item input{width:15px;height:15px;accent-color:var(--red);flex-shrink:0;margin-top:2px;cursor:pointer}
-.cl-label{flex:1;font-size:13px;color:var(--text)}
-.cl-who{font-size:11px;color:var(--red);font-weight:600;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;letter-spacing:.3px;text-transform:uppercase}
-.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
-.link-card{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:border-color .15s,background .15s}
-.link-card:hover{border-color:var(--border2);background:var(--card2)}
-.link-icon{font-size:16px;flex-shrink:0}.link-label{font-size:13px;font-weight:600}.link-url{font-size:11px;color:var(--blue);font-family:monospace}.link-arrow{margin-left:auto;color:var(--text3)}
-.emergency-num{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;color:var(--red);display:block;margin:6px 0}
-footer{margin-top:60px;padding:28px 20px;text-align:center;background:var(--dark);border-top:3px solid var(--red)}
-.f-names{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;letter-spacing:1px;color:var(--white)}
-.f-sub{font-size:13px;color:var(--text3);margin-top:5px}
-.stripe{height:4px;background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 14px,transparent 14px,transparent 28px);margin-bottom:18px}
-.sh3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin:1.5rem 0 12px}
-.note{font-size:12px;color:var(--text3);font-style:italic;margin-top:8px}
-b,strong{color:var(--white)}
-@media(max-width:580px){.crew-grid{grid-template-columns:1fr 1fr}.budget-grid{grid-template-columns:1fr}}
+:root{
+  --red:#C0392B;--red2:#E74C3C;--red3:#8B1A1A;
+  --black:#080808;--dark:#111;--card:#161616;--card2:#1c1c1c;
+  --mid:#222;--mid2:#2a2a2a;--border:#252525;--border2:#333;
+  --text:#e8e8e8;--text2:#999;--text3:#555;
+  --white:#fff;--yellow:#F1C40F;--green:#27AE60;
+  --radius:10px;--radius-sm:6px;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes checkPop{0%{transform:scale(.5)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--black);}
+body{color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;line-height:1.6;}
+
+/* ── CARBON TEXTURE ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.015) 2px,rgba(255,255,255,0.015) 4px),
+    repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(255,255,255,0.015) 2px,rgba(255,255,255,0.015) 4px);
+}
+
+/* ── HEADER ── */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(8,8,8,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 16px;
+  height:54px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:env(safe-area-inset-top,0);
+}
+.header-left{display:flex;align-items:center;gap:10px;}
+.header-logo{
+  width:32px;height:32px;
+  background:var(--red);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:900;color:white;letter-spacing:-0.5px;
+}
+.header-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:700;color:var(--white);
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.header-right{display:flex;align-items:center;gap:8px;}
+.lang-toggle{
+  background:var(--mid);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:4px 10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:600;color:var(--text2);
+  cursor:pointer;touch-action:manipulation;
+  transition:all .15s;letter-spacing:.5px;
+}
+.lang-toggle:active{background:var(--mid2);}
+.hamburger{
+  width:38px;height:38px;
+  background:var(--mid);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  cursor:pointer;touch-action:manipulation;
+  transition:all .15s;
+}
+.hamburger:active{background:var(--mid2);}
+.hamburger span{width:18px;height:1.5px;background:var(--text);border-radius:2px;transition:all .25s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── MENU OVERLAY ── */
+.menu-overlay{
+  position:fixed;inset:0;z-index:190;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.menu-overlay.open{opacity:1;pointer-events:all;}
+.menu-panel{
+  position:fixed;top:54px;right:0;bottom:0;z-index:195;
+  width:min(280px,85vw);
+  background:var(--dark);
+  border-left:1px solid var(--border2);
+  transform:translateX(100%);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.menu-panel.open{transform:none;}
+.menu-section-title{
+  padding:16px 20px 8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:600;color:var(--text3);
+  text-transform:uppercase;letter-spacing:2px;
+}
+.menu-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 20px;
+  cursor:pointer;touch-action:manipulation;
+  transition:background .15s;
+  border-bottom:1px solid var(--border);
+}
+.menu-item:active{background:var(--mid);}
+.menu-item.active{border-left:3px solid var(--red);}
+.menu-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.menu-label{font-size:14px;color:var(--text);font-weight:500;}
+.menu-item.active .menu-label{color:var(--red);}
+.menu-divider{height:1px;background:var(--border2);margin:8px 0;}
+.menu-logout{
+  margin:16px 20px;padding:12px;
+  background:rgba(192,57,43,0.1);
+  border:1px solid rgba(192,57,43,0.25);
+  border-radius:var(--radius-sm);
+  color:var(--red);font-size:13px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;
+  text-transform:uppercase;letter-spacing:1px;
+  cursor:pointer;touch-action:manipulation;
+  text-align:center;transition:all .15s;
+}
+.menu-logout:active{background:rgba(192,57,43,0.2);}
+
+/* ── MAIN CONTENT ── */
+.main{
+  position:fixed;
+  top:54px;left:0;right:0;bottom:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.tab-content{display:none;min-height:100%;}
+.tab-content.active{display:block;animation:fadeUp .2s ease;}
+
+/* ── HERO (Ana tab) ── */
+.hero{
+  position:relative;
+  padding:28px 18px 24px;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,57,43,0.08) 0%,transparent 60%);
+}
+.hero-stripe{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 20px,transparent 20px,transparent 40px);
+}
+.hero-inner{position:relative;z-index:1;}
+.hero-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:4px;
+  text-transform:uppercase;color:var(--red);margin-bottom:8px;
+}
+.hero h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(38px,10vw,72px);font-weight:900;
+  line-height:.92;text-transform:uppercase;
+  letter-spacing:-1px;color:var(--white);
+}
+.hero h1 em{color:var(--red);font-style:normal;}
+.hero-sub{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;color:var(--text2);
+  margin-top:10px;letter-spacing:.5px;
+}
+.hero-dates{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:14px;
+  background:var(--mid);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:7px 14px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:600;color:var(--text);
+  letter-spacing:.5px;
+}
+.hero-dates span{color:var(--red);}
+
+/* ── COUNTDOWN ── */
+.countdown-wrap{padding:20px 18px;border-bottom:1px solid var(--border);}
+.countdown-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:3px;
+  color:var(--text3);text-transform:uppercase;margin-bottom:10px;
+}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.cd-box{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:12px 6px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cd-box::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--red),transparent);
+}
+.cd-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:700;color:var(--red);line-height:1;
+}
+.cd-lbl{font-size:9px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:1px;}
+
+/* ── CREW PILLS ── */
+.crew-pills{display:flex;flex-wrap:wrap;gap:8px;padding:16px 18px;border-bottom:1px solid var(--border);}
+.pill{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:8px 14px;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;
+}
+.pill-name{color:var(--white);}
+.pill-car{display:block;color:var(--text3);font-weight:400;font-size:11px;margin-top:1px;}
+
+/* ── SECTION HEADERS ── */
+.section{padding:20px 18px 24px;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.sec-flag{
+  width:4px;height:20px;background:var(--red);border-radius:2px;flex-shrink:0;
+}
+.sec-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--white);
+}
+.sec-title em{color:var(--red);font-style:normal;}
+
+/* ── STAT CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:var(--red);
+}
+.stat-val{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:26px;font-weight:700;color:var(--white);line-height:1;
+}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── QUICK LINKS ── */
+.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.quick-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px;border-radius:var(--radius);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;text-decoration:none;
+  cursor:pointer;touch-action:manipulation;transition:all .15s;
+}
+.quick-btn.red{background:var(--red);color:white;}
+.quick-btn.red:active{background:var(--red3);}
+.quick-btn.outline{background:transparent;color:var(--text);border:1px solid var(--border2);}
+.quick-btn.outline:active{background:var(--mid);}
+
+/* ── PROGRAM TAB ── */
+.day-switcher{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.day-switcher::-webkit-scrollbar{display:none;}
+.day-btn{
+  flex-shrink:0;padding:7px 16px;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;
+  border:1px solid var(--border2);border-radius:var(--radius-sm);
+  cursor:pointer;background:var(--card);color:var(--text2);
+  transition:all .15s;touch-action:manipulation;white-space:nowrap;
+}
+.day-btn.active{background:var(--red);color:var(--white);border-color:var(--red);}
+.day-btn:active:not(.active){background:var(--mid);}
+.itin-list{display:flex;flex-direction:column;gap:0;}
+.itin-row{
+  display:flex;gap:14px;padding:12px 0;
+  border-bottom:1px solid var(--border);
+  animation:fadeIn .2s ease;
+}
+.itin-row:last-child{border-bottom:none;}
+.itin-time{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:600;color:var(--red);
+  min-width:58px;padding-top:2px;flex-shrink:0;
+}
+.itin-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border2);margin-top:6px;flex-shrink:0;
+}
+.itin-body{flex:1;}
+.itin-title{font-size:14px;font-weight:500;color:var(--text);}
+.itin-sub{font-size:12px;color:var(--text3);margin-top:2px;}
+.itin-badge{
+  display:inline-block;margin-top:5px;
+  padding:2px 8px;border-radius:3px;
+  font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+}
+.badge-track{background:rgba(192,57,43,0.2);color:var(--red2);}
+.badge-travel{background:rgba(39,174,96,0.15);color:#2ECC71;}
+.badge-rest{background:rgba(52,73,94,0.4);color:#85929E;}
+.badge-food{background:rgba(241,196,15,0.15);color:var(--yellow);}
+
+/* ── CREW TAB ── */
+.crew-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
+.crew-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+  cursor:pointer;transition:all .15s;touch-action:manipulation;
+}
+.crew-card.active{border-color:var(--red);border-width:1.5px;}
+.crew-card:active{background:var(--mid);}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;color:white;margin-bottom:10px;
+}
+.crew-name{font-size:15px;font-weight:600;color:var(--white);}
+.crew-role{font-size:11px;color:var(--text3);margin-top:2px;}
+.crew-detail{
+  background:var(--card);border:1px solid var(--border);
+  border-left:3px solid var(--red);
+  border-radius:var(--radius);padding:18px;margin-top:4px;
+  animation:slideDown .2s ease;
+}
+.crew-detail-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;text-transform:uppercase;
+  color:var(--white);margin-bottom:12px;
+}
+.crew-tbl{width:100%;font-size:13px;}
+.crew-tbl tr td{padding:7px 0;border-bottom:1px solid var(--border);vertical-align:top;}
+.crew-tbl tr:last-child td{border-bottom:none;}
+.crew-tbl td:first-child{color:var(--text3);width:90px;padding-right:10px;}
+.crew-checklist{margin-top:14px;}
+.crew-checklist-title{
+  font-size:10px;font-weight:600;color:var(--text3);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;
+}
+.crew-check-item{
+  font-size:13px;color:var(--text2);padding:5px 0;
+  border-bottom:1px solid var(--border);
+}
+.crew-check-item:last-child{border-bottom:none;}
+
+/* ── ROUTE TAB ── */
+.route-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;}
+.route-tabs::-webkit-scrollbar{display:none;}
+.route-tab{
+  flex-shrink:0;padding:6px 14px;
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;
+  border:1px solid var(--border2);border-radius:var(--radius-sm);
+  cursor:pointer;background:var(--card);color:var(--text2);
+  touch-action:manipulation;transition:all .15s;white-space:nowrap;
+}
+.route-tab.active{background:var(--red);color:white;border-color:var(--red);}
+.map-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:12px;
+}
+.map-info{
+  padding:10px 14px;
+  font-size:12px;color:var(--text2);
+  border-top:1px solid var(--border);
+  font-family:'Barlow Condensed',sans-serif;letter-spacing:.3px;
+}
+.route-svg{width:100%;height:auto;display:block;}
+.map-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.map-action-btn{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px;border-radius:var(--radius-sm);
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;text-decoration:none;
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--text);touch-action:manipulation;transition:all .15s;
+}
+.map-action-btn:active{background:var(--mid);}
+.map-action-btn.gmaps{border-color:rgba(66,133,244,0.4);color:#4285F4;}
+.map-action-btn.waze{border-color:rgba(52,195,185,0.4);color:#33C3BD;}
+
+/* ── WEATHER TAB ── */
+.weather-main{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;margin-bottom:12px;
+}
+.w-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.w-temp{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:700;line-height:1;color:var(--white);}
+.w-desc{font-size:14px;color:var(--text2);margin-top:4px;}
+.w-loc{font-size:11px;color:var(--text3);margin-top:2px;}
+.w-icon{font-size:52px;line-height:1;}
+.w-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.w-cell{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center;}
+.w-cell .val{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--white);}
+.w-cell .lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+.w-tip{background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text2);margin-bottom:10px;}
+.w-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.w-forecast-day{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px;text-align:center;
+}
+.w-forecast-date{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.w-forecast-icon{font-size:24px;margin-bottom:4px;}
+.w-forecast-temp{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--white);}
+.w-forecast-desc{font-size:11px;color:var(--text3);margin-top:2px;}
+.w-refresh{
+  text-align:center;font-size:12px;color:var(--text3);
+  cursor:pointer;padding:8px;touch-action:manipulation;
+  transition:color .15s;
+}
+.w-refresh:active{color:var(--text);}
+.w-loading{
+  padding:30px;text-align:center;color:var(--text3);
+  font-size:13px;animation:pulse 1.5s ease infinite;
+}
+
+/* ── CHECKLIST TAB ── */
+.cl-progress{margin-bottom:16px;}
+.cl-progress-bar{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:6px;}
+.cl-progress-fill{height:100%;background:var(--red);border-radius:2px;transition:width .4s ease;}
+.cl-progress-text{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);}
+.cl-filter{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;}
+.cl-filter::-webkit-scrollbar{display:none;}
+.cl-filter-btn{
+  flex-shrink:0;padding:5px 12px;
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;
+  border:1px solid var(--border2);border-radius:var(--radius-sm);
+  cursor:pointer;background:var(--card);color:var(--text2);
+  touch-action:manipulation;transition:all .15s;white-space:nowrap;
+}
+.cl-filter-btn.active{background:var(--red);color:white;border-color:var(--red);}
+.cl-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--border);
+  cursor:pointer;touch-action:manipulation;
+}
+.cl-item:last-child{border-bottom:none;}
+.cl-cb{
+  width:22px;height:22px;border-radius:4px;
+  border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:transparent;transition:all .2s;
+}
+.cl-cb.done{background:var(--red);border-color:var(--red);color:white;animation:checkPop .3s ease;}
+.cl-item.done .cl-label{text-decoration:line-through;opacity:.4;}
+.cl-label{font-size:14px;color:var(--text);flex:1;transition:all .2s;}
+.cl-who{
+  font-size:10px;font-weight:600;color:var(--text3);
+  padding:2px 7px;background:var(--mid);border-radius:3px;
+  flex-shrink:0;letter-spacing:.5px;text-transform:uppercase;align-self:flex-start;margin-top:3px;
+}
+
+/* ── BUDGET TAB ── */
+.budget-grid{display:flex;flex-direction:column;gap:10px;}
+.budget-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.budget-hdr{
+  background:var(--mid);padding:12px 16px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;color:var(--white);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.budget-hdr small{font-size:12px;color:var(--text3);font-weight:400;}
+.b-row{display:flex;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--border);font-size:13px;}
+.b-row:last-of-type{border-bottom:none;}
+.b-row .item{color:var(--text2);}
+.b-row .cost{color:var(--text);font-weight:500;}
+.budget-total{
+  display:flex;justify-content:space-between;
+  padding:11px 16px;background:rgba(192,57,43,0.1);
+  font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;
+  border-top:1px solid rgba(192,57,43,0.3);
+}
+.budget-total span:last-child{color:var(--red);}
+.currency-info{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;
+}
+.currency-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;}
+.currency-row span:first-child{color:var(--text3);}
+.currency-row span:last-child{color:var(--white);font-weight:500;}
+
+/* ── LAP TIME TAB (in budget/extra) ── */
+.lap-table{width:100%;font-size:13px;border-collapse:collapse;}
+.lap-table th{
+  text-align:left;padding:8px 10px;
+  background:var(--mid);color:var(--text3);
+  font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;
+}
+.lap-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text);}
+.lap-table tr:last-child td{border-bottom:none;}
+.lap-input{
+  background:transparent;border:none;color:var(--text);
+  font-size:13px;font-family:'Barlow',sans-serif;
+  width:100%;outline:none;
+}
+.lap-input::placeholder{color:var(--text3);}
+
+/* ── SPOTS TAB ── */
+.spot-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:8px;
+}
+.spot-card:last-child{margin-bottom:0;}
+.spot-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.spot-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:17px;font-weight:700;color:var(--white);
+  text-transform:uppercase;letter-spacing:.3px;
+}
+.spot-km{
+  font-size:11px;font-weight:600;color:var(--red);
+  background:rgba(192,57,43,0.1);
+  padding:3px 8px;border-radius:3px;flex-shrink:0;
+}
+.spot-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:8px;}
+.spot-actions{display:flex;gap:6px;}
+.spot-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 12px;border-radius:var(--radius-sm);
+  font-size:12px;font-weight:600;text-decoration:none;
+  touch-action:manipulation;transition:all .15s;
+  font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;
+}
+.spot-btn.gmaps{background:rgba(66,133,244,0.1);color:#4285F4;border:1px solid rgba(66,133,244,0.25);}
+.spot-btn.waze{background:rgba(52,195,185,0.1);color:#33C3BD;border:1px solid rgba(52,195,185,0.25);}
+.spot-btn:active{opacity:.7;}
+
+/* ── PIST TAB ── */
+.info-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:10px;
+}
+.info-card-hdr{
+  background:var(--mid);padding:11px 16px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;color:var(--white);
+  text-transform:uppercase;letter-spacing:.5px;
+  display:flex;align-items:center;gap:8px;
+}
+.info-row{display:flex;padding:10px 16px;border-bottom:1px solid var(--border);gap:10px;font-size:13px;align-items:flex-start;}
+.info-row:last-child{border-bottom:none;}
+.info-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.info-text{color:var(--text2);flex:1;line-height:1.5;}
+.info-text b{color:var(--text);}
+.info-text a{color:var(--red);text-decoration:none;}
+
+/* ── PRATIK TAB ── */
+.tip-card{
+  background:var(--card);border:1px solid var(--border);
+  border-left:3px solid var(--red);
+  border-radius:var(--radius);padding:14px 16px;
+  margin-bottom:8px;
+}
+.tip-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;color:var(--white);
+  text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;
+}
+.tip-text{font-size:13px;color:var(--text2);line-height:1.6;}
+.tip-text a{color:var(--red);}
+.emergency-card{
+  background:rgba(192,57,43,0.08);
+  border:1px solid rgba(192,57,43,0.25);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:10px;
+}
+.emergency-hdr{
+  background:var(--red);padding:10px 16px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;color:white;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.emergency-row{
+  display:flex;align-items:center;padding:11px 16px;
+  border-bottom:1px solid rgba(192,57,43,0.15);gap:10px;
+}
+.emergency-row:last-child{border-bottom:none;}
+.e-info{flex:1;}
+.e-name{font-size:13px;font-weight:600;color:var(--text);}
+.e-num{font-size:12px;color:var(--text3);margin-top:1px;}
+.e-call{
+  background:var(--red);color:white;
+  border:none;border-radius:var(--radius-sm);
+  padding:7px 13px;font-size:12px;font-weight:600;
+  text-decoration:none;display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;
+  touch-action:manipulation;transition:opacity .15s;
+}
+.e-call:active{opacity:.8;}
+
+/* ── HARITA TAB ── */
+#gmap{
+  width:100%;height:calc(100svh - 100px);
+  border:none;border-radius:var(--radius);overflow:hidden;
+}
+
+/* ── SCROLL TOP ── */
+.scroll-top{
+  position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);right:14px;
+  width:38px;height:38px;
+  background:var(--red);color:white;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;
+  box-shadow:0 3px 12px rgba(192,57,43,0.4);
+  opacity:0;transition:opacity .3s;z-index:150;
+  touch-action:manipulation;border:none;
+}
+.scroll-top.visible{opacity:1;}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-stripe-top"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">22 – 24 May 2026</div>
-    <h1>Nürburgring<br><em>Weekend</em></h1>
-    <div class="hero-sub">Basildon / West London → Green Hell → Home</div>
-    <div class="crew-pills">
-      <div class="pill"><span>🚗</span>Mert + Tuncay<small>SLK 200 · Basildon</small></div>
-      <div class="pill"><span>🏎</span>Cagri<small>Supra A90 · Slough</small></div>
-      <div class="pill"><span>🚙</span>Onur<small>Own car · Mannheim</small></div>
-      <div class="pill"><span>📍</span>3 Cars · 4 People<small>Nordschleife, Germany</small></div>
-    </div>
-    <div class="countdown">
-      <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">Days</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Hours</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl">Sec</div></div>
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">NR</div>
+    <div class="header-title" id="header-title">Nürburgring</div>
+  </div>
+  <div class="header-right">
+    <button class="lang-toggle" onclick="toggleLang()" id="lang-btn">EN</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
     </div>
   </div>
-  <div class="hero-stripe-bot"></div>
 </div>
 
-<nav>
-  <a href="#itinerary">Itinerary</a>
-  <a href="#crew">Crew</a>
-  <a href="#weather">Weather</a>
-  <a href="#route">Route</a>
-  <a href="#track">Track</a>
-  <a href="#budget">Budget</a>
-  <a href="#checklist">Checklist</a>
-  <a href="#food">Food & Bars</a>
-  <a href="#museums">Museums</a>
-  <a href="#links">Links</a>
-</nav>
-
-<div class="wrap">
-
-<section id="itinerary">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Day-by-Day <em>Itinerary</em></h2></div>
-  <div class="day-switcher">
-    <button class="day-btn active" data-day="fri">Fri 22 May — Travel</button>
-    <button class="day-btn" data-day="sat">Sat 23 May — Track Day</button>
-    <button class="day-btn" data-day="sun">Sun 24 May — Home</button>
-  </div>
-  <div id="itin-content"></div>
-</section>
-
-<section id="crew">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>The <em>Crew</em></h2></div>
-  <div class="crew-grid" id="crewGrid"></div>
-  <div id="crewDetail"><p style="font-size:13px;color:var(--text3)">Select a crew member to see their route, budget and personal checklist.</p></div>
-</section>
-
-<section id="weather">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Live <em>Weather</em> — Nürburgring</h2></div>
-  <div id="weatherCard"><div class="w-loading">Loading live weather data...</div></div>
-</section>
-
-<section id="route">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Route <em>Maps</em></h2></div>
-  <div class="map-wrap">
-    <div class="map-tabs">
-      <button class="map-tab active" data-route="uk">UK Convoy</button>
-      <button class="map-tab" data-route="onur">Onur (Mannheim)</button>
-      <button class="map-tab" data-route="return">Return</button>
-    </div>
-    <div class="map-svg-area" id="mapSvg"></div>
-    <div class="map-info" id="mapInfo"></div>
-  </div>
-</section>
-
-<section id="track">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Track <em>Info & Rules</em></h2></div>
-  <div class="stripe"></div>
-  <div class="tbl-wrap" style="margin-bottom:1.5rem">
-    <table>
-      <thead><tr><th>Stat</th><th>Detail</th></tr></thead>
-      <tbody>
-        <tr><td>Length</td><td>20.832 km — longest permanent circuit in the world</td></tr>
-        <tr><td>Corners</td><td>73 corners, 300m elevation change</td></tr>
-        <tr><td>Lap ticket (weekend)</td><td>€35 per lap — at the barrier or Green Hell app</td></tr>
-        <tr><td>Opening hours</td><td>08:00 – 19:00 Saturday & Sunday</td></tr>
-        <tr><td>Emergency number</td><td><strong>+49 2691 302 9111 — save this NOW</strong></td></tr>
-        <tr><td>Lap time (tourist)</td><td>~10–15 minutes</td></tr>
-        <tr><td>Fuel per lap</td><td>~21 km — fill up before entering. No fuel on track.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="sh3">First-timer tips</div>
-  <div class="tips" style="margin-bottom:1.5rem">
-    <div class="tip"><span class="tip-icon">🐢</span><span><strong>Lap 1 — go slow.</strong> 21 km of blind crests and surprise corners. Learn before you push.</span></div>
-    <div class="tip"><span class="tip-icon">👁</span><span><strong>Keep eyes up and far ahead</strong> — the road changes constantly.</span></div>
-    <div class="tip"><span class="tip-icon">⬅</span><span><strong>Overtake on the LEFT only.</strong> Move right if someone's faster.</span></div>
-    <div class="tip"><span class="tip-icon">🟡</span><span><strong>Yellow flag = 50 km/h immediately.</strong> No overtaking until flag is clear.</span></div>
-    <div class="tip"><span class="tip-icon">💧</span><span><strong>Any fluid leak — pull over, get behind the armco, call +49 2691 302 9111.</strong></span></div>
-    <div class="tip"><span class="tip-icon">🔒</span><span><strong>SLK roof must be fully closed and latched</strong> at all times on track.</span></div>
-    <div class="tip"><span class="tip-icon">📸</span><span>Dashcam OK — handheld filming during lapping is not allowed.</span></div>
-    <div class="tip"><span class="tip-icon">⚠️</span><span>Breidscheid Bridge has a <strong>50 km/h speed limit</strong> — marshals enforce this.</span></div>
-  </div>
-  <div class="sh3">Track rules</div>
-  <div class="tbl-wrap" style="margin-bottom:1.5rem">
-    <table>
-      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
-      <tbody>
-        <tr><td>Overtaking</td><td>LEFT side ONLY — never right, even if it looks safe</td></tr>
-        <tr><td>Yellow flags</td><td>Reduce to 50 km/h immediately. No overtaking.</td></tr>
-        <tr><td>Direction</td><td>Clockwise only. No reversing or turning around — ever.</td></tr>
-        <tr><td>Drifting</td><td>Strictly prohibited during Touristenfahrten.</td></tr>
-        <tr><td>SLK roof</td><td>Must be fully CLOSED and latched at all times.</td></tr>
-        <tr><td>Noise limit</td><td>Max 130 dB — all three cars are fine.</td></tr>
-        <tr><td>Documents</td><td>Driving licence + registration + proof of insurance.</td></tr>
-        <tr><td>Headlights</td><td>Fit beam deflector stickers — UK cars dip wrong way. ~£5 Halfords / Amazon.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="info-box warn">
-    <div class="info-box-hdr">🇩🇪 Mandatory German road equipment — UK cars</div>
-    <div class="info-box-body">
-      <p>• High-visibility reflective vest — one per person in the car</p>
-      <p>• First aid kit (Verbandkasten) &nbsp;•&nbsp; Warning triangle</p>
-      <p>• Headlight beam deflector stickers</p>
-      <p>All available from Halfords or Amazon before departure.</p>
-    </div>
-  </div>
-  <div class="sh3">Best spectator & photo spots</div>
-  <div id="spotList"></div>
-  <div class="sh3">Ring Taxi (optional)</div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Car</th><th>Power</th><th>Pax</th><th>Price</th><th>Book</th></tr></thead>
-      <tbody>
-        <tr><td>BMW M3 CS</td><td>551 HP</td><td>1–3</td><td>€359/lap total (~€120/person)</td><td>ringtaxi.com</td></tr>
-        <tr><td>Porsche 911 GT3 RS</td><td>525 HP</td><td>1</td><td>~€450/lap</td><td>ringtaxi.com</td></tr>
-        <tr><td>AMG GT Black Series</td><td>730 HP</td><td>1</td><td>Check website</td><td>ringtaxi.com</td></tr>
-        <tr><td>Genesis G70</td><td>370 HP</td><td>1–3</td><td>€120 / €160 / €180</td><td>On-site weekends</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="note">With 4 people you'd need two bookings (max 3 per car). BMW M3 CS split 3-ways = ~€120/person. Book via ringtaxi.com in advance.</p>
-  <div class="info-box danger" style="margin-top:1.5rem">
-    <div class="info-box-hdr">⚠️ If something goes wrong on track</div>
-    <div class="info-box-body">
-      <p>1. Pull car to the side of the track immediately.</p>
-      <p>2. <strong>GET BEHIND THE ARMCO BARRIER</strong> — Never stand on the track.</p>
-      <p>3. Warn oncoming cars from behind the barrier.</p>
-      <p>4. Call: <span class="emergency-num">+49 2691 302 9111</span></p>
-      <p>5. Give your location — corner names are on the barriers.</p>
-      <p>6. Do NOT move cars until marshals instruct you.</p>
-      <p>7. All towing and recovery costs are YOUR responsibility.</p>
-    </div>
-  </div>
-</section>
-
-<section id="budget">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Estimated <em>Budget</em></h2></div>
-  <div class="budget-grid" id="budgetGrid"></div>
-</section>
-
-<section id="checklist">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Pre-Trip <em>Checklist</em></h2></div>
-  <div class="progress-wrap">
-    <div class="progress-text"><b id="doneCount">0</b> / <span id="totalCount">15</span> tasks complete</div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-note" id="progressNote">Tick off tasks as you complete them</div>
-  </div>
-  <div class="cl-list" id="clList"></div>
-</section>
-
-<section id="food">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Food, Drink & <em>Nightlife</em> — Adenau</h2></div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Place</th><th>Type</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Ristorante Pinocchio</td><td>Italian</td><td><strong>Book Saturday evening ahead.</strong> Best-rated restaurant in Adenau.</td></tr>
-        <tr><td>Hotel Blaue Ecke</td><td>German</td><td>Marktplatz location. Good schnitzel, solid beer selection.</td></tr>
-        <tr><td>Devil's Diner</td><td>Burgers</td><td>Right at Nordschleife entrance. Trackside atmosphere.</td></tr>
-        <tr><td>Bistro Cockpit</td><td>Café</td><td>Track views. Good for a quick lunch between laps.</td></tr>
-        <tr><td>Eifelstadl</td><td>Bar</td><td>Most popular local bar post-track. Cold beer, great atmosphere.</td></tr>
-        <tr><td>Fiddler's Irish Pub</td><td>Pub</td><td>Marktplatz. Live music some weekends, great whiskey list.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="note">Adenau closes early — book Saturday dinner in advance. Sundays: only bakeries + petrol stations open in the morning.</p>
-</section>
-
-<section id="museums">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Car Museums & <em>Attractions</em> Nearby</h2></div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Museum</th><th>Distance</th><th>Highlights</th></tr></thead>
-      <tbody>
-        <tr><td>ring°werk (on-site)</td><td>0 km</td><td>Nürburgring history museum, interactive exhibits, café. Entry ~€13.</td></tr>
-        <tr><td>Classic Race Museum, Jammelshofen</td><td>~5 km</td><td>200+ historic racing cars. Far more impressive than ring°werk.</td></tr>
-        <tr><td>Nürburg Castle</td><td>~2 km</td><td>Medieval ruin above the track. Panoramic views of circuit and Eifel.</td></tr>
-        <tr><td>Motorworld Köln</td><td>~80 km</td><td>Massive collection — classics, F1, Schumacher's personal cars. Great Sunday return stop.</td></tr>
-        <tr><td>Classic Remise Düsseldorf</td><td>~120 km</td><td>Huge classic car & bike collection. <strong>Free entry.</strong></td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="links">
-  <div class="sec-hdr"><div class="chk-sq"></div><h2>Useful <em>Links</em> & Numbers</h2></div>
-  <div class="info-box danger" style="margin-bottom:1rem">
-    <div class="info-box-hdr">Emergency number — save this now</div>
-    <div class="info-box-body">
-      <span class="emergency-num">+49 2691 302 9111</span>
-      <p>Call immediately for any accident or fluid leak on track. Give your corner location.</p>
-    </div>
-  </div>
-  <div class="links-grid">
-    <a class="link-card" href="https://nuerburgring.de" target="_blank"><span class="link-icon">🏁</span><div><div class="link-label">Nürburgring official</div><div class="link-url">nuerburgring.de</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://nring.info/nurburgring-tourist-drives-calendar/" target="_blank"><span class="link-icon">📅</span><div><div class="link-label">Touristenfahrten calendar</div><div class="link-url">nring.info</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://nring.info/nurburgring-track-status/" target="_blank"><span class="link-icon">📡</span><div><div class="link-label">Track status & webcam</div><div class="link-url">nring.info/track-status</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://www.ringtaxi.com/en/prices-and-booking/" target="_blank"><span class="link-icon">🏎</span><div><div class="link-label">Ring Taxi booking</div><div class="link-url">ringtaxi.com</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://www.directferries.co.uk" target="_blank"><span class="link-icon">⛴</span><div><div class="link-label">Ferry comparison</div><div class="link-url">directferries.co.uk</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://nuerburgring.de/driving/touristdrives/safety-regulations" target="_blank"><span class="link-icon">📋</span><div><div class="link-label">Safety regulations</div><div class="link-url">nuerburgring.de</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://classic-race-museum.de" target="_blank"><span class="link-icon">🏛</span><div><div class="link-label">Classic Race Museum</div><div class="link-url">classic-race-museum.de</div></div><span class="link-arrow">↗</span></a>
-    <a class="link-card" href="https://oversteer48.com/nurburgring-opening-hours/" target="_blank"><span class="link-icon">🗓</span><div><div class="link-label">Oversteer48 ring guide</div><div class="link-url">oversteer48.com</div></div><span class="link-arrow">↗</span></a>
-  </div>
-</section>
-
+<!-- ══ MENU ══ -->
+<div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
+<div class="menu-panel" id="menu-panel">
+  <div class="menu-section-title" id="ml-nav">Navigasyon</div>
+  <div class="menu-item active" onclick="switchTab('ana')"><div class="menu-icon">🏠</div><div class="menu-label" id="ml-ana">Ana Sayfa</div></div>
+  <div class="menu-item" onclick="switchTab('program')"><div class="menu-icon">📅</div><div class="menu-label" id="ml-program">Program</div></div>
+  <div class="menu-item" onclick="switchTab('ekip')"><div class="menu-icon">👥</div><div class="menu-label" id="ml-ekip">Ekip</div></div>
+  <div class="menu-item" onclick="switchTab('rota')"><div class="menu-icon">🗺️</div><div class="menu-label" id="ml-rota">Rota</div></div>
+  <div class="menu-item" onclick="switchTab('hava')"><div class="menu-icon">🌦️</div><div class="menu-label" id="ml-hava">Hava Durumu</div></div>
+  <div class="menu-item" onclick="switchTab('kontrol')"><div class="menu-icon">✅</div><div class="menu-label" id="ml-kontrol">Kontrol Listesi</div></div>
+  <div class="menu-item" onclick="switchTab('butce')"><div class="menu-icon">💰</div><div class="menu-label" id="ml-butce">Bütçe</div></div>
+  <div class="menu-item" onclick="switchTab('spotlar')"><div class="menu-icon">📸</div><div class="menu-label" id="ml-spotlar">Fotoğraf Spotları</div></div>
+  <div class="menu-item" onclick="switchTab('pist')"><div class="menu-icon">🏁</div><div class="menu-label" id="ml-pist">Pist Bilgisi</div></div>
+  <div class="menu-item" onclick="switchTab('pratik')"><div class="menu-icon">⚙️</div><div class="menu-label" id="ml-pratik">Pratik Bilgiler</div></div>
+  <div class="menu-item" onclick="switchTab('harita')"><div class="menu-icon">🗺️</div><div class="menu-label" id="ml-harita">Harita</div></div>
+  <div class="menu-divider"></div>
+  <div class="menu-logout" onclick="doLogout()" id="ml-logout">🚪 Çıkış Yap</div>
 </div>
 
-<footer>
-  <div class="f-names">Mert &nbsp;·&nbsp; Tuncay &nbsp;·&nbsp; Cagri &nbsp;·&nbsp; Onur</div>
-  <div class="f-sub">🏁 &nbsp; Nürburgring · May 2026 · Green Hell or bust</div>
-</footer>
+<!-- ══ MAIN ══ -->
+<div class="main" id="main-scroll">
+
+  <!-- ANA SAYFA -->
+  <div class="tab-content active" id="tab-ana">
+    <div class="hero">
+      <div class="hero-stripe"></div>
+      <div class="hero-inner">
+        <div class="hero-eyebrow" id="h-eyebrow">Motorsport Trip 2026</div>
+        <h1>NÜRBURG<br><em>RING</em></h1>
+        <div class="hero-sub" id="h-sub">Nordschleife · Green Hell</div>
+        <div class="hero-dates"><span>📅</span> <span id="h-dates">11 – 14 Haziran 2026</span></div>
+      </div>
+    </div>
+    <div class="countdown-wrap">
+      <div class="countdown-label" id="h-cd-label">Hareket Gününe Kalan</div>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl" id="cdl-d">Gün</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl" id="cdl-h">Saat</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl" id="cdl-m">Dakika</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl" id="cdl-s">Saniye</div></div>
+      </div>
+    </div>
+    <div class="crew-pills" id="crew-pills-ana"></div>
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="h-stats-title">Seyahat <em>Özeti</em></div></div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl" id="sl-crew">Kişi</div></div>
+        <div class="stat-card"><div class="stat-val">3</div><div class="stat-lbl" id="sl-cars">Araç</div></div>
+        <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl" id="sl-days">Gün</div></div>
+        <div class="stat-card"><div class="stat-val">20.8km</div><div class="stat-lbl" id="sl-track">Pist Uzunluğu</div></div>
+      </div>
+      <div class="quick-links">
+        <a class="quick-btn red" href="https://www.nring.info/nurburgring-track-status" target="_blank" id="ql-status">🏁 Pist Durumu</a>
+        <a class="quick-btn outline" href="https://www.msv-trackdays.co.uk/venues/nurburgring/" target="_blank" id="ql-book">🎟️ MSV Bilet</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM -->
+  <div class="tab-content" id="tab-program">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="p-title">Gezi <em>Programı</em></div></div>
+      <div class="day-switcher">
+        <button class="day-btn active" data-day="thu" id="db-thu">Per · 11 Haz</button>
+        <button class="day-btn" data-day="fri" id="db-fri">Cum · 12 Haz</button>
+        <button class="day-btn" data-day="sat" id="db-sat">Cmt · 13 Haz</button>
+        <button class="day-btn" data-day="sun" id="db-sun">Paz · 14 Haz</button>
+      </div>
+      <div class="itin-list" id="itin-list"></div>
+    </div>
+  </div>
+
+  <!-- EKİP -->
+  <div class="tab-content" id="tab-ekip">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="e-title">Ekip <em>Kadrosu</em></div></div>
+      <div class="crew-grid" id="crewGrid"></div>
+      <div id="crewDetail"><p style="font-size:13px;color:var(--text3);margin-top:6px" id="e-select-hint">Detay görmek için ekip üyesine tıkla.</p></div>
+    </div>
+  </div>
+
+  <!-- ROTA -->
+  <div class="tab-content" id="tab-rota">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="r-title">Rota <em>Haritaları</em></div></div>
+      <div class="route-tabs">
+        <div class="route-tab active" data-route="uk" id="rt-uk">🇬🇧 UK Konvoyu</div>
+        <div class="route-tab" data-route="onur" id="rt-onur">🇩🇪 Onur</div>
+        <div class="route-tab" data-route="return" id="rt-return">↩️ Dönüş</div>
+      </div>
+      <div class="map-box">
+        <div id="mapSvg" style="padding:10px;"></div>
+        <div class="map-info" id="mapInfo"></div>
+      </div>
+      <div class="map-actions" id="map-actions"></div>
+    </div>
+  </div>
+
+  <!-- HAVA -->
+  <div class="tab-content" id="tab-hava">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="hw-title">Hava <em>Durumu</em></div></div>
+      <div id="weatherCard"><div class="w-loading" id="w-loading">Hava verisi yükleniyor...</div></div>
+      <div style="margin-top:12px;">
+        <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="hw-forecast-title">3 Günlük <em>Tahmin</em></div></div>
+        <div class="w-forecast" id="forecastGrid"><div class="w-loading" id="wf-loading">Yükleniyor...</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTROL -->
+  <div class="tab-content" id="tab-kontrol">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="cl-title">Kontrol <em>Listesi</em></div></div>
+      <div class="cl-progress">
+        <div class="cl-progress-bar"><div class="cl-progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="cl-progress-text">
+          <span id="progressNote">—</span>
+          <span><span id="doneCount">0</span>/<span id="totalCount">0</span></span>
+        </div>
+      </div>
+      <div class="cl-filter">
+        <button class="cl-filter-btn active" onclick="filterChecks('all',this)" id="clf-all">Tümü</button>
+        <button class="cl-filter-btn" onclick="filterChecks('ortak',this)" id="clf-ortak">Ortak</button>
+        <button class="cl-filter-btn" onclick="filterChecks('mert',this)" id="clf-mert">Mert</button>
+        <button class="cl-filter-btn" onclick="filterChecks('cagri',this)" id="clf-cagri">Çağrı</button>
+        <button class="cl-filter-btn" onclick="filterChecks('onur',this)" id="clf-onur">Onur</button>
+        <button class="cl-filter-btn" onclick="filterChecks('sergen',this)" id="clf-sergen">Sergen</button>
+      </div>
+      <div id="clList"></div>
+    </div>
+  </div>
+
+  <!-- BÜTÇE -->
+  <div class="tab-content" id="tab-butce">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="b-title">Tahmini <em>Bütçe</em></div></div>
+      <div class="currency-info" id="currency-info">
+        <div class="currency-row"><span id="cr-eur">1 EUR =</span><span id="cr-eur-val">-- GBP</span></div>
+        <div class="currency-row"><span id="cr-gbp">1 GBP =</span><span id="cr-gbp-val">-- EUR</span></div>
+      </div>
+      <div class="budget-grid" id="budgetGrid"></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="lt-title">Tur <em>Süreleri</em></div></div>
+      <p style="font-size:13px;color:var(--text3);margin-bottom:12px;" id="lt-hint">Pist çıkışında notunuzu girin.</p>
+      <table class="lap-table">
+        <thead><tr><th id="lth-name">İsim</th><th id="lth-car">Araç</th><th id="lth-time">Süre</th><th id="lth-notes">Not</th></tr></thead>
+        <tbody id="lapBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOTOĞRAF SPOTLARI -->
+  <div class="tab-content" id="tab-spotlar">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="sp-title">📸 Fotoğraf <em>Spotları</em></div></div>
+      <div id="spotList"></div>
+    </div>
+  </div>
+
+  <!-- PİST BİLGİSİ -->
+  <div class="tab-content" id="tab-pist">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="pi-title">Pist <em>Bilgisi</em></div></div>
+      <div class="info-card">
+        <div class="info-card-hdr">🏁 <span id="pi-general">Genel Bilgiler</span></div>
+        <div class="info-row"><div class="info-icon">📏</div><div class="info-text"><b id="pi-length-l">Uzunluk:</b> <span id="pi-length">20.832 km (Nordschleife)</span></div></div>
+        <div class="info-row"><div class="info-icon">↕️</div><div class="info-text"><b id="pi-elev-l">Yükseklik Farkı:</b> <span id="pi-elev">300 metre (en düşük - en yüksek nokta)</span></div></div>
+        <div class="info-row"><div class="info-icon">🔄</div><div class="info-text"><b id="pi-corners-l">Viraj Sayısı:</b> <span id="pi-corners">154+ viraj</span></div></div>
+        <div class="info-row"><div class="info-icon">⏱️</div><div class="info-text"><b id="pi-lap-l">Ortalama Tur:</b> <span id="pi-lap">8–12 dakika (araca ve sürücüye göre)</span></div></div>
+        <div class="info-row"><div class="info-icon">🌐</div><div class="info-text"><b>Web:</b> <a href="https://www.nring.info" target="_blank">nring.info</a></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-hdr">🎟️ <span id="pi-msv">MSV Track Day</span></div>
+        <div class="info-row"><div class="info-icon">💷</div><div class="info-text"><b id="pi-price-l">Fiyat:</b> <span id="pi-price">~£65–£85 / giriş (MSV üyelerine indirim)</span></div></div>
+        <div class="info-row"><div class="info-icon">📋</div><div class="info-text"><b id="pi-rules-l">Kurallar:</b> <span id="pi-rules">Geçerli ehliyet zorunlu. Roll cage şart değil. Convertible yasak.</span></div></div>
+        <div class="info-row"><div class="info-icon">🔒</div><div class="info-text"><b id="pi-closed-l">Kapalı Turluk:</b> <span id="pi-closed">Akşam seansları daha az kalabalık, önerilir.</span></div></div>
+        <div class="info-row"><div class="info-icon">🌐</div><div class="info-text"><b>MSV:</b> <a href="https://www.msv-trackdays.co.uk/venues/nurburgring/" target="_blank">msv-trackdays.co.uk</a></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-hdr">⚠️ <span id="pi-rules2">Önemli Kurallar</span></div>
+        <div class="info-row"><div class="info-icon">🚫</div><div class="info-text" id="pi-r1">Overtake sadece düz hatlarda, sürücü izin verirse.</div></div>
+        <div class="info-row"><div class="info-icon">🚫</div><div class="info-text" id="pi-r2">Kask zorunluluğu yok ama kesinlikle tavsiye edilir.</div></div>
+        <div class="info-row"><div class="info-icon">🚫</div><div class="info-text" id="pi-r3">Sarı bayrak = yavaşla, geçme. Kırmızı = dur.</div></div>
+        <div class="info-row"><div class="info-icon">✅</div><div class="info-text" id="pi-r4">İlk kez gidenler için tanıma turu şart.</div></div>
+        <div class="info-row"><div class="info-icon">✅</div><div class="info-text"><b id="pi-status-l">Anlık Durum:</b> <a href="https://www.nring.info/nurburgring-track-status" target="_blank">nring.info/nurburgring-track-status</a></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRATİK -->
+  <div class="tab-content" id="tab-pratik">
+    <div class="section">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="pr-title">Pratik <em>Bilgiler</em></div></div>
+      <div class="emergency-card">
+        <div class="emergency-hdr" id="pr-emergency">🆘 Acil Durumlar</div>
+        <div class="emergency-row"><div class="info-icon">🚨</div><div class="e-info"><div class="e-name" id="e-eu">Avrupa Acil (AB geneli)</div><div class="e-num" id="e-eu-n">Polis · Ambulans · İtfaiye</div></div><a class="e-call" href="tel:112">112</a></div>
+        <div class="emergency-row"><div class="info-icon">🏥</div><div class="e-info"><div class="e-name">ADAC Pannenhilfe</div><div class="e-num" id="e-adac-n">Almanya yol yardım hattı</div></div><a class="e-call" href="tel:+4989222222">Ara</a></div>
+        <div class="emergency-row"><div class="info-icon">🏁</div><div class="e-info"><div class="e-name" id="e-ring">Ring Ambulans</div><div class="e-num" id="e-ring-n">Pist içi acil servis</div></div><a class="e-call" href="tel:+492691302911">Ara</a></div>
+        <div class="emergency-row"><div class="info-icon">🏥</div><div class="e-info"><div class="e-name">Kreiskrankenhaus Adenau</div><div class="e-num">Adenau Hastanesi — 12 km</div></div><a class="e-call" href="tel:+4926916070">Ara</a></div>
+        <div class="emergency-row"><div class="info-icon">🇹🇷</div><div class="e-info"><div class="e-name" id="e-tc">T.C. Köln Başkonsolosluğu</div><div class="e-num">Türk vatandaşları için</div></div><a class="e-call" href="tel:+492219255760">Ara</a></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-fuel">⛽ Yakıt</div>
+        <div class="tip-text" id="pr-fuel-text">Almanya'da yakıt İngiltere'den ucuz. Adenau (Aral) ve Nürburg'da istasyon var. Tank doldurun — ring çevresinde seçenek az. Shell V-Power veya benzeri premium yakıt öneririz.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-autobahn">🛣️ Otobahn</div>
+        <div class="tip-text" id="pr-autobahn-text">Almanya'da otobahn ücretsiz (vignette yok). Bazı bölümlerde hız sınırı yok — dikkatli olun. A61 üzerinden Adenau'ya yaklaşık 1.5 saat Köln'den.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-ferry">⛴️ Dover–Calais Feribot</div>
+        <div class="tip-text" id="pr-ferry-text">P&O veya DFDS. Önceden bilet alın. Araç başına ~£50–80. Geçiş süresi ~90 dakika. Erken gidin — araç yükleme 30 dk önce.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-hotel">🏨 Konaklama</div>
+        <div class="tip-text" id="pr-hotel-text">Adenau merkez önerilir — ring'e 12 km. Alternatif: Nürburg (ring içinde, pahalı). Booking.com'dan erken rezervasyon yapın, sezonda dolar.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-food">🍺 Yeme & İçme</div>
+        <div class="tip-text" id="pr-food-text">Ring içinde Pistenklause (efsane) — rezervasyon şart. Adenau'da Gasthaus seçenekleri. Almanya'da döner her yerde, kaliteli!</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title" id="pr-app">📱 Uygulamalar</div>
+        <div class="tip-text">
+          <a href="https://apps.apple.com/app/nring/id1045801808" target="_blank">nRing App</a> — anlık pist durumu<br>
+          <a href="https://www.google.com/maps" target="_blank">Google Maps</a> — navigasyon<br>
+          <a href="https://www.waze.com" target="_blank">Waze</a> — trafik + hız kameralı navigasyon<br>
+          ADAC App — yol yardım
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARİTA -->
+  <div class="tab-content" id="tab-harita">
+    <div style="padding:10px 18px 8px;">
+      <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title" id="hm-title">Canlı <em>Harita</em></div></div>
+    </div>
+    <div style="padding:0 18px 18px;">
+      <iframe id="gmap"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10264.87!2d6.9425!3d50.3356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bf6a76c9d02781%3A0x1e7b7dd1be32dad5!2sN%C3%BCrburgring!5e0!3m2!1str!2str!4v1"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+        <a class="map-action-btn gmaps" href="https://maps.google.com/?q=Nurburgring+Nordschleife" target="_blank">📍 Google Maps</a>
+        <a class="map-action-btn waze" href="https://waze.com/ul?ll=50.3356,6.9475&navigate=yes" target="_blank">🔵 Waze</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<button class="scroll-top" id="scrollTop" onclick="document.getElementById('main-scroll').scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-const DAYS={fri:[{t:'05:45',a:'Mert departs Basildon',n:'A13 → M25 → J30'},{t:'06:15',a:'Cagri departs Slough',n:'M4 east → M25 south → J30'},{t:'06:30',a:'Meet at Thurrock Services',n:'Fuel up, convoy forms'},{t:'07:00',a:'Thurrock → Dover (A2/M2)',n:'~75 min — aim to arrive 08:15'},{t:'08:15',a:'Arrive Dover — check in',n:'P&O or DFDS · arrive 90 min before sailing'},{t:'09:30',a:'Dover → Calais',n:'~90 min crossing'},{t:'11:00',a:'Depart Calais (E40/A3)',n:'Belgium → Germany'},{t:'13:00',a:'Fuel + coffee stop — Liège, Belgium',n:'Last cheap fuel before Germany'},{t:'15:30',a:'Cross into Germany at Aachen'},{t:'17:30',a:'Arrive Adenau — check in',n:'~7 km from Nürburgring'},{t:'19:30',a:'Dinner in Adenau',n:'Ristorante Pinocchio or Hotel Blaue Ecke'}],sat:[{t:'07:30',a:'Breakfast',n:'Adenau bakery or hotel'},{t:'07:45',a:'UK crew depart for track',n:'~10 min drive'},{t:'08:00',a:'ALL FOUR meet at Nordschleife entrance',n:'Onur arrives from Mannheim'},{t:'08:15',a:'Buy lap tickets',n:'€35/lap/car — barrier or Green Hell app'},{t:'08:30–12:00',a:'Laps 1–2 per car',n:'Learn the track, take it easy'},{t:'12:00–13:30',a:'Lunch',n:"ring°werk café or Devil's Diner"},{t:'13:30–17:00',a:'Laps 3–4 per car',n:'You know the track now — push a little'},{t:'17:00–19:00',a:'Spectator spots',n:'Brünnchen, Karussell, group photos'},{t:'19:00',a:'Track closes'},{t:'20:00',a:'Celebratory dinner',n:'Adenau — book in advance!'},{t:'Late',a:'Drinks',n:"Eifelstadl or Fiddler's Irish Pub"}],sun:[{t:'08:00',a:'Breakfast'},{t:'09:00',a:'Optional final lap or ring°werk / fan shop'},{t:'11:00',a:'Farewells — Onur heads back to Mannheim'},{t:'11:00',a:'UK crew depart for Calais',n:'Optional Cologne stop'},{t:'17:30',a:'Calais — ferry check in'},{t:'19:00',a:'Calais → Dover',n:'~90 min'},{t:'22:30',a:'Back in the UK 🏠'}]};
-const CREW=[{id:'mert',initials:'MT',name:'Mert + Tuncay',car:'Mercedes SLK 200',from:'Basildon, Essex',role:'UK lead car',budget:'~£308–363 / person',route:'A13 → M25 → Thurrock → Dover → Calais → Adenau',notes:'Pick up Tuncay in Basildon. Meet Cagri at Thurrock Services 06:30. Arrive Adenau Friday evening.',checks:['Book ferry (2 UK cars)','Book hotel Adenau (4 people, Fri + Sat)','Confirm insurance covers Germany — SLK','Buy headlight beam deflectors — SLK','Check brakes & tyres — SLK','Pack reflective vest + first aid kit + triangle','Fit dashcam','Save emergency number +49 2691 302 9111']},{id:'cagri',initials:'C',name:'Cagri',car:'Toyota Supra A90',from:'Slough / West London',role:'UK second car',budget:'~£535–635 total',route:'M4 east → M25 → Thurrock (06:30 meet) → Dover → Calais → Adenau',notes:'Meet Mert at Thurrock Services 06:30. Travel in convoy to Dover and beyond.',checks:['Confirm insurance covers Germany — Supra','Buy headlight beam deflectors — Supra','Check brakes & tyres — Supra','Pack reflective vest + first aid kit + triangle','Fit dashcam','Save emergency number +49 2691 302 9111']},{id:'onur',initials:'O',name:'Onur',car:'Own car',from:'Mannheim, Germany',role:'Germany joiner',budget:'~€260–285 total',route:'A6 West → A61 North → B412 → Nürburgring. Depart 05:30, arrive 08:00.',notes:'Depart Mannheim ~05:30. A6 West, then A61 North towards Koblenz, exit at B412 towards Nürburg. Meet the crew at Nordschleife entrance at 08:00.',checks:['Check brakes & tyres — own car','Fit dashcam','Save emergency number +49 2691 302 9111','Download Green Hell app']}];
-const CHECKS=[{t:'Book ferry — Dover–Calais return (2 UK cars)',w:'Mert'},{t:'Book hotel in Adenau — 4 people, Fri + Sat nights',w:'Mert'},{t:'Confirm UK insurance covers Germany — SLK 200',w:'Mert'},{t:'Confirm UK insurance covers Germany — Supra A90',w:'Cagri'},{t:'Check brake pads & tyres — SLK 200',w:'Mert'},{t:'Check brake pads & tyres — Supra A90',w:'Cagri'},{t:'Check brake pads & tyres — own car',w:'Onur'},{t:'Buy headlight beam deflectors — SLK 200',w:'Mert'},{t:'Buy headlight beam deflectors — Supra A90',w:'Cagri'},{t:'Pack reflective vest + first aid kit + triangle (UK cars)',w:'Mert & Cagri'},{t:'Fit dashcam — all three cars',w:'All'},{t:'Download Green Hell app for lap tickets',w:'All'},{t:'Save emergency number +49 2691 302 9111',w:'All'},{t:'Book Ring Taxi (optional) — ringtaxi.com',w:'Mert'},{t:'Book Saturday dinner — Ristorante Pinocchio, Adenau',w:'Mert'}];
-const SPOTS=[{name:'Brünnchen (YouTube Corner)',desc:'Most famous spectator area. Downhill right-hander — cars come at you fast. Food stands + toilets on site. Best group hangout spot.',dir:'Search "Brünnchen" on Google Maps. ~8 min drive from entrance.'},{name:'Caracciola-Karussell',desc:'Iconic banked concrete carousel. Cars tilt dramatically as they grip the banking — unmissable.',dir:'Walk from Brünnchen car park along the track, ~20 min.'},{name:'Pflanzgarten',desc:'Cars go airborne here. One of the most dramatic sections on the circuit.',dir:'~30 min hike from Herschbroich village.'},{name:'Breidscheid Bridge',desc:'Bridge over the road near Adenau. Park at supermarket, climb stairs to viewing platform above the track.',dir:'Navigate to "Breidscheid, Adenau". 5 min from hotel.'},{name:'Nürburgring Sign (group photo)',desc:'Illuminated 24hrs. Park all 3 cars below the sign for the classic group shot.',dir:'Navigate to "Nürburgring 1927 GmbH". 5 min from entrance.'}];
-const BUDGET=[{who:'Mert & Tuncay',sub:'SLK 200 — split between 2',rows:[['Ferry return (car + 2 people)','£150–220'],['Fuel UK + Europe (~900 km)','~£125'],['Beam deflectors + German kit','~£20'],['Hotel Adenau — 2 nights','£130–170'],['Lap tickets 3 × €35','~£90'],['Food & drinks 3 days','~£100']],total:'~£308–363 each'},{who:'Cagri',sub:'Supra A90',rows:[['Ferry return (car + 1 person)','£130–190'],['Fuel UK + Europe','~£125'],['Beam deflectors + German kit','~£20'],['Hotel Adenau — 2 nights','£80–120'],['Lap tickets 3 × €35','~£90'],['Food & drinks 3 days','~£90']],total:'~£535–635'},{who:'Onur',sub:'Own car · Mannheim',rows:[['Fuel Mannheim ↔ Nürburgring','~€30'],['Hotel Adenau — 1 night','~€65–90'],['Lap tickets 3 × €35','~€105'],['Food & drinks 2 days','~€60']],total:'~€260–285'}];
-const ROUTES={uk:{title:'UK convoy: Basildon → Thurrock → Dover → Calais → Liège → Aachen → Adenau (Friday 22 May)',color:'#C0392B',stops:[{x:78,y:128,label:'Basildon',sub:'05:45'},{x:108,y:152,label:'Thurrock',sub:'Cagri joins 06:30'},{x:128,y:192,label:'Dover',sub:'09:30 ferry'},{x:192,y:197,label:'Calais',sub:'~11:00'},{x:228,y:172,label:'Liège',sub:'fuel 13:00'},{x:262,y:158,label:'Aachen',sub:'~15:30'},{x:308,y:148,label:'Adenau',sub:'~17:30'}]},onur:{title:'Onur: Mannheim → A61 North → B412 → Nürburgring (Saturday 23 May, depart 05:30)',color:'#2471A3',stops:[{x:338,y:208,label:'Mannheim',sub:'05:30'},{x:315,y:183,label:'A61 North',sub:''},{x:308,y:148,label:'Nürburgring',sub:'08:00'}]},return:{title:'Return: Adenau → Cologne → Calais → Dover → Basildon (Sunday 24 May)',color:'#1E8449',stops:[{x:308,y:148,label:'Adenau',sub:'11:00'},{x:262,y:158,label:'Aachen',sub:''},{x:238,y:172,label:'Cologne',sub:'optional'},{x:192,y:197,label:'Calais',sub:'17:30'},{x:128,y:192,label:'Dover',sub:'~21:00'},{x:78,y:128,label:'Basildon',sub:'~22:30'}]}};
+// ── LANG ──────────────────────────────────────────────────────
+let lang = localStorage.getItem('nr_lang') || 'tr';
+const T = {
+  tr:{
+    nav:'Navigasyon', ana:'Ana Sayfa', program:'Program', ekip:'Ekip',
+    rota:'Rota', hava:'Hava Durumu', kontrol:'Kontrol Listesi',
+    butce:'Bütçe', spotlar:'Fotoğraf Spotları', pist:'Pist Bilgisi',
+    pratik:'Pratik Bilgiler', harita:'Harita', logout:'🚪 Çıkış Yap',
+    eyebrow:'Motorsport Seyahati 2026', sub:'Nordschleife · Green Hell',
+    dates:'11 – 14 Haziran 2026', cdLabel:'Hareket Gününe Kalan',
+    days:'Gün', hours:'Saat', mins:'Dakika', secs:'Saniye',
+    statsTitle:'Seyahat Özeti', crew:'Kişi', cars:'Araç', days2:'Gün', track:'Pist Uzunluğu',
+    pistStatus:'🏁 Pist Durumu', book:'🎟️ MSV Bilet',
+    pTitle:'Gezi Programı', eTitle:'Ekip Kadrosu', eHint:'Detay görmek için ekip üyesine tıkla.',
+    rTitle:'Rota Haritaları', rtUK:'🇬🇧 UK Konvoyu', rtOnur:'🇩🇪 Onur', rtReturn:'↩️ Dönüş',
+    hwTitle:'Hava Durumu', hwForecast:'3 Günlük Tahmin',
+    clTitle:'Kontrol Listesi', clfAll:'Tümü', clfOrtak:'Ortak',
+    bTitle:'Tahmini Bütçe', ltTitle:'Tur Süreleri', ltHint:'Pist çıkışında notunuzu girin.',
+    lthName:'İsim', lthCar:'Araç', lthTime:'Süre', lthNotes:'Not',
+    spTitle:'📸 Fotoğraf Spotları', piTitle:'Pist Bilgisi', prTitle:'Pratik Bilgiler',
+    hmTitle:'Canlı Harita', wLoading:'Hava verisi yükleniyor...', wfLoading:'Yükleniyor...',
+    prEmergency:'🆘 Acil Durumlar',
+    done:'Tamamlandı', remaining:'görev kaldı', allDone:'🏁 Hepsi tamam — Green Hell sizi bekliyor!',
+  },
+  en:{
+    nav:'Navigation', ana:'Home', program:'Schedule', ekip:'Crew',
+    rota:'Routes', hava:'Weather', kontrol:'Checklist',
+    butce:'Budget', spotlar:'Photo Spots', pist:'Track Info',
+    pratik:'Practical Info', harita:'Map', logout:'🚪 Log Out',
+    eyebrow:'Motorsport Trip 2026', sub:'Nordschleife · Green Hell',
+    dates:'11 – 14 June 2026', cdLabel:'Until Departure',
+    days:'Days', hours:'Hours', mins:'Mins', secs:'Secs',
+    statsTitle:'Trip Summary', crew:'People', cars:'Cars', days2:'Days', track:'Track Length',
+    pistStatus:'🏁 Track Status', book:'🎟️ MSV Ticket',
+    pTitle:'Trip Schedule', eTitle:'Crew Roster', eHint:'Tap a crew member to see details.',
+    rTitle:'Route Maps', rtUK:'🇬🇧 UK Convoy', rtOnur:'🇩🇪 Onur', rtReturn:'↩️ Return',
+    hwTitle:'Weather', hwForecast:'3-Day Forecast',
+    clTitle:'Checklist', clfAll:'All', clfOrtak:'Shared',
+    bTitle:'Estimated Budget', ltTitle:'Lap Times', ltHint:'Add your times after the session.',
+    lthName:'Name', lthCar:'Car', lthTime:'Time', lthNotes:'Notes',
+    spTitle:'📸 Photo Spots', piTitle:'Track Information', prTitle:'Practical Info',
+    hmTitle:'Live Map', wLoading:'Loading weather data...', wfLoading:'Loading...',
+    prEmergency:'🆘 Emergency Contacts',
+    done:'done', remaining:'tasks remaining', allDone:'🏁 All done — Green Hell awaits!',
+  }
+};
+function applyLang(){
+  const t = T[lang];
+  document.getElementById('lang-btn').textContent = lang==='tr'?'EN':'TR';
+  document.getElementById('ml-nav').textContent = t.nav;
+  document.getElementById('ml-ana').textContent = t.ana;
+  document.getElementById('ml-program').textContent = t.program;
+  document.getElementById('ml-ekip').textContent = t.ekip;
+  document.getElementById('ml-rota').textContent = t.rota;
+  document.getElementById('ml-hava').textContent = t.hava;
+  document.getElementById('ml-kontrol').textContent = t.kontrol;
+  document.getElementById('ml-butce').textContent = t.butce;
+  document.getElementById('ml-spotlar').textContent = t.spotlar;
+  document.getElementById('ml-pist').textContent = t.pist;
+  document.getElementById('ml-pratik').textContent = t.pratik;
+  document.getElementById('ml-harita').textContent = t.harita;
+  document.getElementById('ml-logout').textContent = t.logout;
+  document.getElementById('h-eyebrow').textContent = t.eyebrow;
+  document.getElementById('h-sub').textContent = t.sub;
+  document.getElementById('h-dates').textContent = t.dates;
+  document.getElementById('h-cd-label').textContent = t.cdLabel;
+  document.getElementById('cdl-d').textContent = t.days;
+  document.getElementById('cdl-h').textContent = t.hours;
+  document.getElementById('cdl-m').textContent = t.mins;
+  document.getElementById('cdl-s').textContent = t.secs;
+  document.getElementById('sl-crew').textContent = t.crew;
+  document.getElementById('sl-cars').textContent = t.cars;
+  document.getElementById('sl-days').textContent = t.days2;
+  document.getElementById('sl-track').textContent = t.track;
+  document.getElementById('ql-status').textContent = t.pistStatus;
+  document.getElementById('ql-book').textContent = t.book;
+  document.getElementById('p-title').innerHTML = lang==='tr'?'Gezi <em>Programı</em>':'Trip <em>Schedule</em>';
+  document.getElementById('db-thu').textContent = lang==='tr'?'Per · 11 Haz':'Thu · 11 Jun';
+  document.getElementById('db-fri').textContent = lang==='tr'?'Cum · 12 Haz':'Fri · 12 Jun';
+  document.getElementById('db-sat').textContent = lang==='tr'?'Cmt · 13 Haz':'Sat · 13 Jun';
+  document.getElementById('db-sun').textContent = lang==='tr'?'Paz · 14 Haz':'Sun · 14 Jun';
+  document.getElementById('e-title').innerHTML = lang==='tr'?'Ekip <em>Kadrosu</em>':'Crew <em>Roster</em>';
+  document.getElementById('e-select-hint').textContent = t.eHint;
+  document.getElementById('r-title').innerHTML = lang==='tr'?'Rota <em>Haritaları</em>':'Route <em>Maps</em>';
+  document.getElementById('rt-uk').textContent = t.rtUK;
+  document.getElementById('rt-onur').textContent = t.rtOnur;
+  document.getElementById('rt-return').textContent = t.rtReturn;
+  document.getElementById('hw-title').innerHTML = lang==='tr'?'Hava <em>Durumu</em>':'<em>Weather</em>';
+  document.getElementById('hw-forecast-title').innerHTML = lang==='tr'?'3 Günlük <em>Tahmin</em>':'3-Day <em>Forecast</em>';
+  document.getElementById('cl-title').innerHTML = lang==='tr'?'Kontrol <em>Listesi</em>':'<em>Checklist</em>';
+  document.getElementById('clf-all').textContent = t.clfAll;
+  document.getElementById('clf-ortak').textContent = t.clfOrtak;
+  document.getElementById('b-title').innerHTML = lang==='tr'?'Tahmini <em>Bütçe</em>':'Estimated <em>Budget</em>';
+  document.getElementById('lt-title').innerHTML = lang==='tr'?'Tur <em>Süreleri</em>':'<em>Lap Times</em>';
+  document.getElementById('lt-hint').textContent = t.ltHint;
+  document.getElementById('lth-name').textContent = t.lthName;
+  document.getElementById('lth-car').textContent = t.lthCar;
+  document.getElementById('lth-time').textContent = t.lthTime;
+  document.getElementById('lth-notes').textContent = t.lthNotes;
+  document.getElementById('sp-title').innerHTML = lang==='tr'?'📸 Fotoğraf <em>Spotları</em>':'📸 Photo <em>Spots</em>';
+  document.getElementById('pi-title').innerHTML = lang==='tr'?'Pist <em>Bilgisi</em>':'Track <em>Info</em>';
+  document.getElementById('pr-title').innerHTML = lang==='tr'?'Pratik <em>Bilgiler</em>':'Practical <em>Info</em>';
+  document.getElementById('hm-title').innerHTML = lang==='tr'?'Canlı <em>Harita</em>':'Live <em>Map</em>';
+  document.getElementById('h-stats-title').innerHTML = lang==='tr'?'Seyahat <em>Özeti</em>':'Trip <em>Summary</em>';
+  renderChecklist(); renderCrew(null); renderCrewPillsAna();
+}
+function toggleLang(){
+  lang = lang==='tr'?'en':'tr';
+  localStorage.setItem('nr_lang',lang);
+  applyLang();
+}
 
-function renderDay(day){document.getElementById('itin-content').innerHTML='<div class="itin-list">'+DAYS[day].map(r=>`<div class="itin-row"><div class="itin-time">${r.t}</div><div class="itin-body">${r.a}${r.n?`<small>${r.n}</small>`:''}</div></div>`).join('')+'</div>';}
+// ── DATA ──────────────────────────────────────────────────────
+const CREW = [
+  {id:'mert',name:'Mert',initials:'M',role:lang==='tr'?'Organizatör':'Organiser',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'Trip organiser. SLK 200 sürer.',checks:['Pasaport','Sürücü belgesi','Araç sigortası','Kask','Nakit EUR','Şarj aleti','Yedek lastik kontrolü']},
+  {id:'cagri',name:'Çağrı',initials:'Ç',role:'Co-Driver',from:'Thurrock, UK',budget:'~£350',route:'UK Konvoyu — Thurrock\'tan katılım',notes:'Thurrock\'ta konvoya katılır.',checks:['Pasaport','Sürücü belgesi','Kask','Nakit EUR','Earplugs','Su & snack']},
+  {id:'onur',name:'Onur',initials:'O',role:'Driver',from:'Mannheim, DE',budget:'~€200',route:'Mannheim → Nürburgring (Cmt sabahı)',notes:'Almanya\'dan direkt gelir. Cumartesi 05:30 kalkış.',checks:['Sürücü belgesi','Araç sigortası','Yakıt','Nakit EUR','Yedek yağ']},
+  {id:'sergen',name:'Sergen',initials:'S',role:'Co-Driver',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'UK konvoyunda Mert ile.',checks:['Pasaport','Sürücü belgesi','Nakit EUR','Kamera','Güneş kremi']},
+];
 
-let activeCrewId=null;
+const ITINERARY = {
+  thu:{
+    tr:[
+      {time:'05:45',title:'Basildon\'dan hareket',sub:'Mert + Sergen. Thurrock\'a git.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'06:30',title:'Thurrock — Çağrı katılıyor',sub:'Convoy toplanır.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'09:30',title:'Dover Limanı',sub:'Araçları kontrol et. Erken gidin.',badge:'badge-travel',badgeText:'Feribot'},
+      {time:'~11:00',title:'Calais\'e varış',sub:'Fransa. A26 → Belçika rotası.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'~13:00',title:'Belçika — Yakıt + Mola',sub:'Liège civarı. Ucuz yakıt.',badge:'badge-rest',badgeText:'Mola'},
+      {time:'~15:30',title:'Aachen, Almanya',sub:'A61 güneye dön.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'~17:30',title:'Adenau\'ya varış',sub:'Otel check-in. Dinlenin!',badge:'badge-rest',badgeText:'Konaklama'},
+      {time:'19:30',title:'Akşam yemeği — Adenau',sub:'Gasthaus\'ta buluşun.',badge:'badge-food',badgeText:'Yemek'},
+    ],
+    en:[
+      {time:'05:45',title:'Depart Basildon',sub:'Mert + Sergen. Head to Thurrock.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'06:30',title:'Thurrock — Çağrı joins',sub:'Convoy assembles.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'09:30',title:'Dover Port',sub:'Check vehicles. Arrive early.',badge:'badge-travel',badgeText:'Ferry'},
+      {time:'~11:00',title:'Arrive Calais',sub:'France. A26 → Belgium route.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'~13:00',title:'Belgium — Fuel + Break',sub:'Near Liège. Cheap fuel.',badge:'badge-rest',badgeText:'Break'},
+      {time:'~15:30',title:'Aachen, Germany',sub:'Turn south on A61.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'~17:30',title:'Arrive Adenau',sub:'Hotel check-in. Rest!',badge:'badge-rest',badgeText:'Hotel'},
+      {time:'19:30',title:'Dinner — Adenau',sub:'Meet at local Gasthaus.',badge:'badge-food',badgeText:'Food'},
+    ]
+  },
+  fri:{
+    tr:[
+      {time:'08:00',title:'Kahvaltı',sub:'Otelde veya kasabada.',badge:'badge-food',badgeText:'Yemek'},
+      {time:'09:30',title:'Ring\'e giriş',sub:'MSV Track Day. Biletleri hazırlayın.',badge:'badge-track',badgeText:'Pist'},
+      {time:'10:00',title:'Tanıma Turları',sub:'İlk kez gidenler için zorunlu. Yavaş git, öğren.',badge:'badge-track',badgeText:'Pist'},
+      {time:'12:30',title:'Öğle — Pistenklause',sub:'Ring\'in efsane restoranı. Rezervasyon!',badge:'badge-food',badgeText:'Yemek'},
+      {time:'14:00',title:'Pist Seansı (Öğleden Sonra)',sub:'Isınmış lastikler, daha iyi grip.',badge:'badge-track',badgeText:'Pist'},
+      {time:'17:00',title:'Pist çıkışı',sub:'Araçları kontrol et. Fotoğraflar!',badge:'badge-rest',badgeText:'Mola'},
+      {time:'19:00',title:'Akşam yemeği',sub:'Tüm ekip buluşması.',badge:'badge-food',badgeText:'Yemek'},
+    ],
+    en:[
+      {time:'08:00',title:'Breakfast',sub:'At hotel or in town.',badge:'badge-food',badgeText:'Food'},
+      {time:'09:30',title:'Enter the Ring',sub:'MSV Track Day. Have tickets ready.',badge:'badge-track',badgeText:'Track'},
+      {time:'10:00',title:'Familiarisation Laps',sub:'Mandatory for first-timers. Slow and learn.',badge:'badge-track',badgeText:'Track'},
+      {time:'12:30',title:'Lunch — Pistenklause',sub:'Legendary Ring restaurant. Book ahead!',badge:'badge-food',badgeText:'Food'},
+      {time:'14:00',title:'Afternoon Track Session',sub:'Warm tyres, better grip.',badge:'badge-track',badgeText:'Track'},
+      {time:'17:00',title:'Exit track',sub:'Check vehicles. Photos!',badge:'badge-rest',badgeText:'Break'},
+      {time:'19:00',title:'Group dinner',sub:'Full crew meetup.',badge:'badge-food',badgeText:'Food'},
+    ]
+  },
+  sat:{
+    tr:[
+      {time:'05:30',title:'Onur — Mannheim\'dan kalkış',sub:'A61 kuzey. ~08:00 Ring\'de.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'08:00',title:'Onur Ring\'e varıyor',sub:'Tüm ekip bir arada!',badge:'badge-track',badgeText:'Pist'},
+      {time:'09:00',title:'Sabah pist seansı',sub:'En iyi tur zamanları için erken gelin.',badge:'badge-track',badgeText:'Pist'},
+      {time:'13:00',title:'Öğle molası',sub:'Yakıt + yemek.',badge:'badge-food',badgeText:'Yemek'},
+      {time:'14:30',title:'Öğleden sonra seansı',sub:'Son süreç. Her turu kaydedin!',badge:'badge-track',badgeText:'Pist'},
+      {time:'17:30',title:'Pist bitti',sub:'Ekip fotoğrafı! Tur sürelerini karşılaştırın.',badge:'badge-rest',badgeText:'Mola'},
+      {time:'20:00',title:'Veda yemeği',sub:'Son gece Adenau\'da.',badge:'badge-food',badgeText:'Yemek'},
+    ],
+    en:[
+      {time:'05:30',title:'Onur departs Mannheim',sub:'A61 north. Arrives Ring ~08:00.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'08:00',title:'Onur arrives at Ring',sub:'Full crew together!',badge:'badge-track',badgeText:'Track'},
+      {time:'09:00',title:'Morning track session',sub:'Come early for best lap times.',badge:'badge-track',badgeText:'Track'},
+      {time:'13:00',title:'Lunch break',sub:'Fuel up + food.',badge:'badge-food',badgeText:'Food'},
+      {time:'14:30',title:'Afternoon session',sub:'Final push. Record every lap!',badge:'badge-track',badgeText:'Track'},
+      {time:'17:30',title:'Track done',sub:'Group photo! Compare lap times.',badge:'badge-rest',badgeText:'Break'},
+      {time:'20:00',title:'Farewell dinner',sub:'Last night in Adenau.',badge:'badge-food',badgeText:'Food'},
+    ]
+  },
+  sun:{
+    tr:[
+      {time:'09:00',title:'Kahvaltı + check-out',sub:'Erken kalkın — uzun yol var.',badge:'badge-food',badgeText:'Yemek'},
+      {time:'10:00',title:'Adenau\'dan ayrılış',sub:'UK ekibi konvoy halinde.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'~12:00',title:'Belçika — Son mola',sub:'Yakıt + yemek.',badge:'badge-rest',badgeText:'Mola'},
+      {time:'~15:30',title:'Calais Limanı',sub:'17:30 feribotunu hedefleyin.',badge:'badge-travel',badgeText:'Feribot'},
+      {time:'~21:00',title:'Dover\'a varış',sub:'İngiltere\'ye hoş geldiniz!',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'~22:30',title:'Basildon\'a varış',sub:'Ev. Uyuyun. Maşallah.',badge:'badge-rest',badgeText:'Ev'},
+    ],
+    en:[
+      {time:'09:00',title:'Breakfast + checkout',sub:'Early start — long drive ahead.',badge:'badge-food',badgeText:'Food'},
+      {time:'10:00',title:'Depart Adenau',sub:'UK crew convoy formation.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'~12:00',title:'Belgium — Last break',sub:'Fuel + food.',badge:'badge-rest',badgeText:'Break'},
+      {time:'~15:30',title:'Calais Port',sub:'Target 17:30 ferry.',badge:'badge-travel',badgeText:'Ferry'},
+      {time:'~21:00',title:'Arrive Dover',sub:'Welcome back to England!',badge:'badge-travel',badgeText:'Drive'},
+      {time:'~22:30',title:'Arrive Basildon',sub:'Home. Sleep. Legends.',badge:'badge-rest',badgeText:'Home'},
+    ]
+  }
+};
+
+const ROUTES = {
+  uk:{
+    color:'#C0392B',
+    titleTr:'UK Konvoyu: Basildon → Thurrock → Dover → Calais → Liège → Aachen → Adenau (Perşembe 11 Haziran)',
+    titleEn:'UK Convoy: Basildon → Thurrock → Dover → Calais → Liège → Aachen → Adenau (Thu 11 June)',
+    gmaps:'https://maps.google.com/maps/dir/Basildon,UK/Thurrock,UK/Dover,UK/Calais,France/Liege,Belgium/Aachen,Germany/Adenau,Germany',
+    waze:'https://waze.com/ul?ll=50.3765,6.9441&navigate=yes',
+    stops:[{x:78,y:128,label:'Basildon',sub:'05:45'},{x:108,y:152,label:'Thurrock',sub:'06:30'},{x:128,y:192,label:'Dover',sub:'09:30'},{x:192,y:197,label:'Calais',sub:'~11:00'},{x:228,y:172,label:'Liège',sub:'13:00'},{x:262,y:158,label:'Aachen',sub:'~15:30'},{x:308,y:148,label:'Adenau',sub:'~17:30'}]
+  },
+  onur:{
+    color:'#2471A3',
+    titleTr:'Onur: Mannheim → A61 Kuzey → B412 → Nürburgring (Cumartesi 13 Haziran, 05:30 kalkış)',
+    titleEn:'Onur: Mannheim → A61 North → B412 → Nürburgring (Sat 13 June, depart 05:30)',
+    gmaps:'https://maps.google.com/maps/dir/Mannheim,Germany/Nurburgring,Germany',
+    waze:'https://waze.com/ul?ll=49.4875,8.4660&navigate=yes&from=50.3356,6.9475',
+    stops:[{x:338,y:208,label:'Mannheim',sub:'05:30'},{x:315,y:183,label:'A61 Kuzey',sub:''},{x:308,y:148,label:'Nürburgring',sub:'08:00'}]
+  },
+  return:{
+    color:'#27AE60',
+    titleTr:'Dönüş: Adenau → Liège → Calais → Dover → Basildon (Pazar 14 Haziran)',
+    titleEn:'Return: Adenau → Liège → Calais → Dover → Basildon (Sun 14 June)',
+    gmaps:'https://maps.google.com/maps/dir/Adenau,Germany/Liege,Belgium/Calais,France/Dover,UK/Basildon,UK',
+    waze:'https://waze.com/ul?ll=51.2993,1.3089&navigate=yes',
+    stops:[{x:308,y:148,label:'Adenau',sub:'10:00'},{x:228,y:172,label:'Liège',sub:''},{x:192,y:197,label:'Calais',sub:'~15:30'},{x:128,y:192,label:'Dover',sub:'~21:00'},{x:78,y:128,label:'Basildon',sub:'~22:30'}]
+  }
+};
+
+const CHECKS = [
+  {t:'Pasaport (geçerlilik kontrol et)',w:'ortak'},{t:'Sürücü belgesi',w:'ortak'},{t:'Araç sigortası belgesi',w:'ortak'},
+  {t:'EHIC / sağlık sigortası',w:'ortak'},{t:'Nakit EUR (min €100)',w:'ortak'},{t:'Kart (Visa/Mastercard)',w:'ortak'},
+  {t:'MSV Track Day bileti',w:'ortak'},{t:'Otel rezervasyonu',w:'ortak'},{t:'Feribot bileti',w:'ortak'},
+  {t:'Şarj aleti + powerbank',w:'ortak'},{t:'Kask (zorunlu değil ama tavsiye)',w:'ortak'},
+  {t:'Araç muayene (MOT geçerli)',w:'mert'},{t:'SLK lastik kontrolü',w:'mert'},{t:'Yedek yağ — SLK',w:'mert'},
+  {t:'Araç sigortası (AB kapsam)',w:'cagri'},{t:'Snack & su',w:'cagri'},
+  {t:'Almanya araç sigortası',w:'onur'},{t:'Araç yağ + su kontrolü',w:'onur'},{t:'Navigasyon güncelle',w:'onur'},
+  {t:'Kamera & hafıza kartı',w:'sergen'},{t:'Güneş kremi',w:'sergen'},
+];
+
+const BUDGET = [
+  {
+    who:'Mert + Sergen',sub:'UK → Almanya → UK',total:'~£720',
+    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt (UK)','£80'],['Yakıt (DE/BE/FR)','£100'],['MSV Track Day (x2 giriş)','£160'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Otopark + diğer','£30']]
+  },
+  {
+    who:'Çağrı',sub:'UK → Almanya → UK',total:'~£680',
+    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt katkı','£60'],['MSV Track Day','£80'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Diğer','£40'],['Kask kiralama (opsiyonel)','£30']]
+  },
+  {
+    who:'Onur',sub:'Mannheim → Nürburgring',total:'~€350',
+    rows:[['Yakıt (gidiş-dönüş)','€60'],['MSV Track Day','€90'],['Otel (1 gece)','€80'],['Yemek & içecek','€80'],['Diğer','€40']]
+  }
+];
+
+const SPOTS = [
+  {name:'Brünnchen',km:'km 18.6',desc:lang==='tr'?'En popüler fotoğraf noktası. Salto alan alanı gibi hava tüketimi. Geniş açı çekim için ideal.':'Most popular photo spot. Cars get airborne. Perfect for wide angle shots.',gmaps:'https://maps.google.com/?q=50.3291,6.9696',waze:'https://waze.com/ul?ll=50.3291,6.9696&navigate=yes'},
+  {name:'Karussell',km:'km 12.3',desc:lang==='tr'?'İkonik beton bankınglı viraj. Beton sesleri eşliğinde dramatik fotoğraflar.':'Iconic banked concrete corner. Dramatic shots with tyre scrub sounds.',gmaps:'https://maps.google.com/?q=50.3485,6.9567',waze:'https://waze.com/ul?ll=50.3485,6.9567&navigate=yes'},
+  {name:'Flugplatz',km:'km 6.1',desc:lang==='tr'?'Uçuş noktası — arabalar zeminden ayrılır. Hava sekansları için en iyi spot.':'Flight point — cars leave the ground. Best spot for airborne sequences.',gmaps:'https://maps.google.com/?q=50.3623,6.9313',waze:'https://waze.com/ul?ll=50.3623,6.9313&navigate=yes'},
+  {name:'Adenauer Forst',km:'km 4.8',desc:lang==='tr'?'Ormanlık kesimde hızlı S virajları. Yeşil arka plan ve dramatik ışık.':'Fast S-bends through forest. Green backdrop with dramatic lighting.',gmaps:'https://maps.google.com/?q=50.3681,6.9278',waze:'https://waze.com/ul?ll=50.3681,6.9278&navigate=yes'},
+  {name:'Dottinger Hohe',km:'km 20.1',desc:lang==='tr'?'Uzun düzlük — en yüksek hızlar burada. Uzaktan çekim için teleobjektif lazım.':'Long straight — highest speeds here. Need telephoto lens for distant shots.',gmaps:'https://maps.google.com/?q=50.3356,6.9612',waze:'https://waze.com/ul?ll=50.3356,6.9612&navigate=yes'},
+  {name:'Hohe Acht',km:'km 14.2',desc:lang==='tr'?'Pistin en yüksek noktası (674m). Panoramik manzara. Yürüyüş gerektiriyor.':'Highest point of track (674m). Panoramic views. Requires short walk.',gmaps:'https://maps.google.com/?q=50.3402,6.9425',waze:'https://waze.com/ul?ll=50.3402,6.9425&navigate=yes'},
+];
+
+// ── TAB / MENU ─────────────────────────────────────────────────
+let activeTab = 'ana';
+let menuOpen = false;
+let weatherLoaded = false;
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
+  const items = document.querySelectorAll('.menu-item');
+  const tabNames = ['ana','program','ekip','rota','hava','kontrol','butce','spotlar','pist','pratik','harita'];
+  const idx = tabNames.indexOf(name);
+  if(idx>=0) items[idx].classList.add('active');
+  activeTab = name;
+  document.getElementById('main-scroll').scrollTop = 0;
+  closeMenu();
+  if(name==='hava' && !weatherLoaded){ fetchWeather(); weatherLoaded=true; }
+  if(name==='ekip') renderCrew(null);
+  if(name==='rota') renderRoute('uk');
+  if(name==='butce'){ renderBudget(); renderLapTable(); fetchRates(); }
+  if(name==='kontrol') renderChecklist();
+  if(name==='spotlar') renderSpots();
+}
+
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open',menuOpen);
+  document.getElementById('menu-overlay').classList.toggle('open',menuOpen);
+  document.getElementById('menu-panel').classList.toggle('open',menuOpen);
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('menu-overlay').classList.remove('open');
+  document.getElementById('menu-panel').classList.remove('open');
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────────────
+function countdown() {
+  const diff = new Date('2026-06-11T05:45:00') - new Date();
+  if(diff<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='0');return;}
+  document.getElementById('cd-d').textContent = Math.floor(diff/86400000);
+  document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+
+// ── CREW ──────────────────────────────────────────────────────
+let activeCrewId = null;
+function renderCrewPillsAna(){
+  document.getElementById('crew-pills-ana').innerHTML = CREW.map(c=>`
+    <div class="pill">
+      <span class="pill-name">${c.name}</span>
+      <span class="pill-car">${c.from}</span>
+    </div>`).join('');
+}
 function renderCrew(id){
-  activeCrewId=id;
-  document.getElementById('crewGrid').innerHTML=CREW.map(c=>`<div class="crew-card${c.id===id?' active':''}" data-crew="${c.id}"><div class="avatar">${c.initials}</div><div class="crew-name">${c.name}</div><div class="crew-car">${c.car}</div><div class="crew-from">${c.from}</div></div>`).join('');
-  if(id){const c=CREW.find(x=>x.id===id);document.getElementById('crewDetail').innerHTML=`<div class="crew-detail"><h3>${c.name} <span style="color:var(--text3);font-weight:400;font-size:14px">— ${c.role}</span></h3><table class="crew-tbl"><tr><td>Car</td><td>${c.car}</td></tr><tr><td>From</td><td>${c.from}</td></tr><tr><td>Budget</td><td style="color:var(--red);font-weight:600">${c.budget}</td></tr><tr><td>Route</td><td>${c.route}</td></tr><tr><td>Notes</td><td>${c.notes}</td></tr></table><div><div class="pc-lbl">Personal checklist</div>${c.checks.map(ch=>`<div class="pc-item">${ch}</div>`).join('')}</div></div>`;}
-  else document.getElementById('crewDetail').innerHTML='<p style="font-size:13px;color:var(--text3);margin-top:6px">Select a crew member to see their route, budget and personal checklist.</p>';
-  document.querySelectorAll('.crew-card').forEach(el=>el.addEventListener('click',()=>renderCrew(el.dataset.crew===activeCrewId?null:el.dataset.crew)));
+  activeCrewId = id;
+  document.getElementById('crewGrid').innerHTML = CREW.map(c=>`
+    <div class="crew-card${c.id===id?' active':''}" onclick="renderCrew(this.dataset.id==='${id}'?null:'${c.id}')" data-id="${c.id}">
+      <div class="avatar">${c.initials}</div>
+      <div class="crew-name">${c.name}</div>
+      <div class="crew-role">${c.role} · ${c.from}</div>
+    </div>`).join('');
+  if(id){
+    const c = CREW.find(x=>x.id===id);
+    document.getElementById('crewDetail').innerHTML = `
+      <div class="crew-detail">
+        <div class="crew-detail-name">${c.name} <span style="color:var(--text3);font-size:14px;font-weight:400;text-transform:none">— ${c.role}</span></div>
+        <table class="crew-tbl">
+          <tr><td>${lang==='tr'?'Nereden':'From'}</td><td>${c.from}</td></tr>
+          <tr><td>${lang==='tr'?'Bütçe':'Budget'}</td><td style="color:var(--red);font-weight:600">${c.budget}</td></tr>
+          <tr><td>${lang==='tr'?'Rota':'Route'}</td><td>${c.route}</td></tr>
+          <tr><td>${lang==='tr'?'Not':'Notes'}</td><td>${c.notes}</td></tr>
+        </table>
+        <div class="crew-checklist">
+          <div class="crew-checklist-title">${lang==='tr'?'Kişisel Kontrol Listesi':'Personal Checklist'}</div>
+          ${c.checks.map(ch=>`<div class="crew-check-item">· ${ch}</div>`).join('')}
+        </div>
+      </div>`;
+  } else {
+    document.getElementById('crewDetail').innerHTML = `<p style="font-size:13px;color:var(--text3);margin-top:6px">${T[lang].eHint}</p>`;
+  }
 }
 
-function renderWeather(data){
-  const el=document.getElementById('weatherCard');
-  if(!data){el.innerHTML='<div class="w-loading">Loading live weather data...</div>';return;}
-  if(data.error){el.innerHTML=`<div class="w-loading" style="color:var(--text3)">${data.error}</div>`;return;}
-  const{temp,feels,desc,humidity,wind,icon,tip}=data;
-  el.innerHTML=`<div class="weather-card"><div class="w-top"><div><div class="w-temp">${temp}°C</div><div class="w-desc">${desc}</div><div class="w-loc">Nürburgring, Eifel, Germany</div></div><div class="w-icon">${icon}</div></div><div class="w-grid"><div class="w-cell"><div class="val">${feels}°C</div><div class="lbl">Feels like</div></div><div class="w-cell"><div class="val">${humidity}%</div><div class="lbl">Humidity</div></div><div class="w-cell"><div class="val">${wind} km/h</div><div class="lbl">Wind</div></div></div><div class="w-tip">${tip}</div><div class="w-refresh" id="wRefresh">↻ Refresh</div></div>`;
-  document.getElementById('wRefresh').addEventListener('click',fetchWeather);
+// ── ITINERARY ─────────────────────────────────────────────────
+let activeDay = 'thu';
+function renderDay(day){
+  activeDay = day;
+  const items = ITINERARY[day][lang];
+  document.getElementById('itin-list').innerHTML = items.map(r=>`
+    <div class="itin-row">
+      <div class="itin-time">${r.time}</div>
+      <div class="itin-dot"></div>
+      <div class="itin-body">
+        <div class="itin-title">${r.title}</div>
+        <div class="itin-sub">${r.sub}</div>
+        <span class="itin-badge ${r.badge}">${r.badgeText}</span>
+      </div>
+    </div>`).join('');
 }
+document.querySelectorAll('.day-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderDay(btn.dataset.day);
+  });
+});
+
+// ── ROUTE ─────────────────────────────────────────────────────
+let activeRoute = 'uk';
+function renderRoute(key){
+  activeRoute = key;
+  const r = ROUTES[key];
+  const s = r.stops;
+  let d = `M${s[0].x},${s[0].y}`;
+  for(let i=1;i<s.length;i++) d+=` L${s[i].x},${s[i].y}`;
+  document.getElementById('mapSvg').innerHTML = `
+    <svg class="route-svg" viewBox="50 100 330 150" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="${r.color}"/></marker></defs>
+      <path d="${d}" fill="none" stroke="${r.color}" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr)" opacity=".85"/>
+      ${s.map((pt,i)=>{
+        const end=i===0||i===s.length-1;
+        return`<g>
+          <circle cx="${pt.x}" cy="${pt.y}" r="${end?7:5}" fill="${end?r.color:'#1a1a1a'}" stroke="${r.color}" stroke-width="1.5"/>
+          <text x="${pt.x}" y="${pt.y-11}" text-anchor="middle" font-size="10" font-weight="600" fill="#e8e8e8" font-family="Barlow,sans-serif">${pt.label}</text>
+          ${pt.sub?`<text x="${pt.x}" y="${pt.y+20}" text-anchor="middle" font-size="9" fill="#666" font-family="Barlow,sans-serif">${pt.sub}</text>`:''}
+        </g>`;
+      }).join('')}
+    </svg>`;
+  document.getElementById('mapInfo').textContent = lang==='tr'?r.titleTr:r.titleEn;
+  document.getElementById('map-actions').innerHTML = `
+    <a class="map-action-btn gmaps" href="${r.gmaps}" target="_blank">📍 Google Maps</a>
+    <a class="map-action-btn waze" href="${r.waze}" target="_blank">🔵 Waze</a>`;
+  document.querySelectorAll('.route-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`[data-route="${key}"]`).classList.add('active');
+}
+document.querySelectorAll('.route-tab').forEach(t=>{
+  t.addEventListener('click',()=>renderRoute(t.dataset.route));
+});
+
+// ── WEATHER ───────────────────────────────────────────────────
+const WX_ICONS={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'❄️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+const WX_DESC={0:'Clear',1:'Mostly Clear',2:'Partly Cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light Drizzle',53:'Drizzle',55:'Heavy Drizzle',61:'Light Rain',63:'Rain',65:'Heavy Rain',71:'Light Snow',73:'Snow',75:'Heavy Snow',80:'Rain Showers',81:'Heavy Showers',82:'Violent Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Heavy Thunderstorm'};
 
 async function fetchWeather(){
-  renderWeather(null);
-  try{const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=50.3356&longitude=6.9475&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Europe/Berlin');const j=await res.json();const c=j.current;const wc=c.weather_code;let icon='☀️',desc='Clear';if(wc>=45&&wc<60){icon='🌫️';desc='Foggy';}else if(wc>=80){icon='⛈️';desc='Heavy rain';}else if(wc>=60){icon='🌧️';desc='Rainy';}else if(wc>=3){icon='☁️';desc='Cloudy';}else if(wc>=1){icon='⛅';desc='Partly cloudy';}const temp=Math.round(c.temperature_2m),wind=Math.round(c.wind_speed_10m);let tip='';if(wc>=60)tip='⚠️ Rain expected — track stays open but grip changes. Extra caution on braking zones.';else if(temp<8)tip='🌡️ Cold morning — tyres need extra warm-up laps before pushing.';else if(wind>40)tip='💨 Windy — affects stability on exposed sections like the Dottinger Hohe straight.';else tip='✅ Good conditions for lapping. Check nring.info for current track status.';renderWeather({temp,feels:Math.round(c.apparent_temperature),desc,humidity:c.relative_humidity_2m,wind,icon,tip});}catch(e){renderWeather({error:'Could not load live weather. Check nring.info/nurburgring-track-status for current conditions.'});}
+  document.getElementById('weatherCard').innerHTML = `<div class="w-loading">${T[lang].wLoading}</div>`;
+  document.getElementById('forecastGrid').innerHTML = `<div class="w-loading">${T[lang].wfLoading}</div>`;
+  try{
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=50.3356&longitude=6.9475&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum&timezone=Europe/Berlin&forecast_days=4');
+    const j = await res.json();
+    const c = j.current;
+    const wc = c.weather_code;
+    const icon = WX_ICONS[wc]||'🌡️';
+    const desc = WX_DESC[wc]||'';
+    const temp = Math.round(c.temperature_2m);
+    const feels = Math.round(c.apparent_temperature);
+    const wind = Math.round(c.wind_speed_10m);
+    const hum = c.relative_humidity_2m;
+    let tip = '';
+    if(wc>=80) tip=lang==='tr'?'⚠️ Yağmur var — pist açık ama grip değişir. Frenleme bölgelerinde dikkat.':'⚠️ Rain expected — track stays open but grip changes. Extra caution on braking zones.';
+    else if(temp<8) tip=lang==='tr'?'🌡️ Soğuk sabah — lastikler ısınana kadar yavaş gidin.':'🌡️ Cold morning — tyres need warm-up laps before pushing.';
+    else if(wind>40) tip=lang==='tr'?'💨 Rüzgarlı — Dottinger Hohe\'de stabilite etkilenir.':'💨 Windy — affects stability on the Dottinger Hohe straight.';
+    else tip=lang==='tr'?'✅ İyi koşullar. nring.info\'dan anlık durum kontrolü yapın.':'✅ Good conditions. Check nring.info for current track status.';
+
+    document.getElementById('weatherCard').innerHTML = `
+      <div class="weather-main">
+        <div class="w-top">
+          <div><div class="w-temp">${temp}°C</div><div class="w-desc">${desc}</div><div class="w-loc">Nürburgring, Eifel</div></div>
+          <div class="w-icon">${icon}</div>
+        </div>
+        <div class="w-grid">
+          <div class="w-cell"><div class="val">${feels}°C</div><div class="lbl">${lang==='tr'?'Hissedilen':'Feels Like'}</div></div>
+          <div class="w-cell"><div class="val">${hum}%</div><div class="lbl">${lang==='tr'?'Nem':'Humidity'}</div></div>
+          <div class="w-cell"><div class="val">${wind} km/h</div><div class="lbl">${lang==='tr'?'Rüzgar':'Wind'}</div></div>
+        </div>
+        <div class="w-tip">${tip}</div>
+        <div class="w-refresh" onclick="fetchWeather()">↻ ${lang==='tr'?'Yenile':'Refresh'}</div>
+      </div>`;
+
+    // 3-day forecast
+    const days = j.daily;
+    const dayNames = lang==='tr'?['Paz','Pzt','Sal','Çar','Per','Cum','Cmt']:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    document.getElementById('forecastGrid').innerHTML = days.time.slice(0,3).map((d,i)=>{
+      const date = new Date(d);
+      const dayName = dayNames[date.getDay()];
+      const fIcon = WX_ICONS[days.weather_code[i]]||'🌡️';
+      return`<div class="w-forecast-day">
+        <div class="w-forecast-date">${dayName} ${date.getDate()}/${date.getMonth()+1}</div>
+        <div class="w-forecast-icon">${fIcon}</div>
+        <div class="w-forecast-temp">${Math.round(days.temperature_2m_max[i])}°</div>
+        <div class="w-forecast-desc">${Math.round(days.temperature_2m_min[i])}° min</div>
+      </div>`;
+    }).join('');
+  }catch(e){
+    document.getElementById('weatherCard').innerHTML = `<div class="w-loading" style="color:var(--text3)">${lang==='tr'?'Hava verisi alınamadı. nring.info\'yu kontrol edin.':'Could not load weather. Check nring.info.'}</div>`;
+  }
 }
 
-function renderRoute(key){
-  const r=ROUTES[key],s=r.stops;let d=`M${s[0].x},${s[0].y}`;for(let i=1;i<s.length;i++)d+=` L${s[i].x},${s[i].y}`;
-  document.getElementById('mapSvg').innerHTML=`<svg class="route-svg" viewBox="50 100 330 150" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr${key}" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${r.color}"/></marker></defs><path d="${d}" fill="none" stroke="${r.color}" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr${key})" opacity=".85"/>${s.map((pt,i)=>{const end=i===0||i===s.length-1;return`<g><circle cx="${pt.x}" cy="${pt.y}" r="${end?7:5}" fill="${end?r.color:'#1a1a1a'}" stroke="${r.color}" stroke-width="1.5"/><text x="${pt.x}" y="${pt.y-11}" text-anchor="middle" font-size="10" font-weight="600" fill="#e8e8e8" font-family="Barlow,sans-serif">${pt.label}</text>${pt.sub?`<text x="${pt.x}" y="${pt.y+20}" text-anchor="middle" font-size="9" fill="#666" font-family="Barlow,sans-serif">${pt.sub}</text>`:''}</g>`;}).join('')}</svg>`;
-  document.getElementById('mapInfo').textContent=r.title;
-}
-
-function renderBudget(){document.getElementById('budgetGrid').innerHTML=BUDGET.map(b=>`<div class="budget-card"><div class="budget-hdr">${b.who}<small>${b.sub}</small></div>${b.rows.map(r=>`<div class="b-row"><span class="item">${r[0]}</span><span class="cost">${r[1]}</span></div>`).join('')}<div class="budget-total"><span>Total</span><span>${b.total}</span></div></div>`).join('');}
-
-function renderSpots(){document.getElementById('spotList').innerHTML=SPOTS.map(s=>`<div class="spot-card"><div class="spot-name">${s.name}</div><div class="spot-desc">${s.desc}</div><div class="spot-dir">→ ${s.dir}</div></div>`).join('');}
-
-const SK='nring_checks_v1';
+// ── CHECKLIST ─────────────────────────────────────────────────
+const SK='nring_v2';
+let checkFilter = 'all';
 function getSaved(){try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch{return{}}}
-function renderChecklist(){
-  const saved=getSaved();
-  document.getElementById('totalCount').textContent=CHECKS.length;
-  document.getElementById('clList').innerHTML=CHECKS.map((c,i)=>`<div class="cl-item${saved[i]?' done':''}" data-idx="${i}"><input type="checkbox" id="ck${i}"${saved[i]?' checked':''}><label for="ck${i}" class="cl-label">${c.t}</label><span class="cl-who">${c.w}</span></div>`).join('');
-  updateProgress();
-  document.querySelectorAll('.cl-item').forEach(el=>{el.addEventListener('click',e=>{const cb=el.querySelector('input');if(e.target!==cb)cb.checked=!cb.checked;el.classList.toggle('done',cb.checked);const s=getSaved();if(cb.checked)s[el.dataset.idx]=true;else delete s[el.dataset.idx];try{localStorage.setItem(SK,JSON.stringify(s))}catch(e){}updateProgress();});});
+function filterChecks(f,btn){
+  checkFilter=f;
+  document.querySelectorAll('.cl-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChecklist();
 }
-function updateProgress(){const total=CHECKS.length,done=document.querySelectorAll('.cl-item input:checked').length;document.getElementById('doneCount').textContent=done;document.getElementById('progressFill').style.width=Math.round(done/total*100)+'%';document.getElementById('progressNote').textContent=done===total?'🏁 All done — Green Hell awaits!':`${total-done} task${total-done===1?'':'s'} remaining`;}
+function renderChecklist(){
+  const saved = getSaved();
+  const filtered = checkFilter==='all'?CHECKS:CHECKS.filter(c=>c.w===checkFilter||c.w==='ortak');
+  document.getElementById('totalCount').textContent = CHECKS.length;
+  document.getElementById('clList').innerHTML = filtered.map((c,i)=>{
+    const realIdx = CHECKS.indexOf(c);
+    const done = saved[realIdx];
+    return`<div class="cl-item${done?' done':''}" onclick="toggleCheck(${realIdx},this)">
+      <div class="cl-cb${done?' done':''}">✓</div>
+      <div class="cl-label">${c.t}</div>
+      <div class="cl-who">${c.w}</div>
+    </div>`;
+  }).join('');
+  updateProgress();
+}
+function toggleCheck(idx,el){
+  const saved = getSaved();
+  saved[idx] = !saved[idx];
+  if(!saved[idx]) delete saved[idx];
+  try{localStorage.setItem(SK,JSON.stringify(saved))}catch(e){}
+  renderChecklist();
+}
+function updateProgress(){
+  const saved = getSaved();
+  const total = CHECKS.length;
+  const done = Object.values(saved).filter(Boolean).length;
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('progressFill').style.width = Math.round(done/total*100)+'%';
+  const t = T[lang];
+  document.getElementById('progressNote').textContent = done===total ? t.allDone : `${total-done} ${t.remaining}`;
+}
 
-function countdown(){const diff=new Date('2026-05-22T05:45:00')-new Date();if(diff<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='0');return;}document.getElementById('cd-d').textContent=Math.floor(diff/86400000);document.getElementById('cd-h').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');document.getElementById('cd-m').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');document.getElementById('cd-s').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');}
+// ── BUDGET ────────────────────────────────────────────────────
+async function fetchRates(){
+  try{
+    const r = await fetch('https://api.frankfurter.app/latest?base=EUR&symbols=GBP');
+    const d = await r.json();
+    const gbp = d.rates.GBP;
+    document.getElementById('cr-eur-val').textContent = gbp.toFixed(4)+' GBP';
+    document.getElementById('cr-gbp-val').textContent = (1/gbp).toFixed(4)+' EUR';
+  }catch(e){}
+}
+function renderBudget(){
+  document.getElementById('budgetGrid').innerHTML = BUDGET.map(b=>`
+    <div class="budget-card">
+      <div class="budget-hdr">${b.who}<small>${b.sub}</small></div>
+      ${b.rows.map(r=>`<div class="b-row"><span class="item">${r[0]}</span><span class="cost">${r[1]}</span></div>`).join('')}
+      <div class="budget-total"><span>${lang==='tr'?'Toplam':'Total'}</span><span>${b.total}</span></div>
+    </div>`).join('');
+}
 
-renderDay('fri');renderCrew(null);renderBudget();renderSpots();renderChecklist();renderRoute('uk');fetchWeather();countdown();setInterval(countdown,1000);
-document.querySelectorAll('.day-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDay(btn.dataset.day);}));
-document.querySelectorAll('.map-tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.map-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');renderRoute(t.dataset.route);}));
-document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(a.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}));
+// ── LAP TIMES ─────────────────────────────────────────────────
+const LAP_KEY = 'nring_laps_v1';
+function getLaps(){try{return JSON.parse(localStorage.getItem(LAP_KEY)||'[]')}catch{return[]}}
+function saveLaps(laps){try{localStorage.setItem(LAP_KEY,JSON.stringify(laps))}catch(e){}}
+function renderLapTable(){
+  const laps = getLaps();
+  document.getElementById('lapBody').innerHTML = CREW.map((c,i)=>{
+    const lap = laps[i]||{time:'',notes:''};
+    return`<tr>
+      <td>${c.name}</td>
+      <td style="color:var(--text3);font-size:12px">${c.id==='onur'?'Onur\'un arabası':'SLK / Diğer'}</td>
+      <td><input class="lap-input" placeholder="8:32.4" value="${lap.time||''}" onchange="updateLap(${i},'time',this.value)" style="width:70px"></td>
+      <td><input class="lap-input" placeholder="..." value="${lap.notes||''}" onchange="updateLap(${i},'notes',this.value)"></td>
+    </tr>`;
+  }).join('');
+}
+function updateLap(idx,field,val){
+  const laps = getLaps();
+  if(!laps[idx]) laps[idx]={time:'',notes:''};
+  laps[idx][field]=val;
+  saveLaps(laps);
+}
+
+// ── SPOTS ─────────────────────────────────────────────────────
+function renderSpots(){
+  document.getElementById('spotList').innerHTML = SPOTS.map(s=>`
+    <div class="spot-card">
+      <div class="spot-header">
+        <div class="spot-name">${s.name}</div>
+        <div class="spot-km">${s.km}</div>
+      </div>
+      <div class="spot-desc">${lang==='tr'?s.desc:s.desc}</div>
+      <div class="spot-actions">
+        <a class="spot-btn gmaps" href="${s.gmaps}" target="_blank">📍 Google Maps</a>
+        <a class="spot-btn waze" href="${s.waze}" target="_blank">🔵 Waze</a>
+      </div>
+    </div>`).join('');
+}
+
+// ── SCROLL TOP ────────────────────────────────────────────────
+document.getElementById('main-scroll').addEventListener('scroll',function(){
+  document.getElementById('scrollTop').classList.toggle('visible',this.scrollTop>200);
+});
+
+// ── LOGOUT ────────────────────────────────────────────────────
+function doLogout(){
+  localStorage.removeItem('kirpi_auth');
+  if(window.parent&&window.parent.logout){window.parent.logout();}
+  else{window.location.href='index.html';}
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+applyLang();
+renderDay('thu');
+renderCrewPillsAna();
+renderSpots();
+countdown();
+setInterval(countdown,1000);
 </script>
-
-<script>
-
-</script>
-
-<!-- Back button -->
-<div style="position:fixed;bottom:16px;right:16px;z-index:999;">
-  <button onclick="if(window.parent && window.parent.logout){window.parent.logout();}else{window.location.href='index.html';}" style="
-    background:#1E0F06;color:#C9A96E;
-    border:1px solid rgba(201,169,110,0.3);
-    border-radius:10px;padding:9px 14px;
-    font-size:12px;cursor:pointer;
-    font-family:sans-serif;font-weight:500;
-    box-shadow:0 3px 12px rgba(0,0,0,0.4);
-    touch-action:manipulation;
-  ">← Ana Sayfa</button>
-</div>
 </body>
 </html>
