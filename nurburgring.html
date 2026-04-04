@@ -688,7 +688,7 @@ body::before{
       </div>
       <div class="quick-links">
         <a class="quick-btn red" href="https://www.nring.info/nurburgring-track-status" target="_blank" id="ql-status">🏁 Pist Durumu</a>
-        <a class="quick-btn outline" href="https://www.msv-trackdays.co.uk/venues/nurburgring/" target="_blank" id="ql-book">🎟️ MSV Bilet</a>
+        <a class="quick-btn outline" href="https://www.nuerburgring.de/en/fans-info/driving-on-the-ring/touristenfahrten.html" target="_blank" id="ql-book">🎟️ Nürburgring Bilet</a>
       </div>
     </div>
   </div>
@@ -762,7 +762,7 @@ body::before{
         <button class="cl-filter-btn" onclick="filterChecks('mert',this)" id="clf-mert">Mert</button>
         <button class="cl-filter-btn" onclick="filterChecks('cagri',this)" id="clf-cagri">Çağrı</button>
         <button class="cl-filter-btn" onclick="filterChecks('onur',this)" id="clf-onur">Onur</button>
-        <button class="cl-filter-btn" onclick="filterChecks('sergen',this)" id="clf-sergen">Sergen</button>
+        <button class="cl-filter-btn" onclick="filterChecks('tuncay',this)" id="clf-tuncay">Tuncay</button>
       </div>
       <div id="clList"></div>
     </div>
@@ -809,11 +809,11 @@ body::before{
         <div class="info-row"><div class="info-icon">🌐</div><div class="info-text"><b>Web:</b> <a href="https://www.nring.info" target="_blank">nring.info</a></div></div>
       </div>
       <div class="info-card">
-        <div class="info-card-hdr">🎟️ <span id="pi-msv">MSV Track Day</span></div>
-        <div class="info-row"><div class="info-icon">💷</div><div class="info-text"><b id="pi-price-l">Fiyat:</b> <span id="pi-price">~£65–£85 / giriş (MSV üyelerine indirim)</span></div></div>
+        <div class="info-card-hdr">🎟️ <span id="pi-msv">Nürburgring Touristenfahrten</span></div>
+        <div class="info-row"><div class="info-icon">💷</div><div class="info-text"><b id="pi-price-l">Fiyat:</b> <span id="pi-price">~£65–£85 / giriş (erken rezervasyonda indirim)</span></div></div>
         <div class="info-row"><div class="info-icon">📋</div><div class="info-text"><b id="pi-rules-l">Kurallar:</b> <span id="pi-rules">Geçerli ehliyet zorunlu. Roll cage şart değil. Convertible yasak.</span></div></div>
         <div class="info-row"><div class="info-icon">🔒</div><div class="info-text"><b id="pi-closed-l">Kapalı Turluk:</b> <span id="pi-closed">Akşam seansları daha az kalabalık, önerilir.</span></div></div>
-        <div class="info-row"><div class="info-icon">🌐</div><div class="info-text"><b>MSV:</b> <a href="https://www.msv-trackdays.co.uk/venues/nurburgring/" target="_blank">msv-trackdays.co.uk</a></div></div>
+        <div class="info-row"><div class="info-icon">🌐</div><div class="info-text"><b>Ring:</b> <a href="https://www.nuerburgring.de/en/fans-info/driving-on-the-ring/touristenfahrten.html" target="_blank">nring.info</a></div></div>
       </div>
       <div class="info-card">
         <div class="info-card-hdr">⚠️ <span id="pi-rules2">Önemli Kurallar</span></div>
@@ -904,7 +904,7 @@ const T = {
     dates:'11 – 14 Haziran 2026', cdLabel:'Hareket Gününe Kalan',
     days:'Gün', hours:'Saat', mins:'Dakika', secs:'Saniye',
     statsTitle:'Seyahat Özeti', crew:'Kişi', cars:'Araç', days2:'Gün', track:'Pist Uzunluğu',
-    pistStatus:'🏁 Pist Durumu', book:'🎟️ MSV Bilet',
+    pistStatus:'🏁 Pist Durumu', book:'🎟️ Tur Bileti',
     pTitle:'Gezi Programı', eTitle:'Ekip Kadrosu', eHint:'Detay görmek için ekip üyesine tıkla.',
     rTitle:'Rota Haritaları', rtUK:'🇬🇧 UK Konvoyu', rtOnur:'🇩🇪 Onur', rtReturn:'↩️ Dönüş',
     hwTitle:'Hava Durumu', hwForecast:'3 Günlük Tahmin',
@@ -925,7 +925,7 @@ const T = {
     dates:'11 – 14 June 2026', cdLabel:'Until Departure',
     days:'Days', hours:'Hours', mins:'Mins', secs:'Secs',
     statsTitle:'Trip Summary', crew:'People', cars:'Cars', days2:'Days', track:'Track Length',
-    pistStatus:'🏁 Track Status', book:'🎟️ MSV Ticket',
+    pistStatus:'🏁 Track Status', book:'🎟️ Track Ticket',
     pTitle:'Trip Schedule', eTitle:'Crew Roster', eHint:'Tap a crew member to see details.',
     rTitle:'Route Maps', rtUK:'🇬🇧 UK Convoy', rtOnur:'🇩🇪 Onur', rtReturn:'↩️ Return',
     hwTitle:'Weather', hwForecast:'3-Day Forecast',
@@ -1006,16 +1006,16 @@ function toggleLang(){
 
 // ── DATA ──────────────────────────────────────────────────────
 const CREW = [
-  {id:'mert',name:'Mert',initials:'M',role:lang==='tr'?'Organizatör':'Organiser',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'Trip organiser. SLK 200 sürer.',checks:['Pasaport','Sürücü belgesi','Araç sigortası','Kask','Nakit EUR','Şarj aleti','Yedek lastik kontrolü']},
-  {id:'cagri',name:'Çağrı',initials:'Ç',role:'Co-Driver',from:'Thurrock, UK',budget:'~£350',route:'UK Konvoyu — Thurrock\'tan katılım',notes:'Thurrock\'ta konvoya katılır.',checks:['Pasaport','Sürücü belgesi','Kask','Nakit EUR','Earplugs','Su & snack']},
-  {id:'onur',name:'Onur',initials:'O',role:'Driver',from:'Mannheim, DE',budget:'~€200',route:'Mannheim → Nürburgring (Cmt sabahı)',notes:'Almanya\'dan direkt gelir. Cumartesi 05:30 kalkış.',checks:['Sürücü belgesi','Araç sigortası','Yakıt','Nakit EUR','Yedek yağ']},
-  {id:'sergen',name:'Sergen',initials:'S',role:'Co-Driver',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'UK konvoyunda Mert ile.',checks:['Pasaport','Sürücü belgesi','Nakit EUR','Kamera','Güneş kremi']},
+  {id:'mert',name:'Mert',initials:'M',role:'',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'Trip organiser. SLK 200 sürer.',checks:['Pasaport','Sürücü belgesi','Araç sigortası','Kask','Nakit EUR','Şarj aleti','Yedek lastik kontrolü']},
+  {id:'cagri',name:'Çağrı',initials:'Ç',role:'',from:'Thurrock, UK',budget:'~£350',route:'UK Konvoyu — Thurrock\'tan katılım',notes:'Thurrock\'ta konvoya katılır.',checks:['Pasaport','Sürücü belgesi','Kask','Nakit EUR','Earplugs','Su & snack']},
+  {id:'onur',name:'Onur',initials:'O',role:'',from:'Mannheim, DE',budget:'~€200',route:'Mannheim → Nürburgring (Cmt sabahı)',notes:'Almanya\'dan direkt gelir. Cumartesi 05:30 kalkış.',checks:['Sürücü belgesi','Araç sigortası','Yakıt','Nakit EUR','Yedek yağ']},
+  {id:'tuncay',name:'Tuncay',initials:'T',role:'',from:'Basildon, UK',budget:'~£350',route:'UK Konvoyu ile',notes:'UK konvoyunda Mert ile.',checks:['Pasaport','Sürücü belgesi','Nakit EUR','Kamera','Güneş kremi']},
 ];
 
 const ITINERARY = {
   thu:{
     tr:[
-      {time:'05:45',title:'Basildon\'dan hareket',sub:'Mert + Sergen. Thurrock\'a git.',badge:'badge-travel',badgeText:'Yolculuk'},
+      {time:'05:45',title:'Basildon\'dan hareket',sub:'Mert + Tuncay. Thurrock\'a git.',badge:'badge-travel',badgeText:'Yolculuk'},
       {time:'06:30',title:'Thurrock — Çağrı katılıyor',sub:'Convoy toplanır.',badge:'badge-travel',badgeText:'Yolculuk'},
       {time:'09:30',title:'Dover Limanı',sub:'Araçları kontrol et. Erken gidin.',badge:'badge-travel',badgeText:'Feribot'},
       {time:'~11:00',title:'Calais\'e varış',sub:'Fransa. A26 → Belçika rotası.',badge:'badge-travel',badgeText:'Yolculuk'},
@@ -1025,7 +1025,7 @@ const ITINERARY = {
       {time:'19:30',title:'Akşam yemeği — Adenau',sub:'Gasthaus\'ta buluşun.',badge:'badge-food',badgeText:'Yemek'},
     ],
     en:[
-      {time:'05:45',title:'Depart Basildon',sub:'Mert + Sergen. Head to Thurrock.',badge:'badge-travel',badgeText:'Drive'},
+      {time:'05:45',title:'Depart Basildon',sub:'Mert + Tuncay. Head to Thurrock.',badge:'badge-travel',badgeText:'Drive'},
       {time:'06:30',title:'Thurrock — Çağrı joins',sub:'Convoy assembles.',badge:'badge-travel',badgeText:'Drive'},
       {time:'09:30',title:'Dover Port',sub:'Check vehicles. Arrive early.',badge:'badge-travel',badgeText:'Ferry'},
       {time:'~11:00',title:'Arrive Calais',sub:'France. A26 → Belgium route.',badge:'badge-travel',badgeText:'Drive'},
@@ -1038,7 +1038,7 @@ const ITINERARY = {
   fri:{
     tr:[
       {time:'08:00',title:'Kahvaltı',sub:'Otelde veya kasabada.',badge:'badge-food',badgeText:'Yemek'},
-      {time:'09:30',title:'Ring\'e giriş',sub:'MSV Track Day. Biletleri hazırlayın.',badge:'badge-track',badgeText:'Pist'},
+      {time:'09:30',title:'Ring\'e giriş',sub:'Nürburgring Touristenfahrten. Biletleri hazırlayın.',badge:'badge-track',badgeText:'Pist'},
       {time:'10:00',title:'Tanıma Turları',sub:'İlk kez gidenler için zorunlu. Yavaş git, öğren.',badge:'badge-track',badgeText:'Pist'},
       {time:'12:30',title:'Öğle — Pistenklause',sub:'Ring\'in efsane restoranı. Rezervasyon!',badge:'badge-food',badgeText:'Yemek'},
       {time:'14:00',title:'Pist Seansı (Öğleden Sonra)',sub:'Isınmış lastikler, daha iyi grip.',badge:'badge-track',badgeText:'Pist'},
@@ -1047,7 +1047,7 @@ const ITINERARY = {
     ],
     en:[
       {time:'08:00',title:'Breakfast',sub:'At hotel or in town.',badge:'badge-food',badgeText:'Food'},
-      {time:'09:30',title:'Enter the Ring',sub:'MSV Track Day. Have tickets ready.',badge:'badge-track',badgeText:'Track'},
+      {time:'09:30',title:'Enter the Ring',sub:'Nürburgring Touristenfahrten. Have tickets ready.',badge:'badge-track',badgeText:'Track'},
       {time:'10:00',title:'Familiarisation Laps',sub:'Mandatory for first-timers. Slow and learn.',badge:'badge-track',badgeText:'Track'},
       {time:'12:30',title:'Lunch — Pistenklause',sub:'Legendary Ring restaurant. Book ahead!',badge:'badge-food',badgeText:'Food'},
       {time:'14:00',title:'Afternoon Track Session',sub:'Warm tyres, better grip.',badge:'badge-track',badgeText:'Track'},
@@ -1125,26 +1125,26 @@ const ROUTES = {
 const CHECKS = [
   {t:'Pasaport (geçerlilik kontrol et)',w:'ortak'},{t:'Sürücü belgesi',w:'ortak'},{t:'Araç sigortası belgesi',w:'ortak'},
   {t:'EHIC / sağlık sigortası',w:'ortak'},{t:'Nakit EUR (min €100)',w:'ortak'},{t:'Kart (Visa/Mastercard)',w:'ortak'},
-  {t:'MSV Track Day bileti',w:'ortak'},{t:'Otel rezervasyonu',w:'ortak'},{t:'Feribot bileti',w:'ortak'},
+  {t:'Nürburgring tur biletii',w:'ortak'},{t:'Otel rezervasyonu',w:'ortak'},{t:'Feribot bileti',w:'ortak'},
   {t:'Şarj aleti + powerbank',w:'ortak'},{t:'Kask (zorunlu değil ama tavsiye)',w:'ortak'},
   {t:'Araç muayene (MOT geçerli)',w:'mert'},{t:'SLK lastik kontrolü',w:'mert'},{t:'Yedek yağ — SLK',w:'mert'},
   {t:'Araç sigortası (AB kapsam)',w:'cagri'},{t:'Snack & su',w:'cagri'},
   {t:'Almanya araç sigortası',w:'onur'},{t:'Araç yağ + su kontrolü',w:'onur'},{t:'Navigasyon güncelle',w:'onur'},
-  {t:'Kamera & hafıza kartı',w:'sergen'},{t:'Güneş kremi',w:'sergen'},
+  {t:'Kamera & hafıza kartı',w:'tuncay'},{t:'Güneş kremi',w:'tuncay'},
 ];
 
 const BUDGET = [
   {
-    who:'Mert + Sergen',sub:'UK → Almanya → UK',total:'~£720',
-    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt (UK)','£80'],['Yakıt (DE/BE/FR)','£100'],['MSV Track Day (x2 giriş)','£160'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Otopark + diğer','£30']]
+    who:'Mert + Tuncay',sub:'UK → Almanya → UK',total:'~£720',
+    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt (UK)','£80'],['Yakıt (DE/BE/FR)','£100'],['Nürburgring Touristenfahrten (x2 giriş)','£160'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Otopark + diğer','£30']]
   },
   {
     who:'Çağrı',sub:'UK → Almanya → UK',total:'~£680',
-    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt katkı','£60'],['MSV Track Day','£80'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Diğer','£40'],['Kask kiralama (opsiyonel)','£30']]
+    rows:[['Feribot (gidiş-dönüş)','£150'],['Yakıt katkı','£60'],['Nürburgring Touristenfahrten','£80'],['Otel (3 gece, paylaşım)','£120'],['Yemek & içecek','£80'],['Diğer','£40'],['Kask kiralama (opsiyonel)','£30']]
   },
   {
     who:'Onur',sub:'Mannheim → Nürburgring',total:'~€350',
-    rows:[['Yakıt (gidiş-dönüş)','€60'],['MSV Track Day','€90'],['Otel (1 gece)','€80'],['Yemek & içecek','€80'],['Diğer','€40']]
+    rows:[['Yakıt (gidiş-dönüş)','€60'],['Nürburgring Touristenfahrten','€90'],['Otel (1 gece)','€80'],['Yemek & içecek','€80'],['Diğer','€40']]
   }
 ];
 
@@ -1197,7 +1197,10 @@ function closeMenu() {
 // ── COUNTDOWN ─────────────────────────────────────────────────
 function countdown() {
   const diff = new Date('2026-06-11T05:45:00') - new Date();
-  if(diff<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='0');return;}
+  if(diff<=0){
+    document.getElementById('countdown-wrap').innerHTML = '<div style="text-align:center;padding:16px 0;font-family:\'Barlow Condensed\',sans-serif;font-size:22px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;">' + (lang==='tr'?'🏎️ İyi Gazlamalar!':'🏎️ Have a Good One!') + '</div>';
+    return;
+  }
   document.getElementById('cd-d').textContent = Math.floor(diff/86400000);
   document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
   document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
@@ -1219,13 +1222,13 @@ function renderCrew(id){
     <div class="crew-card${c.id===id?' active':''}" onclick="renderCrew(this.dataset.id==='${id}'?null:'${c.id}')" data-id="${c.id}">
       <div class="avatar">${c.initials}</div>
       <div class="crew-name">${c.name}</div>
-      <div class="crew-role">${c.role} · ${c.from}</div>
+      <div class="crew-role">${c.from}</div>
     </div>`).join('');
   if(id){
     const c = CREW.find(x=>x.id===id);
     document.getElementById('crewDetail').innerHTML = `
       <div class="crew-detail">
-        <div class="crew-detail-name">${c.name} <span style="color:var(--text3);font-size:14px;font-weight:400;text-transform:none">— ${c.role}</span></div>
+        <div class="crew-detail-name">${c.name}</div>
         <table class="crew-tbl">
           <tr><td>${lang==='tr'?'Nereden':'From'}</td><td>${c.from}</td></tr>
           <tr><td>${lang==='tr'?'Bütçe':'Budget'}</td><td style="color:var(--red);font-weight:600">${c.budget}</td></tr>
