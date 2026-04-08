@@ -1097,20 +1097,7 @@ if('serviceWorker' in navigator) {
     <div class="food-item"><div class="food-name">Unicum</div><div class="food-desc">Otlu likör. Harika hediye.</div></div>
   </div>
 </div>
-<div style="margin:16px 14px 24px;padding:0;">
-  <button onclick="doLogout()" style="
-    width:100%;padding:15px;
-    background:transparent;
-    border:1px solid rgba(122,28,28,0.3);
-    border-radius:12px;
-    color:#7A1C1C;font-size:14px;
-    font-family:'Outfit',sans-serif;font-weight:500;
-    cursor:pointer;letter-spacing:0.3px;
-    transition:all 0.2s;
-    -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
-  ">🚪 Çıkış Yap</button>
-</div>
+<div style="margin:16px 14px 24px;padding:0;"></div>
 
 </div><!-- /tab-info -->
 
@@ -1237,6 +1224,7 @@ if('serviceWorker' in navigator) {
   <button class="nav-btn" id="nav-map" onclick="switchTab('map')"><span class="nav-icon">🗺️</span>Harita</button>
   <button class="nav-btn" id="nav-extras" onclick="switchTab('extras')"><span class="nav-icon">✨</span>Ekstra</button>
   <button class="nav-btn" id="nav-info" onclick="switchTab('info')"><span class="nav-icon">ℹ️</span>Bilgi</button>
+  <button class="nav-btn" onclick="doLogout()" style="color:rgba(122,28,28,0.7);"><span class="nav-icon">🚪</span>Çıkış</button>
 </div>
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
