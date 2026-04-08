@@ -1810,6 +1810,15 @@ setInterval(updateCountdown, 1000);
 
 window.initMapCallback = initMap;
 restoreState();
+
+function doLogout() {
+  localStorage.removeItem('kirpi_auth');
+  if(window.parent && window.parent.logout) {
+    window.parent.logout();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlY9iRmb2y6lf-tpkmN4OBTib0pPxgBRI&callback=initMapCallback&loading=async" async defer></script>
