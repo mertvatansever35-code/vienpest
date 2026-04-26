@@ -491,11 +491,11 @@
     pointer-events:all;
   }
 
-  .tab-content{display:none;padding-bottom:20px;min-height:100svh;}
+  .tab-content{display:none;padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 100px);min-height:100svh;}
   .tab-content.active{display:block;animation:fadeIn 0.2s ease;}
 
   .scroll-top{
-    position:fixed;bottom:72px;right:14px;
+    position:fixed;bottom:calc(env(safe-area-inset-bottom, 0px) + 84px);right:20px;
     width:38px;height:38px;
     background:var(--brown);color:var(--gold);
     border-radius:50%;display:flex;align-items:center;justify-content:center;
@@ -634,7 +634,42 @@
   .phrase-local{font-size:14px;font-weight:600;color:var(--brown);text-align:right;}
   .phrase-phonetic{font-size:10.5px;color:#AAA;font-style:italic;margin-top:1px;text-align:right;}
 
-  /* ── EMERGENCY ── */
+  /* ── MEMORY MODE ── */
+  .memory-banner{
+    background:var(--brown);
+    background-image:var(--grain);
+    padding:14px 20px;
+    border-bottom:1px solid rgba(201,169,110,0.15);
+  }
+  .memory-banner-inner{
+    display:flex;align-items:center;gap:12px;
+    background:rgba(201,169,110,0.08);
+    border:1px solid rgba(201,169,110,0.2);
+    border-radius:12px;padding:12px 14px;
+  }
+  .memory-icon{font-size:24px;}
+  .memory-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:16px;font-weight:700;color:var(--gold);
+  }
+  .memory-sub{font-size:11px;color:rgba(201,169,110,0.5);margin-top:2px;font-style:italic;}
+  /* Anı notları */
+  .memory-note{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
+  .memory-note-hdr{background:var(--ivory);padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--brown);border-bottom:1px solid rgba(201,169,110,0.12);}
+  .memory-note-body{padding:14px 15px;}
+  .memory-note-text{
+    width:100%;min-height:100px;
+    background:transparent;border:none;
+    font-family:'Cormorant Garamond',serif;font-size:16px;
+    color:var(--brown);line-height:1.8;resize:none;
+    outline:none;font-style:italic;
+  }
+  .memory-note-text::placeholder{color:rgba(44,26,14,0.3);}
+  .memory-note-saved{font-size:11px;color:rgba(201,169,110,0.5);text-align:right;margin-top:4px;font-family:'Outfit',sans-serif;}
+
+  /* Day cards collapsed by default in memory mode */
+  .day-card .day-body{display:none;}
+  .day-card.open .day-body{display:block;}
   .emrg-card{margin:6px 14px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);border:1px solid rgba(201,169,110,0.1);}
   .emrg-header{background:linear-gradient(135deg,#6B1515,#8B2020);color:white;padding:11px 15px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;}
   .emrg-item{display:flex;align-items:center;padding:11px 15px;border-bottom:1px solid rgba(201,169,110,0.07);gap:11px;}
@@ -675,22 +710,22 @@ if('serviceWorker' in navigator) {
   </div>
 </div>
 
-<div class="countdown" id="countdown-wrap">
-  <div class="countdown-boxes" id="countdown-boxes">
-    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Gün</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Saat</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Dakika</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Saniye</div></div>
+<div class="memory-banner">
+  <div class="memory-banner-inner">
+    <div class="memory-icon">🌹</div>
+    <div>
+      <div class="memory-title">Hatıra Modu</div>
+      <div class="memory-sub">18 – 23 Nisan 2026 · Viyana & Budapeşte</div>
+    </div>
   </div>
-  <div class="cd-msg" id="cd-msg">✈️ Viyana'ya kadar kalan süre</div>
 </div>
 
 <div class="progress-wrap">
   <div class="progress-label">
-    <span>İlerleme</span>
-    <span id="progress-text">0 / 6 gün</span>
+    <span>Tamamlanan Günler</span>
+    <span id="progress-text">6 / 6 gün</span>
   </div>
-  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:100%"></div></div>
 </div>
 
 <!-- ══ TAB: PLAN ══ -->
@@ -703,7 +738,7 @@ if('serviceWorker' in navigator) {
 </div>
 
 <!-- DAY 1 -->
-<div class="day-card open" id="day-1">
+<div class="day-card" id="day-1">
   <div class="day-header" onclick="toggleDay(1)">
     <div class="day-check" id="check-1" onclick="markDay(event,1)">&#10003;</div>
     <div class="day-header-info">
@@ -1295,6 +1330,10 @@ if('serviceWorker' in navigator) {
       <div class="fab-item-label">Ekstra</div>
       <div class="fab-item-icon">✨</div>
     </button>
+    <button class="fab-item" id="fab-memories" onclick="switchTab('memories');closeFab()">
+      <div class="fab-item-label">Anılar</div>
+      <div class="fab-item-icon">📸</div>
+    </button>
     <button class="fab-item" id="fab-map" onclick="switchTab('map');closeFab()">
       <div class="fab-item-label">Harita</div>
       <div class="fab-item-icon">🗺️</div>
@@ -1308,6 +1347,36 @@ if('serviceWorker' in navigator) {
 </div>
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ══ TAB: ANILAR ══ -->
+<div class="tab-content" id="tab-memories">
+<div class="top-gap"></div>
+
+<div class="memory-note">
+  <div class="memory-note-hdr">✍️ Seyahat Notları</div>
+  <div class="memory-note-body">
+    <textarea class="memory-note-text" id="memoryNoteText" placeholder="Bu seyahatin sana bıraktıkları..." oninput="saveNote()"></textarea>
+    <div class="memory-note-saved" id="noteSaved"></div>
+  </div>
+</div>
+
+<div class="photo-section">
+  <div class="photo-header">
+    📸 Fotoğraflar
+    <span style="font-size:12px;color:var(--soft);font-weight:400;font-family:'Outfit',sans-serif;" id="photoCount">0 fotoğraf</span>
+  </div>
+  <div class="photo-grid" id="photoGrid">
+    <div class="photo-add" onclick="document.getElementById('photoInput').click()">
+      <div class="photo-add-icon">+</div>
+      <div class="photo-add-label">Ekle</div>
+    </div>
+  </div>
+  <input type="file" class="photo-input" id="photoInput" accept="image/*" multiple onchange="addPhotos(this)">
+</div>
+
+<div class="section-gap"></div>
+</div><!-- /tab-memories -->
+
 
 <script>
 // ── STATE ──────────────────────────────────────────────────────
@@ -1357,6 +1426,7 @@ function switchTab(name) {
   document.querySelectorAll('.fab-item').forEach(b=>b.classList.remove('active'));
   const fabEl = document.getElementById('fab-'+name);
   if(fabEl) fabEl.classList.add('active');
+  if(name==='memories') { loadMemories(); }
   if(name==='map') {
     if(!mapInitialized) {
       initMap();
@@ -1365,6 +1435,20 @@ function switchTab(name) {
     }
   }
   if(name==='extras' && !extrasLoaded) { initExtras(); extrasLoaded=true; }
+}
+
+// ── MEMORIES ──────────────────────────────────────────────────
+const NOTE_KEY = 'viyana_note_v1';
+function loadMemories() {
+  const note = localStorage.getItem(NOTE_KEY)||'';
+  const el = document.getElementById('memoryNoteText');
+  if(el) el.value = note;
+}
+function saveNote() {
+  localStorage.setItem(NOTE_KEY, document.getElementById('memoryNoteText').value);
+  const s = document.getElementById('noteSaved');
+  s.textContent = 'Kaydedildi ✓';
+  setTimeout(()=>s.textContent='', 2000);
 }
 
 // ── FAB ────────────────────────────────────────────────────────
@@ -1857,11 +1941,11 @@ let mapIsFullscreen = false;
 function toggleFullscreen() {
   const mapEl = document.getElementById('map');
   const exitBtn = document.getElementById('map-exit-btn');
-  const nav = document.querySelector('.bottom-nav');
+  const fab = document.querySelector('.fab-wrap');
   mapIsFullscreen = !mapIsFullscreen;
   mapEl.classList.toggle('fullscreen', mapIsFullscreen);
   exitBtn.classList.toggle('visible', mapIsFullscreen);
-  nav.style.display = mapIsFullscreen ? 'none' : '';
+  if(fab) fab.style.display = mapIsFullscreen ? 'none' : '';
   document.body.style.overflow = mapIsFullscreen ? 'hidden' : '';
   setTimeout(() => { if(map) google.maps.event.trigger(map, 'resize'); }, 300);
 }
