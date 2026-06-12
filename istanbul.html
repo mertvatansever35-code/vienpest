@@ -6,418 +6,556 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>İstanbul — Mayıs 2026</title>
+<title>İzmir & İstanbul — Mayıs-Haziran 2026</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --night:#0B1120;--night2:#101828;--night3:#172033;
-  --card:#131D2E;--card2:#182438;
-  --border:rgba(210,175,120,0.08);--border2:rgba(210,175,120,0.14);
-  --amber:#D4A54A;--amber2:#E8C06A;--amber3:rgba(212,165,74,0.12);
-  --rose:#C06868;--rose2:rgba(192,104,104,0.12);
-  --text:#E8E0D4;--text2:#9A8E7C;--text3:#5C5346;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  /* Ege palette */
+  --sky:#E8F4F8;--sea:#0891B2;--sea2:#06748E;--sand:#F5EDE0;--sand2:#EDE3D0;
+  --terracotta:#C2714F;--olive:#5C7A50;
+  /* Istanbul palette */
+  --night:#0B1120;--amber:#D4A54A;--amber2:#E8C06A;--amber3:rgba(212,165,74,0.12);
+  /* Shared */
+  --card-ege:#FFFFFF;--card-ist:#131D2E;
+  --text-dark:#1A1A1A;--text-mid:#5A5248;--text-light:#8A8070;
+  --text-ist:#E8E0D4;--text-ist2:#9A8E7C;
+  --border-ege:rgba(8,145,178,0.12);--border-ist:rgba(212,165,74,0.12);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes moonGlow{0%,100%{filter:drop-shadow(0 0 12px rgba(212,165,74,0.3))}50%{filter:drop-shadow(0 0 24px rgba(212,165,74,0.55))}}
-@keyframes gentlePulse{0%,100%{opacity:0.6}50%{opacity:1}}
-@keyframes starTwinkle{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.8;transform:scale(1.3)}}
+@keyframes wave{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(1deg)}75%{transform:translateY(2px) rotate(-1deg)}}
+@keyframes moonGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(212,165,74,0.25))}50%{filter:drop-shadow(0 0 22px rgba(212,165,74,0.5))}}
+@keyframes drivePulse{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{
-  background:var(--night);
-  background-image:var(--grain);
-  color:var(--text);
-  font-family:'Outfit',sans-serif;
+body{
+  background:var(--sky);background-image:var(--grain);
+  color:var(--text-dark);font-family:'Outfit',sans-serif;
   font-size:15px;line-height:1.6;
 }
 
-/* ── GEOMETRIC PATTERN OVERLAY ── */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  opacity:0.018;
-  background-image:
-    repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 60deg, rgba(212,165,74,0.5) 60deg 120deg, transparent 120deg 180deg);
-  background-size:60px 60px;
-}
-
-/* ── HEADER ── */
-.header{
+/* ── EGE HEADER ── */
+.header-ege{
   position:relative;overflow:hidden;
-  background:linear-gradient(180deg,#060C18 0%,var(--night) 100%);
+  background:linear-gradient(180deg,#D4EFFA 0%,var(--sky) 100%);
   padding:20px 24px 28px;
-  padding-top:max(calc(env(safe-area-inset-top,0px)+18px),28px);
+  padding-top:max(calc(env(safe-area-inset-top,0px)+16px),26px);
   text-align:center;
-  border-bottom:1px solid var(--border2);
+  border-bottom:1px solid var(--border-ege);
 }
-.header::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 70% at 50% -5%,rgba(212,165,74,0.1) 0%,transparent 65%);
+.header-ege::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--sea),var(--terracotta),var(--sea));opacity:0.3;
 }
-/* Decorative stars */
-.star{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--amber);animation:starTwinkle 3s ease infinite;}
-.star:nth-child(1){top:15%;left:12%;animation-delay:0s;opacity:0.4;}
-.star:nth-child(2){top:22%;left:82%;animation-delay:1.2s;opacity:0.3;width:2px;height:2px;}
-.star:nth-child(3){top:8%;left:55%;animation-delay:0.6s;opacity:0.5;width:2px;height:2px;}
-.star:nth-child(4){top:30%;left:28%;animation-delay:1.8s;opacity:0.25;}
-.star:nth-child(5){top:18%;left:68%;animation-delay:2.4s;opacity:0.35;width:2px;height:2px;}
-
-.h-moon{
-  font-size:40px;display:block;margin-bottom:8px;
-  position:relative;z-index:1;
-  animation:moonGlow 4s ease infinite;
+.h-wave{font-size:28px;display:block;margin-bottom:6px;animation:wave 3s ease infinite;}
+.h-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(32px,9vw,48px);font-weight:900;
+  color:var(--sea2);line-height:0.95;
+  animation:fadeUp 0.5s ease 0.1s both;
 }
-.h-city{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(42px,12vw,60px);font-weight:700;
-  color:var(--amber);line-height:0.95;
-  position:relative;z-index:1;
-  text-shadow:0 2px 20px rgba(212,165,74,0.2);
-  animation:fadeUp 0.6s ease 0.1s both;
+.h-title span{color:var(--terracotta);}
+.h-amp{
+  font-family:'Fraunces',serif;font-size:clamp(22px,6vw,32px);
+  font-weight:400;font-style:italic;color:var(--text-light);
+  margin:4px 0;display:block;
+  animation:fadeUp 0.5s ease 0.15s both;
 }
 .h-sub{
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;font-style:italic;
-  color:var(--text2);margin-top:8px;
-  position:relative;z-index:1;
-  animation:fadeUp 0.6s ease 0.25s both;
+  font-family:'Fraunces',serif;font-size:14px;font-style:italic;
+  color:var(--text-light);margin-top:6px;
+  animation:fadeUp 0.5s ease 0.25s both;
 }
-.h-dates{
-  display:inline-flex;align-items:center;gap:7px;
-  margin-top:14px;
-  background:var(--amber3);
-  border:1px solid rgba(212,165,74,0.2);
-  border-radius:22px;padding:5px 16px;
-  font-size:11px;font-weight:500;color:var(--amber);
-  letter-spacing:1.5px;text-transform:uppercase;
-  position:relative;z-index:1;
-  animation:fadeUp 0.6s ease 0.35s both;
+.h-badge{
+  display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  background:rgba(8,145,178,0.08);border:1px solid rgba(8,145,178,0.2);
+  border-radius:22px;padding:5px 15px;
+  font-size:11px;font-weight:500;color:var(--sea);letter-spacing:1px;
+  animation:fadeUp 0.5s ease 0.35s both;
 }
 
 /* ── COUNTDOWN ── */
-.cd-section{
-  padding:22px 18px;
-  background:var(--night2);
-  border-bottom:1px solid var(--border);
-}
-.cd-label{
-  font-size:10px;font-weight:600;letter-spacing:3.5px;
-  color:var(--text3);text-transform:uppercase;
-  margin-bottom:12px;text-align:center;
-}
-.cd-done{
-  text-align:center;padding:8px 0;
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;color:var(--amber);
-}
-.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.cd-wrap{padding:20px 18px;background:white;border-bottom:1px solid var(--border-ege);}
+.cd-lbl{font-size:10px;font-weight:600;letter-spacing:3px;color:var(--text-light);text-transform:uppercase;margin-bottom:12px;text-align:center;}
+.cd-done{text-align:center;font-family:'Fraunces',serif;font-size:20px;color:var(--sea);padding:8px 0;}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
 .cd-box{
-  background:var(--card);
-  border:1px solid var(--border2);
+  background:var(--sky);border:1px solid var(--border-ege);
   border-radius:12px;padding:14px 6px;text-align:center;
   position:relative;overflow:hidden;
 }
-.cd-box::before{
-  content:'';position:absolute;top:0;left:15%;right:15%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,165,74,0.4),transparent);
-}
-.cd-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;font-weight:700;
-  color:var(--amber);line-height:1;
-}
-.cd-lbl{font-size:8.5px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:2px;}
+.cd-box::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1.5px;background:linear-gradient(90deg,transparent,var(--sea),transparent);opacity:0.4;}
+.cd-num{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--sea);line-height:1;}
+.cd-unit{font-size:8.5px;color:var(--text-light);margin-top:4px;text-transform:uppercase;letter-spacing:2px;}
 
-/* ── SECTIONS ── */
-.sec{padding:22px 18px;border-bottom:1px solid var(--border);position:relative;z-index:1;}
-.sec:last-of-type{border-bottom:none;}
+/* ── SECTIONS (EGE STYLE) ── */
+.sec-ege{padding:22px 18px;border-bottom:1px solid var(--border-ege);background:white;}
 .sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
-.sec-flag{width:3px;height:22px;background:var(--amber);border-radius:2px;flex-shrink:0;}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);}
-.sec-title em{color:var(--amber);font-style:normal;}
+.sec-flag-ege{width:3px;height:22px;background:var(--sea);border-radius:2px;flex-shrink:0;}
+.sec-flag-ist{width:3px;height:22px;background:var(--amber);border-radius:2px;flex-shrink:0;}
+.sec-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;line-height:1.1;}
+.sec-title em{font-style:normal;}
+.sec-title-ege{color:var(--text-dark);}
+.sec-title-ege em{color:var(--sea);}
+.sec-title-ist{color:var(--text-ist);}
+.sec-title-ist em{color:var(--amber);}
 
-/* ── FLIGHT CARDS (boarding pass style) ── */
+/* ── FLIGHT CARD ── */
 .flight{
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:16px;padding:18px 18px 14px;
-  margin-bottom:12px;position:relative;overflow:hidden;
+  border-radius:16px;padding:18px;margin-bottom:12px;
+  position:relative;overflow:hidden;
   animation:fadeUp 0.5s ease both;
 }
 .flight:last-child{margin-bottom:0;}
-.flight::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:linear-gradient(180deg,var(--amber),var(--amber2));
-}
+.flight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
+.flight-ege{background:var(--sky);border:1px solid var(--border-ege);}
+.flight-ege::before{background:linear-gradient(180deg,var(--sea),var(--sea2));}
+.flight-ist{background:var(--card-ist);border:1px solid var(--border-ist);}
+.flight-ist::before{background:linear-gradient(180deg,var(--amber),var(--amber2));}
 /* Perforated line */
 .flight::after{
-  content:'';position:absolute;right:70px;top:0;bottom:0;width:1px;
-  background:repeating-linear-gradient(180deg,transparent 0,transparent 6px,var(--border2) 6px,var(--border2) 12px);
+  content:'';position:absolute;right:72px;top:0;bottom:0;width:1px;
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 5px,rgba(128,128,128,0.15) 5px,rgba(128,128,128,0.15) 10px);
 }
-.fl-type{
-  font-size:10px;font-weight:600;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--amber);
-  margin-bottom:12px;padding-left:6px;
-}
-.fl-row{display:flex;align-items:center;gap:12px;padding-left:6px;}
-.fl-airport{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--text);line-height:1;}
-.fl-time{font-size:14px;color:var(--text2);margin-top:2px;font-weight:500;}
-.fl-city{font-size:10px;color:var(--text3);margin-top:1px;letter-spacing:0.5px;}
+.fl-type{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;padding-left:6px;}
+.fl-type-ege{color:var(--sea);}
+.fl-type-ist{color:var(--amber);}
+.fl-row{display:flex;align-items:center;gap:10px;padding-left:6px;}
+.fl-airport{font-family:'Fraunces',serif;font-size:32px;font-weight:900;line-height:1;}
+.fl-airport-ege{color:var(--text-dark);}
+.fl-airport-ist{color:var(--text-ist);}
+.fl-time{font-size:13px;margin-top:3px;font-weight:500;}
+.fl-time-ege{color:var(--text-mid);}
+.fl-time-ist{color:var(--text-ist2);}
+.fl-city{font-size:10px;margin-top:1px;letter-spacing:0.5px;}
+.fl-city-ege{color:var(--text-light);}
+.fl-city-ist{color:rgba(154,142,124,0.6);}
 .fl-arrow{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 6px;}
-.fl-line{width:100%;height:1px;background:linear-gradient(90deg,var(--amber),rgba(212,165,74,0.2));position:relative;}
-.fl-line::after{content:'✈';position:absolute;right:-2px;top:-9px;font-size:13px;color:var(--amber);}
-.fl-dur{font-size:10px;color:var(--text3);letter-spacing:0.5px;}
-.fl-meta{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-top:12px;padding-top:10px;
-  border-top:1px solid var(--border);padding-left:6px;
+.fl-line{width:100%;height:1px;position:relative;}
+.fl-line-ege{background:linear-gradient(90deg,var(--sea),rgba(8,145,178,0.2));}
+.fl-line-ist{background:linear-gradient(90deg,var(--amber),rgba(212,165,74,0.2));}
+.fl-line::after{content:'✈';position:absolute;right:-2px;top:-9px;font-size:12px;}
+.fl-line-ege::after{color:var(--sea);}
+.fl-line-ist::after{color:var(--amber);}
+.fl-dur{font-size:10px;letter-spacing:0.5px;}
+.fl-dur-ege{color:var(--text-light);}
+.fl-dur-ist{color:rgba(154,142,124,0.5);}
+.fl-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;padding-left:6px;}
+.fl-meta-ege{border-top:1px solid var(--border-ege);}
+.fl-meta-ist{border-top:1px solid var(--border-ist);}
+.fl-date{font-size:12px;}
+.fl-date-ege{color:var(--text-mid);}
+.fl-date-ist{color:var(--text-ist2);}
+.fl-no{border-radius:6px;padding:3px 10px;font-weight:600;font-size:11px;letter-spacing:1px;}
+.fl-no-ege{background:rgba(8,145,178,0.08);border:1px solid rgba(8,145,178,0.2);color:var(--sea);}
+.fl-no-ist{background:var(--amber3);border:1px solid rgba(212,165,74,0.2);color:var(--amber);}
+
+/* ── ROAD TRIP DIVIDER ── */
+.road-divider{
+  background:linear-gradient(180deg,var(--sand) 0%,var(--night) 100%);
+  padding:32px 18px;text-align:center;
+  border-bottom:1px solid var(--border-ist);
+  position:relative;overflow:hidden;
 }
-.fl-date{font-size:12px;color:var(--text2);}
-.fl-no{
-  background:var(--amber3);border:1px solid rgba(212,165,74,0.2);
-  border-radius:6px;padding:3px 10px;
-  color:var(--amber);font-weight:600;font-size:11px;
-  letter-spacing:1px;
+.road-divider::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(255,255,255,0.02) 38px,rgba(255,255,255,0.02) 40px);
+}
+.road-icon{font-size:36px;display:block;margin-bottom:8px;animation:drivePulse 2s ease infinite;}
+.road-title{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--terracotta);line-height:1.1;}
+.road-sub{font-size:13px;color:var(--text-light);margin-top:6px;font-style:italic;font-family:'Fraunces',serif;}
+.road-date{
+  display:inline-block;margin-top:10px;
+  padding:4px 14px;border-radius:20px;
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  background:rgba(194,113,79,0.12);border:1px solid rgba(194,113,79,0.2);color:var(--terracotta);
 }
 
-/* ── PROGRAM ── */
-.day-divider{
-  font-size:9px;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;color:var(--text3);
-  margin:18px 0 12px;padding-bottom:8px;
-  border-bottom:1px solid var(--border);
-}
-.day-divider:first-child{margin-top:0;}
-.prog{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);}
+/* ── ISTANBUL SECTIONS ── */
+.sec-ist{padding:22px 18px;border-bottom:1px solid var(--border-ist);background:var(--night);color:var(--text-ist);}
+.sec-ist .sec-hdr{margin-bottom:18px;}
+
+/* ── PROGRAM ITEMS ── */
+.day-div{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:18px 0 12px;padding-bottom:8px;}
+.day-div:first-child{margin-top:0;}
+.day-div-ege{color:var(--text-light);border-bottom:1px solid var(--border-ege);}
+.day-div-ist{color:rgba(154,142,124,0.5);border-bottom:1px solid var(--border-ist);}
+.prog{display:flex;gap:14px;padding:11px 0;}
+.prog-ege{border-bottom:1px solid var(--border-ege);}
+.prog-ist{border-bottom:1px solid var(--border-ist);}
 .prog:last-child{border-bottom:none;}
-.prog-time{
-  font-size:11px;font-weight:600;color:var(--amber);
-  min-width:52px;padding-top:2px;flex-shrink:0;
-  letter-spacing:0.5px;font-family:'Outfit',sans-serif;
-}
-.prog-dot{
-  width:8px;height:8px;border-radius:50%;
-  border:1.5px solid rgba(212,165,74,0.35);
-  margin-top:5px;flex-shrink:0;
-  background:var(--night);
-}
+.prog-time{font-size:11px;font-weight:600;min-width:52px;padding-top:2px;flex-shrink:0;letter-spacing:0.5px;}
+.prog-time-ege{color:var(--sea);}
+.prog-time-ist{color:var(--amber);}
+.prog-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;background:transparent;}
+.prog-dot-ege{border:1.5px solid rgba(8,145,178,0.3);}
+.prog-dot-ist{border:1.5px solid rgba(212,165,74,0.3);}
 .prog-body{flex:1;}
-.prog-title{font-size:14.5px;font-weight:500;color:var(--text);line-height:1.3;}
-.prog-sub{font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5;}
-.prog-tag{
-  display:inline-block;margin-top:6px;
-  padding:2px 9px;border-radius:4px;
-  font-size:10px;font-weight:600;letter-spacing:0.5px;
-}
-.tag-flight{background:var(--amber3);color:var(--amber);}
-.tag-food{background:rgba(192,104,104,0.12);color:var(--rose);}
-.tag-explore{background:rgba(100,140,180,0.12);color:#7EB0D4;}
+.prog-title{font-size:14.5px;font-weight:500;line-height:1.3;}
+.prog-title-ege{color:var(--text-dark);}
+.prog-title-ist{color:var(--text-ist);}
+.prog-sub{font-size:12px;margin-top:2px;line-height:1.5;}
+.prog-sub-ege{color:var(--text-mid);}
+.prog-sub-ist{color:var(--text-ist2);}
+.prog-tag{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:0.5px;}
+.tag-flight-ege{background:rgba(8,145,178,0.08);color:var(--sea);}
+.tag-food-ege{background:rgba(194,113,79,0.1);color:var(--terracotta);}
+.tag-explore-ege{background:rgba(92,122,80,0.1);color:var(--olive);}
+.tag-flight-ist{background:var(--amber3);color:var(--amber);}
+.tag-food-ist{background:rgba(212,165,74,0.08);color:var(--amber2);}
+.tag-explore-ist{background:rgba(100,140,180,0.1);color:#7EB0D4;}
+.tag-drive{background:rgba(194,113,79,0.1);color:var(--terracotta);}
 
 /* ── NOTE ── */
-.note-wrap{
-  background:var(--card);border:1px solid var(--border2);
-  border-radius:16px;overflow:hidden;
-}
-.note-hdr{
-  background:var(--card2);padding:12px 16px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;font-weight:700;color:var(--text2);
-  border-bottom:1px solid var(--border);
-  letter-spacing:0.5px;
-}
+.note-card-ege{background:var(--card-ege);border:1px solid var(--border-ege);border-radius:16px;overflow:hidden;}
+.note-hdr-ege{background:var(--sand);padding:12px 16px;font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--text-mid);border-bottom:1px solid var(--border-ege);}
+.note-card-ist{background:var(--card-ist);border:1px solid var(--border-ist);border-radius:16px;overflow:hidden;}
+.note-hdr-ist{background:rgba(24,36,56,1);padding:12px 16px;font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--text-ist2);border-bottom:1px solid var(--border-ist);}
 .note-body{padding:16px 16px 12px;}
-.note-text{
-  width:100%;min-height:100px;background:transparent;border:none;
-  font-family:'Cormorant Garamond',serif;font-size:17px;
-  color:var(--text);line-height:1.9;resize:none;outline:none;
-  font-style:italic;
-}
-.note-text::placeholder{color:var(--text3);}
-.note-saved{
-  font-size:11px;color:var(--amber);
-  text-align:right;margin-top:6px;
-  opacity:0;transition:opacity 0.3s;
-}
+.note-text{width:100%;min-height:80px;background:transparent;border:none;font-family:'Fraunces',serif;font-size:16px;line-height:1.9;resize:none;outline:none;font-style:italic;}
+.note-text-ege{color:var(--text-dark);}
+.note-text-ege::placeholder{color:var(--text-light);}
+.note-text-ist{color:var(--text-ist);}
+.note-text-ist::placeholder{color:rgba(154,142,124,0.4);}
+.note-saved{font-size:11px;text-align:right;margin-top:6px;opacity:0;transition:opacity 0.3s;}
+.note-saved-ege{color:var(--sea);}
+.note-saved-ist{color:var(--amber);}
 .note-saved.show{opacity:1;}
 
 /* ── FAB ── */
-.fab-wrap{
-  position:fixed;
-  bottom:calc(env(safe-area-inset-bottom,0px)+22px);
-  right:20px;z-index:200;
-  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
-}
-.fab-items{
-  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
-  pointer-events:none;opacity:0;transform:translateY(10px);
-  transition:all 0.25s cubic-bezier(.4,0,.2,1);
-}
+.fab-wrap{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+22px);right:20px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.fab-items{display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;opacity:0;transform:translateY(10px);transition:all 0.25s cubic-bezier(.4,0,.2,1);}
 .fab-items.open{pointer-events:all;opacity:1;transform:none;}
-.fab-item{
-  display:flex;align-items:center;gap:10px;
-  background:none;border:none;cursor:pointer;
-  touch-action:manipulation;padding:0;
-}
-.fab-lbl{
-  background:var(--card);border:1px solid var(--border2);
-  border-radius:20px;padding:7px 14px;
-  font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
-  color:var(--amber);box-shadow:0 6px 20px rgba(0,0,0,0.6);
-  white-space:nowrap;letter-spacing:0.3px;
-}
-.fab-ico{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--card);border:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:19px;flex-shrink:0;
-  box-shadow:0 6px 20px rgba(0,0,0,0.6);
-  transition:transform 0.15s;
-}
+.fab-item{display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;touch-action:manipulation;padding:0;}
+.fab-lbl{background:var(--night);border:1px solid var(--border-ist);border-radius:20px;padding:7px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--amber);box-shadow:0 6px 20px rgba(0,0,0,0.5);white-space:nowrap;}
+.fab-ico{width:44px;height:44px;border-radius:50%;background:var(--night);border:1px solid var(--border-ist);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,0.5);}
 .fab-item:active .fab-ico{transform:scale(0.9);}
-.fab-item.exit .fab-lbl{color:var(--rose);border-color:rgba(192,104,104,0.2);}
-.fab-btn{
-  width:54px;height:54px;border-radius:50%;
-  background:linear-gradient(135deg,var(--amber),var(--amber2));
-  border:none;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;touch-action:manipulation;
-  box-shadow:0 4px 22px rgba(212,165,74,0.35);
-  transition:all 0.25s;font-size:20px;color:var(--night);
-}
-.fab-btn.open{transform:rotate(45deg);box-shadow:0 4px 28px rgba(212,165,74,0.5);}
-.fab-bg{
-  position:fixed;inset:0;z-index:150;
-  background:rgba(0,0,0,0);pointer-events:none;
-  transition:background 0.25s;
-}
+.fab-item.exit .fab-lbl{color:#C06868;border-color:rgba(192,104,104,0.2);}
+.fab-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--sea),var(--sea2));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;box-shadow:0 4px 22px rgba(8,145,178,0.35);transition:all 0.25s;font-size:20px;color:white;}
+.fab-btn.open{transform:rotate(45deg);box-shadow:0 4px 28px rgba(8,145,178,0.5);}
+.fab-bg{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.25s;}
 .fab-bg.open{background:rgba(0,0,0,0.45);pointer-events:all;}
+
+  /* ── ALBUM ── */
+  .album-status{font-size:12px;color:var(--text-light);margin-bottom:10px;min-height:18px;}
+  .album-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:12px;}
+  .album-item{aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;background:var(--sky);position:relative;}
+  .album-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.2s;}
+  .album-item:active img{transform:scale(0.95);}
+  .album-item-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.45);padding:3px 6px;font-size:9px;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .album-add-row{display:flex;justify-content:center;}
+  .album-add-btn{
+    padding:10px 24px;border-radius:22px;
+    background:rgba(8,145,178,0.08);
+    border:1.5px dashed rgba(8,145,178,0.25);
+    color:var(--sea);font-size:13px;font-weight:500;
+    cursor:pointer;touch-action:manipulation;
+    font-family:'Outfit',sans-serif;
+    transition:all 0.15s;
+  }
+  .album-add-btn:active{background:rgba(8,145,178,0.15);}
+  .album-uploading{font-size:11px;color:var(--sea);text-align:center;margin-top:8px;animation:fadeIn 0.3s ease;}
+
+  /* Photo viewer */
+  .photo-viewer{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.96);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+  .photo-viewer.open{display:flex;}
+  .pv-close{position:absolute;top:calc(env(safe-area-inset-top,0px)+14px);right:14px;width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:50%;border:none;color:white;font-size:18px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;}
+  #pvImg{max-width:100%;max-height:65vh;border-radius:10px;object-fit:contain;}
+  .pv-caption{font-family:'Fraunces',serif;font-size:15px;color:rgba(255,255,255,0.7);font-style:italic;margin-top:12px;text-align:center;min-height:20px;}
+  .pv-actions{display:flex;gap:10px;margin-top:12px;width:100%;max-width:340px;align-items:center;}
+  .pv-caption-input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:9px 12px;color:white;font-size:13px;font-family:'Outfit',sans-serif;outline:none;text-align:center;}
+  .pv-caption-input::placeholder{color:rgba(255,255,255,0.3);}
+  .pv-delete{width:40px;height:40px;background:rgba(192,104,104,0.15);border:1px solid rgba(192,104,104,0.25);border-radius:8px;color:#E07070;font-size:16px;cursor:pointer;touch-action:manipulation;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 
 .gap{height:100px;}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-  <div class="h-moon">🌙</div>
-  <div class="h-city">İstanbul</div>
-  <div class="h-sub">Sema'ya Ziyaret</div>
-  <div class="h-dates">✈️ 8 – 10 Mayıs 2026</div>
+<!-- ══ EGE HEADER ══ -->
+<div class="header-ege">
+  <div class="h-wave">🌊</div>
+  <div class="h-title">İzmir</div>
+  <div class="h-amp">&</div>
+  <div class="h-title"><span>İstanbul</span></div>
+  <div class="h-sub">Sema ile · Ege'den Boğaz'a</div>
+  <div class="h-badge">✈️ 28 Mayıs – 7 Haziran 2026</div>
 </div>
 
-<!-- COUNTDOWN -->
-<div class="cd-section">
-  <div class="cd-label" id="cdLabel">İnişe Kalan Süre</div>
+<!-- ══ COUNTDOWN ══ -->
+<div class="cd-wrap">
+  <div class="cd-lbl" id="cdL">İzmir'e İnişe Kalan</div>
   <div id="cdBox">
     <div class="cd-grid">
-      <div class="cd-box"><div class="cd-num" id="cdD">--</div><div class="cd-lbl">Gün</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdH">--</div><div class="cd-lbl">Saat</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdM">--</div><div class="cd-lbl">Dakika</div></div>
-      <div class="cd-box"><div class="cd-num" id="cdS">--</div><div class="cd-lbl">Saniye</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdD">--</div><div class="cd-unit">Gün</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdH">--</div><div class="cd-unit">Saat</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdM">--</div><div class="cd-unit">Dakika</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdS">--</div><div class="cd-unit">Saniye</div></div>
     </div>
   </div>
 </div>
 
-<!-- FLIGHTS -->
-<div class="sec">
-  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Uçuş <em>Bilgileri</em></div></div>
-
-  <div class="flight">
-    <div class="fl-type">✈ Gidiş Uçuşu</div>
+<!-- ══ UÇUŞ: GİDİŞ ══ -->
+<div class="sec-ege">
+  <div class="sec-hdr"><div class="sec-flag-ege"></div><div class="sec-title sec-title-ege">Gidiş <em>Uçuşu</em></div></div>
+  <div class="flight flight-ege">
+    <div class="fl-type fl-type-ege">✈ Londra → İzmir</div>
     <div class="fl-row">
-      <div>
-        <div class="fl-airport">STN</div>
-        <div class="fl-time">09:30</div>
-        <div class="fl-city">Londra</div>
-      </div>
-      <div class="fl-arrow"><div class="fl-line"></div><div class="fl-dur">3sa 45dk</div></div>
-      <div style="text-align:right">
-        <div class="fl-airport">SAW</div>
-        <div class="fl-time">15:15</div>
-        <div class="fl-city">İstanbul</div>
-      </div>
+      <div><div class="fl-airport fl-airport-ege">STN</div><div class="fl-time fl-time-ege">22:30</div><div class="fl-city fl-city-ege">Londra</div></div>
+      <div class="fl-arrow"><div class="fl-line fl-line-ege"></div><div class="fl-dur fl-dur-ege">~5sa 45dk</div></div>
+      <div style="text-align:right"><div class="fl-airport fl-airport-ege">ADB</div><div class="fl-time fl-time-ege">04:15</div><div class="fl-city fl-city-ege">İzmir</div></div>
     </div>
-    <div class="fl-meta"><span class="fl-date">08 Mayıs 2026 · Cuma</span><span class="fl-no">PC1164</span></div>
+    <div class="fl-meta fl-meta-ege"><span class="fl-date fl-date-ege">28 Mayıs 2026 · Perşembe</span><span class="fl-no fl-no-ege">XQ941</span></div>
   </div>
+</div>
 
-  <div class="flight" style="animation-delay:0.08s">
-    <div class="fl-type">↩ Dönüş Uçuşu</div>
+<!-- ══ İZMİR PROGRAMI ══ -->
+<div class="sec-ege">
+  <div class="sec-hdr"><div class="sec-flag-ege"></div><div class="sec-title sec-title-ege">İzmir <em>Programı</em></div></div>
+
+  <div class="day-div day-div-ege">Cuma — 29 Mayıs</div>
+  <div class="prog prog-ege"><div class="prog-time prog-time-ege">04:15</div><div class="prog-dot prog-dot-ege"></div><div class="prog-body"><div class="prog-title prog-title-ege">🛬 İzmir Adnan Menderes'e İniş</div><div class="prog-sub prog-sub-ege">Gece uçuşunun ardından...</div><span class="prog-tag tag-flight-ege">İniş</span></div></div>
+  <div class="prog prog-ege"><div class="prog-time prog-time-ege">Gündüz</div><div class="prog-dot prog-dot-ege"></div><div class="prog-body"><div class="prog-title prog-title-ege">🏖️ İzmir Keşfi</div><div class="prog-sub prog-sub-ege">Kordon · Alsancak · Kemeraltı · Kumru</div><span class="prog-tag tag-explore-ege">Keşif</span></div></div>
+
+  <div class="day-div day-div-ege">Cumartesi — 30 Mayıs</div>
+  <div class="prog prog-ege"><div class="prog-time prog-time-ege">Gün boyu</div><div class="prog-dot prog-dot-ege"></div><div class="prog-body"><div class="prog-title prog-title-ege">🌿 Ege Günü</div><div class="prog-sub prog-sub-ege">Plan güncelleniyor...</div><span class="prog-tag tag-explore-ege">Keşif</span></div></div>
+
+  <div class="day-div day-div-ege">Pazar — 31 Mayıs</div>
+  <div class="prog prog-ege"><div class="prog-time prog-time-ege">Sabah</div><div class="prog-dot prog-dot-ege"></div><div class="prog-body"><div class="prog-title prog-title-ege">🧳 İzmir'e Veda</div><div class="prog-sub prog-sub-ege">Son kahvaltı, bavul topla</div><span class="prog-tag tag-food-ege">Kahvaltı</span></div></div>
+</div>
+
+<!-- ══ ROAD TRIP DIVIDER ══ -->
+<div class="road-divider">
+  <div class="road-icon">🚗</div>
+  <div class="road-title">İzmir → İstanbul</div>
+  <div class="road-sub">Sema ile kara yolculuğu</div>
+  <div class="road-date">31 Mayıs · Pazar</div>
+</div>
+
+<!-- ══ İSTANBUL PROGRAMI ══ -->
+<div class="sec-ist">
+  <div class="sec-hdr"><div class="sec-flag-ist"></div><div class="sec-title sec-title-ist">İstanbul <em>Programı</em></div></div>
+
+  <div class="day-div day-div-ist">Pazar — 31 Mayıs (Varış)</div>
+  <div class="prog prog-ist"><div class="prog-time prog-time-ist">Akşam</div><div class="prog-dot prog-dot-ist"></div><div class="prog-body"><div class="prog-title prog-title-ist">🌆 İstanbul'a Varış</div><div class="prog-sub prog-sub-ist">Sema ile yerleşme</div><span class="prog-tag tag-drive">Yolculuk</span></div></div>
+
+  <div class="day-div day-div-ist">Pazartesi–Cuma — 1–5 Haziran</div>
+  <div class="prog prog-ist"><div class="prog-time prog-time-ist">Gün boyu</div><div class="prog-dot prog-dot-ist"></div><div class="prog-body"><div class="prog-title prog-title-ist">🕌 İstanbul Günleri</div><div class="prog-sub prog-sub-ist">Plan güncelleniyor...</div><span class="prog-tag tag-explore-ist">Keşif</span></div></div>
+
+  <div class="day-div day-div-ist">Cumartesi — 6 Haziran</div>
+  <div class="prog prog-ist"><div class="prog-time prog-time-ist">Gün boyu</div><div class="prog-dot prog-dot-ist"></div><div class="prog-body"><div class="prog-title prog-title-ist">🌇 Son Tam Gün</div><div class="prog-sub prog-sub-ist">Plan güncelleniyor...</div><span class="prog-tag tag-explore-ist">Keşif</span></div></div>
+
+  <div class="day-div day-div-ist">Pazar — 7 Haziran</div>
+  <div class="prog prog-ist"><div class="prog-time prog-time-ist">Gündüz</div><div class="prog-dot prog-dot-ist"></div><div class="prog-body"><div class="prog-title prog-title-ist">🧳 Veda Günü</div><div class="prog-sub prog-sub-ist">Son anlar, bavul, havalimanı</div><span class="prog-tag tag-explore-ist">Veda</span></div></div>
+  <div class="prog prog-ist"><div class="prog-time prog-time-ist">19:50</div><div class="prog-dot prog-dot-ist"></div><div class="prog-body"><div class="prog-title prog-title-ist">✈️ Dönüş Uçuşu</div><div class="prog-sub prog-sub-ist">VF1991 · SAW → STN</div><span class="prog-tag tag-flight-ist">Uçuş</span></div></div>
+</div>
+
+<!-- ══ DÖNÜŞ UÇUŞU ══ -->
+<div class="sec-ist">
+  <div class="sec-hdr"><div class="sec-flag-ist"></div><div class="sec-title sec-title-ist">Dönüş <em>Uçuşu</em></div></div>
+  <div class="flight flight-ist">
+    <div class="fl-type fl-type-ist">↩ İstanbul → Londra</div>
     <div class="fl-row">
-      <div>
-        <div class="fl-airport">SAW</div>
-        <div class="fl-time">21:10</div>
-        <div class="fl-city">İstanbul</div>
-      </div>
-      <div class="fl-arrow"><div class="fl-line"></div><div class="fl-dur">4sa</div></div>
-      <div style="text-align:right">
-        <div class="fl-airport">STN</div>
-        <div class="fl-time">23:10</div>
-        <div class="fl-city">Londra</div>
-      </div>
+      <div><div class="fl-airport fl-airport-ist">SAW</div><div class="fl-time fl-time-ist">19:50</div><div class="fl-city fl-city-ist">İstanbul</div></div>
+      <div class="fl-arrow"><div class="fl-line fl-line-ist"></div><div class="fl-dur fl-dur-ist">4sa 5dk</div></div>
+      <div style="text-align:right"><div class="fl-airport fl-airport-ist">STN</div><div class="fl-time fl-time-ist">21:55</div><div class="fl-city fl-city-ist">Londra</div></div>
     </div>
-    <div class="fl-meta"><span class="fl-date">10 Mayıs 2026 · Pazar</span><span class="fl-no">PC1173</span></div>
+    <div class="fl-meta fl-meta-ist"><span class="fl-date fl-date-ist">7 Haziran 2026 · Pazar</span><span class="fl-no fl-no-ist">VF1991</span></div>
   </div>
 </div>
 
-<!-- PROGRAM -->
-<div class="sec">
-  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Gezi <em>Programı</em></div></div>
-
-  <div class="day-divider">Perşembe — 8 Mayıs</div>
-  <div class="prog"><div class="prog-time">09:30</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">✈️ Stansted'den Kalkış</div><div class="prog-sub">Pegasus PC1164</div><span class="prog-tag tag-flight">Uçuş</span></div></div>
-  <div class="prog"><div class="prog-time">15:15</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🛬 Sabiha Gökçen'e İniş</div><div class="prog-sub">Sema karşılıyor!</div><span class="prog-tag tag-flight">İniş</span></div></div>
-  <div class="prog"><div class="prog-time">Akşam</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🍽️ İlk İstanbul Akşamı</div><div class="prog-sub">Plan güncelleniyor...</div><span class="prog-tag tag-food">Yemek</span></div></div>
-
-  <div class="day-divider">Cuma — 9 Mayıs</div>
-  <div class="prog"><div class="prog-time">Gün boyu</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🕌 İstanbul Keşfi</div><div class="prog-sub">Plan güncelleniyor...</div><span class="prog-tag tag-explore">Keşif</span></div></div>
-
-  <div class="day-divider">Cumartesi — 10 Mayıs</div>
-  <div class="prog"><div class="prog-time">Gündüz</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🌇 Son Gün</div><div class="prog-sub">Plan güncelleniyor...</div><span class="prog-tag tag-explore">Keşif</span></div></div>
-  <div class="prog"><div class="prog-time">21:10</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">✈️ Dönüş Uçuşu</div><div class="prog-sub">PC1173 · SAW → STN</div><span class="prog-tag tag-flight">Uçuş</span></div></div>
-</div>
-
-<!-- NOTLAR -->
-<div class="sec">
-  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Seyahat <em>Notları</em></div></div>
-  <div class="note-wrap">
-    <div class="note-hdr">✍️ Anılar & Notlar</div>
+<!-- ══ NOTLAR ══ -->
+<div class="sec-ege">
+  <div class="sec-hdr"><div class="sec-flag-ege"></div><div class="sec-title sec-title-ege">Seyahat <em>Notları</em></div></div>
+  <div class="note-card-ege">
+    <div class="note-hdr-ege">✍️ Notlar</div>
     <div class="note-body">
-      <textarea class="note-text" id="noteText" placeholder="İstanbul'dan satırlar..." oninput="saveNote()"></textarea>
-      <div class="note-saved" id="noteSaved">Kaydedildi ✓</div>
+      <textarea class="note-text note-text-ege" id="noteText" placeholder="Ege'den İstanbul'a anılar..." oninput="saveNote()"></textarea>
+      <div class="note-saved note-saved-ege" id="noteSaved">Kaydedildi ✓</div>
     </div>
+  </div>
+</div>
+
+<!-- ══ FOTOĞRAF ALBÜMÜ ══ -->
+<div class="sec-ege" id="albumSection">
+  <div class="sec-hdr"><div class="sec-flag-ege"></div><div class="sec-title sec-title-ege">Fotoğraf <em>Albümü</em></div></div>
+  <div class="album-status" id="albumStatus">🔄 Yükleniyor...</div>
+  <div class="album-grid" id="albumGrid"></div>
+  <div class="album-add-row">
+    <button class="album-add-btn" onclick="document.getElementById('photoInput').click()">📷 Fotoğraf Ekle</button>
+    <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(this)">
+  </div>
+</div>
+
+<!-- PHOTO VIEWER -->
+<div class="photo-viewer" id="photoViewer">
+  <button class="pv-close" onclick="closeViewer()">✕</button>
+  <img id="pvImg" src="" alt="">
+  <div class="pv-caption" id="pvCaption"></div>
+  <div class="pv-actions">
+    <input class="pv-caption-input" id="pvCaptionInput" placeholder="Not ekle..." oninput="updateCaption()">
+    <button class="pv-delete" onclick="deletePhoto()">🗑</button>
   </div>
 </div>
 
 <div class="gap"></div>
 
-<!-- FAB -->
+<!-- ══ FAB ══ -->
 <div class="fab-bg" id="fabBg" onclick="closeFab()"></div>
 <div class="fab-wrap">
   <div class="fab-items" id="fabItems">
-    <button class="fab-item exit" onclick="doLogout();closeFab()">
-      <div class="fab-lbl">Çıkış</div><div class="fab-ico">🚪</div>
-    </button>
-    <button class="fab-item" onclick="goHub();closeFab()">
-      <div class="fab-lbl">Ana Sayfa</div><div class="fab-ico">🏠</div>
-    </button>
+    <button class="fab-item exit" onclick="doLogout();closeFab()"><div class="fab-lbl">Çıkış</div><div class="fab-ico">🚪</div></button>
+    <button class="fab-item" onclick="goHub();closeFab()"><div class="fab-lbl">Ana Sayfa</div><div class="fab-ico">🏠</div></button>
   </div>
   <button class="fab-btn" id="fabBtn" onclick="toggleFab()">✦</button>
 </div>
 
-<script>
+<script type="module">
 if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));caches.keys().then(k=>k.forEach(x=>caches.delete(x)));}
 if(localStorage.getItem('kirpi_auth')!=='semosh'){if(window.parent&&window.parent.logout)window.parent.logout();else window.location.href='index.html';}
 
-// ── COUNTDOWN ──
-const LAND=new Date('2026-05-08T15:15:00+03:00'),DEPART=new Date('2026-05-10T21:10:00+03:00');
+// ── FIREBASE ──────────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const fbApp = initializeApp({
+  apiKey:"AIzaSyCMOr2gdQwOoZE872VtnlphrZ0oRzktQFQ",
+  authDomain:"kirpi-online.firebaseapp.com",
+  projectId:"kirpi-online",
+  storageBucket:"kirpi-online.firebasestorage.app",
+  messagingSenderId:"439694732981",
+  appId:"1:439694732981:web:ea7a5ce8a599d1b58f58fc"
+});
+const db = getFirestore(fbApp);
+const COL = 'izmirist_photos';
+
+// ── PHOTO ALBUM ───────────────────────────────────────────────
+let photos = [];
+let viewerIdx = -1;
+
+async function loadPhotos() {
+  try {
+    const q = query(collection(db, COL), orderBy('ts','asc'));
+    const snap = await getDocs(q);
+    photos = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    renderAlbum();
+    document.getElementById('albumStatus').textContent = photos.length ? '' : 'Henüz fotoğraf yok — ilk sen ekle! 📷';
+  } catch(e) {
+    document.getElementById('albumStatus').textContent = '⚠️ Yüklenemedi';
+  }
+}
+
+function renderAlbum() {
+  const grid = document.getElementById('albumGrid');
+  grid.innerHTML = photos.map((p,i) => `
+    <div class="album-item" onclick="openViewer(${i})">
+      <img src="${p.src}" alt="">
+      ${p.caption ? `<div class="album-item-cap">${p.caption}</div>` : ''}
+    </div>`).join('');
+  document.getElementById('albumStatus').textContent = photos.length > 0 ? `${photos.length} fotoğraf` : 'Henüz fotoğraf yok — ilk sen ekle! 📷';
+}
+
+async function uploadPhotos(input) {
+  const files = Array.from(input.files);
+  if(!files.length) return;
+  const statusEl = document.getElementById('albumStatus');
+  statusEl.textContent = `⏳ ${files.length} fotoğraf yükleniyor...`;
+
+  for(const file of files) {
+    // Resize/compress before upload
+    const compressed = await compressImage(file, 800);
+    try {
+      const docRef = await addDoc(collection(db, COL), {
+        src: compressed,
+        caption: '',
+        ts: Date.now(),
+        name: file.name
+      });
+      photos.push({id:docRef.id, src:compressed, caption:'', ts:Date.now()});
+      renderAlbum();
+    } catch(e) {
+      statusEl.textContent = '⚠️ Yükleme hatası — fotoğraf çok büyük olabilir';
+      return;
+    }
+  }
+  input.value = '';
+  statusEl.textContent = `${photos.length} fotoğraf`;
+}
+
+function compressImage(file, maxSize) {
+  return new Promise(resolve => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if(w > h && w > maxSize){ h = h*maxSize/w; w = maxSize; }
+      else if(h > maxSize){ w = w*maxSize/h; h = maxSize; }
+      canvas.width = w; canvas.height = h;
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.75));
+    };
+    img.src = url;
+  });
+}
+
+function openViewer(idx) {
+  viewerIdx = idx;
+  const p = photos[idx];
+  document.getElementById('pvImg').src = p.src;
+  document.getElementById('pvCaption').textContent = p.caption || '';
+  document.getElementById('pvCaptionInput').value = p.caption || '';
+  document.getElementById('photoViewer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeViewer() {
+  document.getElementById('photoViewer').classList.remove('open');
+  document.body.style.overflow = '';
+  viewerIdx = -1;
+}
+
+let captionTimer;
+async function updateCaption() {
+  if(viewerIdx < 0) return;
+  const cap = document.getElementById('pvCaptionInput').value;
+  document.getElementById('pvCaption').textContent = cap;
+  photos[viewerIdx].caption = cap;
+  renderAlbum();
+  clearTimeout(captionTimer);
+  captionTimer = setTimeout(async () => {
+    try {
+      await updateDoc(doc(db, COL, photos[viewerIdx].id), {caption: cap});
+    } catch(e){}
+  }, 800);
+}
+
+async function deletePhoto() {
+  if(viewerIdx < 0) return;
+  if(!confirm('Bu fotoğrafı sil?')) return;
+  try {
+    await deleteDoc(doc(db, COL, photos[viewerIdx].id));
+    photos.splice(viewerIdx, 1);
+    closeViewer();
+    renderAlbum();
+  } catch(e) { alert('Silinemedi'); }
+}
+
+loadPhotos();
+
+// ── COUNTDOWN ──────────────────────────────────────────────────
+const LAND=new Date('2026-05-29T04:15:00+03:00');
+const HOME=new Date('2026-06-07T21:55:00+01:00');
 function tick(){
   const now=new Date();
-  if(now>=DEPART){document.getElementById('cdLabel').textContent='Güle güle İstanbul 🌙';document.getElementById('cdBox').innerHTML='<div class="cd-done">Harika bir seyahatti! 🌹</div>';return;}
-  if(now>=LAND){document.getElementById('cdLabel').textContent='İstanbul\'dasın! 🎉';document.getElementById('cdBox').innerHTML='<div class="cd-done">Sema seni bekliyor! 🌙</div>';return;}
+  if(now>=HOME){document.getElementById('cdL').textContent='Güzel bir seyahatti!';document.getElementById('cdBox').innerHTML='<div class="cd-done">Ege\'den Boğaz\'a — unutulmaz 🌊🌙</div>';return;}
+  if(now>=LAND){document.getElementById('cdL').textContent='İyi tatiller! 🌊';document.getElementById('cdBox').innerHTML='<div class="cd-done">Seyahat devam ediyor!</div>';return;}
   const d=LAND-now;
   document.getElementById('cdD').textContent=Math.floor(d/864e5);
   document.getElementById('cdH').textContent=String(Math.floor(d%864e5/36e5)).padStart(2,'0');
@@ -426,13 +564,13 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 
-// ── NOTE ──
-const NK='istanbul_note_v1';
+// Note
+const NK='izmirist_note_v1';
 document.getElementById('noteText').value=localStorage.getItem(NK)||'';
 let nt;
 function saveNote(){clearTimeout(nt);nt=setTimeout(()=>{localStorage.setItem(NK,document.getElementById('noteText').value);const s=document.getElementById('noteSaved');s.classList.add('show');setTimeout(()=>s.classList.remove('show'),2000);},500);}
 
-// ── FAB ──
+// FAB
 let fo=false;
 function toggleFab(){fo=!fo;document.getElementById('fabBtn').classList.toggle('open',fo);document.getElementById('fabItems').classList.toggle('open',fo);document.getElementById('fabBg').classList.toggle('open',fo);}
 function closeFab(){fo=false;document.getElementById('fabBtn').classList.remove('open');document.getElementById('fabItems').classList.remove('open');document.getElementById('fabBg').classList.remove('open');}
