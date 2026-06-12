@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sema İngiltere'de — Haziran 2026</title>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F5F0;--bg2:#F2EDE6;--card:#FFFFFF;--card2:#FAF7F3;
+  --border:rgba(60,80,120,0.1);--border2:rgba(60,80,120,0.15);
+  --navy:#1B2B4B;--navy2:#243660;--navy3:rgba(27,43,75,0.08);
+  --red:#C0392B;--red2:rgba(192,57,43,0.1);
+  --gold:#B8943C;--gold2:rgba(184,148,60,0.1);
+  --text:#1A1A2E;--text2:#6B6B7B;--text3:#9B9BAB;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);background-image:var(--grain);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(180deg,#1B2B4B 0%,#243660 100%);
+  padding:20px 24px 28px;
+  padding-top:max(calc(env(safe-area-inset-top,0px)+18px),28px);
+  text-align:center;position:relative;overflow:hidden;
+}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,255,255,0.06) 0%,transparent 70%);}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);}
+/* UK flag stripe subtle */
+.header-stripe{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C0392B,#1B2B4B,#C0392B);opacity:0.5;}
+.h-icon{font-size:38px;display:block;margin-bottom:10px;animation:float 3s ease infinite;position:relative;z-index:1;}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,9vw,48px);font-weight:700;color:#FFFFFF;line-height:1;position:relative;z-index:1;animation:fadeUp 0.5s ease 0.1s both;}
+.h-sub{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.6);margin-top:8px;position:relative;z-index:1;animation:fadeUp 0.5s ease 0.2s both;}
+.h-badge{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:22px;padding:5px 16px;font-size:11px;color:rgba(255,255,255,0.8);letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:1;animation:fadeUp 0.5s ease 0.3s both;}
+
+/* ── COUNTDOWN ── */
+.cd-wrap{padding:20px 18px;background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.06);}
+.cd-lbl{font-size:10px;font-weight:600;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:12px;text-align:center;}
+.cd-done{text-align:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:#E8D5A3;padding:8px 0;}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.cd-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 6px;text-align:center;position:relative;overflow:hidden;}
+.cd-box::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);}
+.cd-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:#E8D5A3;line-height:1;}
+.cd-unit{font-size:8.5px;color:rgba(255,255,255,0.3);margin-top:4px;text-transform:uppercase;letter-spacing:2px;}
+
+/* ── SECTIONS ── */
+.sec{padding:22px 18px;border-bottom:1px solid var(--border);background:white;}
+.sec:nth-child(odd){background:var(--card2);}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.sec-flag{width:3px;height:22px;background:var(--navy);border-radius:2px;flex-shrink:0;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);}
+.sec-title em{color:var(--navy2);font-style:normal;}
+
+/* ── FLIGHT CARDS ── */
+.flight{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;}
+.flight:last-child{margin-bottom:0;}
+.flight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--navy),var(--navy2));}
+.flight::after{content:'';position:absolute;right:72px;top:0;bottom:0;width:1px;background:repeating-linear-gradient(180deg,transparent 0,transparent 5px,var(--border) 5px,var(--border) 10px);}
+.fl-type{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--navy);margin-bottom:12px;padding-left:6px;}
+.fl-row{display:flex;align-items:center;gap:10px;padding-left:6px;}
+.fl-airport{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--text);line-height:1;}
+.fl-time{font-size:13px;color:var(--text2);margin-top:3px;font-weight:500;}
+.fl-city{font-size:10px;color:var(--text3);margin-top:1px;}
+.fl-arrow{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 6px;}
+.fl-line{width:100%;height:1px;background:linear-gradient(90deg,var(--navy),rgba(27,43,75,0.2));position:relative;}
+.fl-line::after{content:'✈';position:absolute;right:-2px;top:-9px;font-size:12px;color:var(--navy);}
+.fl-dur{font-size:10px;color:var(--text3);}
+.fl-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);padding-left:6px;}
+.fl-date{font-size:12px;color:var(--text2);}
+.fl-no{background:var(--navy3);border:1px solid var(--border2);border-radius:6px;padding:3px 10px;color:var(--navy);font-weight:600;font-size:11px;letter-spacing:1px;}
+
+/* ── PROGRAM ── */
+.day-div{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin:18px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.day-div:first-child{margin-top:0;}
+.prog{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);}
+.prog:last-child{border-bottom:none;}
+.prog-time{font-size:11px;font-weight:600;color:var(--navy);min-width:52px;padding-top:2px;flex-shrink:0;letter-spacing:0.5px;}
+.prog-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(27,43,75,0.25);margin-top:5px;flex-shrink:0;}
+.prog-body{flex:1;}
+.prog-title{font-size:14.5px;font-weight:500;color:var(--text);line-height:1.3;}
+.prog-sub{font-size:12px;color:var(--text2);margin-top:2px;}
+.prog-tag{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:0.5px;}
+.tag-flight{background:var(--navy3);color:var(--navy);}
+.tag-food{background:rgba(184,148,60,0.1);color:var(--gold);}
+.tag-explore{background:rgba(192,57,43,0.08);color:var(--red);}
+
+/* ── NOTE ── */
+.note-wrap{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;}
+.note-hdr{background:var(--bg2);padding:12px 16px;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--text2);border-bottom:1px solid var(--border);}
+.note-body{padding:16px 16px 12px;}
+.note-text{width:100%;min-height:80px;background:transparent;border:none;font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--text);line-height:1.9;resize:none;outline:none;font-style:italic;}
+.note-text::placeholder{color:var(--text3);}
+.note-saved{font-size:11px;color:var(--navy);text-align:right;margin-top:6px;opacity:0;transition:opacity 0.3s;}
+.note-saved.show{opacity:1;}
+
+/* ── FAB ── */
+.fab-wrap{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+22px);right:20px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.fab-items{display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;opacity:0;transform:translateY(10px);transition:all 0.25s cubic-bezier(.4,0,.2,1);}
+.fab-items.open{pointer-events:all;opacity:1;transform:none;}
+.fab-item{display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;touch-action:manipulation;padding:0;}
+.fab-lbl{background:var(--navy);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:7px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,0.85);box-shadow:0 6px 20px rgba(0,0,0,0.25);white-space:nowrap;}
+.fab-ico{width:44px;height:44px;border-radius:50%;background:var(--navy);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,0.25);}
+.fab-item:active .fab-ico{transform:scale(0.9);}
+.fab-item.exit .fab-lbl{color:#E07070;}
+.fab-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy2));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;box-shadow:0 4px 20px rgba(27,43,75,0.4);transition:all 0.25s;font-size:20px;color:white;}
+.fab-btn.open{transform:rotate(45deg);}
+.fab-bg{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.25s;}
+.fab-bg.open{background:rgba(0,0,0,0.3);pointer-events:all;}
+.gap{height:100px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="h-icon">🇬🇧</div>
+  <div class="h-title">Sema İngiltere'de</div>
+  <div class="h-sub">Londra'da buluşma</div>
+  <div class="h-badge">✈️ 12 – 15 Haziran 2026</div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="cd-wrap">
+  <div class="cd-lbl" id="cdL">Sema'nın Gelişine Kalan</div>
+  <div id="cdBox">
+    <div class="cd-grid">
+      <div class="cd-box"><div class="cd-num" id="cdD">--</div><div class="cd-unit">Gün</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdH">--</div><div class="cd-unit">Saat</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdM">--</div><div class="cd-unit">Dakika</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdS">--</div><div class="cd-unit">Saniye</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FLIGHTS -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Uçuş <em>Bilgileri</em></div></div>
+  <div class="flight">
+    <div class="fl-type">✈ Geliş Uçuşu</div>
+    <div class="fl-row">
+      <div><div class="fl-airport">SAW</div><div class="fl-time">21:10</div><div class="fl-city">İstanbul</div></div>
+      <div class="fl-arrow"><div class="fl-line"></div><div class="fl-dur">~3sa</div></div>
+      <div style="text-align:right"><div class="fl-airport">STN</div><div class="fl-time">23:10</div><div class="fl-city">Londra</div></div>
+    </div>
+    <div class="fl-meta"><span class="fl-date">12 Haziran 2026 · Cuma</span><span class="fl-no">Pegasus</span></div>
+  </div>
+  <div class="flight" style="animation-delay:0.08s">
+    <div class="fl-type">↩ Dönüş Uçuşu</div>
+    <div class="fl-row">
+      <div><div class="fl-airport">STN</div><div class="fl-time">16:45</div><div class="fl-city">Londra</div></div>
+      <div class="fl-arrow"><div class="fl-line"></div><div class="fl-dur">~3sa 45dk</div></div>
+      <div style="text-align:right"><div class="fl-airport">SAW</div><div class="fl-time">22:30</div><div class="fl-city">İstanbul</div></div>
+    </div>
+    <div class="fl-meta"><span class="fl-date">15 Haziran 2026 · Pazartesi</span><span class="fl-no">Pegasus</span></div>
+  </div>
+</div>
+
+<!-- PROGRAM -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Londra <em>Programı</em></div></div>
+
+  <div class="day-div">Cuma — 12 Haziran</div>
+  <div class="prog"><div class="prog-time">23:10</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🛬 Stansted'e İniş</div><div class="prog-sub">Hoş geldin Sema! 🇬🇧</div><span class="prog-tag tag-flight">İniş</span></div></div>
+
+  <div class="day-div">Cumartesi — 13 Haziran</div>
+  <div class="prog"><div class="prog-time">Gün boyu</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🏙️ Londra Keşfi</div><div class="prog-sub">Plan güncelleniyor...</div><span class="prog-tag tag-explore">Keşif</span></div></div>
+
+  <div class="day-div">Pazar — 14 Haziran</div>
+  <div class="prog"><div class="prog-time">Gün boyu</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🌿 Son Tam Gün</div><div class="prog-sub">Plan güncelleniyor...</div><span class="prog-tag tag-explore">Keşif</span></div></div>
+
+  <div class="day-div">Pazartesi — 15 Haziran</div>
+  <div class="prog"><div class="prog-time">Gündüz</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">🧳 Veda Günü</div><div class="prog-sub">Son anlar...</div><span class="prog-tag tag-explore">Veda</span></div></div>
+  <div class="prog"><div class="prog-time">16:45</div><div class="prog-dot"></div><div class="prog-body"><div class="prog-title">✈️ Sema Dönüyor</div><div class="prog-sub">STN → SAW · Pegasus</div><span class="prog-tag tag-flight">Uçuş</span></div></div>
+</div>
+
+<!-- NOTLAR -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-flag"></div><div class="sec-title">Seyahat <em>Notları</em></div></div>
+  <div class="note-wrap">
+    <div class="note-hdr">✍️ Notlar</div>
+    <div class="note-body">
+      <textarea class="note-text" id="noteText" placeholder="Londra'dan satırlar..." oninput="saveNote()"></textarea>
+      <div class="note-saved" id="noteSaved">Kaydedildi ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="gap"></div>
+
+<!-- FAB -->
+<div class="fab-bg" id="fabBg" onclick="closeFab()"></div>
+<div class="fab-wrap">
+  <div class="fab-items" id="fabItems">
+    <button class="fab-item exit" onclick="doLogout();closeFab()"><div class="fab-lbl">Çıkış</div><div class="fab-ico">🚪</div></button>
+    <button class="fab-item" onclick="goHub();closeFab()"><div class="fab-lbl">Ana Sayfa</div><div class="fab-ico">🏠</div></button>
+  </div>
+  <button class="fab-btn" id="fabBtn" onclick="toggleFab()">✦</button>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));caches.keys().then(k=>k.forEach(x=>caches.delete(x)));}
+if(localStorage.getItem('kirpi_auth')!=='semosh'){if(window.parent&&window.parent.logout)window.parent.logout();else window.location.href='index.html';}
+
+// Sema'nın gelişi: 12 Haziran 23:10 Londra saati (BST = UTC+1)
+const ARRIVE = new Date('2026-06-12T23:10:00+01:00');
+const DEPART = new Date('2026-06-15T16:45:00+01:00');
+
+function tick(){
+  const now = new Date();
+  if(now >= DEPART){
+    document.getElementById('cdL').textContent = 'Güle güle Sema 🇬🇧';
+    document.getElementById('cdBox').innerHTML = '<div class="cd-done">Harika günlerdi! ✈️</div>';
+    return;
+  }
+  if(now >= ARRIVE){
+    document.getElementById('cdL').textContent = 'Sema İngiltere\'de! 🎉';
+    document.getElementById('cdBox').innerHTML = '<div class="cd-done">Hoş geldin! 🇬🇧</div>';
+    return;
+  }
+  const d = ARRIVE - now;
+  document.getElementById('cdD').textContent = Math.floor(d/864e5);
+  document.getElementById('cdH').textContent = String(Math.floor(d%864e5/36e5)).padStart(2,'0');
+  document.getElementById('cdM').textContent = String(Math.floor(d%36e5/6e4)).padStart(2,'0');
+  document.getElementById('cdS').textContent = String(Math.floor(d%6e4/1e3)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+// Note
+const NK = 'semauk_note_v1';
+document.getElementById('noteText').value = localStorage.getItem(NK)||'';
+let nt;
+function saveNote(){clearTimeout(nt);nt=setTimeout(()=>{localStorage.setItem(NK,document.getElementById('noteText').value);const s=document.getElementById('noteSaved');s.classList.add('show');setTimeout(()=>s.classList.remove('show'),2000);},500);}
+
+// FAB
+let fo = false;
+function toggleFab(){fo=!fo;document.getElementById('fabBtn').classList.toggle('open',fo);document.getElementById('fabItems').classList.toggle('open',fo);document.getElementById('fabBg').classList.toggle('open',fo);}
+function closeFab(){fo=false;document.getElementById('fabBtn').classList.remove('open');document.getElementById('fabItems').classList.remove('open');document.getElementById('fabBg').classList.remove('open');}
+function goHub(){if(window.parent&&window.parent.loadApp)window.parent.loadApp('hub.html');else window.location.href='hub.html';}
+function doLogout(){localStorage.removeItem('kirpi_auth');if(window.parent&&window.parent.logout)window.parent.logout();else window.location.href='index.html';}
+</script>
+</body>
+</html>
