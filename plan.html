@@ -408,17 +408,17 @@ const db = getFirestore(app);
 
 // ── AUTH ──────────────────────────────────────────────────────
 const INVITE_CODE = 'sema2026';
-let currentUser = sessionStorage.getItem('plan_user') || '';
+let currentUser = localStorage.getItem('plan_user') || '';
 
 window.doLogin = function() {
   const name = document.getElementById('loginName').value.trim();
   const code = document.getElementById('loginCode').value.trim();
   const err = document.getElementById('loginErr');
   if(!name){ err.textContent='Adını gir'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
-  const fromIndex = window.parent && window.parent !== window;
-  if(!fromIndex && code !== INVITE_CODE){ err.textContent='Yanlış kod'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
+  if(code !== INVITE_CODE){ err.textContent='Yanlış kod'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
   currentUser = name;
-  sessionStorage.setItem('plan_user', name);
+  localStorage.setItem('plan_user', name);
+  localStorage.setItem('plan_auth', '1');
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('headerUser').textContent = 'Hoş geldin, ' + name;
   document.getElementById('drawerUserInfo').textContent = name + ' olarak girdiniz';
@@ -426,25 +426,16 @@ window.doLogin = function() {
 };
 
 window.doLogout = function() {
-  sessionStorage.removeItem('plan_user');
+  localStorage.removeItem('plan_user');
   location.reload();
 };
 
-// Check if coming from index.html (iframe) or direct
-if(currentUser) {
+if(currentUser && localStorage.getItem('plan_auth') === '1') {
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('headerUser').textContent = 'Hoş geldin, ' + currentUser;
   document.getElementById('drawerUserInfo').textContent = currentUser + ' olarak girdiniz';
   loadAll();
 } else {
-  // Show name input only (code already verified by index.html)
-  const fromIndex = window.parent && window.parent !== window;
-  if(fromIndex) {
-    // Ask only for name
-    document.getElementById('loginCode').closest('.login-box').querySelector('label:last-of-type') && null;
-    document.getElementById('loginCode').style.display = 'none';
-    document.querySelector('.login-label:last-of-type') && (document.querySelector('.login-label:last-of-type').style.display = 'none');
-  }
   setTimeout(()=>document.getElementById('loginName').focus(), 300);
 }
 
