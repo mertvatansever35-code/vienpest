@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sema & Mert · Plan</title>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sun:#F5C842;--sun2:#E8B82A;--sun3:rgba(245,200,66,0.12);
+  --forest:#2D4A1E;--forest2:#3D6228;--forest3:rgba(45,74,30,0.08);
+  --coffee:#8B5E2A;--coffee2:rgba(139,94,42,0.12);
+  --cream:#F9F3E3;--cream2:#FFF8E7;--cream3:#EFE6D0;
+  --text:#1A1208;--text2:#5A4A2A;--text3:#9A8A6A;
+  --border:rgba(139,94,42,0.12);--border2:rgba(139,94,42,0.2);
+  --shadow:rgba(45,74,30,0.1);
+  --card:#FFFDF5;
+  --red:#C0392B;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes checkPop{0%{transform:scale(.4)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:none}}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;min-height:100svh;}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;z-index:999;
+  background:var(--forest);
+  background-image:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(245,200,66,0.15) 0%,transparent 65%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:30px 24px;
+  padding-top:max(calc(env(safe-area-inset-top,0px)+30px),40px);
+  transition:opacity 0.4s;
+}
+#login-screen.hidden{opacity:0;pointer-events:none;}
+.login-flower{font-size:52px;margin-bottom:12px;display:block;animation:sway 4s ease-in-out infinite;transform-origin:bottom center;}
+.login-names{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--sun);margin-bottom:4px;text-align:center;}
+.login-sub{font-size:11px;color:rgba(245,200,66,0.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;text-align:center;}
+.login-box{width:100%;max-width:300px;background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.18);border-radius:18px;padding:24px 20px;}
+.login-label{display:block;font-size:10px;color:rgba(245,200,66,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+.login-name-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(245,200,66,0.2);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--sun);font-family:'Outfit',sans-serif;outline:none;margin-bottom:10px;-webkit-appearance:none;}
+.login-name-input:focus{border-color:rgba(245,200,66,0.5);}
+.login-name-input::placeholder{color:rgba(245,200,66,0.25);}
+.login-code-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(245,200,66,0.2);border-radius:10px;padding:12px 14px;font-size:16px;color:var(--sun);font-family:'Outfit',sans-serif;letter-spacing:3px;outline:none;margin-bottom:14px;text-align:center;-webkit-appearance:none;}
+.login-code-input::placeholder{color:rgba(245,200,66,0.2);letter-spacing:1px;font-size:14px;}
+.login-btn{width:100%;background:var(--sun);border:none;border-radius:10px;padding:13px;font-size:13px;color:var(--forest);font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:1px;cursor:pointer;text-transform:uppercase;touch-action:manipulation;}
+.login-btn:active{opacity:0.85;}
+.login-err{font-size:12px;color:#FF8A80;text-align:center;margin-top:10px;min-height:18px;opacity:0;transition:opacity 0.2s;}
+.login-err.show{opacity:1;}
+
+/* ── HEADER ── */
+.header{
+  background:var(--forest);
+  background-image:radial-gradient(ellipse 80% 70% at 50% -10%,rgba(245,200,66,0.15) 0%,transparent 65%);
+  padding:16px 18px 18px;
+  padding-top:max(calc(env(safe-area-inset-top,0px)+14px),20px);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(245,200,66,0.15);
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;}
+.header-names{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--sun);letter-spacing:.5px;}
+.header-user{font-size:11px;color:rgba(245,200,66,0.5);margin-top:2px;}
+.hamburger-btn{width:40px;height:40px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;touch-action:manipulation;flex-shrink:0;}
+.hamburger-btn span{width:18px;height:1.5px;background:var(--sun);border-radius:2px;transition:all 0.25s;}
+.hamburger-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger-btn.open span:nth-child(2){opacity:0;}
+.hamburger-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ── DRAWER ── */
+.drawer-overlay{position:fixed;inset:0;z-index:190;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.25s;}
+.drawer-overlay.open{background:rgba(0,0,0,0.4);pointer-events:all;}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:195;
+  width:min(280px,82vw);
+  background:var(--forest);
+  border-left:1px solid rgba(245,200,66,0.15);
+  transform:translateX(100%);
+  transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  padding-top:env(safe-area-inset-top,0);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.drawer.open{transform:none;}
+.drawer-header{padding:20px 18px 14px;border-bottom:1px solid rgba(245,200,66,0.1);}
+.drawer-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sun);font-weight:700;}
+.drawer-user-info{font-size:11px;color:rgba(245,200,66,0.4);margin-top:3px;}
+.drawer-section{font-size:10px;color:rgba(245,200,66,0.3);letter-spacing:2px;text-transform:uppercase;padding:14px 18px 6px;}
+.drawer-item{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;touch-action:manipulation;border-bottom:1px solid rgba(245,200,66,0.06);transition:background 0.15s;}
+.drawer-item:active{background:rgba(245,200,66,0.08);}
+.drawer-item.active{border-left:3px solid var(--sun);}
+.drawer-item-icon{font-size:19px;width:26px;text-align:center;flex-shrink:0;}
+.drawer-item-label{font-size:14px;color:rgba(245,200,66,0.8);font-weight:500;}
+.drawer-item.active .drawer-item-label{color:var(--sun);}
+.drawer-logout{margin:16px 18px;padding:11px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);border-radius:10px;color:#E07070;font-size:13px;font-family:'Outfit',sans-serif;font-weight:500;text-align:center;cursor:pointer;touch-action:manipulation;}
+
+/* ── TABS ── */
+.tab-content{display:none;min-height:100svh;padding-bottom:80px;}
+.tab-content.active{display:block;animation:fadeUp 0.2s ease;}
+
+/* ── SECTION ── */
+.sec{padding:18px 16px;border-bottom:1px solid var(--border);}
+.sec:last-child{border-bottom:none;}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;}
+.sec-left{display:flex;align-items:center;gap:8px;}
+.sec-flag{width:3px;height:20px;background:var(--sun2);border-radius:2px;flex-shrink:0;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--forest);}
+.sec-title em{color:var(--sun2);font-style:normal;}
+
+/* ── ADD ROW ── */
+.add-row{display:flex;gap:8px;margin-bottom:12px;}
+.add-input{flex:1;border:1.5px solid var(--border2);border-radius:10px;padding:10px 12px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--text);background:var(--card);outline:none;-webkit-appearance:none;}
+.add-input:focus{border-color:var(--sun2);}
+.add-input::placeholder{color:var(--text3);}
+.add-select{border:1.5px solid var(--border2);border-radius:10px;padding:10px 10px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--text2);background:var(--card);outline:none;flex-shrink:0;-webkit-appearance:none;}
+.add-btn{width:42px;height:42px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:22px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+.add-btn:active{opacity:0.8;}
+
+/* ── ITEMS ── */
+.item-list{display:flex;flex-direction:column;gap:6px;}
+.item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 13px;display:flex;align-items:flex-start;gap:10px;animation:fadeUp 0.25s ease;box-shadow:0 1px 4px var(--shadow);}
+.item-cb{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:transparent;transition:all 0.2s;margin-top:1px;touch-action:manipulation;}
+.item-cb.done{background:var(--forest);border-color:var(--forest);color:var(--sun);animation:checkPop 0.3s ease;}
+.item-body{flex:1;min-width:0;}
+.item-text{font-size:14px;color:var(--text);line-height:1.4;transition:all 0.2s;}
+.item-text.done{text-decoration:line-through;opacity:0.4;}
+.item-meta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap;}
+.item-who{font-size:10px;font-weight:600;color:var(--forest2);background:var(--forest3);padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;}
+.item-by{font-size:10px;color:var(--text3);}
+.item-del{width:28px;height:28px;border-radius:50%;border:none;background:none;color:var(--text3);font-size:15px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+.item-del:active{color:var(--red);}
+.empty{text-align:center;padding:28px 16px;color:var(--text3);font-size:13px;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:16px;}
+
+/* ── NOTE ── */
+.note-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px var(--shadow);}
+.note-hdr{background:var(--cream3);padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--forest);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.note-textarea{width:100%;min-height:90px;background:transparent;border:none;padding:12px 14px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);line-height:1.8;resize:none;outline:none;font-style:italic;}
+.note-textarea::placeholder{color:var(--text3);}
+.note-footer{padding:4px 14px 10px;font-size:11px;color:var(--text3);text-align:right;}
+
+/* ── KATILIMCI ── */
+.person-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:8px;box-shadow:0 1px 4px var(--shadow);animation:fadeUp 0.25s ease;}
+.person-card:last-child{margin-bottom:0;}
+.person-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.person-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--forest);}
+.person-rel{font-size:11px;color:var(--text3);margin-top:1px;}
+.person-status{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.status-badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;cursor:pointer;touch-action:manipulation;transition:all 0.15s;border:1.5px solid transparent;}
+.status-bekliyor{background:rgba(139,94,42,0.1);color:var(--coffee);border-color:rgba(139,94,42,0.2);}
+.status-haberdar{background:rgba(45,74,30,0.1);color:var(--forest);border-color:rgba(45,74,30,0.2);}
+.status-henuz{background:rgba(155,155,155,0.1);color:var(--text3);border-color:rgba(155,155,155,0.2);}
+.person-kanal{font-size:12px;color:var(--text2);margin-top:4px;}
+.person-note{font-size:12px;color:var(--text3);font-style:italic;margin-top:4px;}
+.person-del{font-size:13px;color:var(--text3);cursor:pointer;touch-action:manipulation;padding:4px;}
+
+/* ── YEMEK ── */
+.food-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:8px;box-shadow:0 1px 4px var(--shadow);}
+.food-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--forest);}
+.food-who{font-size:11px;color:var(--text3);margin-top:2px;}
+.food-recipe{font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6;white-space:pre-wrap;font-style:italic;}
+
+/* ── BUTCE ── */
+.budget-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.budget-row:last-child{border-bottom:none;}
+.budget-item-name{color:var(--text2);flex:1;}
+.budget-amount{color:var(--forest);font-weight:600;}
+.budget-total{display:flex;justify-content:space-between;padding:12px 14px;background:var(--forest3);border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-top:8px;}
+.budget-total span:last-child{color:var(--forest);}
+
+/* ── MESAJ SABLONU ── */
+.template-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:8px;}
+.template-title{font-size:12px;font-weight:600;color:var(--forest);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.template-text{font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap;font-style:italic;}
+.template-copy{margin-top:8px;padding:7px 14px;background:var(--forest3);border:1px solid rgba(45,74,30,0.2);border-radius:8px;font-size:12px;font-weight:600;color:var(--forest);cursor:pointer;touch-action:manipulation;transition:all 0.15s;display:inline-flex;align-items:center;gap:5px;}
+.template-copy:active{background:rgba(45,74,30,0.15);}
+.copied{color:var(--sun2)!important;}
+
+/* ── LOADING ── */
+.loading{text-align:center;padding:24px;color:var(--text3);font-size:13px;animation:fadeIn 0.3s ease;}
+
+/* ── SCROLL TOP ── */
+.scroll-top{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+16px);right:16px;width:40px;height:40px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:18px;cursor:pointer;box-shadow:0 3px 12px var(--shadow);opacity:0;transition:opacity 0.3s;z-index:100;touch-action:manipulation;display:flex;align-items:center;justify-content:center;}
+.scroll-top.visible{opacity:1;}
+
+/* ── HERO (Anasayfa) ── */
+.hero{
+  background:var(--forest);
+  background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);
+  padding:28px 20px 24px;
+  text-align:center;position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(245,200,66,0.12);
+}
+.hero-flower{font-size:56px;display:block;margin-bottom:10px;animation:sway 5s ease-in-out infinite;transform-origin:bottom center;}
+.hero-names{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,42px);font-weight:700;color:var(--sun);line-height:1;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(245,200,66,0.5);margin-top:8px;}
+.hero-date{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--sun);letter-spacing:1px;text-transform:uppercase;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--forest);}
+.stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <span class="login-flower">🌻</span>
+  <div class="login-names">Sema & Mert</div>
+  <div class="login-sub">Planlama · Organizasyon</div>
+  <div class="login-box">
+    <label class="login-label">Adın</label>
+    <input class="login-name-input" id="loginName" type="text" placeholder="Adını gir..." autocomplete="name">
+    <label class="login-label">Davet Kodu</label>
+    <input class="login-code-input" id="loginCode" type="password" placeholder="••••••" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Giriş Yap</button>
+    <div class="login-err" id="loginErr">Yanlış kod</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-names">🌻 Sema & Mert</div>
+      <div class="header-user" id="headerUser"></div>
+    </div>
+    <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div class="drawer-title">🌻 Plan</div>
+    <div class="drawer-user-info" id="drawerUserInfo"></div>
+  </div>
+  <div class="drawer-section">Sayfalar</div>
+  <div class="drawer-item active" onclick="switchTab('ana')"><div class="drawer-item-icon">🏠</div><div class="drawer-item-label">Ana Sayfa</div></div>
+  <div class="drawer-item" onclick="switchTab('todos')"><div class="drawer-item-icon">✅</div><div class="drawer-item-label">Yapılacaklar</div></div>
+  <div class="drawer-item" onclick="switchTab('notlar')"><div class="drawer-item-icon">📝</div><div class="drawer-item-label">Notlar</div></div>
+  <div class="drawer-item" onclick="switchTab('katilimci')"><div class="drawer-item-icon">👥</div><div class="drawer-item-label">Katılımcılar</div></div>
+  <div class="drawer-item" onclick="switchTab('yemek')"><div class="drawer-item-icon">🍽️</div><div class="drawer-item-label">Yemek Listesi</div></div>
+  <div class="drawer-item" onclick="switchTab('butce')"><div class="drawer-item-icon">💰</div><div class="drawer-item-label">Bütçe</div></div>
+  <div class="drawer-item" onclick="switchTab('mesaj')"><div class="drawer-item-icon">💌</div><div class="drawer-item-label">Mesaj Şablonları</div></div>
+  <div class="drawer-logout" onclick="doLogout()">🚪 Çıkış Yap</div>
+</div>
+
+<!-- ANA SAYFA -->
+<div class="tab-content active" id="tab-ana">
+  <div class="hero">
+    <span class="hero-flower">🌻</span>
+    <div class="hero-names">Sema & Mert</div>
+    <div class="hero-sub">Birlikte planlıyoruz</div>
+    <div class="hero-date">🌿 2026 · Planlama</div>
+  </div>
+  <div class="stat-grid" id="statGrid">
+    <div class="stat-card"><div class="stat-num" id="statTodo">-</div><div class="stat-lbl">Yapılacak</div></div>
+    <div class="stat-card"><div class="stat-num" id="statPerson">-</div><div class="stat-lbl">Katılımcı</div></div>
+    <div class="stat-card"><div class="stat-num" id="statNote">-</div><div class="stat-lbl">Not</div></div>
+  </div>
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Son <em>Aktivite</em></div></div></div>
+    <div id="recentActivity"><div class="loading">Yükleniyor...</div></div>
+  </div>
+</div>
+
+<!-- YAPILACAKLAR -->
+<div class="tab-content" id="tab-todos">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yapılacaklar <em>Listesi</em></div></div></div>
+    <div class="add-row">
+      <input class="add-input" id="todoInput" placeholder="Yeni görev..." onkeydown="if(event.key==='Enter')addTodo()">
+      <select class="add-select" id="todoWho">
+        <option value="ortak">Ortak</option>
+        <option value="mert">Mert</option>
+        <option value="sema">Sema</option>
+        <option value="ozlem">Özlem</option>
+        <option value="ozge">Özge</option>
+        <option value="selen">Selen</option>
+      </select>
+      <button class="add-btn" onclick="addTodo()">+</button>
+    </div>
+    <div class="item-list" id="todoList"><div class="loading">Yükleniyor...</div></div>
+  </div>
+</div>
+
+<!-- NOTLAR -->
+<div class="tab-content" id="tab-notlar">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Ortak <em>Notlar</em></div></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px;" id="noteList">
+      <div class="loading">Yükleniyor...</div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="add-row">
+        <input class="add-input" id="noteTitle" placeholder="Not başlığı...">
+        <button class="add-btn" onclick="addNote()">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KATILIMCI -->
+<div class="tab-content" id="tab-katilimci">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Katılımcı <em>Listesi</em></div></div></div>
+    <div class="add-row" style="flex-wrap:wrap;gap:6px;">
+      <input class="add-input" id="personName" placeholder="İsim..." style="flex:1;min-width:120px;">
+      <input class="add-input" id="personRel" placeholder="Yakınlık (Anne, Dede...)" style="flex:1;min-width:140px;">
+      <select class="add-select" id="personKanal">
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Arama">Arama</option>
+        <option value="Yüz yüze">Yüz yüze</option>
+        <option value="SMS">SMS</option>
+      </select>
+      <button class="add-btn" onclick="addPerson()">+</button>
+    </div>
+    <div id="personList"><div class="loading">Yükleniyor...</div></div>
+  </div>
+</div>
+
+<!-- YEMEK -->
+<div class="tab-content" id="tab-yemek">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yemek <em>Listesi</em></div></div></div>
+    <div class="add-row" style="flex-wrap:wrap;gap:6px;">
+      <input class="add-input" id="foodName" placeholder="Yemek adı..." style="flex:1;">
+      <input class="add-input" id="foodWho" placeholder="Yapan..." style="flex:1;min-width:100px;">
+      <button class="add-btn" onclick="addFood()">+</button>
+    </div>
+    <div id="foodList"><div class="loading">Yükleniyor...</div></div>
+  </div>
+</div>
+
+<!-- BÜTÇE -->
+<div class="tab-content" id="tab-butce">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Bütçe <em>Takibi</em></div></div></div>
+    <div class="add-row">
+      <input class="add-input" id="budgetItem" placeholder="Kalem adı...">
+      <input class="add-input" id="budgetAmount" type="number" placeholder="₺" style="width:90px;flex:none;">
+      <button class="add-btn" onclick="addBudget()">+</button>
+    </div>
+    <div class="note-card" style="margin-bottom:12px;">
+      <div class="note-hdr">Giderler</div>
+      <div style="padding:8px 14px;">
+        <div id="budgetList"><div class="loading">Yükleniyor...</div></div>
+      </div>
+    </div>
+    <div class="budget-total" id="budgetTotal"><span>Toplam</span><span>₺0</span></div>
+  </div>
+</div>
+
+<!-- MESAJ ŞABLONLARI -->
+<div class="tab-content" id="tab-mesaj">
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Mesaj <em>Şablonları</em></div></div></div>
+    <div class="template-card">
+      <div class="template-title">💍 Kız İsteme Daveti</div>
+      <div class="template-text" id="t1">Sevgili [İsim],
+Sizinle güzel bir haberimizi paylaşmak istiyoruz. [Tarih] tarihinde ailelerimizle bir araya gelmeyi planlıyoruz. Umarız bu özel günde yanımızda olursunuz. 🌻</div>
+      <button class="template-copy" onclick="copyTemplate('t1',this)">📋 Kopyala</button>
+    </div>
+    <div class="template-card">
+      <div class="template-title">💒 Nikah Daveti</div>
+      <div class="template-text" id="t2">Sevgili [İsim],
+Nikahımıza sizi de dahil etmek istiyoruz. [Tarih] tarihinde [Yer] adresinde gerçekleşecek bu özel günde yanımızda olmanızdan mutluluk duyarız. 🌸</div>
+      <button class="template-copy" onclick="copyTemplate('t2',this)">📋 Kopyala</button>
+    </div>
+    <div class="template-card">
+      <div class="template-title">📍 Konum Paylaşımı</div>
+      <div class="template-text" id="t3">Merhaba! Etkinlik konumunu paylaşıyorum:
+📍 [Adres]
+🕐 Saat: [Saat]
+📅 Tarih: [Tarih]</div>
+      <button class="template-copy" onclick="copyTemplate('t3',this)">📋 Kopyala</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIzaSyCMOr2gdQwOoZE872VtnlphrZ0oRzktQFQ",
+  authDomain:"kirpi-online.firebaseapp.com",
+  projectId:"kirpi-online",
+  storageBucket:"kirpi-online.firebasestorage.app",
+  messagingSenderId:"439694732981",
+  appId:"1:439694732981:web:ea7a5ce8a599d1b58f58fc"
+});
+const db = getFirestore(app);
+
+// ── AUTH ──────────────────────────────────────────────────────
+const INVITE_CODE = 'sema2026';
+let currentUser = sessionStorage.getItem('plan_user') || '';
+
+window.doLogin = function() {
+  const name = document.getElementById('loginName').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  const err = document.getElementById('loginErr');
+  if(!name){ err.textContent='Adını gir'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
+  if(code !== INVITE_CODE){ err.textContent='Yanlış kod'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
+  currentUser = name;
+  sessionStorage.setItem('plan_user', name);
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('headerUser').textContent = 'Hoş geldin, ' + name;
+  document.getElementById('drawerUserInfo').textContent = name + ' olarak girdiniz';
+  loadAll();
+};
+
+window.doLogout = function() {
+  sessionStorage.removeItem('plan_user');
+  location.reload();
+};
+
+if(currentUser) {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('headerUser').textContent = 'Hoş geldin, ' + currentUser;
+  document.getElementById('drawerUserInfo').textContent = currentUser + ' olarak girdiniz';
+  loadAll();
+} else {
+  setTimeout(()=>document.getElementById('loginName').focus(), 300);
+}
+
+// ── DRAWER ────────────────────────────────────────────────────
+let drawerOpen = false;
+window.toggleDrawer = function() {
+  drawerOpen = !drawerOpen;
+  document.getElementById('hamburgerBtn').classList.toggle('open', drawerOpen);
+  document.getElementById('drawer').classList.toggle('open', drawerOpen);
+  document.getElementById('drawerOverlay').classList.toggle('open', drawerOpen);
+};
+window.closeDrawer = function() {
+  drawerOpen = false;
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+};
+
+// ── TABS ──────────────────────────────────────────────────────
+let activeTab = 'ana';
+window.switchTab = function(name) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.drawer-item').forEach(d=>d.classList.remove('active'));
+  const tabs = ['ana','todos','notlar','katilimci','yemek','butce','mesaj'];
+  const idx = tabs.indexOf(name);
+  if(idx>=0) document.querySelectorAll('.drawer-item')[idx].classList.add('active');
+  activeTab = name;
+  window.scrollTo({top:0});
+  closeDrawer();
+  if(name==='todos') loadTodos();
+  if(name==='notlar') loadNotes();
+  if(name==='katilimci') loadPersons();
+  if(name==='yemek') loadFoods();
+  if(name==='butce') loadBudget();
+};
+
+// ── SCROLL TOP ────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY>200);
+});
+
+// ── TODOS ─────────────────────────────────────────────────────
+async function loadTodos() {
+  const el = document.getElementById('todoList');
+  el.innerHTML = '<div class="loading">Yükleniyor...</div>';
+  try {
+    const q = query(collection(db,'plan_todos'), orderBy('ts','desc'));
+    const snap = await getDocs(q);
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){ el.innerHTML='<div class="empty">Henüz görev yok 🌻</div>'; return; }
+    el.innerHTML = items.map(t=>`
+      <div class="item" id="todo-${t.id}">
+        <div class="item-cb${t.done?' done':''}" onclick="toggleTodo('${t.id}',${!t.done})">✓</div>
+        <div class="item-body">
+          <div class="item-text${t.done?' done':''}">${t.text}</div>
+          <div class="item-meta">
+            <span class="item-who">${t.who||'Ortak'}</span>
+            <span class="item-by">· ${t.by||'?'}</span>
+          </div>
+        </div>
+        <button class="item-del" onclick="delTodo('${t.id}')">×</button>
+      </div>`).join('');
+    updateStats();
+  } catch(e){ el.innerHTML='<div class="empty">Yüklenemedi</div>'; }
+}
+
+window.addTodo = async function() {
+  const text = document.getElementById('todoInput').value.trim();
+  const who = document.getElementById('todoWho').value;
+  if(!text) return;
+  document.getElementById('todoInput').value = '';
+  await addDoc(collection(db,'plan_todos'),{text,who,done:false,by:currentUser,ts:Date.now()});
+  loadTodos();
+};
+
+window.toggleTodo = async function(id, done) {
+  await updateDoc(doc(db,'plan_todos',id),{done});
+  loadTodos();
+};
+
+window.delTodo = async function(id) {
+  await deleteDoc(doc(db,'plan_todos',id));
+  loadTodos();
+};
+
+// ── NOTES ─────────────────────────────────────────────────────
+async function loadNotes() {
+  const el = document.getElementById('noteList');
+  el.innerHTML = '<div class="loading">Yükleniyor...</div>';
+  try {
+    const q = query(collection(db,'plan_notes'), orderBy('ts','desc'));
+    const snap = await getDocs(q);
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){ el.innerHTML='<div class="empty">Henüz not yok 🌻</div>'; return; }
+    el.innerHTML = items.map(n=>`
+      <div class="note-card">
+        <div class="note-hdr">
+          <span>${n.title}</span>
+          <span style="font-size:11px;color:var(--text3);font-weight:400">${n.by}</span>
+        </div>
+        <textarea class="note-textarea" onblur="saveNote('${n.id}',this.value)" style="min-height:70px">${n.content||''}</textarea>
+        <div class="note-footer" style="display:flex;justify-content:space-between;align-items:center;">
+          <span></span>
+          <button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;">Sil</button>
+        </div>
+      </div>`).join('');
+    updateStats();
+  } catch(e){ el.innerHTML='<div class="empty">Yüklenemedi</div>'; }
+}
+
+window.addNote = async function() {
+  const title = document.getElementById('noteTitle').value.trim();
+  if(!title) return;
+  document.getElementById('noteTitle').value = '';
+  await addDoc(collection(db,'plan_notes'),{title,content:'',by:currentUser,ts:Date.now()});
+  loadNotes();
+};
+
+window.saveNote = async function(id, content) {
+  await updateDoc(doc(db,'plan_notes',id),{content});
+};
+
+window.delNote = async function(id) {
+  await deleteDoc(doc(db,'plan_notes',id));
+  loadNotes();
+};
+
+// ── PERSONS ───────────────────────────────────────────────────
+async function loadPersons() {
+  const el = document.getElementById('personList');
+  el.innerHTML = '<div class="loading">Yükleniyor...</div>';
+  try {
+    const q = query(collection(db,'plan_persons'), orderBy('ts','asc'));
+    const snap = await getDocs(q);
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){ el.innerHTML='<div class="empty">Henüz katılımcı yok 🌻</div>'; return; }
+    el.innerHTML = items.map(p=>`
+      <div class="person-card">
+        <div class="person-top">
+          <div>
+            <div class="person-name">${p.name}</div>
+            <div class="person-rel">${p.rel||''}</div>
+          </div>
+          <button class="person-del" onclick="delPerson('${p.id}')">×</button>
+        </div>
+        <div class="person-status">
+          <span class="status-badge ${p.status==='haberdar'?'status-haberdar':p.status==='bekliyor'?'status-bekliyor':'status-henuz'}" onclick="cycleStatus('${p.id}','${p.status||'henuz'}')">
+            ${p.status==='haberdar'?'✅ Haberdar':p.status==='bekliyor'?'⏳ Bekliyor':'○ Henüz değil'}
+          </span>
+        </div>
+        <div class="person-kanal">📱 ${p.kanal||'WhatsApp'}</div>
+      </div>`).join('');
+    updateStats();
+  } catch(e){ el.innerHTML='<div class="empty">Yüklenemedi</div>'; }
+}
+
+window.addPerson = async function() {
+  const name = document.getElementById('personName').value.trim();
+  const rel = document.getElementById('personRel').value.trim();
+  const kanal = document.getElementById('personKanal').value;
+  if(!name) return;
+  document.getElementById('personName').value = '';
+  document.getElementById('personRel').value = '';
+  await addDoc(collection(db,'plan_persons'),{name,rel,kanal,status:'henuz',by:currentUser,ts:Date.now()});
+  loadPersons();
+};
+
+window.cycleStatus = async function(id, current) {
+  const next = current==='henuz'?'bekliyor':current==='bekliyor'?'haberdar':'henuz';
+  await updateDoc(doc(db,'plan_persons',id),{status:next});
+  loadPersons();
+};
+
+window.delPerson = async function(id) {
+  await deleteDoc(doc(db,'plan_persons',id));
+  loadPersons();
+};
+
+// ── FOODS ─────────────────────────────────────────────────────
+async function loadFoods() {
+  const el = document.getElementById('foodList');
+  el.innerHTML = '<div class="loading">Yükleniyor...</div>';
+  try {
+    const q = query(collection(db,'plan_foods'), orderBy('ts','asc'));
+    const snap = await getDocs(q);
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){ el.innerHTML='<div class="empty">Henüz yemek yok 🌻</div>'; return; }
+    el.innerHTML = items.map(f=>`
+      <div class="food-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="food-name">${f.name}</div>
+            <div class="food-who">👤 ${f.who||'?'}</div>
+          </div>
+          <button onclick="delFood('${f.id}')" style="background:none;border:none;color:var(--text3);font-size:15px;cursor:pointer;">×</button>
+        </div>
+        <textarea placeholder="Tarif notu ekle..." class="note-textarea" style="margin-top:8px;min-height:60px;border-top:1px solid var(--border);padding:8px 0 0;" onblur="saveFood('${f.id}',this.value)">${f.recipe||''}</textarea>
+      </div>`).join('');
+  } catch(e){ el.innerHTML='<div class="empty">Yüklenemedi</div>'; }
+}
+
+window.addFood = async function() {
+  const name = document.getElementById('foodName').value.trim();
+  const who = document.getElementById('foodWho').value.trim();
+  if(!name) return;
+  document.getElementById('foodName').value = '';
+  document.getElementById('foodWho').value = '';
+  await addDoc(collection(db,'plan_foods'),{name,who,recipe:'',by:currentUser,ts:Date.now()});
+  loadFoods();
+};
+
+window.saveFood = async function(id, recipe) {
+  await updateDoc(doc(db,'plan_foods',id),{recipe});
+};
+
+window.delFood = async function(id) {
+  await deleteDoc(doc(db,'plan_foods',id));
+  loadFoods();
+};
+
+// ── BUDGET ────────────────────────────────────────────────────
+async function loadBudget() {
+  const el = document.getElementById('budgetList');
+  el.innerHTML = '<div class="loading">Yükleniyor...</div>';
+  try {
+    const q = query(collection(db,'plan_budget'), orderBy('ts','asc'));
+    const snap = await getDocs(q);
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){ el.innerHTML='<div class="empty">Henüz gider yok</div>'; document.getElementById('budgetTotal').innerHTML='<span>Toplam</span><span>₺0</span>'; return; }
+    el.innerHTML = items.map(b=>`
+      <div class="budget-row">
+        <span class="budget-item-name">${b.item}</span>
+        <span class="budget-amount">₺${Number(b.amount).toLocaleString('tr-TR')}</span>
+        <button onclick="delBudget('${b.id}')" style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;margin-left:8px;">×</button>
+      </div>`).join('');
+    const total = items.reduce((s,b)=>s+Number(b.amount||0),0);
+    document.getElementById('budgetTotal').innerHTML = `<span>Toplam</span><span>₺${total.toLocaleString('tr-TR')}</span>`;
+  } catch(e){ el.innerHTML='<div class="empty">Yüklenemedi</div>'; }
+}
+
+window.addBudget = async function() {
+  const item = document.getElementById('budgetItem').value.trim();
+  const amount = document.getElementById('budgetAmount').value;
+  if(!item || !amount) return;
+  document.getElementById('budgetItem').value = '';
+  document.getElementById('budgetAmount').value = '';
+  await addDoc(collection(db,'plan_budget'),{item,amount:Number(amount),by:currentUser,ts:Date.now()});
+  loadBudget();
+};
+
+window.delBudget = async function(id) {
+  await deleteDoc(doc(db,'plan_budget',id));
+  loadBudget();
+};
+
+// ── STATS ─────────────────────────────────────────────────────
+async function updateStats() {
+  try {
+    const [todos, persons, notes] = await Promise.all([
+      getDocs(collection(db,'plan_todos')),
+      getDocs(collection(db,'plan_persons')),
+      getDocs(collection(db,'plan_notes')),
+    ]);
+    const pending = todos.docs.filter(d=>!d.data().done).length;
+    document.getElementById('statTodo').textContent = pending;
+    document.getElementById('statPerson').textContent = persons.size;
+    document.getElementById('statNote').textContent = notes.size;
+  } catch(e){}
+}
+
+// ── RECENT ACTIVITY ───────────────────────────────────────────
+async function loadRecent() {
+  try {
+    const [todos, persons, notes] = await Promise.all([
+      getDocs(query(collection(db,'plan_todos'), orderBy('ts','desc'))),
+      getDocs(query(collection(db,'plan_persons'), orderBy('ts','desc'))),
+      getDocs(query(collection(db,'plan_notes'), orderBy('ts','desc'))),
+    ]);
+    const all = [
+      ...todos.docs.map(d=>({...d.data(),type:'todo'})),
+      ...persons.docs.map(d=>({...d.data(),type:'person'})),
+      ...notes.docs.map(d=>({...d.data(),type:'note'})),
+    ].sort((a,b)=>b.ts-a.ts).slice(0,5);
+    const el = document.getElementById('recentActivity');
+    if(!all.length){ el.innerHTML='<div class="empty">Henüz aktivite yok 🌻</div>'; return; }
+    el.innerHTML = all.map(a=>`
+      <div class="item" style="margin-bottom:6px;">
+        <div style="font-size:18px">${a.type==='todo'?'✅':a.type==='person'?'👥':'📝'}</div>
+        <div class="item-body">
+          <div class="item-text">${a.type==='todo'?a.text:a.type==='person'?a.name:a.title}</div>
+          <div class="item-meta"><span class="item-by">${a.by||'?'} tarafından eklendi</span></div>
+        </div>
+      </div>`).join('');
+    updateStats();
+  } catch(e){}
+}
+
+// ── COPY TEMPLATE ─────────────────────────────────────────────
+window.copyTemplate = function(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent = '✓ Kopyalandı';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='📋 Kopyala'; btn.classList.remove('copied'); }, 2000);
+  });
+};
+
+// ── INIT ──────────────────────────────────────────────────────
+async function loadAll() {
+  loadRecent();
+}
+</script>
+</body>
+</html>
