@@ -119,6 +119,12 @@ function doLogin() {
 }
 
 function loadApp(url) {
+  // plan.html opens standalone (PWA compatible)
+  if(url === 'plan.html') {
+    localStorage.setItem('kirpi_auth', document.getElementById('login-input').value.trim());
+    window.location.href = url;
+    return;
+  }
   const frame = document.getElementById('app-frame');
   const screen = document.getElementById('login-screen');
   frame.src = url;
