@@ -63,7 +63,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   background:var(--forest);
   background-image:radial-gradient(ellipse 80% 70% at 50% -10%,rgba(245,200,66,0.15) 0%,transparent 65%);
   padding:16px 18px 18px;
-  padding-top:max(calc(env(safe-area-inset-top,0px)+14px),54px);
+  padding-top:max(calc(env(safe-area-inset-top,0px)+16px),64px);
   position:relative;overflow:hidden;
   border-bottom:1px solid rgba(245,200,66,0.15);
 }
@@ -253,7 +253,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   <div class="drawer-item" onclick="switchTab('katilimci')"><div class="drawer-item-icon">👥</div><div class="drawer-item-label">Katılımcılar</div></div>
   <div class="drawer-item" onclick="switchTab('yemek')"><div class="drawer-item-icon">🍽️</div><div class="drawer-item-label">Yemek Listesi</div></div>
   <div class="drawer-item" onclick="switchTab('butce')"><div class="drawer-item-icon">💰</div><div class="drawer-item-label">Bütçe</div></div>
-  <div class="drawer-item" onclick="switchTab('mesaj')"><div class="drawer-item-icon">💌</div><div class="drawer-item-label">Mesaj Şablonları</div></div>
   <div class="drawer-logout" onclick="doLogout()">🚪 Çıkış Yap</div>
 </div>
 
@@ -363,33 +362,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   </div>
 </div>
 
-<!-- MESAJ ŞABLONLARI -->
-<div class="tab-content" id="tab-mesaj">
-  <div class="sec">
-    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Mesaj <em>Şablonları</em></div></div></div>
-    <div class="template-card">
-      <div class="template-title">💍 Kız İsteme Daveti</div>
-      <div class="template-text" id="t1">Sevgili [İsim],
-Sizinle güzel bir haberimizi paylaşmak istiyoruz. [Tarih] tarihinde ailelerimizle bir araya gelmeyi planlıyoruz. Umarız bu özel günde yanımızda olursunuz. 🌻</div>
-      <button class="template-copy" onclick="copyTemplate('t1',this)">📋 Kopyala</button>
-    </div>
-    <div class="template-card">
-      <div class="template-title">💒 Nikah Daveti</div>
-      <div class="template-text" id="t2">Sevgili [İsim],
-Nikahımıza sizi de dahil etmek istiyoruz. [Tarih] tarihinde [Yer] adresinde gerçekleşecek bu özel günde yanımızda olmanızdan mutluluk duyarız. 🌸</div>
-      <button class="template-copy" onclick="copyTemplate('t2',this)">📋 Kopyala</button>
-    </div>
-    <div class="template-card">
-      <div class="template-title">📍 Konum Paylaşımı</div>
-      <div class="template-text" id="t3">Merhaba! Etkinlik konumunu paylaşıyorum:
-📍 [Adres]
-🕐 Saat: [Saat]
-📅 Tarih: [Tarih]</div>
-      <button class="template-copy" onclick="copyTemplate('t3',this)">📋 Kopyala</button>
-    </div>
-  </div>
-</div>
-
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script type="module">
@@ -468,7 +440,7 @@ window.switchTab = function(name) {
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   document.querySelectorAll('.drawer-item').forEach(d=>d.classList.remove('active'));
-  const tabs = ['ana','todos','notlar','katilimci','yemek','butce','mesaj'];
+  const tabs = ['ana','todos','notlar','katilimci','yemek','butce'];
   const idx = tabs.indexOf(name);
   if(idx>=0) document.querySelectorAll('.drawer-item')[idx].classList.add('active');
   activeTab = name;
