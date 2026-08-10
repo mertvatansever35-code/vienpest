@@ -14,9 +14,9 @@
 <style>
 :root{
   --sun:#F5C842;--sun2:#E8B82A;--sun3:rgba(245,200,66,0.12);
-  --forest:#2D4A1E;--forest2:#3D6228;--forest3:rgba(45,74,30,0.08);
+  --forest:#1E3512;--forest2:#2A4A1A;--forest3:rgba(30,53,18,0.1);
   --coffee:#8B5E2A;--coffee2:rgba(139,94,42,0.12);
-  --cream:#F9F3E3;--cream2:#FFF8E7;--cream3:#EFE6D0;
+  --cream:#F0E8D5;--cream2:#F5EDD8;--cream3:#E4D8C0;
   --text:#1A1208;--text2:#5A4A2A;--text3:#9A8A6A;
   --border:rgba(139,94,42,0.12);--border2:rgba(139,94,42,0.2);
   --shadow:rgba(45,74,30,0.08);--card:#FFFDF5;--red:#C0392B;
@@ -52,13 +52,13 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   position:fixed;top:0;left:0;right:0;z-index:180;
   background:var(--forest);
   border-bottom:1px solid rgba(245,200,66,0.15);
-  box-shadow:0 2px 10px rgba(0,0,0,0.2);
-  padding:10px 16px 10px;
-  padding-top:max(calc(env(safe-area-inset-top,0px)+10px),50px);
+  box-shadow:0 2px 10px rgba(0,0,0,0.25);
+  padding:8px 16px 8px;
+  padding-top:max(calc(env(safe-area-inset-top,0px)+8px),52px);
 }
 .header-top{display:flex;align-items:center;justify-content:space-between;}
-.header-names{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--sun);}
-.header-user{font-size:10px;color:rgba(245,200,66,0.45);margin-top:1px;}
+.header-names{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--sun);}
+.header-user{display:none;}
 .hamburger-btn{width:38px;height:38px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;touch-action:manipulation;flex-shrink:0;}
 .hamburger-btn span{width:16px;height:1.5px;background:var(--sun);border-radius:2px;transition:all 0.25s;}
 .hamburger-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
@@ -83,19 +83,19 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .drawer-logout{margin:14px 16px;padding:10px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);border-radius:10px;color:#E07070;font-size:13px;text-align:center;cursor:pointer;touch-action:manipulation;}
 
 /* ── MAIN CONTENT ── */
-.main-wrap{padding-top:max(calc(env(safe-area-inset-top,0px)+64px),80px);}
+.main-wrap{padding-top:max(calc(env(safe-area-inset-top,0px)+56px),76px);}
 .tab-content{display:none;min-height:100svh;padding-bottom:max(env(safe-area-inset-bottom,0px),20px);}
 .tab-content.active{display:block;animation:fadeUp 0.2s ease;}
 
 /* ── FILTER BAR ── */
-.filter-bar{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);position:sticky;top:max(calc(env(safe-area-inset-top,0px)+64px),80px);z-index:10;}
+.filter-bar{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);position:sticky;top:max(calc(env(safe-area-inset-top,0px)+56px),76px);z-index:10;}
 .filter-bar::-webkit-scrollbar{display:none;}
 .filter-chip{flex-shrink:0;padding:5px 12px;border:1.5px solid var(--border2);border-radius:20px;font-size:12px;font-weight:500;color:var(--text2);background:var(--card);cursor:pointer;touch-action:manipulation;transition:all 0.15s;white-space:nowrap;}
 .filter-chip.active{background:var(--forest);color:var(--sun);border-color:var(--forest);}
 .filter-chip:active{opacity:0.7;}
 
 /* ── SECTION ── */
-.sec{padding:14px 16px;border-bottom:1px solid var(--border);}
+.sec{padding:12px 16px;border-bottom:1px solid var(--border);}
 .sec:last-child{border-bottom:none;padding-bottom:20px;}
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;}
 .sec-left{display:flex;align-items:center;gap:7px;}
@@ -190,8 +190,8 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .gift-del{font-size:14px;color:var(--text3);background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 4px;}
 
 /* ── HERO ── */
-.hero{background:var(--forest);background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);padding:20px 16px 18px;text-align:center;border-bottom:1px solid rgba(245,200,66,0.12);}
-.hero-flower{font-size:44px;display:block;margin-bottom:8px;animation:sway 5s ease-in-out infinite;transform-origin:bottom center;}
+.hero{background:var(--forest);background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);padding:24px 16px 18px;text-align:center;border-bottom:1px solid rgba(245,200,66,0.12);}
+
 .hero-names{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,7vw,36px);font-weight:700;color:var(--sun);line-height:1;}
 .hero-sub{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(245,200,66,0.5);margin-top:6px;}
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 16px;}
@@ -226,7 +226,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   <div class="header-top">
     <div>
       <div class="header-names">🌻 Sema & Mert</div>
-      <div class="header-user" id="headerUser"></div>
     </div>
     <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()">
       <span></span><span></span><span></span>
@@ -260,7 +259,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- ANA SAYFA -->
 <div class="tab-content active" id="tab-ana">
   <div class="hero">
-    <span class="hero-flower">🌻</span>
     <div class="hero-names">Sema & Mert</div>
     <div class="hero-sub">Birlikte planlıyoruz · 2026</div>
   </div>
@@ -475,7 +473,7 @@ window.doLogout = function() {
 };
 
 function setUserInfo(name) {
-  document.getElementById('headerUser').textContent = name + ' olarak giriş yapıldı';
+  
   document.getElementById('drawerUserInfo').textContent = name;
 }
 
