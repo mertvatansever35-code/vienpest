@@ -52,9 +52,11 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 /* header removed - integrated into hero */
 .header{display:none;}
 .hamburger-btn{
-  position:fixed;
-  bottom:max(calc(env(safe-area-inset-bottom,0px)+24px), 34px);
-  right:20px;
+  position:fixed !important;
+  bottom:max(calc(env(safe-area-inset-bottom,0px)+24px), 34px) !important;
+  right:20px !important;
+  top:auto !important;
+  left:auto !important;
   width:52px;height:52px;
   background:var(--forest);
   border:1.5px solid rgba(245,200,66,0.4);
