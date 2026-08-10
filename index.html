@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#2D4A1E">
+<script>if(navigator.standalone)document.documentElement.classList.add('pwa-standalone');</script>
 <title>Sema & Mert · Plan</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -201,6 +202,8 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .gift-del{font-size:14px;color:var(--text3);background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 4px;}
 
 /* ── HERO ── */
+.pwa-standalone .hero{padding-top:80px!important;}
+.pwa-standalone #login-screen{padding-top:80px!important;}
 .hero{
   background:var(--forest);
   background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);
