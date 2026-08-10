@@ -7,21 +7,21 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#2D4A1E">
-<script>if(navigator.standalone)document.documentElement.classList.add('pwa-standalone');</script>
 <title>Sema & Mert · Plan</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sun:#F5C842;--sun2:#E8B82A;--sun3:rgba(245,200,66,0.12);
+  --sun:#F5C842;
+  --safe-top:59px; /* Dynamic Island default, overridden by JS */--sun2:#E8B82A;--sun3:rgba(245,200,66,0.12);
   --forest:#1E3512;--forest2:#2A4A1A;--forest3:rgba(30,53,18,0.1);
   --coffee:#8B5E2A;--coffee2:rgba(139,94,42,0.12);
   --cream:#F0E8D5;--cream2:#F5EDD8;--cream3:#E4D8C0;
   --text:#1A1208;--text2:#5A4A2A;--text3:#9A8A6A;
   --border:rgba(139,94,42,0.12);--border2:rgba(139,94,42,0.2);
   --shadow:rgba(45,74,30,0.08);--card:#FFFDF5;--red:#C0392B;
-  --header-h:max(calc(env(safe-area-inset-top, 59px) + 54px), 80px);
+  --header-h:max(calc(env(safe-area-inset-top,0px) + 54px), 70px);
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -32,7 +32,7 @@
 html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;line-height:1.5;min-height:100svh;}
 
 /* ── LOGIN ── */
-#login-screen{position:fixed;inset:0;z-index:999;background:var(--forest);background-image:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(245,200,66,0.15) 0%,transparent 65%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 24px;padding-top:max(calc(env(safe-area-inset-top,0px)+30px),50px);transition:opacity 0.4s;}
+#login-screen{position:fixed;inset:0;z-index:999;background:var(--forest);background-image:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(245,200,66,0.15) 0%,transparent 65%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 24px;padding-top:calc(var(--safe-top, 59px) + 30px);transition:opacity 0.4s;}
 #login-screen.hidden{opacity:0;pointer-events:none;}
 .login-flower{font-size:48px;margin-bottom:10px;display:block;animation:sway 4s ease-in-out infinite;transform-origin:bottom center;}
 .login-names{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--sun);margin-bottom:4px;text-align:center;}
@@ -52,16 +52,20 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 /* header removed - integrated into hero */
 .header{display:none;}
 .hamburger-btn{
-  position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+20px);right:18px;
-  width:50px;height:50px;
+  position:fixed;
+  bottom:max(calc(env(safe-area-inset-bottom,0px)+24px), 34px);
+  right:20px;
+  width:52px;height:52px;
   background:var(--forest);
-  border:1.5px solid rgba(245,200,66,0.35);
+  border:1.5px solid rgba(245,200,66,0.4);
   border-radius:50%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
   cursor:pointer;touch-action:manipulation;
-  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  box-shadow:0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2);
   z-index:180;
+  transition:transform 0.2s, box-shadow 0.2s;
 }
+.hamburger-btn:active{transform:scale(0.92);}
 .hamburger-btn span{width:18px;height:1.5px;background:var(--sun);border-radius:2px;transition:all 0.25s;}
 .hamburger-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .hamburger-btn.open span:nth-child(2){opacity:0;}
@@ -80,7 +84,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 /* ── DRAWER ── */
 .drawer-overlay{position:fixed;inset:0;z-index:190;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.25s;}
 .drawer-overlay.open{background:rgba(0,0,0,0.45);pointer-events:all;}
-.drawer{position:fixed;top:0;right:0;bottom:0;z-index:195;width:min(270px,82vw);background:var(--forest);border-left:1px solid rgba(245,200,66,0.15);transform:translateX(100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding-top:env(safe-area-inset-top,0);padding-bottom:max(env(safe-area-inset-bottom,0px),16px);}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:195;width:min(270px,82vw);background:var(--forest);border-left:1px solid rgba(245,200,66,0.15);transform:translateX(100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding-top:var(--safe-top, 59px);padding-bottom:max(env(safe-area-inset-bottom,0px),16px);}
 .drawer.open{transform:none;}
 .drawer-header{padding:18px 16px 12px;border-bottom:1px solid rgba(245,200,66,0.1);}
 .drawer-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--sun);font-weight:700;}
@@ -100,7 +104,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .tab-content.active{display:block;animation:fadeUp 0.2s ease;}
 
 /* ── FILTER BAR ── */
-.filter-bar{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+.filter-bar{display:flex;gap:6px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
 .filter-bar::-webkit-scrollbar{display:none;}
 .filter-chip{flex-shrink:0;padding:5px 12px;border:1.5px solid var(--border2);border-radius:20px;font-size:12px;font-weight:500;color:var(--text2);background:var(--card);cursor:pointer;touch-action:manipulation;transition:all 0.15s;white-space:nowrap;}
 .filter-chip.active{background:var(--forest);color:var(--sun);border-color:var(--forest);}
@@ -202,23 +206,11 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .gift-del{font-size:14px;color:var(--text3);background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 4px;}
 
 /* ── HERO ── */
-@media (display-mode: standalone){
-  .hero{padding-top:80px!important;}
-  #login-screen{padding-top:80px!important;}
-  /* Diğer tüm tablar: Dynamic Island için üst boşluk */
-  .tab-content:not(#tab-ana){padding-top:60px!important;}
-  /* Sticky filter-bar da aşağı in */
-  .filter-bar{top:60px!important;}
-  /* Hamburger butonu alt safe area */
-  .hamburger-btn{bottom:calc(env(safe-area-inset-bottom,34px)+20px)!important;}
-  /* Scroll top butonu da */
-  .scroll-top{bottom:calc(env(safe-area-inset-bottom,34px)+14px)!important;}
-}
 .hero{
   background:var(--forest);
   background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);
   padding:20px 16px 20px;
-  padding-top:max(calc(env(safe-area-inset-top, 59px)+20px),80px);
+  padding-top:calc(var(--safe-top, 59px) + 20px);
   text-align:center;
   border-bottom:1px solid rgba(245,200,66,0.12);
 }
@@ -231,7 +223,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .stat-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
 
 /* ── SCROLL TOP ── */
-.scroll-top{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+14px);right:14px;width:36px;height:36px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:16px;cursor:pointer;box-shadow:0 3px 10px var(--shadow);opacity:0;transition:opacity 0.3s;z-index:100;touch-action:manipulation;display:flex;align-items:center;justify-content:center;}
+.scroll-top{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+28px);left:16px;width:36px;height:36px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:16px;cursor:pointer;box-shadow:0 3px 10px var(--shadow);opacity:0;transition:opacity 0.3s;z-index:100;touch-action:manipulation;display:flex;align-items:center;justify-content:center;}
 .scroll-top.visible{opacity:1;}
 </style>
 </head>
@@ -456,6 +448,17 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<script>
+// Runtime safe area fix for Dynamic Island
+function setSafeArea() {
+  const top = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0');
+  // Force minimum 59px for iPhone 14 Pro Max Dynamic Island
+  document.documentElement.style.setProperty('--safe-top', 
+    Math.max(window.screen.height > 800 ? 59 : 44, 0) + 'px');
+}
+setSafeArea();
+window.addEventListener('resize', setSafeArea);
+</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
