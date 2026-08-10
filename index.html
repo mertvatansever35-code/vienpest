@@ -376,19 +376,62 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- ANA SAYFA -->
 <div class="tab-content active" id="tab-ana">
-  <div class="hero">
-    <div class="hero-names">Sema & Mert</div>
-    <div class="hero-sub" id="heroUser">Birlikte planlıyoruz · 2026</div>
-  </div>
-  <div class="stat-grid">
-    <div class="stat-card"><div class="stat-num" id="statTodo">-</div><div class="stat-lbl">Görev</div></div>
-    <div class="stat-card"><div class="stat-num" id="statPerson">-</div><div class="stat-lbl">Kişi</div></div>
-    <div class="stat-card"><div class="stat-num" id="statFood">-</div><div class="stat-lbl">Yemek</div></div>
-    <div class="stat-card"><div class="stat-num" id="statBudget">-</div><div class="stat-lbl">Bütçe</div></div>
-  </div>
-  <div class="sec">
-    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Son <em>Aktivite</em></div></div></div>
-    <div id="recentActivity"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
+  <div class="home-screen">
+    <div class="home-header">
+      <div class="home-title">🌻 Sema & Mert</div>
+      <div class="home-sub" id="heroUser">Birlikte planlıyoruz · 2026</div>
+      <div class="home-stats">
+        <span id="statTodo">-</span> görev &nbsp;·&nbsp;
+        <span id="statPerson">-</span> kişi &nbsp;·&nbsp;
+        <span id="statBudget">-</span>
+      </div>
+    </div>
+    <div class="app-grid">
+      <div class="app-icon" onclick="switchTab('todos')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#2D6A2D,#1A3D1A)"><span>✅</span></div>
+        <div class="app-label">Yapılacaklar</div>
+        <div class="app-badge" id="badge-todos"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('notlar')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#5C4A1E,#3A2D0E)"><span>📝</span></div>
+        <div class="app-label">Notlar</div>
+        <div class="app-badge" id="badge-notlar"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('katilimci')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#1E4A5C,#0E2D3A)"><span>👥</span></div>
+        <div class="app-label">Katılımcılar</div>
+        <div class="app-badge" id="badge-katilimci"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('yemek')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#7A3A1E,#4A200E)"><span>🍽️</span></div>
+        <div class="app-label">Yemekler</div>
+        <div class="app-badge" id="badge-yemek"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('butce')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#1E5C3A,#0E3A22)"><span>💰</span></div>
+        <div class="app-label">Bütçe</div>
+        <div class="app-badge" id="badge-butce"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('org')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#5C1E5C,#3A0E3A)"><span>🎪</span></div>
+        <div class="app-label">Organizasyon</div>
+        <div class="app-badge" id="badge-org"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('esya')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#3A1E5C,#1E0E3A)"><span>👗</span></div>
+        <div class="app-label">Kıyafet & Eşya</div>
+        <div class="app-badge" id="badge-esya"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('hediye')">
+        <div class="app-icon-bg" style="background:linear-gradient(135deg,#7A1E2D,#4A0E1A)"><span>🎁</span></div>
+        <div class="app-label">Hediyelik</div>
+        <div class="app-badge" id="badge-hediye"></div>
+      </div>
+    </div>
+    <div class="home-recent">
+      <div class="home-recent-title">Son Aktivite</div>
+      <div id="recentActivity"><div style="color:rgba(245,200,66,0.3);font-size:13px;text-align:center;padding:12px;">Yükleniyor...</div></div>
+    </div>
   </div>
 </div>
 
