@@ -101,6 +101,13 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 /* ── MAIN CONTENT ── */
 .main-wrap{padding-top:0;}
 .tab-content{display:none;min-height:100svh;padding-bottom:max(calc(env(safe-area-inset-bottom,0px)+80px),100px);}
+.safe-top-bar{
+  height:var(--safe-top,59px);
+  background:var(--forest);
+  display:none;
+}
+.tab-content.active .safe-top-bar{display:block;}
+.hero-tab .safe-top-bar{display:none !important;}
 .tab-content.active{display:block;animation:fadeUp 0.2s ease;}
 
 /* ── FILTER BAR ── */
@@ -293,6 +300,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- YAPILACAKLAR -->
 <div class="tab-content" id="tab-todos">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="todoFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yapılacaklar</div></div><span class="sec-count" id="todoCnt"></span></div>
@@ -314,6 +322,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- NOTLAR -->
 <div class="tab-content" id="tab-notlar">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="notlarFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Notlar</div></div></div>
@@ -335,6 +344,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- KATILIMCI -->
 <div class="tab-content" id="tab-katilimci">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="katilimciFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Katılımcılar</div></div><span class="sec-count" id="personCnt"></span></div>
@@ -355,6 +365,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- YEMEK -->
 <div class="tab-content" id="tab-yemek">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="yemekFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yemek <em>Listesi</em></div></div><span class="sec-count" id="foodCnt"></span></div>
@@ -377,6 +388,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- BÜTÇE -->
 <div class="tab-content" id="tab-butce">
+  <div class="safe-top-bar"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Bütçe <em>Takibi</em></div></div></div>
     <div class="add-row">
@@ -391,6 +403,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- ORGANİZASYON -->
 <div class="tab-content" id="tab-org">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="orgFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Organizasyon</div></div></div>
@@ -412,6 +425,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- KIYAFET & EŞYA -->
 <div class="tab-content" id="tab-esya">
+  <div class="safe-top-bar"></div>
   <div class="filter-bar" id="esyaFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Kıyafet & <em>Eşya</em></div></div></div>
@@ -430,6 +444,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <!-- HEDİYELİK -->
 <div class="tab-content" id="tab-hediye">
+  <div class="safe-top-bar"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Hediyelik</div></div></div>
     <div class="add-row">
