@@ -205,6 +205,14 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 @media (display-mode: standalone){
   .hero{padding-top:80px!important;}
   #login-screen{padding-top:80px!important;}
+  /* Diğer tüm tablar: Dynamic Island için üst boşluk */
+  .tab-content:not(#tab-ana){padding-top:60px!important;}
+  /* Sticky filter-bar da aşağı in */
+  .filter-bar{top:60px!important;}
+  /* Hamburger butonu alt safe area */
+  .hamburger-btn{bottom:calc(env(safe-area-inset-bottom,34px)+20px)!important;}
+  /* Scroll top butonu da */
+  .scroll-top{bottom:calc(env(safe-area-inset-bottom,34px)+14px)!important;}
 }
 .hero{
   background:var(--forest);
