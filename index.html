@@ -202,8 +202,10 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .gift-del{font-size:14px;color:var(--text3);background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 4px;}
 
 /* ── HERO ── */
-.pwa-standalone .hero{padding-top:80px!important;}
-.pwa-standalone #login-screen{padding-top:80px!important;}
+@media (display-mode: standalone){
+  .hero{padding-top:80px!important;}
+  #login-screen{padding-top:80px!important;}
+}
 .hero{
   background:var(--forest);
   background-image:radial-gradient(ellipse 80% 70% at 50% 0%,rgba(245,200,66,0.12) 0%,transparent 70%);
