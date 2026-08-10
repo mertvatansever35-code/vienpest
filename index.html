@@ -234,6 +234,101 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 /* ── SCROLL TOP ── */
 .scroll-top{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px)+28px);left:16px;width:36px;height:36px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:16px;cursor:pointer;box-shadow:0 3px 10px var(--shadow);opacity:0;transition:opacity 0.3s;z-index:100;touch-action:manipulation;display:flex;align-items:center;justify-content:center;}
 .scroll-top.visible{opacity:1;}
+
+/* ── HOME SCREEN ── */
+.home-screen{
+  min-height:100svh;
+  background:var(--forest);
+  background-image:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(245,200,66,0.1) 0%,transparent 60%);
+  padding-top:calc(var(--safe-top,59px) + 16px);
+  padding-bottom:max(calc(env(safe-area-inset-bottom,0px)+20px),40px);
+}
+.home-header{
+  text-align:center;
+  padding:0 20px 20px;
+}
+.home-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;font-weight:700;color:var(--sun);
+  margin-bottom:4px;
+}
+.home-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;font-style:italic;
+  color:rgba(245,200,66,0.5);margin-bottom:8px;
+}
+.home-stats{
+  font-size:11px;color:rgba(245,200,66,0.35);
+  letter-spacing:0.5px;
+}
+.app-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px 8px;
+  padding:0 16px 20px;
+}
+.app-icon{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  cursor:pointer;touch-action:manipulation;
+  position:relative;
+}
+.app-icon:active .app-icon-bg{transform:scale(0.88);}
+.app-icon-bg{
+  width:64px;height:64px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:transform 0.15s;
+}
+.app-label{
+  font-size:10px;color:rgba(245,200,66,0.7);
+  text-align:center;line-height:1.2;
+  font-family:'Outfit',sans-serif;
+  max-width:70px;
+}
+.app-badge{
+  position:absolute;top:-4px;right:4px;
+  width:18px;height:18px;border-radius:50%;
+  background:#E8622A;color:white;
+  font-size:10px;font-weight:700;
+  display:none;align-items:center;justify-content:center;
+  border:2px solid var(--forest);
+  font-family:'Outfit',sans-serif;
+}
+.app-badge.show{display:flex;}
+.home-recent{
+  margin:0 16px;
+  background:rgba(245,200,66,0.05);
+  border:1px solid rgba(245,200,66,0.1);
+  border-radius:14px;padding:12px 14px;
+}
+.home-recent-title{
+  font-size:10px;font-weight:600;
+  color:rgba(245,200,66,0.4);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:10px;
+}
+.home-recent .item{
+  background:rgba(245,200,66,0.05);
+  border-color:rgba(245,200,66,0.1);
+}
+.home-recent .item-text{color:rgba(245,200,66,0.8);}
+.home-recent .item-by{color:rgba(245,200,66,0.35);}
+
+/* Back button for sub-pages */
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px 8px 10px;
+  background:rgba(245,200,66,0.1);
+  border:1px solid rgba(245,200,66,0.2);
+  border-radius:20px;
+  font-size:13px;color:var(--sun);
+  cursor:pointer;touch-action:manipulation;
+  font-family:'Outfit',sans-serif;font-weight:500;
+  margin:12px 16px 0;
+  transition:all 0.15s;
+}
+.back-btn:active{background:rgba(245,200,66,0.18);}
 </style>
 </head>
 <body>
@@ -254,10 +349,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 </div>
 
 <!-- HEADER -->
-<div class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()">
-  <span></span><span></span><span></span>
-  <div class="notif-badge" id="notifBadge"></div>
-</div>
+
 
 <!-- DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
@@ -303,6 +395,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- YAPILACAKLAR -->
 <div class="tab-content" id="tab-todos">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="todoFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yapılacaklar</div></div><span class="sec-count" id="todoCnt"></span></div>
@@ -325,6 +418,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- NOTLAR -->
 <div class="tab-content" id="tab-notlar">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="notlarFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Notlar</div></div></div>
@@ -347,6 +441,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- KATILIMCI -->
 <div class="tab-content" id="tab-katilimci">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="katilimciFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Katılımcılar</div></div><span class="sec-count" id="personCnt"></span></div>
@@ -368,6 +463,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- YEMEK -->
 <div class="tab-content" id="tab-yemek">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="yemekFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yemek <em>Listesi</em></div></div><span class="sec-count" id="foodCnt"></span></div>
@@ -391,6 +487,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- BÜTÇE -->
 <div class="tab-content" id="tab-butce">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Bütçe <em>Takibi</em></div></div></div>
     <div class="add-row">
@@ -406,6 +503,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- ORGANİZASYON -->
 <div class="tab-content" id="tab-org">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="orgFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Organizasyon</div></div></div>
@@ -428,6 +526,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- KIYAFET & EŞYA -->
 <div class="tab-content" id="tab-esya">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="filter-bar" id="esyaFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Kıyafet & <em>Eşya</em></div></div></div>
@@ -447,6 +546,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- HEDİYELİK -->
 <div class="tab-content" id="tab-hediye">
   <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Hediyelik</div></div></div>
     <div class="add-row">
@@ -540,28 +640,15 @@ if(currentUser && localStorage.getItem('plan_auth')==='1') {
 
 // ── DRAWER ────────────────────────────────────────────────────
 let drawerOpen = false;
-window.toggleDrawer = function() {
-  drawerOpen = !drawerOpen;
-  document.getElementById('hamburgerBtn').classList.toggle('open',drawerOpen);
-  document.getElementById('drawer').classList.toggle('open',drawerOpen);
-  document.getElementById('drawerOverlay').classList.toggle('open',drawerOpen);
-  if(drawerOpen) clearNotifications();
-};
-window.closeDrawer = function() {
-  drawerOpen = false;
-  document.getElementById('hamburgerBtn').classList.remove('open');
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('drawerOverlay').classList.remove('open');
-};
+window.toggleDrawer = function() {};
+window.closeDrawer = function() {};
 
 // ── TABS ──────────────────────────────────────────────────────
 const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','butce','org','esya','hediye'];
 window.switchTab = function(name) {
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  document.querySelectorAll('.drawer-item').forEach((d,i)=>d.classList.toggle('active',ALL_TABS[i]===name));
   window.scrollTo({top:0});
-  closeDrawer();
   if(name==='todos') loadTodos();
   else if(name==='notlar') loadNotes();
   else if(name==='katilimci') loadPersons();
@@ -589,11 +676,12 @@ async function checkNotifications() {
       ...persons.docs.map(d=>({...d.data()})),
     ];
     notifCount = allItems.filter(i=>i.ts > lastSeenTs && i.by !== currentUser).length;
-    const badge = document.getElementById('notifBadge');
-    if(badge) {
-      badge.textContent = notifCount > 9 ? '9+' : notifCount;
-      badge.classList.toggle('show', notifCount > 0);
-    }
+    // Update all app badges
+    const collections = [
+      {col:'plan_todos', badge:'badge-todos'},
+      {col:'plan_notes', badge:'badge-notlar'},
+      {col:'plan_persons', badge:'badge-katilimci'},
+    ];
   } catch(e){}
 }
 
@@ -601,8 +689,7 @@ function clearNotifications() {
   lastSeenTs = Date.now();
   localStorage.setItem('plan_lastSeen', lastSeenTs);
   notifCount = 0;
-  const badge = document.getElementById('notifBadge');
-  if(badge) badge.classList.remove('show');
+  document.querySelectorAll('.app-badge').forEach(b=>b.classList.remove('show'));
 }
 
 // Check notifications every 30 seconds
