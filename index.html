@@ -489,48 +489,77 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <div class="home-sub" id="heroUser">Birlikte planlıyoruz · 2026</div>
       <div class="home-stats">
         <span id="statTodo">-</span> görev &nbsp;·&nbsp;
-        <span id="statPerson">-</span> kişi &nbsp;·&nbsp;
-        <span id="statBudget">-</span>
+        <span id="statPerson">-</span> kişi
       </div>
     </div>
     <div class="app-grid">
       <div class="app-icon" onclick="switchTab('todos')">
-        <div class="app-icon-bg" style="background:rgba(45,74,30,0.75);border:1.5px solid rgba(45,74,30,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(45,74,30,0.78);border:1.5px solid rgba(45,74,30,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
         <div class="app-label">Yapılacaklar</div>
         <div class="app-badge" id="badge-todos"></div>
       </div>
       <div class="app-icon" onclick="switchTab('notlar')">
-        <div class="app-icon-bg" style="background:rgba(92,74,30,0.78);border:1.5px solid rgba(92,74,30,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(92,74,30,0.78);border:1.5px solid rgba(92,74,30,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
         <div class="app-label">Notlar</div>
         <div class="app-badge" id="badge-notlar"></div>
       </div>
       <div class="app-icon" onclick="switchTab('katilimci')">
-        <div class="app-icon-bg" style="background:rgba(30,68,88,0.78);border:1.5px solid rgba(30,68,88,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(30,68,88,0.78);border:1.5px solid rgba(30,68,88,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <div class="app-label">Katılımcılar</div>
         <div class="app-badge" id="badge-katilimci"></div>
       </div>
       <div class="app-icon" onclick="switchTab('yemek')">
-        <div class="app-icon-bg" style="background:rgba(100,55,35,0.78);border:1.5px solid rgba(100,55,35,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(100,55,35,0.78);border:1.5px solid rgba(100,55,35,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        </div>
         <div class="app-label">Yemekler</div>
         <div class="app-badge" id="badge-yemek"></div>
       </div>
-      <div class="app-icon" onclick="switchTab('butce')">
-        <div class="app-icon-bg" style="background:rgba(30,85,58,0.78);border:1.5px solid rgba(30,85,58,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="app-label">Bütçe</div>
-        <div class="app-badge" id="badge-butce"></div>
+      <div class="app-icon" onclick="switchTab('chat')">
+        <div class="app-icon-bg" style="background:rgba(30,68,88,0.78);border:1.5px solid rgba(30,68,88,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="app-label">Sohbet</div>
+        <div class="app-badge" id="badge-chat"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('oylama')">
+        <div class="app-icon-bg" style="background:rgba(30,85,58,0.78);border:1.5px solid rgba(30,85,58,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div class="app-label">Oylama</div>
+        <div class="app-badge" id="badge-oylama"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('nishan')">
+        <div class="app-icon-bg" style="background:rgba(80,45,88,0.78);border:1.5px solid rgba(80,45,88,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+        </div>
+        <div class="app-label">Nişan Listesi</div>
+        <div class="app-badge" id="badge-nishan"></div>
       </div>
       <div class="app-icon" onclick="switchTab('org')">
-        <div class="app-icon-bg" style="background:rgba(80,45,88,0.78);border:1.5px solid rgba(80,45,88,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(80,45,88,0.78);border:1.5px solid rgba(80,45,88,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div class="app-label">Organizasyon</div>
         <div class="app-badge" id="badge-org"></div>
       </div>
       <div class="app-icon" onclick="switchTab('esya')">
-        <div class="app-icon-bg" style="background:rgba(50,42,88,0.78);border:1.5px solid rgba(50,42,88,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H5v10a2 2 0 002 2h10a2 2 0 002-2V10h1.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(50,42,88,0.78);border:1.5px solid rgba(50,42,88,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H5v10a2 2 0 002 2h10a2 2 0 002-2V10h1.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+        </div>
         <div class="app-label">Kıyafet & Eşya</div>
         <div class="app-badge" id="badge-esya"></div>
       </div>
       <div class="app-icon" onclick="switchTab('hediye')">
-        <div class="app-icon-bg" style="background:rgba(105,40,55,0.78);border:1.5px solid rgba(105,40,55,0.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+        <div class="app-icon-bg" style="background:rgba(105,40,55,0.78);border:1.5px solid rgba(105,40,55,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
         <div class="app-label">Hediyelik</div>
         <div class="app-badge" id="badge-hediye"></div>
       </div>
@@ -539,15 +568,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <div class="home-prog-bar"><div class="home-prog-fill" id="homeProgFill" style="width:0%"></div></div>
       <div class="home-prog-text"><span>Yapılacaklar İlerlemesi</span><span id="homeProgText">-</span></div>
     </div>
-      <div id="recentActivity"><div style="color:rgba(245,200,66,0.3);font-size:13px;text-align:center;padding:12px;">Yükleniyor...</div></div>
-    </div>
-      <div style="display:flex;gap:6px;">
-        <input id="quickPollInput" placeholder="Bir şey oylayalım..." style="flex:1;background:rgba(255,255,255,0.8);border:1px solid rgba(139,94,42,0.25);border-radius:20px;padding:8px 14px;color:var(--text);font-size:14px;font-family:Outfit,sans-serif;outline:none;-webkit-appearance:none;" onkeydown="if(event.key==='Enter')quickPoll()">
-        <button onclick="quickPoll()" style="width:38px;height:38px;border-radius:50%;background:var(--forest);border:none;color:var(--sun);font-size:18px;cursor:pointer;touch-action:manipulation;flex-shrink:0;display:flex;align-items:center;justify-content:center;">+</button>
-      </div>
-      <div id="quickPollResult" style="margin-top:8px;font-size:12px;color:rgba(245,200,66,0.4);"></div>
-    </div>
-    <div style="text-align:center;margin:8px 0 6px;">
+    <div style="text-align:center;margin:16px 0 6px;">
       <div style="font-size:11px;font-weight:600;color:var(--forest);letter-spacing:3px;text-transform:uppercase;opacity:0.7;">Kalan Süre</div>
     </div>
     <div class="home-countdown">
@@ -561,7 +582,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   </div>
 </div>
 
-<!-- YAPILACAKLAR -->
 <div class="tab-content" id="tab-todos">
   <div class="safe-top-bar"></div>
   <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
