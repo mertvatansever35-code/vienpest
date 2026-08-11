@@ -5,9 +5,10 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sema & Mert">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#2D4A1E">
-<title>Sema & Mert · Plan</title>
+<title>Sema & Mert</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -401,19 +402,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .nishan-text{font-size:13px;color:var(--text);flex:1;}
 .nishan-text.done{text-decoration:line-through;opacity:0.4;}
 
-/* ── COMMENTS ── */
-.comments-section{margin-top:8px;border-top:1px solid var(--border);padding-top:10px;}
-.comments-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
-.comment{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);}
-.comment:last-of-type{border-bottom:none;}
-.comment-avatar{width:24px;height:24px;border-radius:50%;background:var(--forest3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--forest);flex-shrink:0;font-family:'Cormorant Garamond',serif;}
-.comment-body{flex:1;}
-.comment-who{font-size:10px;font-weight:600;color:var(--forest2);}
-.comment-text{font-size:13px;color:var(--text);line-height:1.4;margin-top:1px;}
-.comment-del{background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;touch-action:manipulation;padding:0 2px;align-self:flex-start;}
-.comment-add{display:flex;gap:6px;margin-top:8px;}
-.comment-input{flex:1;border:1.5px solid var(--border2);border-radius:8px;padding:7px 10px;font-size:16px;font-family:'Outfit',sans-serif;color:var(--text);background:var(--card);outline:none;-webkit-appearance:none;}
-.comment-btn{width:34px;height:34px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+
 
 /* ── PROGRESS on home ── */
 .home-progress{margin:0 16px 12px;background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.12);border-radius:12px;padding:12px 14px;}
@@ -480,7 +469,9 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   <div class="drawer-item" onclick="switchTab('notlar')"><div class="drawer-item-icon">📝</div><div class="drawer-item-label">Notlar</div></div>
   <div class="drawer-item" onclick="switchTab('katilimci')"><div class="drawer-item-icon">👥</div><div class="drawer-item-label">Katılımcılar</div></div>
   <div class="drawer-item" onclick="switchTab('yemek')"><div class="drawer-item-icon">🍽️</div><div class="drawer-item-label">Yemek Listesi</div></div>
-  <div class="drawer-item" onclick="switchTab('butce')"><div class="drawer-item-icon">💰</div><div class="drawer-item-label">Bütçe</div></div>
+  <div class="drawer-item" onclick="switchTab('chat')"><div class="drawer-item-icon">💬</div><div class="drawer-item-label">Sohbet</div></div>
+  <div class="drawer-item" onclick="switchTab('oylama')"><div class="drawer-item-icon">🗳️</div><div class="drawer-item-label">Oylama</div></div>
+  <div class="drawer-item" onclick="switchTab('nishan')"><div class="drawer-item-icon">💍</div><div class="drawer-item-label">Nişan Listesi</div></div>
   <div class="drawer-item" onclick="switchTab('org')"><div class="drawer-item-icon">🎪</div><div class="drawer-item-label">Organizasyon</div></div>
   <div class="drawer-item" onclick="switchTab('esya')"><div class="drawer-item-icon">👗</div><div class="drawer-item-label">Kıyafet & Eşya</div></div>
   <div class="drawer-item" onclick="switchTab('hediye')"><div class="drawer-item-icon">🎁</div><div class="drawer-item-label">Hediyelik</div></div>
@@ -494,7 +485,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <div class="tab-content active" id="tab-ana">
   <div class="home-screen">
     <div class="home-header">
-      <div class="home-title">🌻 Sema & Mert</div>
+      <div class="home-title">Sema & Mert</div>
       <div class="home-sub" id="heroUser">Birlikte planlıyoruz · 2026</div>
       <div class="home-stats">
         <span id="statTodo">-</span> görev &nbsp;·&nbsp;
@@ -592,16 +583,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div class="item-list" id="todoList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-todos"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-todos" placeholder="Yapılacaklar hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('todos')">↑</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- NOTLAR -->
@@ -625,16 +606,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div id="noteList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-notlar"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-notlar" placeholder="Not hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('notlar')">↑</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- KATILIMCI -->
@@ -656,16 +627,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <button class="add-btn" onclick="addPerson()">+</button>
     </div>
     <div id="personList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
-  </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-katilimci"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-katilimci" placeholder="Katılımcılar hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('katilimci')">↑</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -690,16 +651,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <button class="add-btn" onclick="addFood()">+</button>
     </div>
     <div id="foodList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
-  </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-yemek"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-yemek" placeholder="Yemek hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('yemek')">↑</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -775,16 +726,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div id="orgList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-org"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-org" placeholder="Organizasyon hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('org')">↑</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- KIYAFET & EŞYA -->
@@ -804,16 +745,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <button class="add-btn" onclick="addEsya()">+</button>
     </div>
     <div id="esyaList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
-  </div>
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-esya"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-esya" placeholder="Eşya hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('esya')">↑</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -835,16 +766,6 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   </div>
 </div>
 
-  <div class="sec">
-    <div class="comments-section">
-      <div class="comments-title">Yorumlar</div>
-      <div id="cmts-hediye"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
-      <div class="comment-add">
-        <input class="comment-input" id="cmt-input-hediye" placeholder="Hediye hakkında yorum...">
-        <button class="comment-btn" onclick="addComment('hediye')">↑</button>
-      </div>
-    </div>
-  </div>
 </div><!-- /main-wrap -->
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -938,12 +859,11 @@ window.switchTab = function(name) {
   else if(name==='katilimci') loadPersons();
   else if(name==='yemek') loadFoods();
   else if(name==='chat') loadChat();
+  else if(name==='chat') loadChat();
   else if(name==='oylama') loadOylama();
   else if(name==='nishan') loadNishan();
   else if(name==='org') loadOrg();
-  // load comments
-  const cmtCols = ['todos','notlar','katilimci','yemek','org','esya','hediye'];
-  if(cmtCols.includes(name)) loadComments(name);
+
   else if(name==='esya') loadEsya();
   else if(name==='hediye') loadGifts();
 };
@@ -1527,39 +1447,6 @@ window.toggleNishan = async function(item, docId, isDone) {
   loadNishan();
 };
 
-// ── COMMENTS ──────────────────────────────────────────────────
-async function loadComments(colId) {
-  const el = document.getElementById('cmts-'+colId);
-  if(!el) return;
-  try {
-    const snap = await getDocs(query(collection(db,'plan_comments_'+colId),orderBy('ts','asc')));
-    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    if(!items.length){el.innerHTML='<div style="color:var(--text3);font-size:12px;font-style:italic;padding:4px 0;">Henüz yorum yok</div>';return;}
-    el.innerHTML = items.map(c=>`
-      <div class="comment">
-        <div class="comment-avatar">${(c.by||'?').charAt(0).toUpperCase()}</div>
-        <div class="comment-body">
-          <div class="comment-who">${c.by||'?'}</div>
-          <div class="comment-text">${c.text}</div>
-        </div>
-        ${c.by===currentUser?`<button class="comment-del" onclick="delComment('${colId}','${c.id}')">×</button>`:''}
-      </div>`).join('');
-  } catch(e){}
-}
-
-window.addComment = async function(colId) {
-  const input = document.getElementById('cmt-input-'+colId);
-  const text = input.value.trim();
-  if(!text) return;
-  input.value='';
-  await addDoc(collection(db,'plan_comments_'+colId),{text,by:currentUser,ts:Date.now()});
-  loadComments(colId);
-};
-
-window.delComment = async function(colId, id) {
-  await deleteDoc(doc(db,'plan_comments_'+colId,id));
-  loadComments(colId);
-};
 
 // ── HOME PROGRESS ─────────────────────────────────────────────
 async function updateHomeProgress() {
