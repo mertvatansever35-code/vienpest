@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#2D4A1E">
@@ -39,7 +39,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .login-sub{font-size:11px;color:rgba(245,200,66,0.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;text-align:center;}
 .login-box{width:100%;max-width:300px;background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.18);border-radius:16px;padding:22px 18px;}
 .login-label{display:block;font-size:10px;color:rgba(245,200,66,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;}
-.login-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(245,200,66,0.2);border-radius:10px;padding:11px 14px;font-size:15px;color:var(--sun);font-family:'Outfit',sans-serif;outline:none;margin-bottom:10px;-webkit-appearance:none;}
+.login-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(245,200,66,0.2);border-radius:10px;padding:11px 14px;font-size:16px;color:var(--sun);font-family:'Outfit',sans-serif;outline:none;margin-bottom:10px;-webkit-appearance:none;}
 .login-input:focus{border-color:rgba(245,200,66,0.5);}
 .login-input::placeholder{color:rgba(245,200,66,0.22);font-size:13px;}
 .login-code{letter-spacing:3px;text-align:center;}
@@ -131,10 +131,10 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 /* ── ADD ROW ── */
 .add-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.add-input{flex:1;min-width:120px;border:1.5px solid var(--border2);border-radius:8px;padding:9px 11px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--text);background:var(--card);outline:none;-webkit-appearance:none;}
+.add-input{flex:1;min-width:120px;border:1.5px solid var(--border2);border-radius:8px;padding:9px 11px;font-size:16px;font-family:'Outfit',sans-serif;color:var(--text);background:var(--card);outline:none;-webkit-appearance:none;}
 .add-input:focus{border-color:var(--sun2);}
 .add-input::placeholder{color:var(--text3);}
-.add-select{border:1.5px solid var(--border2);border-radius:8px;padding:9px 8px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--text2);background:var(--card);outline:none;-webkit-appearance:none;flex-shrink:0;}
+.add-select{border:1.5px solid var(--border2);border-radius:8px;padding:9px 8px;font-size:16px;font-family:'Outfit',sans-serif;color:var(--text2);background:var(--card);outline:none;-webkit-appearance:none;flex-shrink:0;}
 .add-btn{width:38px;height:38px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
 .add-btn:active{opacity:0.8;}
 
@@ -157,7 +157,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .note-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;}
 .note-card:last-child{margin-bottom:0;}
 .note-hdr{background:var(--cream3);padding:8px 12px;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--forest);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.note-textarea{width:100%;min-height:70px;background:transparent;border:none;padding:10px 12px;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text);line-height:1.7;resize:none;outline:none;font-style:italic;}
+.note-textarea{width:100%;min-height:70px;background:transparent;border:none;padding:10px 12px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);line-height:1.7;resize:none;outline:none;font-style:italic;}
 .note-textarea::placeholder{color:var(--text3);}
 .note-footer{padding:3px 12px 8px;font-size:10px;color:var(--text3);display:flex;justify-content:space-between;align-items:center;}
 
@@ -385,14 +385,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     <button class="login-btn" onclick="doLogin()">Giriş Yap</button>
     <div class="login-err" id="loginErr">Yanlış kod</div>
   </div>
-  <div class="login-countdown">
-    <div class="login-cd-grid">
-      <div class="login-cd-box"><div class="login-cd-num" id="lcd-d">--</div><div class="login-cd-lbl">Gün</div></div>
-      <div class="login-cd-box"><div class="login-cd-num" id="lcd-h">--</div><div class="login-cd-lbl">Saat</div></div>
-      <div class="login-cd-box"><div class="login-cd-num" id="lcd-m">--</div><div class="login-cd-lbl">Dakika</div></div>
-      <div class="login-cd-box"><div class="login-cd-num" id="lcd-s">--</div><div class="login-cd-lbl">Saniye</div></div>
-    </div>
-  </div>
+
 </div>
 
 <!-- HEADER -->
