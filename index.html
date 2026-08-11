@@ -1052,6 +1052,8 @@ window.toggleTodo = async function(id,done) {
 window.delTodo = async function(id) {
   await deleteDoc(doc(db,'plan_todos',id));
   loadTodos();
+  updateHomeProgress();
+  if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
 };
 
 // ── NOTES ─────────────────────────────────────────────────────
@@ -1090,6 +1092,7 @@ window.saveNote = async function(id,content) {
 window.delNote = async function(id) {
   await deleteDoc(doc(db,'plan_notes',id));
   loadNotes();
+  if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
 };
 
 // ── PERSONS ───────────────────────────────────────────────────
@@ -1138,6 +1141,7 @@ window.cycleStatus = async function(id,current) {
 window.delPerson = async function(id) {
   await deleteDoc(doc(db,'plan_persons',id));
   loadPersons();
+  if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
 };
 
 // ── FOODS ─────────────────────────────────────────────────────
