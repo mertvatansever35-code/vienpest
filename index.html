@@ -114,11 +114,11 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 .tab-content.active{display:block;animation:fadeUp 0.2s ease;}
 
 /* ── FILTER BAR ── */
-.filter-bar{display:flex;gap:6px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
-.filter-bar::-webkit-scrollbar{display:none;}
-.filter-chip{flex-shrink:0;padding:5px 12px;border:1.5px solid var(--border2);border-radius:20px;font-size:12px;font-weight:500;color:var(--text2);background:var(--card);cursor:pointer;touch-action:manipulation;transition:all 0.15s;white-space:nowrap;}
-.filter-chip.active{background:var(--forest);color:var(--sun);border-color:var(--forest);}
-.filter-chip:active{opacity:0.7;}
+
+
+
+
+
 
 /* ── SECTION ── */
 .sec{padding:12px 16px;border-bottom:1px solid var(--border);}
@@ -323,19 +323,64 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 /* Back button for sub-pages */
 .back-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px 8px 10px;
-  background:rgba(45,74,30,0.85);
-  border:1px solid rgba(245,200,66,0.35);
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;
+  background:var(--forest);
+  border:1.5px solid var(--forest);
   border-radius:20px;
-  font-size:13px;color:var(--sun);
+  font-size:12px;font-weight:500;color:var(--sun);
   cursor:pointer;touch-action:manipulation;
-  font-family:'Outfit',sans-serif;font-weight:600;
-  margin:12px 16px 0;
+  font-family:'Outfit',sans-serif;
   transition:all 0.15s;
-  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  white-space:nowrap;
+  flex-shrink:0;
 }
-.back-btn:active{background:rgba(45,74,30,1);}
+.back-btn:active{opacity:0.8;}
+.top-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 16px;
+  background:var(--cream);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;z-index:10;
+}
+.filter-dropdown{
+  position:relative;flex-shrink:0;
+}
+.filter-dd-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;
+  background:var(--card);
+  border:1.5px solid var(--border2);
+  border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--text2);
+  cursor:pointer;touch-action:manipulation;
+  font-family:'Outfit',sans-serif;
+  white-space:nowrap;
+}
+.filter-dd-btn.active{background:var(--forest);color:var(--sun);border-color:var(--forest);}
+.filter-dd-menu{
+  position:absolute;top:calc(100% + 6px);left:0;
+  background:white;
+  border:1px solid var(--border2);
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  z-index:100;
+  min-width:140px;
+  overflow:hidden;
+  display:none;
+}
+.filter-dd-menu.open{display:block;}
+.filter-dd-item{
+  padding:10px 14px;
+  font-size:13px;color:var(--text);
+  cursor:pointer;touch-action:manipulation;
+  transition:background 0.1s;
+  border-bottom:1px solid var(--border);
+}
+.filter-dd-item:last-child{border-bottom:none;}
+.filter-dd-item:active{background:var(--cream3);}
+.filter-dd-item.selected{color:var(--forest);font-weight:600;}
 
 /* ── LOGIN COUNTDOWN ── */
 .login-countdown{
@@ -584,7 +629,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 
 <div class="tab-content" id="tab-todos">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-todos">
+      <div class="filter-dd-btn" id="dd-btn-todos" onclick="toggleDD('todos')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-todos"><div class="filter-dd-item selected" onclick="filterDDSelect('todos','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('todos','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="filter-bar" id="todoFilter"></div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yapılacaklar</div></div><span class="sec-count" id="todoCnt"></span></div>
@@ -607,8 +661,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- NOTLAR -->
 <div class="tab-content" id="tab-notlar">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
-  <div class="filter-bar" id="notlarFilter"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-notlar">
+      <div class="filter-dd-btn" id="dd-btn-notlar" onclick="toggleDD('notlar')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-notlar"><div class="filter-dd-item selected" onclick="filterDDSelect('notlar','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('notlar','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Notlar</div></div></div>
     <div class="add-row">
@@ -630,8 +692,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- KATILIMCI -->
 <div class="tab-content" id="tab-katilimci">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
-  <div class="filter-bar" id="katilimciFilter"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-katilimci">
+      <div class="filter-dd-btn" id="dd-btn-katilimci" onclick="toggleDD('katilimci')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-katilimci"><div class="filter-dd-item selected" onclick="filterDDSelect('katilimci','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('katilimci','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Katılımcılar</div></div><span class="sec-count" id="personCnt"></span></div>
     <div class="add-row">
@@ -652,8 +722,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- YEMEK -->
 <div class="tab-content" id="tab-yemek">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
-  <div class="filter-bar" id="yemekFilter"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-yemek">
+      <div class="filter-dd-btn" id="dd-btn-yemek" onclick="toggleDD('yemek')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-yemek"><div class="filter-dd-item selected" onclick="filterDDSelect('yemek','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('yemek','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Yemek <em>Listesi</em></div></div><span class="sec-count" id="foodCnt"></span></div>
     <div class="add-row">
@@ -676,7 +754,9 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- CHAT -->
 <div class="tab-content" id="tab-chat">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  </div>
   <div class="sec" style="padding-bottom:80px;">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Sohbet</div></div></div>
     <div id="chatMessages" style="display:flex;flex-direction:column;gap:8px;min-height:200px;"></div>
@@ -692,7 +772,9 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- OYLAMA -->
 <div class="tab-content" id="tab-oylama">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Oylama</div></div></div>
     <div class="poll-create">
@@ -713,7 +795,9 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- NİŞAN LİSTESİ -->
 <div class="tab-content" id="tab-nishan">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Nişan <em>Listesi</em></div></div><span class="sec-count" id="nishanCnt"></span></div>
     <div class="nishan-progress">
@@ -727,8 +811,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- ORGANİZASYON -->
 <div class="tab-content" id="tab-org">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
-  <div class="filter-bar" id="orgFilter"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-org">
+      <div class="filter-dd-btn" id="dd-btn-org" onclick="toggleDD('org')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-org"><div class="filter-dd-item selected" onclick="filterDDSelect('org','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('org','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('org','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('org','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('org','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('org','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('org','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Organizasyon</div></div></div>
     <div class="add-row">
@@ -750,8 +842,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- KIYAFET & EŞYA -->
 <div class="tab-content" id="tab-esya">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
-  <div class="filter-bar" id="esyaFilter"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+    <div class="filter-dropdown" id="dd-esya">
+      <div class="filter-dd-btn" id="dd-btn-esya" onclick="toggleDD('esya')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tümü ▾
+      </div>
+      <div class="filter-dd-menu" id="dd-menu-esya"><div class="filter-dd-item selected" onclick="filterDDSelect('esya','Tümü',this)">Tümü</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Sema',this)">Sema</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Özlem',this)">Özlem</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Özge',this)">Özge</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Selen',this)">Selen</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Mert',this)">Mert</div><div class="filter-dd-item" onclick="filterDDSelect('esya','Ortak',this)">Ortak</div></div>
+    </div>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Kıyafet & <em>Eşya</em></div></div></div>
     <div class="add-row">
@@ -770,7 +870,9 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
 <!-- HEDİYELİK -->
 <div class="tab-content" id="tab-hediye">
   <div class="safe-top-bar"></div>
-  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  </div>
   <div class="sec">
     <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Hediyelik</div></div></div>
     <div class="add-row">
@@ -927,36 +1029,66 @@ window.addEventListener('scroll',()=>{
   document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>150);
 });
 
-// ── FILTER BUILDER ────────────────────────────────────────────
-const PERSONS_FILTER = ['Tümü','Mert','Sema','Özlem','Özge','Selen','Ortak'];
-function buildFilter(containerId, onSelect, initialActive='Tümü') {
-  const el = document.getElementById(containerId);
-  if(!el) return;
-  el.innerHTML = PERSONS_FILTER.map(p=>`
-    <div class="filter-chip${p===initialActive?' active':''}" onclick="filterSelect('${containerId}',this,'${p}')">${p}</div>`
-  ).join('');
-  window['_filter_'+containerId] = initialActive;
-}
-window.filterSelect = function(containerId, btn, val) {
-  document.querySelectorAll(`#${containerId} .filter-chip`).forEach(c=>c.classList.remove('active'));
-  btn.classList.add('active');
-  window['_filter_'+containerId] = val;
-  if(containerId==='todoFilter') loadTodos();
-  else if(containerId==='notlarFilter') loadNotes();
-  else if(containerId==='katilimciFilter') loadPersons();
-  else if(containerId==='yemekFilter') loadFoods();
-  else if(containerId==='orgFilter') loadOrg();
-  else if(containerId==='esyaFilter') loadEsya();
+
+
+// ── FILTER DROPDOWN ──────────────────────────────────────────
+window._ddFilters = {};
+
+window.toggleDD = function(tabId) {
+  const menu = document.getElementById('dd-menu-'+tabId);
+  if(!menu) return;
+  // Close all others
+  document.querySelectorAll('.filter-dd-menu.open').forEach(m=>{
+    if(m.id !== 'dd-menu-'+tabId) m.classList.remove('open');
+  });
+  menu.classList.toggle('open');
+  // Close on outside click
+  if(menu.classList.contains('open')) {
+    setTimeout(()=>{
+      document.addEventListener('click', function closeDD(e) {
+        if(!menu.contains(e.target) && e.target.id !== 'dd-btn-'+tabId) {
+          menu.classList.remove('open');
+        }
+        document.removeEventListener('click', closeDD);
+      });
+    }, 10);
+  }
 };
+
+window.filterDDSelect = function(tabId, val, el) {
+  window._ddFilters[tabId] = val;
+  // Update button label
+  const btn = document.getElementById('dd-btn-'+tabId);
+  if(btn) {
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${val} ▾`;
+    btn.classList.toggle('active', val !== 'Tümü');
+  }
+  // Mark selected
+  el.closest('.filter-dd-menu').querySelectorAll('.filter-dd-item').forEach(i=>i.classList.remove('selected'));
+  el.classList.add('selected');
+  // Close menu
+  document.getElementById('dd-menu-'+tabId).classList.remove('open');
+  // Reload
+  if(tabId==='todos') loadTodos();
+  else if(tabId==='notlar') loadNotes();
+  else if(tabId==='katilimci') loadPersons();
+  else if(tabId==='yemek') loadFoods();
+  else if(tabId==='org') loadOrg();
+  else if(tabId==='esya') loadEsya();
+};
+
+function getFilter(tabId) {
+  return window._ddFilters[tabId] || 'Tümü';
+}
 
 // ── TODOS ─────────────────────────────────────────────────────
 async function loadTodos() {
-  buildFilter('todoFilter', null, window['_filter_todoFilter']||'Tümü');
+  buildFilter('todoFilter', null, getFilter('todos'));
   const el = document.getElementById('todoList');
   try {
     const snap = await getDocs(query(collection(db,'plan_todos'),orderBy('ts','desc')));
     let items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    const f = window['_filter_todoFilter']||'Tümü';
+    const f = getFilter('todos');
     if(f!=='Tümü') items = items.filter(t=>t.who&&t.who.toLowerCase()===f.toLowerCase());
     document.getElementById('todoCnt').textContent = items.length + ' görev';
     if(!items.length){el.innerHTML='<div class="empty">Görev yok 🌻</div>';return;}
@@ -997,12 +1129,12 @@ window.delTodo = async function(id) {
 
 // ── NOTES ─────────────────────────────────────────────────────
 async function loadNotes() {
-  buildFilter('notlarFilter', null, window['_filter_notlarFilter']||'Tümü');
+  buildFilter('notlarFilter', null, getFilter('notlar'));
   const el = document.getElementById('noteList');
   try {
     const snap = await getDocs(query(collection(db,'plan_notes'),orderBy('ts','desc')));
     let items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    const f = window['_filter_notlarFilter']||'Tümü';
+    const f = getFilter('notlar');
     if(f!=='Tümü') items = items.filter(n=>n.who&&n.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Not yok 🌻</div>';return;}
     el.innerHTML = items.map(n=>`
@@ -1036,7 +1168,7 @@ window.delNote = async function(id) {
 
 // ── PERSONS ───────────────────────────────────────────────────
 async function loadPersons() {
-  buildFilter('katilimciFilter', null, window['_filter_katilimciFilter']||'Tümü');
+  buildFilter('katilimciFilter', null, getFilter('katilimci'));
   const el = document.getElementById('personList');
   try {
     const snap = await getDocs(query(collection(db,'plan_persons'),orderBy('ts','asc')));
@@ -1085,12 +1217,12 @@ window.delPerson = async function(id) {
 
 // ── FOODS ─────────────────────────────────────────────────────
 async function loadFoods() {
-  buildFilter('yemekFilter', null, window['_filter_yemekFilter']||'Tümü');
+  buildFilter('yemekFilter', null, getFilter('yemek'));
   const el = document.getElementById('foodList');
   try {
     const snap = await getDocs(query(collection(db,'plan_foods'),orderBy('ts','asc')));
     let items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    const f = window['_filter_yemekFilter']||'Tümü';
+    const f = getFilter('yemek');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     document.getElementById('foodCnt').textContent = items.length + ' yemek';
     if(!items.length){el.innerHTML='<div class="empty">Yemek yok 🌻</div>';return;}
@@ -1158,7 +1290,7 @@ window.delBudget = async function(id) {
 // ── ORG ───────────────────────────────────────────────────────
 const ORG_ICONS = {mekan:'🏠',sandalye:'🪑',yuzuk:'💍',cicek:'🌸',muzik:'🎵',diger:'📌'};
 async function loadOrg() {
-  buildFilter('orgFilter', null, window['_filter_orgFilter']||'Tümü');
+  buildFilter('orgFilter', null, getFilter('org'));
   const el = document.getElementById('orgList');
   try {
     const snap = await getDocs(query(collection(db,'plan_org'),orderBy('ts','asc')));
@@ -1189,12 +1321,12 @@ window.delOrg = async function(id) {
 
 // ── ESYA ──────────────────────────────────────────────────────
 async function loadEsya() {
-  buildFilter('esyaFilter', null, window['_filter_esyaFilter']||'Tümü');
+  buildFilter('esyaFilter', null, getFilter('esya'));
   const el = document.getElementById('esyaList');
   try {
     const snap = await getDocs(query(collection(db,'plan_esya'),orderBy('ts','asc')));
     let items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    const f = window['_filter_esyaFilter']||'Tümü';
+    const f = getFilter('esya');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Eşya yok 🌻</div>';return;}
     el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
