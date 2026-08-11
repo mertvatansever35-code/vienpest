@@ -368,6 +368,51 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   font-size:28px;font-weight:700;color:var(--sun);line-height:1;
 }
 .home-cd-lbl{font-size:9px;color:rgba(245,200,66,0.3);margin-top:3px;text-transform:uppercase;letter-spacing:1.5px;}
+
+/* ── POLL ── */
+.poll-create{margin-bottom:14px;}
+.poll-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;}
+.poll-q{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--forest);margin-bottom:10px;}
+.poll-by{font-size:10px;color:var(--text3);margin-bottom:10px;}
+.poll-opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1.5px solid var(--border2);margin-bottom:6px;cursor:pointer;touch-action:manipulation;transition:all 0.15s;background:white;}
+.poll-opt:last-child{margin-bottom:0;}
+.poll-opt.voted{background:var(--forest3);border-color:var(--forest2);}
+.poll-opt-bar{height:4px;background:var(--forest);border-radius:2px;margin-top:4px;transition:width 0.3s;}
+.poll-opt-label{flex:1;font-size:13px;color:var(--text);}
+.poll-opt-count{font-size:11px;color:var(--text3);font-weight:600;}
+.poll-del{background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer;padding:2px 4px;touch-action:manipulation;}
+
+/* ── NİŞAN ── */
+.nishan-progress{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.nishan-prog-bar{height:6px;background:var(--cream3);border-radius:3px;overflow:hidden;margin-bottom:6px;}
+.nishan-prog-fill{height:100%;background:var(--forest);border-radius:3px;transition:width 0.4s ease;}
+.nishan-prog-text{font-size:12px;color:var(--text2);text-align:right;}
+.nishan-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);}
+.nishan-item:last-child{border-bottom:none;}
+.nishan-cb{width:20px;height:20px;border-radius:4px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:transparent;transition:all 0.2s;touch-action:manipulation;}
+.nishan-cb.done{background:var(--forest);border-color:var(--forest);color:var(--sun);}
+.nishan-text{font-size:13px;color:var(--text);flex:1;}
+.nishan-text.done{text-decoration:line-through;opacity:0.4;}
+
+/* ── COMMENTS ── */
+.comments-section{margin-top:8px;border-top:1px solid var(--border);padding-top:10px;}
+.comments-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.comment{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);}
+.comment:last-of-type{border-bottom:none;}
+.comment-avatar{width:24px;height:24px;border-radius:50%;background:var(--forest3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--forest);flex-shrink:0;font-family:'Cormorant Garamond',serif;}
+.comment-body{flex:1;}
+.comment-who{font-size:10px;font-weight:600;color:var(--forest2);}
+.comment-text{font-size:13px;color:var(--text);line-height:1.4;margin-top:1px;}
+.comment-del{background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;touch-action:manipulation;padding:0 2px;align-self:flex-start;}
+.comment-add{display:flex;gap:6px;margin-top:8px;}
+.comment-input{flex:1;border:1.5px solid var(--border2);border-radius:8px;padding:7px 10px;font-size:16px;font-family:'Outfit',sans-serif;color:var(--text);background:var(--card);outline:none;-webkit-appearance:none;}
+.comment-btn{width:34px;height:34px;border-radius:50%;background:var(--forest);color:var(--sun);border:none;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+
+/* ── PROGRESS on home ── */
+.home-progress{margin:0 16px 12px;background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.12);border-radius:12px;padding:12px 14px;}
+.home-prog-bar{height:5px;background:rgba(245,200,66,0.15);border-radius:3px;overflow:hidden;margin-bottom:6px;}
+.home-prog-fill{height:100%;background:var(--sun);border-radius:3px;transition:width 0.4s ease;}
+.home-prog-text{font-size:11px;color:rgba(245,200,66,0.45);display:flex;justify-content:space-between;}
 </style>
 </head>
 <body>
@@ -468,6 +513,10 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
         <div class="app-badge" id="badge-hediye"></div>
       </div>
     </div>
+    <div class="home-progress">
+      <div class="home-prog-bar"><div class="home-prog-fill" id="homeProgFill" style="width:0%"></div></div>
+      <div class="home-prog-text"><span>Yapılacaklar İlerlemesi</span><span id="homeProgText">-</span></div>
+    </div>
     <div class="home-recent">
       <div class="home-recent-title">Son Aktivite</div>
       <div id="recentActivity"><div style="color:rgba(245,200,66,0.3);font-size:13px;text-align:center;padding:12px;">Yükleniyor...</div></div>
@@ -504,6 +553,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div class="item-list" id="todoList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-todos"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-todos" placeholder="Yapılacaklar hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('todos')">↑</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- NOTLAR -->
@@ -527,6 +586,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div id="noteList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-notlar"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-notlar" placeholder="Not hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('notlar')">↑</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- KATILIMCI -->
@@ -548,6 +617,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <button class="add-btn" onclick="addPerson()">+</button>
     </div>
     <div id="personList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
+  </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-katilimci"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-katilimci" placeholder="Katılımcılar hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('katilimci')">↑</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -573,21 +652,50 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div id="foodList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-yemek"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-yemek" placeholder="Yemek hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('yemek')">↑</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- BÜTÇE -->
-<div class="tab-content" id="tab-butce">
+<!-- OYLAMA -->
+<div class="tab-content" id="tab-oylama">
   <div class="safe-top-bar"></div>
   <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
   <div class="sec">
-    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Bütçe <em>Takibi</em></div></div></div>
-    <div class="add-row">
-      <input class="add-input" id="budgetItem" placeholder="Kalem adı...">
-      <input class="add-input" id="budgetAmount" type="number" placeholder="₺" style="width:80px;min-width:0;flex:none;">
-      <button class="add-btn" onclick="addBudget()">+</button>
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Oylama</div></div></div>
+    <div class="poll-create">
+      <input class="add-input" id="pollQ" placeholder="Soru..." style="width:100%;margin-bottom:6px;">
+      <div class="add-row">
+        <input class="add-input" id="pollOpt1" placeholder="Seçenek 1...">
+        <input class="add-input" id="pollOpt2" placeholder="Seçenek 2...">
+      </div>
+      <div class="add-row">
+        <input class="add-input" id="pollOpt3" placeholder="Seçenek 3... (opsiyonel)">
+        <button class="add-btn" onclick="addPoll()">+</button>
+      </div>
     </div>
-    <div id="budgetList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
-    <div class="budget-total-row" id="budgetTotal"><span>Toplam</span><span>₺0</span></div>
+    <div id="pollList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
+  </div>
+</div>
+
+<!-- NİŞAN LİSTESİ -->
+<div class="tab-content" id="tab-nishan">
+  <div class="safe-top-bar"></div>
+  <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Nişan <em>Listesi</em></div></div><span class="sec-count" id="nishanCnt"></span></div>
+    <div class="nishan-progress">
+      <div class="nishan-prog-bar"><div class="nishan-prog-fill" id="nishanFill"></div></div>
+      <div class="nishan-prog-text" id="nishanText"></div>
+    </div>
+    <div id="nishanList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
 </div>
 
@@ -612,6 +720,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
     </div>
     <div id="orgList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
   </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-org"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-org" placeholder="Organizasyon hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('org')">↑</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- KIYAFET & EŞYA -->
@@ -631,6 +749,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
       <button class="add-btn" onclick="addEsya()">+</button>
     </div>
     <div id="esyaList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
+  </div>
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-esya"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-esya" placeholder="Eşya hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('esya')">↑</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -652,6 +780,16 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   </div>
 </div>
 
+  <div class="sec">
+    <div class="comments-section">
+      <div class="comments-title">Yorumlar</div>
+      <div id="cmts-hediye"><div style="color:var(--text3);font-size:12px;padding:4px 0;">Yükleniyor...</div></div>
+      <div class="comment-add">
+        <input class="comment-input" id="cmt-input-hediye" placeholder="Hediye hakkında yorum...">
+        <button class="comment-btn" onclick="addComment('hediye')">↑</button>
+      </div>
+    </div>
+  </div>
 </div><!-- /main-wrap -->
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -735,7 +873,7 @@ window.toggleDrawer = function() {};
 window.closeDrawer = function() {};
 
 // ── TABS ──────────────────────────────────────────────────────
-const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','butce','org','esya','hediye'];
+const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','oylama','nishan','org','esya','hediye'];
 window.switchTab = function(name) {
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
@@ -744,8 +882,12 @@ window.switchTab = function(name) {
   else if(name==='notlar') loadNotes();
   else if(name==='katilimci') loadPersons();
   else if(name==='yemek') loadFoods();
-  else if(name==='butce') loadBudget();
+  else if(name==='oylama') loadOylama();
+  else if(name==='nishan') loadNishan();
   else if(name==='org') loadOrg();
+  // load comments
+  const cmtCols = ['todos','notlar','katilimci','yemek','org','esya','hediye'];
+  if(cmtCols.includes(name)) loadComments(name);
   else if(name==='esya') loadEsya();
   else if(name==='hediye') loadGifts();
 };
@@ -1166,7 +1308,170 @@ async function loadRecent() {
   } catch(e){}
 }
 
-function loadAll() { loadRecent(); setTimeout(checkNotifications, 1000); }
+
+// ── OYLAMA ────────────────────────────────────────────────────
+async function loadOylama() {
+  const el = document.getElementById('pollList');
+  try {
+    const snap = await getDocs(query(collection(db,'plan_polls'),orderBy('ts','desc')));
+    const polls = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!polls.length){el.innerHTML='<div class="empty">Henüz oylama yok 🗳️</div>';return;}
+    el.innerHTML = polls.map(p=>{
+      const total = Object.values(p.votes||{}).length;
+      const opts = (p.options||[]).map((opt,i)=>{
+        const cnt = Object.values(p.votes||{}).filter(v=>v===i).length;
+        const pct = total>0?Math.round(cnt/total*100):0;
+        const myVote = p.votes&&p.votes[currentUser]===i;
+        return `<div class="poll-opt${myVote?' voted':''}" onclick="vote('${p.id}',${i})">
+          <div style="flex:1;">
+            <div class="poll-opt-label">${opt}</div>
+            <div class="poll-opt-bar" style="width:${pct}%"></div>
+          </div>
+          <div class="poll-opt-count">${cnt} (${pct}%)</div>
+        </div>`;
+      }).join('');
+      return `<div class="poll-card">
+        <div class="poll-q">${p.question}</div>
+        <div class="poll-by">${p.by||'?'} sordu · ${total} oy</div>
+        ${opts}
+        <button class="poll-del" onclick="delPoll('${p.id}')">Soruyu sil</button>
+      </div>`;
+    }).join('');
+  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
+}
+
+window.addPoll = async function() {
+  const q = document.getElementById('pollQ').value.trim();
+  const o1 = document.getElementById('pollOpt1').value.trim();
+  const o2 = document.getElementById('pollOpt2').value.trim();
+  const o3 = document.getElementById('pollOpt3').value.trim();
+  if(!q||!o1||!o2) return;
+  const opts = [o1,o2,...(o3?[o3]:[])];
+  ['pollQ','pollOpt1','pollOpt2','pollOpt3'].forEach(id=>document.getElementById(id).value='');
+  await addDoc(collection(db,'plan_polls'),{question:q,options:opts,votes:{},by:currentUser,ts:Date.now()});
+  loadOylama();
+};
+
+window.vote = async function(id, optIdx) {
+  const ref = doc(db,'plan_polls',id);
+  const snap = await getDocs(query(collection(db,'plan_polls')));
+  const poll = snap.docs.find(d=>d.id===id)?.data();
+  if(!poll) return;
+  const votes = poll.votes||{};
+  if(votes[currentUser]===optIdx) delete votes[currentUser];
+  else votes[currentUser]=optIdx;
+  await updateDoc(ref,{votes});
+  loadOylama();
+};
+
+window.delPoll = async function(id) {
+  await deleteDoc(doc(db,'plan_polls',id));
+  loadOylama();
+};
+
+// ── NİŞAN LİSTESİ ─────────────────────────────────────────────
+const NISHAN_ITEMS = [
+  'Aile onayı ve bilgilendirme',
+  'Tarih belirleme',
+  'Mekan seçimi',
+  'Davetliler listesi hazırlama',
+  'Yüzük alımı',
+  'Fotoğrafçı / kameraman',
+  'Kıyafet seçimi (Mert)',
+  'Kıyafet seçimi (Sema)',
+  'İkram ve yemek planı',
+  'Müzik / çalgı',
+  'Ulaşım ve konaklama planı',
+  'Hatıra hediyeleri',
+  'Dekorasyon',
+  'Davet kartları / mesajları',
+  'Çiçek aranjmanı',
+];
+
+async function loadNishan() {
+  const el = document.getElementById('nishanList');
+  try {
+    const snap = await getDocs(collection(db,'plan_nishan'));
+    const saved = {};
+    snap.docs.forEach(d=>saved[d.data().item]=d.id);
+    const done = Object.keys(saved).length;
+    const total = NISHAN_ITEMS.length;
+    const pct = Math.round(done/total*100);
+    const fill = document.getElementById('nishanFill');
+    const txt = document.getElementById('nishanText');
+    if(fill) fill.style.width = pct+'%';
+    if(txt) txt.textContent = `${done}/${total} tamamlandı (${pct}%)`;
+    document.getElementById('nishanCnt').textContent = `${pct}%`;
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
+      NISHAN_ITEMS.map(item=>{
+        const isDone = !!saved[item];
+        const docId = saved[item]||'';
+        return `<div class="nishan-item">
+          <div class="nishan-cb${isDone?' done':''}" onclick="toggleNishan('${item}','${docId}',${isDone})">✓</div>
+          <div class="nishan-text${isDone?' done':''}">${item}</div>
+        </div>`;
+      }).join('') + '</div>';
+  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
+}
+
+window.toggleNishan = async function(item, docId, isDone) {
+  if(isDone && docId) {
+    await deleteDoc(doc(db,'plan_nishan',docId));
+  } else {
+    await addDoc(collection(db,'plan_nishan'),{item,by:currentUser,ts:Date.now()});
+  }
+  loadNishan();
+};
+
+// ── COMMENTS ──────────────────────────────────────────────────
+async function loadComments(colId) {
+  const el = document.getElementById('cmts-'+colId);
+  if(!el) return;
+  try {
+    const snap = await getDocs(query(collection(db,'plan_comments_'+colId),orderBy('ts','asc')));
+    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!items.length){el.innerHTML='<div style="color:var(--text3);font-size:12px;font-style:italic;padding:4px 0;">Henüz yorum yok</div>';return;}
+    el.innerHTML = items.map(c=>`
+      <div class="comment">
+        <div class="comment-avatar">${(c.by||'?').charAt(0).toUpperCase()}</div>
+        <div class="comment-body">
+          <div class="comment-who">${c.by||'?'}</div>
+          <div class="comment-text">${c.text}</div>
+        </div>
+        ${c.by===currentUser?`<button class="comment-del" onclick="delComment('${colId}','${c.id}')">×</button>`:''}
+      </div>`).join('');
+  } catch(e){}
+}
+
+window.addComment = async function(colId) {
+  const input = document.getElementById('cmt-input-'+colId);
+  const text = input.value.trim();
+  if(!text) return;
+  input.value='';
+  await addDoc(collection(db,'plan_comments_'+colId),{text,by:currentUser,ts:Date.now()});
+  loadComments(colId);
+};
+
+window.delComment = async function(colId, id) {
+  await deleteDoc(doc(db,'plan_comments_'+colId,id));
+  loadComments(colId);
+};
+
+// ── HOME PROGRESS ─────────────────────────────────────────────
+async function updateHomeProgress() {
+  try {
+    const snap = await getDocs(collection(db,'plan_todos'));
+    const total = snap.size;
+    const done = snap.docs.filter(d=>d.data().done).length;
+    const pct = total>0?Math.round(done/total*100):0;
+    const fill = document.getElementById('homeProgFill');
+    const txt = document.getElementById('homeProgText');
+    if(fill) fill.style.width = pct+'%';
+    if(txt) txt.textContent = `${done}/${total} görev · ${pct}%`;
+  } catch(e){}
+}
+
+function loadAll() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
 
 // ── LOGIN COUNTDOWN ──────────────────────────────────────────
 const CD_TARGET = new Date('2026-09-13T18:00:00+03:00'); // Türkiye saati
