@@ -904,7 +904,7 @@ window.addEventListener('resize', setSafeArea);
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey:"AIzaSyCMOr2gdQwOoZE872VtnlphrZ0oRzktQFQ",
@@ -993,12 +993,12 @@ window.switchTab = function(name) {
 let lastSeenTs = Number(localStorage.getItem('plan_lastSeen')||'0');
 let notifCount = 0;
 
-async function checkNotifications() {
+window.checkNotifications = async function() {
   try {
     const [todos,notes,persons] = await Promise.all([
-      getDocs(query(collection(db,'plan_todos'),orderBy('ts','desc'))),
-      getDocs(query(collection(db,'plan_notes'),orderBy('ts','desc'))),
-      getDocs(query(collection(db,'plan_persons'),orderBy('ts','desc'))),
+      getDocs(collection(db,'plan_todos')),
+      getDocs(collection(db,'plan_notes')),
+      getDocs(collection(db,'plan_persons')),
     ]);
     const allItems = [
       ...todos.docs.map(d=>({...d.data()})),
@@ -1015,7 +1015,7 @@ async function checkNotifications() {
   } catch(e){}
 }
 
-function clearNotifications() {
+window.clearNotifications = function() {
   lastSeenTs = Date.now();
   localStorage.setItem('plan_lastSeen', lastSeenTs);
   notifCount = 0;
@@ -1077,17 +1077,16 @@ window.filterDDSelect = function(tabId, val, el) {
   else if(tabId==='esya') loadEsya();
 };
 
-function getFilter(tabId) {
+window.getFilter = function(tabId) {
   return window._ddFilters[tabId] || 'Tümü';
-}
+};
 
 // ── TODOS ─────────────────────────────────────────────────────
-async function loadTodos() {
-  buildFilter('todoFilter', null, getFilter('todos'));
+window.loadTodos = async function() {
   const el = document.getElementById('todoList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_todos'),orderBy('ts','desc')));
-    let items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_todos'));
+    let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
     const f = getFilter('todos');
     if(f!=='Tümü') items = items.filter(t=>t.who&&t.who.toLowerCase()===f.toLowerCase());
     document.getElementById('todoCnt').textContent = items.length + ' görev';
@@ -1105,7 +1104,7 @@ async function loadTodos() {
         <button class="item-del" onclick="delTodo('${t.id}')">×</button>
       </div>`).join('');
     updateStats();
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
+  } catch(e){el.innerHTML='<div style="padding:12px;color:red;font-size:12px;">Hata: '+e.message+'</div>';console.error(e);}
 }
 
 window.addTodo = async function() {
@@ -1128,12 +1127,11 @@ window.delTodo = async function(id) {
 };
 
 // ── NOTES ─────────────────────────────────────────────────────
-async function loadNotes() {
-  buildFilter('notlarFilter', null, getFilter('notlar'));
+window.loadNotes = async function() {
   const el = document.getElementById('noteList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_notes'),orderBy('ts','desc')));
-    let items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_notes'));
+    let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
     const f = getFilter('notlar');
     if(f!=='Tümü') items = items.filter(n=>n.who&&n.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Not yok 🌻</div>';return;}
@@ -1167,12 +1165,11 @@ window.delNote = async function(id) {
 };
 
 // ── PERSONS ───────────────────────────────────────────────────
-async function loadPersons() {
-  buildFilter('katilimciFilter', null, getFilter('katilimci'));
+window.loadPersons = async function() {
   const el = document.getElementById('personList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_persons'),orderBy('ts','asc')));
-    personsList = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_persons'));
+    personsList = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     let items = personsList;
     document.getElementById('personCnt').textContent = items.length + ' kişi';
     if(!items.length){el.innerHTML='<div class="empty">Katılımcı yok 🌻</div>';return;}
@@ -1216,12 +1213,11 @@ window.delPerson = async function(id) {
 };
 
 // ── FOODS ─────────────────────────────────────────────────────
-async function loadFoods() {
-  buildFilter('yemekFilter', null, getFilter('yemek'));
+window.loadFoods = async function() {
   const el = document.getElementById('foodList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_foods'),orderBy('ts','asc')));
-    let items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_foods'));
+    let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     const f = getFilter('yemek');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     document.getElementById('foodCnt').textContent = items.length + ' yemek';
@@ -1257,8 +1253,8 @@ window.delFood = async function(id) {
 async function loadBudget() {
   const el = document.getElementById('budgetList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_budget'),orderBy('ts','asc')));
-    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_budget'));
+    const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     const total = items.reduce((s,b)=>s+Number(b.amount||0),0);
     document.getElementById('statBudget').textContent = '₺'+total.toLocaleString('tr-TR');
     if(!items.length){el.innerHTML='<div class="empty">Gider yok</div>';document.getElementById('budgetTotal').innerHTML='<span>Toplam</span><span>₺0</span>';return;}
@@ -1289,12 +1285,11 @@ window.delBudget = async function(id) {
 
 // ── ORG ───────────────────────────────────────────────────────
 const ORG_ICONS = {mekan:'🏠',sandalye:'🪑',yuzuk:'💍',cicek:'🌸',muzik:'🎵',diger:'📌'};
-async function loadOrg() {
-  buildFilter('orgFilter', null, getFilter('org'));
+window.loadOrg = async function() {
   const el = document.getElementById('orgList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_org'),orderBy('ts','asc')));
-    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_org'));
+    const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     if(!items.length){el.innerHTML='<div class="empty">Organizasyon notu yok 🌻</div>';return;}
     el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
       items.map(o=>`
@@ -1320,12 +1315,11 @@ window.delOrg = async function(id) {
 };
 
 // ── ESYA ──────────────────────────────────────────────────────
-async function loadEsya() {
-  buildFilter('esyaFilter', null, getFilter('esya'));
+window.loadEsya = async function() {
   const el = document.getElementById('esyaList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_esya'),orderBy('ts','asc')));
-    let items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_esya'));
+    let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     const f = getFilter('esya');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Eşya yok 🌻</div>';return;}
@@ -1360,11 +1354,11 @@ window.delEsya = async function(id) {
 };
 
 // ── GIFTS ─────────────────────────────────────────────────────
-async function loadGifts() {
+window.loadGifts = async function() {
   const el = document.getElementById('giftList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_gifts'),orderBy('ts','asc')));
-    const items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_gifts'));
+    const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     if(!items.length){el.innerHTML='<div class="empty">Hediye yok 🎁</div>';return;}
     el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
       items.map(g=>`
@@ -1396,7 +1390,7 @@ window.delGift = async function(id) {
 };
 
 // ── STATS ─────────────────────────────────────────────────────
-async function updateStats() {
+window.updateStats = async function() {
   try {
     const [todos,persons,foods,budget] = await Promise.all([
       getDocs(collection(db,'plan_todos')),
@@ -1413,12 +1407,12 @@ async function updateStats() {
 }
 
 // ── RECENT ────────────────────────────────────────────────────
-async function loadRecent() {
+window.loadRecent = async function() {
   try {
     const [todos,persons,notes] = await Promise.all([
-      getDocs(query(collection(db,'plan_todos'),orderBy('ts','desc'))),
-      getDocs(query(collection(db,'plan_persons'),orderBy('ts','desc'))),
-      getDocs(query(collection(db,'plan_notes'),orderBy('ts','desc'))),
+      getDocs(collection(db,'plan_todos')),
+      getDocs(collection(db,'plan_persons')),
+      getDocs(collection(db,'plan_notes')),
     ]);
     const all = [
       ...todos.docs.map(d=>({...d.data(),type:'todo'})),
@@ -1442,7 +1436,7 @@ async function loadRecent() {
 
 
 // ── CHAT ──────────────────────────────────────────────────────
-async function loadChat() {
+window.loadChat = async function() {
   const el = document.getElementById('chatMessages');
   if(!el) return;
   try {
@@ -1485,11 +1479,11 @@ window.quickPoll = async function() {
 };
 
 // ── OYLAMA ────────────────────────────────────────────────────
-async function loadOylama() {
+window.loadOylama = async function() {
   const el = document.getElementById('pollList');
   try {
-    const snap = await getDocs(query(collection(db,'plan_polls'),orderBy('ts','desc')));
-    const polls = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const snap = await getDocs(collection(db,'plan_polls'));
+    const polls = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
     if(!polls.length){el.innerHTML='<div class="empty">Henüz oylama yok 🗳️</div>';return;}
     el.innerHTML = polls.map(p=>{
       const total = Object.values(p.votes||{}).length;
@@ -1563,7 +1557,7 @@ const NISHAN_ITEMS = [
   'Çiçek aranjmanı',
 ];
 
-async function loadNishan() {
+window.loadNishan = async function() {
   const el = document.getElementById('nishanList');
   try {
     const snap = await getDocs(collection(db,'plan_nishan'));
@@ -1600,7 +1594,7 @@ window.toggleNishan = async function(item, docId, isDone) {
 
 
 // ── HOME PROGRESS ─────────────────────────────────────────────
-async function updateHomeProgress() {
+window.updateHomeProgress = async function() {
   try {
     const snap = await getDocs(collection(db,'plan_todos'));
     const total = snap.size;
@@ -1613,11 +1607,11 @@ async function updateHomeProgress() {
   } catch(e){}
 }
 
-function loadAll() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
+window.loadAll = function() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
 
 // ── LOGIN COUNTDOWN ──────────────────────────────────────────
 const CD_TARGET = new Date('2026-09-13T18:00:00+03:00'); // Türkiye saati
-function updateHomeCD() {
+window.updateHomeCD = function() {
   const now = new Date();
   const diff = CD_TARGET - now;
   if(diff <= 0) {
@@ -1633,7 +1627,7 @@ function updateHomeCD() {
   set('hcd-s', Math.floor(diff%6e4/1e3));
 }
 
-function updateLoginCD() {
+window.updateLoginCD = function() {
   const now = new Date();
   const diff = CD_TARGET - now;
   if(diff <= 0) {
