@@ -1083,7 +1083,6 @@ function getFilter(tabId) {
 
 // ── TODOS ─────────────────────────────────────────────────────
 async function loadTodos() {
-  buildFilter('todoFilter', null, getFilter('todos'));
   const el = document.getElementById('todoList');
   try {
     const snap = await getDocs(collection(db,'plan_todos'));
@@ -1129,7 +1128,6 @@ window.delTodo = async function(id) {
 
 // ── NOTES ─────────────────────────────────────────────────────
 async function loadNotes() {
-  buildFilter('notlarFilter', null, getFilter('notlar'));
   const el = document.getElementById('noteList');
   try {
     const snap = await getDocs(collection(db,'plan_notes'));
@@ -1168,7 +1166,6 @@ window.delNote = async function(id) {
 
 // ── PERSONS ───────────────────────────────────────────────────
 async function loadPersons() {
-  buildFilter('katilimciFilter', null, getFilter('katilimci'));
   const el = document.getElementById('personList');
   try {
     const snap = await getDocs(collection(db,'plan_persons'));
@@ -1217,7 +1214,6 @@ window.delPerson = async function(id) {
 
 // ── FOODS ─────────────────────────────────────────────────────
 async function loadFoods() {
-  buildFilter('yemekFilter', null, getFilter('yemek'));
   const el = document.getElementById('foodList');
   try {
     const snap = await getDocs(collection(db,'plan_foods'));
@@ -1290,7 +1286,6 @@ window.delBudget = async function(id) {
 // ── ORG ───────────────────────────────────────────────────────
 const ORG_ICONS = {mekan:'🏠',sandalye:'🪑',yuzuk:'💍',cicek:'🌸',muzik:'🎵',diger:'📌'};
 async function loadOrg() {
-  buildFilter('orgFilter', null, getFilter('org'));
   const el = document.getElementById('orgList');
   try {
     const snap = await getDocs(collection(db,'plan_org'));
@@ -1321,7 +1316,6 @@ window.delOrg = async function(id) {
 
 // ── ESYA ──────────────────────────────────────────────────────
 async function loadEsya() {
-  buildFilter('esyaFilter', null, getFilter('esya'));
   const el = document.getElementById('esyaList');
   try {
     const snap = await getDocs(collection(db,'plan_esya'));
