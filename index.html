@@ -902,11 +902,10 @@ function setSafeArea() {
 setSafeArea();
 window.addEventListener('resize', setSafeArea);
 </script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-const app = initializeApp({
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+const app = firebase.initializeApp({
   apiKey:"AIzaSyCMOr2gdQwOoZE872VtnlphrZ0oRzktQFQ",
   authDomain:"kirpi-online.firebaseapp.com",
   projectId:"kirpi-online",
@@ -914,10 +913,7 @@ const app = initializeApp({
   messagingSenderId:"439694732981",
   appId:"1:439694732981:web:ea7a5ce8a599d1b58f58fc"
 });
-const db = getFirestore(app);
-
-// ── PERSONS CACHE ─────────────────────────────────────────────
-let personsList = [];
+const db = firebase.firestore();
 
 // ── AUTH ──────────────────────────────────────────────────────
 const INVITE_CODES = ['sema2026','semosh','izmir'];
@@ -944,19 +940,18 @@ window.doLogout = function() {
 };
 
 function setUserInfo(name) {
-  
-  document.getElementById('drawerUserInfo').textContent = name;
+  document.getElementById('drawerUserInfo').textContent = name + ' olarak giriş yapıldı';
+  const heroUser = document.getElementById('heroUser');
+  if(heroUser) heroUser.textContent = 'Hoş geldin, ' + name + ' 🌻';
 }
 
 if(currentUser && localStorage.getItem('plan_auth')==='1') {
   document.getElementById('login-screen').classList.add('hidden');
-  // Skip code field
   document.getElementById('loginCode').style.display='none';
   document.getElementById('codeLabel').style.display='none';
   setUserInfo(currentUser);
   loadAll();
 } else if(localStorage.getItem('plan_auth')==='1') {
-  // Has auth but no name - show only name field
   document.getElementById('loginCode').style.display='none';
   document.getElementById('codeLabel').style.display='none';
   setTimeout(()=>document.getElementById('loginName').focus(),300);
@@ -974,101 +969,53 @@ const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','chat','oylama','ni
 window.switchTab = function(name) {
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.drawer-item').forEach((d,i)=>d.classList.toggle('active',ALL_TABS[i]===name));
   window.scrollTo({top:0});
-  if(name==='todos') loadTodos();
+  const tabBadge = document.getElementById('badge-'+name);
+  if(tabBadge) tabBadge.classList.remove('show');
+  if(name==='ana') { loadRecent(); updateHomeProgress(); }
+  else if(name==='todos') loadTodos();
   else if(name==='notlar') loadNotes();
   else if(name==='katilimci') loadPersons();
   else if(name==='yemek') loadFoods();
   else if(name==='chat') loadChat();
-  else if(name==='chat') loadChat();
   else if(name==='oylama') loadOylama();
   else if(name==='nishan') loadNishan();
   else if(name==='org') loadOrg();
-
   else if(name==='esya') loadEsya();
   else if(name==='hediye') loadGifts();
 };
-
-// ── NOTIFICATIONS ────────────────────────────────────────────
-let lastSeenTs = Number(localStorage.getItem('plan_lastSeen')||'0');
-let notifCount = 0;
-
-window.checkNotifications = async function() {
-  try {
-    const [todos,notes,persons] = await Promise.all([
-      getDocs(collection(db,'plan_todos')),
-      getDocs(collection(db,'plan_notes')),
-      getDocs(collection(db,'plan_persons')),
-    ]);
-    const allItems = [
-      ...todos.docs.map(d=>({...d.data()})),
-      ...notes.docs.map(d=>({...d.data()})),
-      ...persons.docs.map(d=>({...d.data()})),
-    ];
-    notifCount = allItems.filter(i=>i.ts > lastSeenTs && i.by !== currentUser).length;
-    // Update all app badges
-    const collections = [
-      {col:'plan_todos', badge:'badge-todos'},
-      {col:'plan_notes', badge:'badge-notlar'},
-      {col:'plan_persons', badge:'badge-katilimci'},
-    ];
-  } catch(e){}
-}
-
-window.clearNotifications = function() {
-  lastSeenTs = Date.now();
-  localStorage.setItem('plan_lastSeen', lastSeenTs);
-  notifCount = 0;
-  document.querySelectorAll('.app-badge').forEach(b=>b.classList.remove('show'));
-}
-
-// Check notifications every 30 seconds
-setInterval(checkNotifications, 30000);
 
 window.addEventListener('scroll',()=>{
   document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>150);
 });
 
-
-
 // ── FILTER DROPDOWN ──────────────────────────────────────────
 window._ddFilters = {};
-
 window.toggleDD = function(tabId) {
   const menu = document.getElementById('dd-menu-'+tabId);
   if(!menu) return;
-  // Close all others
-  document.querySelectorAll('.filter-dd-menu.open').forEach(m=>{
-    if(m.id !== 'dd-menu-'+tabId) m.classList.remove('open');
-  });
+  document.querySelectorAll('.filter-dd-menu.open').forEach(m=>{ if(m.id!=='dd-menu-'+tabId) m.classList.remove('open'); });
   menu.classList.toggle('open');
-  // Close on outside click
   if(menu.classList.contains('open')) {
     setTimeout(()=>{
       document.addEventListener('click', function closeDD(e) {
-        if(!menu.contains(e.target) && e.target.id !== 'dd-btn-'+tabId) {
-          menu.classList.remove('open');
-        }
+        if(!menu.contains(e.target) && e.target.id!=='dd-btn-'+tabId) menu.classList.remove('open');
         document.removeEventListener('click', closeDD);
       });
     }, 10);
   }
 };
-
 window.filterDDSelect = function(tabId, val, el) {
   window._ddFilters[tabId] = val;
-  // Update button label
   const btn = document.getElementById('dd-btn-'+tabId);
   if(btn) {
-    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${val} ▾`;
-    btn.classList.toggle('active', val !== 'Tümü');
+    btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + val + ' ▾';
+    btn.classList.toggle('active', val!=='Tümü');
   }
-  // Mark selected
   el.closest('.filter-dd-menu').querySelectorAll('.filter-dd-item').forEach(i=>i.classList.remove('selected'));
   el.classList.add('selected');
-  // Close menu
   document.getElementById('dd-menu-'+tabId).classList.remove('open');
-  // Reload
   if(tabId==='todos') loadTodos();
   else if(tabId==='notlar') loadNotes();
   else if(tabId==='katilimci') loadPersons();
@@ -1076,18 +1023,15 @@ window.filterDDSelect = function(tabId, val, el) {
   else if(tabId==='org') loadOrg();
   else if(tabId==='esya') loadEsya();
 };
-
-window.getFilter = function(tabId) {
-  return window._ddFilters[tabId] || 'Tümü';
-};
+window.getFilter = function(tabId) { return window._ddFilters[tabId] || 'Tümü'; };
 
 // ── TODOS ─────────────────────────────────────────────────────
 window.loadTodos = async function() {
   const el = document.getElementById('todoList');
   try {
-    const snap = await getDocs(collection(db,'plan_todos'));
+    const snap = await db.collection('plan_todos').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
-    const f = getFilter('todos');
+    const f = window.getFilter('todos');
     if(f!=='Tümü') items = items.filter(t=>t.who&&t.who.toLowerCase()===f.toLowerCase());
     document.getElementById('todoCnt').textContent = items.length + ' görev';
     if(!items.length){el.innerHTML='<div class="empty">Görev yok 🌻</div>';return;}
@@ -1096,33 +1040,28 @@ window.loadTodos = async function() {
         <div class="item-cb${t.done?' done':''}" onclick="toggleTodo('${t.id}',${!t.done})">✓</div>
         <div class="item-body">
           <div class="item-text${t.done?' done':''}">${t.text}</div>
-          <div class="item-meta">
-            <span class="item-who">${t.who||'ortak'}</span>
-            <span class="item-by">· ${t.by||''}</span>
-          </div>
+          <div class="item-meta"><span class="item-who">${t.who||'ortak'}</span><span class="item-by">· ${t.by||''}</span></div>
         </div>
         <button class="item-del" onclick="delTodo('${t.id}')">×</button>
       </div>`).join('');
     updateStats();
-  } catch(e){el.innerHTML='<div style="padding:12px;color:red;font-size:12px;">Hata: '+e.message+'</div>';console.error(e);}
-}
-
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addTodo = async function() {
   const text = document.getElementById('todoInput').value.trim();
   const who = document.getElementById('todoWho').value;
   if(!text) return;
   document.getElementById('todoInput').value='';
-  await addDoc(collection(db,'plan_todos'),{text,who,done:false,by:currentUser,ts:Date.now()});
+  await db.collection('plan_todos').add({text,who,done:false,by:currentUser,ts:Date.now()});
   loadTodos();
 };
 window.toggleTodo = async function(id,done) {
-  await updateDoc(doc(db,'plan_todos',id),{done});
+  await db.collection('plan_todos').doc(id).update({done});
   loadTodos();
 };
 window.delTodo = async function(id) {
-  await deleteDoc(doc(db,'plan_todos',id));
-  loadTodos();
-  updateHomeProgress();
+  await db.collection('plan_todos').doc(id).delete();
+  loadTodos(); updateHomeProgress();
   if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
 };
 
@@ -1130,67 +1069,53 @@ window.delTodo = async function(id) {
 window.loadNotes = async function() {
   const el = document.getElementById('noteList');
   try {
-    const snap = await getDocs(collection(db,'plan_notes'));
+    const snap = await db.collection('plan_notes').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
-    const f = getFilter('notlar');
+    const f = window.getFilter('notlar');
     if(f!=='Tümü') items = items.filter(n=>n.who&&n.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Not yok 🌻</div>';return;}
     el.innerHTML = items.map(n=>`
       <div class="note-card">
-        <div class="note-hdr">
-          <span>${n.title}</span>
-          <span style="font-size:10px;color:var(--text3)">${n.who||'ortak'} · ${n.by||''}</span>
-        </div>
+        <div class="note-hdr"><span>${n.title}</span><span style="font-size:10px;color:var(--text3)">${n.who||'ortak'} · ${n.by||''}</span></div>
         <textarea class="note-textarea" onblur="saveNote('${n.id}',this.value)">${n.content||''}</textarea>
         <div class="note-footer"><span></span><button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;">Sil</button></div>
       </div>`).join('');
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addNote = async function() {
   const title = document.getElementById('noteTitle').value.trim();
   const who = document.getElementById('noteWho').value;
   if(!title) return;
   document.getElementById('noteTitle').value='';
-  await addDoc(collection(db,'plan_notes'),{title,who,content:'',by:currentUser,ts:Date.now()});
+  await db.collection('plan_notes').add({title,who,content:'',by:currentUser,ts:Date.now()});
   loadNotes();
 };
-window.saveNote = async function(id,content) {
-  await updateDoc(doc(db,'plan_notes',id),{content});
-};
-window.delNote = async function(id) {
-  await deleteDoc(doc(db,'plan_notes',id));
-  loadNotes();
-  if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
-};
+window.saveNote = async function(id,content) { await db.collection('plan_notes').doc(id).update({content}); };
+window.delNote = async function(id) { await db.collection('plan_notes').doc(id).delete(); loadNotes(); };
 
 // ── PERSONS ───────────────────────────────────────────────────
+let personsList = [];
 window.loadPersons = async function() {
   const el = document.getElementById('personList');
   try {
-    const snap = await getDocs(collection(db,'plan_persons'));
+    const snap = await db.collection('plan_persons').get();
     personsList = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
-    let items = personsList;
-    document.getElementById('personCnt').textContent = items.length + ' kişi';
-    if(!items.length){el.innerHTML='<div class="empty">Katılımcı yok 🌻</div>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
-      items.map(p=>`
+    document.getElementById('personCnt').textContent = personsList.length + ' kişi';
+    if(!personsList.length){el.innerHTML='<div class="empty">Katılımcı yok 🌻</div>';return;}
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
+      personsList.map(p=>`
         <div class="person-row">
           <div class="person-avatar">${p.name.charAt(0).toUpperCase()}</div>
-          <div class="person-info">
-            <div class="person-name">${p.name}</div>
-            <div class="person-rel">${p.rel||''} ${p.kanal?'· '+p.kanal:''}</div>
-          </div>
+          <div class="person-info"><div class="person-name">${p.name}</div><div class="person-rel">${p.rel||''} ${p.kanal?'· '+p.kanal:''}</div></div>
           <div class="person-right">
             <div class="status-dot ${p.status||'henuz'}" onclick="cycleStatus('${p.id}','${p.status||'henuz'}')"></div>
             <span class="status-label ${p.status||'henuz'}" onclick="cycleStatus('${p.id}','${p.status||'henuz'}')">${p.status==='haberdar'?'Haberdar':p.status==='bekliyor'?'Bekliyor':'Değil'}</span>
             <button class="person-del-btn" onclick="delPerson('${p.id}')">×</button>
           </div>
-        </div>`).join('') + `</div>`;
+        </div>`).join('') + '</div>';
     updateStats();
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addPerson = async function() {
   const name = document.getElementById('personName').value.trim();
   const rel = document.getElementById('personRel').value.trim();
@@ -1198,89 +1123,157 @@ window.addPerson = async function() {
   if(!name) return;
   document.getElementById('personName').value='';
   document.getElementById('personRel').value='';
-  await addDoc(collection(db,'plan_persons'),{name,rel,kanal,status:'henuz',by:currentUser,ts:Date.now()});
+  await db.collection('plan_persons').add({name,rel,kanal,status:'henuz',by:currentUser,ts:Date.now()});
   loadPersons();
 };
 window.cycleStatus = async function(id,current) {
   const next = current==='henuz'?'bekliyor':current==='bekliyor'?'haberdar':'henuz';
-  await updateDoc(doc(db,'plan_persons',id),{status:next});
+  await db.collection('plan_persons').doc(id).update({status:next});
   loadPersons();
 };
 window.delPerson = async function(id) {
-  await deleteDoc(doc(db,'plan_persons',id));
+  await db.collection('plan_persons').doc(id).delete();
   loadPersons();
-  if(document.getElementById('tab-ana').classList.contains('active')) loadRecent();
 };
 
 // ── FOODS ─────────────────────────────────────────────────────
 window.loadFoods = async function() {
   const el = document.getElementById('foodList');
   try {
-    const snap = await getDocs(collection(db,'plan_foods'));
+    const snap = await db.collection('plan_foods').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
-    const f = getFilter('yemek');
+    const f = window.getFilter('yemek');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     document.getElementById('foodCnt').textContent = items.length + ' yemek';
     if(!items.length){el.innerHTML='<div class="empty">Yemek yok 🌻</div>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
       items.map(f=>`
         <div class="food-row">
           <div class="food-icon">🍽️</div>
-          <div class="food-info">
-            <div class="food-name">${f.name}</div>
-            <div class="food-who">${f.who||'?'}</div>
-          </div>
+          <div class="food-info"><div class="food-name">${f.name}</div><div class="food-who">${f.who||'?'}</div></div>
           <button class="food-del" onclick="delFood('${f.id}')">×</button>
-        </div>`).join('') + `</div>`;
-    updateStats();
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+        </div>`).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addFood = async function() {
   const name = document.getElementById('foodName').value.trim();
   const who = document.getElementById('foodWho').value;
   if(!name) return;
   document.getElementById('foodName').value='';
-  await addDoc(collection(db,'plan_foods'),{name,who,by:currentUser,ts:Date.now()});
+  await db.collection('plan_foods').add({name,who,by:currentUser,ts:Date.now()});
   loadFoods();
 };
-window.delFood = async function(id) {
-  await deleteDoc(doc(db,'plan_foods',id));
-  loadFoods();
-};
+window.delFood = async function(id) { await db.collection('plan_foods').doc(id).delete(); loadFoods(); };
+window.saveFood = async function(id,recipe) { await db.collection('plan_foods').doc(id).update({recipe}); };
 
-// ── BUDGET ────────────────────────────────────────────────────
-async function loadBudget() {
-  const el = document.getElementById('budgetList');
+// ── CHAT ──────────────────────────────────────────────────────
+window.loadChat = async function() {
+  const el = document.getElementById('chatMessages');
+  if(!el) return;
   try {
-    const snap = await getDocs(collection(db,'plan_budget'));
-    const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
-    const total = items.reduce((s,b)=>s+Number(b.amount||0),0);
-    document.getElementById('statBudget').textContent = '₺'+total.toLocaleString('tr-TR');
-    if(!items.length){el.innerHTML='<div class="empty">Gider yok</div>';document.getElementById('budgetTotal').innerHTML='<span>Toplam</span><span>₺0</span>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
-      items.map(b=>`
-        <div class="budget-row">
-          <span class="budget-item-name">${b.item}</span>
-          <span class="budget-amount">₺${Number(b.amount).toLocaleString('tr-TR')}</span>
-          <button class="budget-del" onclick="delBudget('${b.id}')">×</button>
-        </div>`).join('') + `</div>`;
-    document.getElementById('budgetTotal').innerHTML = `<span>Toplam</span><span>₺${total.toLocaleString('tr-TR')}</span>`;
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
-window.addBudget = async function() {
-  const item = document.getElementById('budgetItem').value.trim();
-  const amount = document.getElementById('budgetAmount').value;
-  if(!item||!amount) return;
-  document.getElementById('budgetItem').value='';
-  document.getElementById('budgetAmount').value='';
-  await addDoc(collection(db,'plan_budget'),{item,amount:Number(amount),by:currentUser,ts:Date.now()});
-  loadBudget();
+    const snap = await db.collection('plan_chat').orderBy('ts','asc').get();
+    const msgs = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!msgs.length){el.innerHTML='<div class="empty">Henüz mesaj yok 💬</div>';return;}
+    el.innerHTML = msgs.map(m=>{
+      const mine = m.by===currentUser;
+      return `<div class="chat-msg ${mine?'mine':'theirs'}">
+        <div class="chat-meta">${mine?'':m.by+' · '}${new Date(m.ts).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}</div>
+        <div class="chat-bubble">${m.text}</div>
+      </div>`;
+    }).join('');
+    el.scrollTop = el.scrollHeight;
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
-window.delBudget = async function(id) {
-  await deleteDoc(doc(db,'plan_budget',id));
-  loadBudget();
+window.sendChat = async function() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value='';
+  await db.collection('plan_chat').add({text,by:currentUser,ts:Date.now()});
+  loadChat();
+};
+
+// ── OYLAMA ────────────────────────────────────────────────────
+window.loadOylama = async function() {
+  const el = document.getElementById('pollList');
+  try {
+    const snap = await db.collection('plan_polls').get();
+    const polls = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
+    if(!polls.length){el.innerHTML='<div class="empty">Henüz oylama yok 🗳️</div>';return;}
+    el.innerHTML = polls.map(p=>{
+      const total = Object.values(p.votes||{}).length;
+      const opts = (p.options||[]).map((opt,i)=>{
+        const cnt = Object.values(p.votes||{}).filter(v=>v===i).length;
+        const pct = total>0?Math.round(cnt/total*100):0;
+        const myVote = p.votes&&p.votes[currentUser]===i;
+        return `<div class="poll-opt${myVote?' voted':''}" onclick="vote('${p.id}',${i})">
+          <div style="flex:1;"><div class="poll-opt-label">${opt}</div><div class="poll-opt-bar" style="width:${pct}%"></div></div>
+          <div class="poll-opt-count">${cnt} (${pct}%)</div>
+        </div>`;
+      }).join('');
+      return `<div class="poll-card"><div class="poll-q">${p.question}</div><div class="poll-by">${p.by||'?'} · ${total} oy</div>${opts}<button class="poll-del" onclick="delPoll('${p.id}')">Soruyu sil</button></div>`;
+    }).join('');
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
+window.addPoll = async function() {
+  const q = document.getElementById('pollQ').value.trim();
+  const o1 = document.getElementById('pollOpt1').value.trim();
+  const o2 = document.getElementById('pollOpt2').value.trim();
+  const o3 = document.getElementById('pollOpt3').value.trim();
+  if(!q||!o1||!o2) return;
+  const opts = [o1,o2,...(o3?[o3]:[])];
+  ['pollQ','pollOpt1','pollOpt2','pollOpt3'].forEach(id=>document.getElementById(id).value='');
+  await db.collection('plan_polls').add({question:q,options:opts,votes:{},by:currentUser,ts:Date.now()});
+  loadOylama();
+};
+window.vote = async function(id,optIdx) {
+  const snap = await db.collection('plan_polls').doc(id).get();
+  const poll = snap.data();
+  if(!poll) return;
+  const votes = poll.votes||{};
+  if(votes[currentUser]===optIdx) delete votes[currentUser];
+  else votes[currentUser]=optIdx;
+  await db.collection('plan_polls').doc(id).update({votes});
+  loadOylama();
+};
+window.delPoll = async function(id) { await db.collection('plan_polls').doc(id).delete(); loadOylama(); };
+
+// ── NİŞAN LİSTESİ ─────────────────────────────────────────────
+const NISHAN_ITEMS = [
+  'Aile onayı ve bilgilendirme','Tarih belirleme','Mekan seçimi',
+  'Davetliler listesi hazırlama','Yüzük alımı','Fotoğrafçı / kameraman',
+  'Kıyafet seçimi (Mert)','Kıyafet seçimi (Sema)','İkram ve yemek planı',
+  'Müzik / çalgı','Ulaşım ve konaklama planı','Hatıra hediyeleri',
+  'Dekorasyon','Davet kartları / mesajları','Çiçek aranjmanı',
+];
+window.loadNishan = async function() {
+  const el = document.getElementById('nishanList');
+  try {
+    const snap = await db.collection('plan_nishan').get();
+    const saved = {};
+    snap.docs.forEach(d=>saved[d.data().item]=d.id);
+    const done = Object.keys(saved).length;
+    const total = NISHAN_ITEMS.length;
+    const pct = Math.round(done/total*100);
+    const fill = document.getElementById('nishanFill');
+    const txt = document.getElementById('nishanText');
+    if(fill) fill.style.width=pct+'%';
+    if(txt) txt.textContent=done+'/'+total+' tamamlandı ('+pct+'%)';
+    document.getElementById('nishanCnt').textContent=pct+'%';
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
+      NISHAN_ITEMS.map(item=>{
+        const isDone=!!saved[item]; const docId=saved[item]||'';
+        return `<div class="nishan-item">
+          <div class="nishan-cb${isDone?' done':''}" onclick="toggleNishan('${item}','${docId}',${isDone})">✓</div>
+          <div class="nishan-text${isDone?' done':''}">${item}</div>
+        </div>`;
+      }).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
+window.toggleNishan = async function(item,docId,isDone) {
+  if(isDone&&docId) await db.collection('plan_nishan').doc(docId).delete();
+  else await db.collection('plan_nishan').add({item,by:currentUser,ts:Date.now()});
+  loadNishan();
 };
 
 // ── ORG ───────────────────────────────────────────────────────
@@ -1288,91 +1281,73 @@ const ORG_ICONS = {mekan:'🏠',sandalye:'🪑',yuzuk:'💍',cicek:'🌸',muzik:
 window.loadOrg = async function() {
   const el = document.getElementById('orgList');
   try {
-    const snap = await getDocs(collection(db,'plan_org'));
+    const snap = await db.collection('plan_org').get();
     const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     if(!items.length){el.innerHTML='<div class="empty">Organizasyon notu yok 🌻</div>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
       items.map(o=>`
         <div class="org-item">
           <span class="org-cat">${ORG_ICONS[o.cat]||'📌'} ${o.cat}</span>
           <span class="org-text">${o.text}</span>
           <button class="org-del" onclick="delOrg('${o.id}')">×</button>
-        </div>`).join('') + `</div>`;
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+        </div>`).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addOrg = async function() {
   const text = document.getElementById('orgText').value.trim();
   const cat = document.getElementById('orgCat').value;
   if(!text) return;
   document.getElementById('orgText').value='';
-  await addDoc(collection(db,'plan_org'),{text,cat,by:currentUser,ts:Date.now()});
+  await db.collection('plan_org').add({text,cat,by:currentUser,ts:Date.now()});
   loadOrg();
 };
-window.delOrg = async function(id) {
-  await deleteDoc(doc(db,'plan_org',id));
-  loadOrg();
-};
+window.delOrg = async function(id) { await db.collection('plan_org').doc(id).delete(); loadOrg(); };
 
 // ── ESYA ──────────────────────────────────────────────────────
 window.loadEsya = async function() {
   const el = document.getElementById('esyaList');
   try {
-    const snap = await getDocs(collection(db,'plan_esya'));
+    const snap = await db.collection('plan_esya').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
-    const f = getFilter('esya');
+    const f = window.getFilter('esya');
     if(f!=='Tümü') items = items.filter(i=>i.who&&i.who.toLowerCase()===f.toLowerCase());
     if(!items.length){el.innerHTML='<div class="empty">Eşya yok 🌻</div>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
       items.map(e=>`
-        <div class="item" style="border:none;border-bottom:1px solid var(--border);border-radius:0;padding:8px 0;" >
+        <div class="item" style="border:none;border-bottom:1px solid var(--border);border-radius:0;padding:8px 0;">
           <div class="item-cb${e.done?' done':''}" onclick="toggleEsya('${e.id}',${!e.done})">✓</div>
-          <div class="item-body">
-            <div class="item-text${e.done?' done':''}">${e.text}</div>
-            <div class="item-meta"><span class="item-who">${e.who}</span></div>
-          </div>
+          <div class="item-body"><div class="item-text${e.done?' done':''}">${e.text}</div><div class="item-meta"><span class="item-who">${e.who}</span></div></div>
           <button class="item-del" onclick="delEsya('${e.id}')">×</button>
-        </div>`).join('') + `</div>`;
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+        </div>`).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addEsya = async function() {
   const text = document.getElementById('esyaText').value.trim();
   const who = document.getElementById('esyaWho').value;
   if(!text) return;
   document.getElementById('esyaText').value='';
-  await addDoc(collection(db,'plan_esya'),{text,who,done:false,by:currentUser,ts:Date.now()});
+  await db.collection('plan_esya').add({text,who,done:false,by:currentUser,ts:Date.now()});
   loadEsya();
 };
-window.toggleEsya = async function(id,done) {
-  await updateDoc(doc(db,'plan_esya',id),{done});
-  loadEsya();
-};
-window.delEsya = async function(id) {
-  await deleteDoc(doc(db,'plan_esya',id));
-  loadEsya();
-};
+window.toggleEsya = async function(id,done) { await db.collection('plan_esya').doc(id).update({done}); loadEsya(); };
+window.delEsya = async function(id) { await db.collection('plan_esya').doc(id).delete(); loadEsya(); };
 
 // ── GIFTS ─────────────────────────────────────────────────────
 window.loadGifts = async function() {
   const el = document.getElementById('giftList');
   try {
-    const snap = await getDocs(collection(db,'plan_gifts'));
+    const snap = await db.collection('plan_gifts').get();
     const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
     if(!items.length){el.innerHTML='<div class="empty">Hediye yok 🎁</div>';return;}
-    el.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">` +
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
       items.map(g=>`
         <div class="gift-row">
           <div class="gift-icon">🎁</div>
-          <div class="gift-info">
-            <div class="gift-text">${g.what}</div>
-            <div class="gift-from">${g.from} → ${g.to}</div>
-          </div>
+          <div class="gift-info"><div class="gift-text">${g.what}</div><div class="gift-from">${g.from} → ${g.to}</div></div>
           <button class="gift-del" onclick="delGift('${g.id}')">×</button>
-        </div>`).join('') + `</div>`;
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
+        </div>`).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
 window.addGift = async function() {
   const from = document.getElementById('giftFrom').value.trim();
   const to = document.getElementById('giftTo').value.trim();
@@ -1381,38 +1356,45 @@ window.addGift = async function() {
   document.getElementById('giftFrom').value='';
   document.getElementById('giftTo').value='';
   document.getElementById('giftWhat').value='';
-  await addDoc(collection(db,'plan_gifts'),{from,to,what,by:currentUser,ts:Date.now()});
+  await db.collection('plan_gifts').add({from,to,what,by:currentUser,ts:Date.now()});
   loadGifts();
 };
-window.delGift = async function(id) {
-  await deleteDoc(doc(db,'plan_gifts',id));
-  loadGifts();
-};
+window.delGift = async function(id) { await db.collection('plan_gifts').doc(id).delete(); loadGifts(); };
 
 // ── STATS ─────────────────────────────────────────────────────
-window.updateStats = async function() {
+async function updateStats() {
   try {
-    const [todos,persons,foods,budget] = await Promise.all([
-      getDocs(collection(db,'plan_todos')),
-      getDocs(collection(db,'plan_persons')),
-      getDocs(collection(db,'plan_foods')),
-      getDocs(collection(db,'plan_budget')),
+    const [todos,persons,foods] = await Promise.all([
+      db.collection('plan_todos').get(),
+      db.collection('plan_persons').get(),
+      db.collection('plan_foods').get(),
     ]);
     document.getElementById('statTodo').textContent = todos.docs.filter(d=>!d.data().done).length;
     document.getElementById('statPerson').textContent = persons.size;
-    document.getElementById('statFood').textContent = foods.size;
-    const total = budget.docs.reduce((s,d)=>s+Number(d.data().amount||0),0);
-    document.getElementById('statBudget').textContent = total>0?'₺'+total.toLocaleString('tr-TR'):'-';
+  } catch(e){}
+}
+
+// ── HOME PROGRESS ─────────────────────────────────────────────
+async function updateHomeProgress() {
+  try {
+    const snap = await db.collection('plan_todos').get();
+    const total = snap.size;
+    const done = snap.docs.filter(d=>d.data().done).length;
+    const pct = total>0?Math.round(done/total*100):0;
+    const fill = document.getElementById('homeProgFill');
+    const txt = document.getElementById('homeProgText');
+    if(fill) fill.style.width=pct+'%';
+    if(txt) txt.textContent=done+'/'+total+' görev · '+pct+'%';
   } catch(e){}
 }
 
 // ── RECENT ────────────────────────────────────────────────────
-window.loadRecent = async function() {
+async function loadRecent() {
   try {
     const [todos,persons,notes] = await Promise.all([
-      getDocs(collection(db,'plan_todos')),
-      getDocs(collection(db,'plan_persons')),
-      getDocs(collection(db,'plan_notes')),
+      db.collection('plan_todos').get(),
+      db.collection('plan_persons').get(),
+      db.collection('plan_notes').get(),
     ]);
     const all = [
       ...todos.docs.map(d=>({...d.data(),type:'todo'})),
@@ -1420,6 +1402,7 @@ window.loadRecent = async function() {
       ...notes.docs.map(d=>({...d.data(),type:'note'})),
     ].sort((a,b)=>b.ts-a.ts).slice(0,3);
     const el = document.getElementById('recentActivity');
+    if(!el) return;
     if(!all.length){el.innerHTML='<div class="empty">Henüz aktivite yok 🌻</div>';return;}
     el.innerHTML = all.map(a=>`
       <div class="item">
@@ -1433,221 +1416,52 @@ window.loadRecent = async function() {
   } catch(e){}
 }
 
-
-
-// ── CHAT ──────────────────────────────────────────────────────
-window.loadChat = async function() {
-  const el = document.getElementById('chatMessages');
-  if(!el) return;
+// ── NOTIFICATIONS ─────────────────────────────────────────────
+let lastSeenTs = Number(localStorage.getItem('plan_lastSeen')||'0');
+let notifCount = 0;
+async function checkNotifications() {
   try {
-    const snap = await getDocs(query(collection(db,'plan_chat'),orderBy('ts','asc')));
-    const msgs = snap.docs.map(d=>({id:d.id,...d.data()}));
-    if(!msgs.length){el.innerHTML='<div class="empty">Henüz mesaj yok 💬</div>';return;}
-    el.innerHTML = msgs.map(m=>{
-      const mine = m.by === currentUser;
-      return `<div class="chat-msg ${mine?'mine':'theirs'}">
-        <div class="chat-meta">${mine?'':m.by+' · '}${new Date(m.ts).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}</div>
-        <div class="chat-bubble">${m.text}</div>
-      </div>`;
-    }).join('');
-    el.scrollTop = el.scrollHeight;
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
-window.sendChat = async function() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if(!text) return;
-  input.value='';
-  await addDoc(collection(db,'plan_chat'),{text,by:currentUser,ts:Date.now()});
-  loadChat();
-};
-
-// ── QUICK POLL ─────────────────────────────────────────────────
-window.quickPoll = async function() {
-  const input = document.getElementById('quickPollInput');
-  const q = input.value.trim();
-  if(!q) return;
-  input.value='';
-  await addDoc(collection(db,'plan_polls'),{
-    question:q,
-    options:['Evet','Hayır','Belki'],
-    votes:{},by:currentUser,ts:Date.now()
-  });
-  const result = document.getElementById('quickPollResult');
-  if(result) { result.textContent='✓ Oylama oluşturuldu! Oylama sayfasından görüntüle.'; setTimeout(()=>result.textContent='',3000); }
-};
-
-// ── OYLAMA ────────────────────────────────────────────────────
-window.loadOylama = async function() {
-  const el = document.getElementById('pollList');
-  try {
-    const snap = await getDocs(collection(db,'plan_polls'));
-    const polls = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
-    if(!polls.length){el.innerHTML='<div class="empty">Henüz oylama yok 🗳️</div>';return;}
-    el.innerHTML = polls.map(p=>{
-      const total = Object.values(p.votes||{}).length;
-      const opts = (p.options||[]).map((opt,i)=>{
-        const cnt = Object.values(p.votes||{}).filter(v=>v===i).length;
-        const pct = total>0?Math.round(cnt/total*100):0;
-        const myVote = p.votes&&p.votes[currentUser]===i;
-        return `<div class="poll-opt${myVote?' voted':''}" onclick="vote('${p.id}',${i})">
-          <div style="flex:1;">
-            <div class="poll-opt-label">${opt}</div>
-            <div class="poll-opt-bar" style="width:${pct}%"></div>
-          </div>
-          <div class="poll-opt-count">${cnt} (${pct}%)</div>
-        </div>`;
-      }).join('');
-      return `<div class="poll-card">
-        <div class="poll-q">${p.question}</div>
-        <div class="poll-by">${p.by||'?'} sordu · ${total} oy</div>
-        ${opts}
-        <button class="poll-del" onclick="delPoll('${p.id}')">Soruyu sil</button>
-      </div>`;
-    }).join('');
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
-window.addPoll = async function() {
-  const q = document.getElementById('pollQ').value.trim();
-  const o1 = document.getElementById('pollOpt1').value.trim();
-  const o2 = document.getElementById('pollOpt2').value.trim();
-  const o3 = document.getElementById('pollOpt3').value.trim();
-  if(!q||!o1||!o2) return;
-  const opts = [o1,o2,...(o3?[o3]:[])];
-  ['pollQ','pollOpt1','pollOpt2','pollOpt3'].forEach(id=>document.getElementById(id).value='');
-  await addDoc(collection(db,'plan_polls'),{question:q,options:opts,votes:{},by:currentUser,ts:Date.now()});
-  loadOylama();
-};
-
-window.vote = async function(id, optIdx) {
-  const ref = doc(db,'plan_polls',id);
-  const snap = await getDocs(query(collection(db,'plan_polls')));
-  const poll = snap.docs.find(d=>d.id===id)?.data();
-  if(!poll) return;
-  const votes = poll.votes||{};
-  if(votes[currentUser]===optIdx) delete votes[currentUser];
-  else votes[currentUser]=optIdx;
-  await updateDoc(ref,{votes});
-  loadOylama();
-};
-
-window.delPoll = async function(id) {
-  await deleteDoc(doc(db,'plan_polls',id));
-  loadOylama();
-};
-
-// ── NİŞAN LİSTESİ ─────────────────────────────────────────────
-const NISHAN_ITEMS = [
-  'Aile onayı ve bilgilendirme',
-  'Tarih belirleme',
-  'Mekan seçimi',
-  'Davetliler listesi hazırlama',
-  'Yüzük alımı',
-  'Fotoğrafçı / kameraman',
-  'Kıyafet seçimi (Mert)',
-  'Kıyafet seçimi (Sema)',
-  'İkram ve yemek planı',
-  'Müzik / çalgı',
-  'Ulaşım ve konaklama planı',
-  'Hatıra hediyeleri',
-  'Dekorasyon',
-  'Davet kartları / mesajları',
-  'Çiçek aranjmanı',
-];
-
-window.loadNishan = async function() {
-  const el = document.getElementById('nishanList');
-  try {
-    const snap = await getDocs(collection(db,'plan_nishan'));
-    const saved = {};
-    snap.docs.forEach(d=>saved[d.data().item]=d.id);
-    const done = Object.keys(saved).length;
-    const total = NISHAN_ITEMS.length;
-    const pct = Math.round(done/total*100);
-    const fill = document.getElementById('nishanFill');
-    const txt = document.getElementById('nishanText');
-    if(fill) fill.style.width = pct+'%';
-    if(txt) txt.textContent = `${done}/${total} tamamlandı (${pct}%)`;
-    document.getElementById('nishanCnt').textContent = `${pct}%`;
-    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
-      NISHAN_ITEMS.map(item=>{
-        const isDone = !!saved[item];
-        const docId = saved[item]||'';
-        return `<div class="nishan-item">
-          <div class="nishan-cb${isDone?' done':''}" onclick="toggleNishan('${item}','${docId}',${isDone})">✓</div>
-          <div class="nishan-text${isDone?' done':''}">${item}</div>
-        </div>`;
-      }).join('') + '</div>';
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
-}
-
-window.toggleNishan = async function(item, docId, isDone) {
-  if(isDone && docId) {
-    await deleteDoc(doc(db,'plan_nishan',docId));
-  } else {
-    await addDoc(collection(db,'plan_nishan'),{item,by:currentUser,ts:Date.now()});
-  }
-  loadNishan();
-};
-
-
-// ── HOME PROGRESS ─────────────────────────────────────────────
-window.updateHomeProgress = async function() {
-  try {
-    const snap = await getDocs(collection(db,'plan_todos'));
-    const total = snap.size;
-    const done = snap.docs.filter(d=>d.data().done).length;
-    const pct = total>0?Math.round(done/total*100):0;
-    const fill = document.getElementById('homeProgFill');
-    const txt = document.getElementById('homeProgText');
-    if(fill) fill.style.width = pct+'%';
-    if(txt) txt.textContent = `${done}/${total} görev · ${pct}%`;
+    const cols = ['plan_todos','plan_notes','plan_persons','plan_foods','plan_chat','plan_polls'];
+    const snaps = await Promise.all(cols.map(c=>db.collection(c).get()));
+    const allItems = snaps.flatMap(s=>s.docs.map(d=>d.data()));
+    notifCount = allItems.filter(i=>i.ts&&i.ts>lastSeenTs&&i.by!==currentUser).length;
+    const todoNew = snaps[0].docs.filter(d=>d.data().ts>lastSeenTs&&d.data().by!==currentUser).length;
+    const noteNew = snaps[1].docs.filter(d=>d.data().ts>lastSeenTs&&d.data().by!==currentUser).length;
+    const chatNew = snaps[4].docs.filter(d=>d.data().ts>lastSeenTs&&d.data().by!==currentUser).length;
+    const pollNew = snaps[5].docs.filter(d=>d.data().ts>lastSeenTs&&d.data().by!==currentUser).length;
+    const setBadge=(id,n)=>{const el=document.getElementById(id);if(el){el.textContent=n>9?'9+':String(n);el.classList.toggle('show',n>0);}};
+    setBadge('badge-todos',todoNew); setBadge('badge-notlar',noteNew);
+    setBadge('badge-chat',chatNew); setBadge('badge-oylama',pollNew);
   } catch(e){}
 }
-
-window.loadAll = function() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
-
-// ── LOGIN COUNTDOWN ──────────────────────────────────────────
-const CD_TARGET = new Date('2026-09-13T18:00:00+03:00'); // Türkiye saati
-window.updateHomeCD = function() {
-  const now = new Date();
-  const diff = CD_TARGET - now;
-  if(diff <= 0) {
-    ['hcd-d','hcd-h','hcd-m','hcd-s'].forEach(id=>{
-      const el=document.getElementById(id); if(el) el.textContent='0';
-    });
-    return;
-  }
-  const set = (id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=String(v).padStart(2,'0'); };
-  set('hcd-d', Math.floor(diff/864e5));
-  set('hcd-h', Math.floor(diff%864e5/36e5));
-  set('hcd-m', Math.floor(diff%36e5/6e4));
-  set('hcd-s', Math.floor(diff%6e4/1e3));
+function clearNotifications() {
+  lastSeenTs = Date.now();
+  localStorage.setItem('plan_lastSeen', lastSeenTs);
+  document.querySelectorAll('.app-badge').forEach(b=>b.classList.remove('show'));
 }
+setInterval(checkNotifications, 30000);
 
-window.updateLoginCD = function() {
-  const now = new Date();
-  const diff = CD_TARGET - now;
-  if(diff <= 0) {
-    ['lcd-d','lcd-h','lcd-m','lcd-s'].forEach(id=>{
-      const el=document.getElementById(id); if(el) el.textContent='0';
-    });
-
-    return;
-  }
-  const d = Math.floor(diff/864e5);
-  const h = Math.floor(diff%864e5/36e5);
-  const m = Math.floor(diff%36e5/6e4);
-  const s = Math.floor(diff%6e4/1e3);
-  const set = (id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=String(v).padStart(2,'0'); };
-  set('lcd-d',d); set('lcd-h',h); set('lcd-m',m); set('lcd-s',s);
+// ── COUNTDOWN ─────────────────────────────────────────────────
+const CD_TARGET = new Date('2026-09-13T18:00:00+03:00');
+function updateLoginCD() {
+  const now = new Date(); const diff = CD_TARGET - now;
+  if(diff<=0) return;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+  set('lcd-d',Math.floor(diff/864e5)); set('lcd-h',Math.floor(diff%864e5/36e5));
+  set('lcd-m',Math.floor(diff%36e5/6e4)); set('lcd-s',Math.floor(diff%6e4/1e3));
 }
-updateLoginCD();
-updateHomeCD();
+function updateHomeCD() {
+  const now = new Date(); const diff = CD_TARGET - now;
+  if(diff<=0) return;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+  set('hcd-d',Math.floor(diff/864e5)); set('hcd-h',Math.floor(diff%864e5/36e5));
+  set('hcd-m',Math.floor(diff%36e5/6e4)); set('hcd-s',Math.floor(diff%6e4/1e3));
+}
+updateLoginCD(); updateHomeCD();
 setInterval(()=>{ updateLoginCD(); updateHomeCD(); }, 1000);
 
+// ── INIT ──────────────────────────────────────────────────────
+function loadAll() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
 </script>
 </body>
 </html>
