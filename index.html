@@ -478,6 +478,17 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   border-bottom-left-radius:4px;
 }
 .chat-meta{font-size:10px;color:var(--text3);padding:0 4px;}
+
+.alinacak-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border);}
+.alinacak-row:last-child{border-bottom:none;}
+.alinacak-cb{width:20px;height:20px;border-radius:4px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:transparent;transition:all 0.2s;touch-action:manipulation;}
+.alinacak-cb.done{background:var(--forest);border-color:var(--forest);color:var(--sun);}
+.alinacak-info{flex:1;min-width:0;}
+.alinacak-text{font-size:13px;color:var(--text);line-height:1.3;}
+.alinacak-text.done{text-decoration:line-through;opacity:0.4;}
+.alinacak-link{font-size:11px;margin-top:2px;}
+.alinacak-link a{color:var(--forest);text-decoration:underline;}
+.alinacak-del{font-size:14px;color:var(--text3);background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 4px;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -520,6 +531,7 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   <div class="drawer-item" onclick="switchTab('org')"><div class="drawer-item-icon">🎪</div><div class="drawer-item-label">Organizasyon</div></div>
   <div class="drawer-item" onclick="switchTab('esya')"><div class="drawer-item-icon">👗</div><div class="drawer-item-label">Kıyafet & Eşya</div></div>
   <div class="drawer-item" onclick="switchTab('hediye')"><div class="drawer-item-icon">🎁</div><div class="drawer-item-label">Hediyelik</div></div>
+  <div class="drawer-item" onclick="switchTab('alinacak')"><div class="drawer-item-icon">🛒</div><div class="drawer-item-label">Alınacaklar</div></div>
   <div class="drawer-logout" onclick="doLogout()">🚪 Çıkış Yap</div>
 </div>
 
@@ -607,6 +619,13 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
         </div>
         <div class="app-label">Hediyelik</div>
         <div class="app-badge" id="badge-hediye"></div>
+      </div>
+      <div class="app-icon" onclick="switchTab('alinacak')">
+        <div class="app-icon-bg" style="background:rgba(45,90,60,0.78);border:1.5px solid rgba(45,90,60,0.9);box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <div class="app-label">Alınacaklar</div>
+        <div class="app-badge" id="badge-alinacak"></div>
       </div>
     </div>
     <div class="home-progress">
@@ -887,6 +906,23 @@ html,body{background:var(--cream);color:var(--text);font-family:'Outfit',sans-se
   </div>
 </div>
 
+
+<!-- ALINACAKLAR -->
+<div class="tab-content" id="tab-alinacak">
+  <div class="safe-top-bar"></div>
+  <div class="top-bar">
+    <button class="back-btn" onclick="switchTab('ana')">← Geri</button>
+  </div>
+  <div class="sec">
+    <div class="sec-hdr"><div class="sec-left"><div class="sec-flag"></div><div class="sec-title">Alınacaklar</div></div><span class="sec-count" id="alinacakCnt"></span></div>
+    <div class="add-row" style="flex-wrap:wrap;gap:6px;">
+      <input class="add-input" id="alinacakText" placeholder="Ürün adı..." style="flex:1;min-width:140px;">
+      <input class="add-input" id="alinacakLink" placeholder="Link (opsiyonel)..." style="flex:1;min-width:140px;">
+      <button class="add-btn" onclick="addAlinacak()">+</button>
+    </div>
+    <div id="alinacakList"><div class="loading" style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Yükleniyor...</div></div>
+  </div>
+</div>
 </div><!-- /main-wrap -->
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -938,9 +974,20 @@ function clearCache() {
   Object.keys(localStorage).filter(k=>k.startsWith('cache_')).forEach(k=>localStorage.removeItem(k));
 }
 
+
+// ── LINK HELPER ───────────────────────────────────────────────
+function linkify(text) {
+  if(!text) return '';
+  const urlRegex = /(https?:\/\/[^\s<>"]+)/g;
+  return text.replace(urlRegex, url => 
+    `<a href="${url}" target="_blank" style="color:var(--forest);text-decoration:underline;word-break:break-all;">${url}</a>`
+  );
+}
 // ── AUTH ──────────────────────────────────────────────────────
-const INVITE_CODES = ['sema2026','semosh','izmir'];
+const INVITE_CODES = ['sema2026','semosh','izmir','semert'];
+const ADMIN_CODES = ['semert','semosh'];
 let currentUser = localStorage.getItem('plan_name') || '';
+let isAdmin = localStorage.getItem('plan_admin') === '1';
 
 window.doLogin = function() {
   const name = document.getElementById('loginName').value.trim();
@@ -949,8 +996,10 @@ window.doLogin = function() {
   if(!name){ err.textContent='Adını gir'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
   if(!INVITE_CODES.includes(code)){ err.textContent='Yanlış kod'; err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),2000); return; }
   currentUser = name;
+  isAdmin = ADMIN_CODES.includes(code);
   localStorage.setItem('plan_name', name);
   localStorage.setItem('plan_auth', '1');
+  localStorage.setItem('plan_admin', isAdmin ? '1' : '0');
   document.getElementById('login-screen').classList.add('hidden');
   setUserInfo(name);
   loadAll();
@@ -959,6 +1008,7 @@ window.doLogin = function() {
 window.doLogout = function() {
   localStorage.removeItem('plan_name');
   localStorage.removeItem('plan_auth');
+  localStorage.removeItem('plan_admin');
   location.reload();
 };
 
@@ -969,6 +1019,7 @@ function setUserInfo(name) {
 }
 
 if(currentUser && localStorage.getItem('plan_auth')==='1') {
+  isAdmin = localStorage.getItem('plan_admin') === '1';
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('loginCode').style.display='none';
   document.getElementById('codeLabel').style.display='none';
@@ -988,7 +1039,7 @@ window.toggleDrawer = function() {};
 window.closeDrawer = function() {};
 
 // ── TABS ──────────────────────────────────────────────────────
-const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','chat','oylama','nishan','org','esya','hediye'];
+const ALL_TABS = ['ana','todos','notlar','katilimci','yemek','chat','oylama','nishan','org','esya','hediye','alinacak'];
 window.switchTab = function(name) {
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
@@ -997,22 +1048,38 @@ window.switchTab = function(name) {
   const tabBadge = document.getElementById('badge-'+name);
   if(tabBadge) tabBadge.classList.remove('show');
   if(name==='ana') { loadRecent(); updateHomeProgress(); }
-  else if(name==='todos') loadTodos();
-  else if(name==='notlar') loadNotes();
-  else if(name==='katilimci') loadPersons();
-  else if(name==='yemek') loadFoods();
+  else if(name==='todos') { loadTodos(); buildDynamicFilter('todos'); }
+  else if(name==='notlar') { loadNotes(); buildDynamicFilter('notlar'); }
+  else if(name==='katilimci') { loadPersons(); buildDynamicFilter('katilimci'); }
+  else if(name==='yemek') { loadFoods(); buildDynamicFilter('yemek'); }
   else if(name==='chat') loadChat();
   else if(name==='oylama') loadOylama();
   else if(name==='nishan') loadNishan();
-  else if(name==='org') loadOrg();
-  else if(name==='esya') loadEsya();
+  else if(name==='org') { loadOrg(); buildDynamicFilter('org'); }
+  else if(name==='esya') { loadEsya(); buildDynamicFilter('esya'); }
   else if(name==='hediye') loadGifts();
+  else if(name==='alinacak') loadAlinacak();
 };
 
 window.addEventListener('scroll',()=>{
   document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>150);
 });
 
+
+// ── DYNAMIC FILTER FROM PERSONS ───────────────────────────────
+async function buildDynamicFilter(tabId) {
+  try {
+    const snap = await db.collection('plan_persons').get();
+    const names = snap.docs.map(d=>d.data().name).filter(Boolean).sort();
+    const items = ['Tümü', ...names, 'Ortak'];
+    const currentVal = window._ddFilters[tabId] || 'Tümü';
+    const menu = document.getElementById('dd-menu-'+tabId);
+    if(!menu) return;
+    menu.innerHTML = items.map(item=>
+      `<div class="filter-dd-item${item===currentVal?' selected':''}" onclick="filterDDSelect('${tabId}','${item}',this)">${item}</div>`
+    ).join('');
+  } catch(e){}
+}
 // ── FILTER DROPDOWN ──────────────────────────────────────────
 window._ddFilters = {};
 window.toggleDD = function(tabId) {
@@ -1077,7 +1144,7 @@ function renderTodos(items) {
         <div class="item-text${t.done?' done':''}">${t.text}</div>
         <div class="item-meta"><span class="item-who">${t.who||'ortak'}</span><span class="item-by">· ${t.by||''}</span></div>
       </div>
-      <button class="item-del" onclick="delTodo('${t.id}')">×</button>
+      ${isAdmin ? `<button class="item-del" onclick="delTodo('${t.id}')">×</button>` : ''}
     </div>`).join('');
 }
 window.addTodo = async function() {
@@ -1121,7 +1188,7 @@ function renderNotes(items) {
     <div class="note-card">
       <div class="note-hdr"><span>${n.title}</span><span style="font-size:10px;color:var(--text3)">${n.who||'ortak'} · ${n.by||''}</span></div>
       <textarea class="note-textarea" onblur="saveNote('${n.id}',this.value)">${n.content||''}</textarea>
-      <div class="note-footer"><span></span><button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;">Sil</button></div>
+      <div class="note-footer"><span></span>${isAdmin ? `<button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;">Sil</button>` : ''}</div>
     </div>`).join('');
 }
 window.addNote = async function() {
@@ -1155,7 +1222,7 @@ window.loadPersons = async function() {
           <div class="person-right">
             <div class="status-dot ${p.status||'henuz'}" onclick="cycleStatus('${p.id}','${p.status||'henuz'}')"></div>
             <span class="status-label ${p.status||'henuz'}" onclick="cycleStatus('${p.id}','${p.status||'henuz'}')">${p.status==='haberdar'?'Haberdar':p.status==='bekliyor'?'Bekliyor':'Değil'}</span>
-            <button class="person-del-btn" onclick="delPerson('${p.id}')">×</button>
+            ${isAdmin ? `<button class="person-del-btn" onclick="delPerson('${p.id}')">×</button>` : ''}
           </div>
         </div>`).join('') + '</div>';
     updateStats();
@@ -1196,7 +1263,7 @@ window.loadFoods = async function() {
         <div class="food-row">
           <div class="food-icon">🍽️</div>
           <div class="food-info"><div class="food-name">${f.name}</div><div class="food-who">${f.who||'?'}</div></div>
-          <button class="food-del" onclick="delFood('${f.id}')">×</button>
+          ${isAdmin ? `<button class="food-del" onclick="delFood('${f.id}')">×</button>` : ''}
         </div>`).join('') + '</div>';
   } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
@@ -1256,7 +1323,7 @@ window.loadOylama = async function() {
           <div class="poll-opt-count">${cnt} (${pct}%)</div>
         </div>`;
       }).join('');
-      return `<div class="poll-card"><div class="poll-q">${p.question}</div><div class="poll-by">${p.by||'?'} · ${total} oy</div>${opts}<button class="poll-del" onclick="delPoll('${p.id}')">Soruyu sil</button></div>`;
+      return `<div class="poll-card"><div class="poll-q">${p.question}</div><div class="poll-by">${p.by||'?'} · ${total} oy</div>${opts}${isAdmin ? `<button class="poll-del" onclick="delPoll('${p.id}')">Soruyu sil</button>` : ''}</div>`;
     }).join('');
   } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
@@ -1334,7 +1401,7 @@ window.loadOrg = async function() {
         <div class="org-item">
           <span class="org-cat">${ORG_ICONS[o.cat]||'📌'} ${o.cat}</span>
           <span class="org-text">${o.text}</span>
-          <button class="org-del" onclick="delOrg('${o.id}')">×</button>
+          ${isAdmin ? `<button class="org-del" onclick="delOrg('${o.id}')">×</button>` : ''}
         </div>`).join('') + '</div>';
   } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
@@ -1362,7 +1429,7 @@ window.loadEsya = async function() {
         <div class="item" style="border:none;border-bottom:1px solid var(--border);border-radius:0;padding:8px 0;">
           <div class="item-cb${e.done?' done':''}" onclick="toggleEsya('${e.id}',${!e.done})">✓</div>
           <div class="item-body"><div class="item-text${e.done?' done':''}">${e.text}</div><div class="item-meta"><span class="item-who">${e.who}</span></div></div>
-          <button class="item-del" onclick="delEsya('${e.id}')">×</button>
+          ${isAdmin ? `<button class="item-del" onclick="delEsya('${e.id}')">×</button>` : ''}
         </div>`).join('') + '</div>';
   } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
@@ -1389,7 +1456,7 @@ window.loadGifts = async function() {
         <div class="gift-row">
           <div class="gift-icon">🎁</div>
           <div class="gift-info"><div class="gift-text">${g.what}</div><div class="gift-from">${g.from} → ${g.to}</div></div>
-          <button class="gift-del" onclick="delGift('${g.id}')">×</button>
+          ${isAdmin ? `<button class="gift-del" onclick="delGift('${g.id}')">×</button>` : ''}
         </div>`).join('') + '</div>';
   } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
 };
@@ -1406,6 +1473,45 @@ window.addGift = async function() {
 };
 window.delGift = async function(id) { await db.collection('plan_gifts').doc(id).delete(); loadGifts(); };
 
+
+// ── ALINACAKLAR ───────────────────────────────────────────────
+window.loadAlinacak = async function() {
+  const el = document.getElementById('alinacakList');
+  try {
+    const snap = await db.collection('plan_alinacak').get();
+    const items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    document.getElementById('alinacakCnt').textContent = items.length + ' ürün';
+    if(!items.length){el.innerHTML='<div class="empty">Alınacak ürün yok 🛒</div>';return;}
+    el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
+      items.map(i=>`
+        <div class="alinacak-row">
+          <div class="alinacak-cb${i.done?' done':''}" onclick="toggleAlinacak('${i.id}',${!i.done})">✓</div>
+          <div class="alinacak-info">
+            <div class="alinacak-text${i.done?' done':''}">${i.text}</div>
+            ${i.link ? `<div class="alinacak-link"><a href="${i.link}" target="_blank">🔗 Linke git</a></div>` : ''}
+            <div style="font-size:9px;color:var(--text3);margin-top:2px;">${i.by||''}</div>
+          </div>
+          ${isAdmin ? `<button class="alinacak-del" onclick="delAlinacak('${i.id}')">×</button>` : ''}
+        </div>`).join('') + '</div>';
+  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+};
+window.addAlinacak = async function() {
+  const text = document.getElementById('alinacakText').value.trim();
+  const link = document.getElementById('alinacakLink').value.trim();
+  if(!text) return;
+  document.getElementById('alinacakText').value='';
+  document.getElementById('alinacakLink').value='';
+  await db.collection('plan_alinacak').add({text,link,done:false,by:currentUser,ts:Date.now()});
+  loadAlinacak();
+};
+window.toggleAlinacak = async function(id,done) {
+  await db.collection('plan_alinacak').doc(id).update({done});
+  loadAlinacak();
+};
+window.delAlinacak = async function(id) {
+  await db.collection('plan_alinacak').doc(id).delete();
+  loadAlinacak();
+};
 // ── STATS ─────────────────────────────────────────────────────
 async function updateStats() {
   try {
