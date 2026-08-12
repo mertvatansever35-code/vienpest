@@ -1105,7 +1105,7 @@ async function loadTodos() {
         <button class="item-del" onclick="delTodo('${t.id}')">×</button>
       </div>`).join('');
     updateStats();
-  } catch(e){el.innerHTML='<div class="empty">Hata</div>';}
+  } catch(e){el.innerHTML='<div style="padding:12px;color:red;font-size:12px;">Hata: '+e.message+'</div>';console.error(e);}
 }
 
 window.addTodo = async function() {
