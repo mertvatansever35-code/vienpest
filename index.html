@@ -915,6 +915,29 @@ const app = firebase.initializeApp({
 });
 const db = firebase.firestore();
 
+
+const CACHE_TTL = 5 * 60 * 1000; // 5 dakika
+
+function saveCache(key, data) {
+  try {
+    localStorage.setItem('cache_' + key, JSON.stringify({data, ts: Date.now()}));
+  } catch(e) {}
+}
+
+function loadCache(key) {
+  try {
+    const raw = localStorage.getItem('cache_' + key);
+    if(!raw) return null;
+    const {data, ts} = JSON.parse(raw);
+    if(Date.now() - ts > CACHE_TTL) return null;
+    return data;
+  } catch(e) { return null; }
+}
+
+function clearCache() {
+  Object.keys(localStorage).filter(k=>k.startsWith('cache_')).forEach(k=>localStorage.removeItem(k));
+}
+
 // ── AUTH ──────────────────────────────────────────────────────
 const INVITE_CODES = ['sema2026','semosh','izmir'];
 let currentUser = localStorage.getItem('plan_name') || '';
@@ -1028,31 +1051,41 @@ window.getFilter = function(tabId) { return window._ddFilters[tabId] || 'Tümü'
 // ── TODOS ─────────────────────────────────────────────────────
 window.loadTodos = async function() {
   const el = document.getElementById('todoList');
+  // Show cache immediately
+  const cached = loadCache('todos');
+  if(cached) renderTodos(cached);
   try {
     const snap = await db.collection('plan_todos').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
-    const f = window.getFilter('todos');
-    if(f!=='Tümü') items = items.filter(t=>t.who&&t.who.toLowerCase()===f.toLowerCase());
-    document.getElementById('todoCnt').textContent = items.length + ' görev';
-    if(!items.length){el.innerHTML='<div class="empty">Görev yok 🌻</div>';return;}
-    el.innerHTML = items.map(t=>`
-      <div class="item">
-        <div class="item-cb${t.done?' done':''}" onclick="toggleTodo('${t.id}',${!t.done})">✓</div>
-        <div class="item-body">
-          <div class="item-text${t.done?' done':''}">${t.text}</div>
-          <div class="item-meta"><span class="item-who">${t.who||'ortak'}</span><span class="item-by">· ${t.by||''}</span></div>
-        </div>
-        <button class="item-del" onclick="delTodo('${t.id}')">×</button>
-      </div>`).join('');
+    saveCache('todos', items);
+    renderTodos(items);
     updateStats();
-  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+  } catch(e){ if(!loadCache('todos')) el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>'; }
 };
+
+function renderTodos(items) {
+  const el = document.getElementById('todoList');
+  if(!el) return;
+  const f = window.getFilter('todos');
+  let filtered = f!=='Tümü' ? items.filter(t=>t.who&&t.who.toLowerCase()===f.toLowerCase()) : items;
+  document.getElementById('todoCnt').textContent = filtered.length + ' görev';
+  if(!filtered.length){el.innerHTML='<div class="empty">Görev yok 🌻</div>';return;}
+  el.innerHTML = filtered.map(t=>`
+    <div class="item">
+      <div class="item-cb${t.done?' done':''}" onclick="toggleTodo('${t.id}',${!t.done})">✓</div>
+      <div class="item-body">
+        <div class="item-text${t.done?' done':''}">${t.text}</div>
+        <div class="item-meta"><span class="item-who">${t.who||'ortak'}</span><span class="item-by">· ${t.by||''}</span></div>
+      </div>
+      <button class="item-del" onclick="delTodo('${t.id}')">×</button>
+    </div>`).join('');
+}
 window.addTodo = async function() {
   const text = document.getElementById('todoInput').value.trim();
   const who = document.getElementById('todoWho').value;
   if(!text) return;
   document.getElementById('todoInput').value='';
-  await db.collection('plan_todos').add({text,who,done:false,by:currentUser,ts:Date.now()});
+  clearCache(); await db.collection('plan_todos').add({text,who,done:false,by:currentUser,ts:Date.now()});
   loadTodos();
 };
 window.toggleTodo = async function(id,done) {
@@ -1068,26 +1101,35 @@ window.delTodo = async function(id) {
 // ── NOTES ─────────────────────────────────────────────────────
 window.loadNotes = async function() {
   const el = document.getElementById('noteList');
+  const cached = loadCache('notes');
+  if(cached) renderNotes(cached);
   try {
     const snap = await db.collection('plan_notes').get();
     let items = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
-    const f = window.getFilter('notlar');
-    if(f!=='Tümü') items = items.filter(n=>n.who&&n.who.toLowerCase()===f.toLowerCase());
-    if(!items.length){el.innerHTML='<div class="empty">Not yok 🌻</div>';return;}
-    el.innerHTML = items.map(n=>`
-      <div class="note-card">
-        <div class="note-hdr"><span>${n.title}</span><span style="font-size:10px;color:var(--text3)">${n.who||'ortak'} · ${n.by||''}</span></div>
-        <textarea class="note-textarea" onblur="saveNote('${n.id}',this.value)">${n.content||''}</textarea>
-        <div class="note-footer"><span></span><button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;">Sil</button></div>
-      </div>`).join('');
-  } catch(e){el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>';}
+    saveCache('notes', items);
+    renderNotes(items);
+  } catch(e){ if(!loadCache('notes')) el.innerHTML='<div style="color:red;padding:12px;font-size:12px;">Hata: '+e.message+'</div>'; }
 };
+
+function renderNotes(items) {
+  const el = document.getElementById('noteList');
+  if(!el) return;
+  const f = window.getFilter('notlar');
+  let filtered = f!=='Tümü' ? items.filter(n=>n.who&&n.who.toLowerCase()===f.toLowerCase()) : items;
+  if(!filtered.length){el.innerHTML='<div class="empty">Not yok 🌻</div>';return;}
+  el.innerHTML = filtered.map(n=>`
+    <div class="note-card">
+      <div class="note-hdr"><span>${n.title}</span><span style="font-size:10px;color:var(--text3)">${n.who||'ortak'} · ${n.by||''}</span></div>
+      <textarea class="note-textarea" onblur="saveNote('${n.id}',this.value)">${n.content||''}</textarea>
+      <div class="note-footer"><span></span><button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;">Sil</button></div>
+    </div>`).join('');
+}
 window.addNote = async function() {
   const title = document.getElementById('noteTitle').value.trim();
   const who = document.getElementById('noteWho').value;
   if(!title) return;
   document.getElementById('noteTitle').value='';
-  await db.collection('plan_notes').add({title,who,content:'',by:currentUser,ts:Date.now()});
+  clearCache(); await db.collection('plan_notes').add({title,who,content:'',by:currentUser,ts:Date.now()});
   loadNotes();
 };
 window.saveNote = async function(id,content) { await db.collection('plan_notes').doc(id).update({content}); };
@@ -1097,9 +1139,12 @@ window.delNote = async function(id) { await db.collection('plan_notes').doc(id).
 let personsList = [];
 window.loadPersons = async function() {
   const el = document.getElementById('personList');
+  const cachedP = loadCache('persons');
+  if(cachedP) { personsList = cachedP; renderPersons(cachedP); }
   try {
     const snap = await db.collection('plan_persons').get();
     personsList = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    saveCache('persons', personsList);
     document.getElementById('personCnt').textContent = personsList.length + ' kişi';
     if(!personsList.length){el.innerHTML='<div class="empty">Katılımcı yok 🌻</div>';return;}
     el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px 12px;">' +
@@ -1123,7 +1168,7 @@ window.addPerson = async function() {
   if(!name) return;
   document.getElementById('personName').value='';
   document.getElementById('personRel').value='';
-  await db.collection('plan_persons').add({name,rel,kanal,status:'henuz',by:currentUser,ts:Date.now()});
+  clearCache(); await db.collection('plan_persons').add({name,rel,kanal,status:'henuz',by:currentUser,ts:Date.now()});
   loadPersons();
 };
 window.cycleStatus = async function(id,current) {
@@ -1160,7 +1205,7 @@ window.addFood = async function() {
   const who = document.getElementById('foodWho').value;
   if(!name) return;
   document.getElementById('foodName').value='';
-  await db.collection('plan_foods').add({name,who,by:currentUser,ts:Date.now()});
+  clearCache(); await db.collection('plan_foods').add({name,who,by:currentUser,ts:Date.now()});
   loadFoods();
 };
 window.delFood = async function(id) { await db.collection('plan_foods').doc(id).delete(); loadFoods(); };
