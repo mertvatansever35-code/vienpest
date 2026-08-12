@@ -993,7 +993,7 @@ window.switchTab = function(name) {
 let lastSeenTs = Number(localStorage.getItem('plan_lastSeen')||'0');
 let notifCount = 0;
 
-async function checkNotifications() {
+window.checkNotifications = async function() {
   try {
     const [todos,notes,persons] = await Promise.all([
       getDocs(collection(db,'plan_todos')),
@@ -1015,7 +1015,7 @@ async function checkNotifications() {
   } catch(e){}
 }
 
-function clearNotifications() {
+window.clearNotifications = function() {
   lastSeenTs = Date.now();
   localStorage.setItem('plan_lastSeen', lastSeenTs);
   notifCount = 0;
@@ -1077,12 +1077,12 @@ window.filterDDSelect = function(tabId, val, el) {
   else if(tabId==='esya') loadEsya();
 };
 
-function getFilter(tabId) {
+window.getFilter = function(tabId) {
   return window._ddFilters[tabId] || 'Tümü';
-}
+};
 
 // ── TODOS ─────────────────────────────────────────────────────
-async function loadTodos() {
+window.loadTodos = async function() {
   const el = document.getElementById('todoList');
   try {
     const snap = await getDocs(collection(db,'plan_todos'));
@@ -1127,7 +1127,7 @@ window.delTodo = async function(id) {
 };
 
 // ── NOTES ─────────────────────────────────────────────────────
-async function loadNotes() {
+window.loadNotes = async function() {
   const el = document.getElementById('noteList');
   try {
     const snap = await getDocs(collection(db,'plan_notes'));
@@ -1165,7 +1165,7 @@ window.delNote = async function(id) {
 };
 
 // ── PERSONS ───────────────────────────────────────────────────
-async function loadPersons() {
+window.loadPersons = async function() {
   const el = document.getElementById('personList');
   try {
     const snap = await getDocs(collection(db,'plan_persons'));
@@ -1213,7 +1213,7 @@ window.delPerson = async function(id) {
 };
 
 // ── FOODS ─────────────────────────────────────────────────────
-async function loadFoods() {
+window.loadFoods = async function() {
   const el = document.getElementById('foodList');
   try {
     const snap = await getDocs(collection(db,'plan_foods'));
@@ -1285,7 +1285,7 @@ window.delBudget = async function(id) {
 
 // ── ORG ───────────────────────────────────────────────────────
 const ORG_ICONS = {mekan:'🏠',sandalye:'🪑',yuzuk:'💍',cicek:'🌸',muzik:'🎵',diger:'📌'};
-async function loadOrg() {
+window.loadOrg = async function() {
   const el = document.getElementById('orgList');
   try {
     const snap = await getDocs(collection(db,'plan_org'));
@@ -1315,7 +1315,7 @@ window.delOrg = async function(id) {
 };
 
 // ── ESYA ──────────────────────────────────────────────────────
-async function loadEsya() {
+window.loadEsya = async function() {
   const el = document.getElementById('esyaList');
   try {
     const snap = await getDocs(collection(db,'plan_esya'));
@@ -1354,7 +1354,7 @@ window.delEsya = async function(id) {
 };
 
 // ── GIFTS ─────────────────────────────────────────────────────
-async function loadGifts() {
+window.loadGifts = async function() {
   const el = document.getElementById('giftList');
   try {
     const snap = await getDocs(collection(db,'plan_gifts'));
@@ -1390,7 +1390,7 @@ window.delGift = async function(id) {
 };
 
 // ── STATS ─────────────────────────────────────────────────────
-async function updateStats() {
+window.updateStats = async function() {
   try {
     const [todos,persons,foods,budget] = await Promise.all([
       getDocs(collection(db,'plan_todos')),
@@ -1407,7 +1407,7 @@ async function updateStats() {
 }
 
 // ── RECENT ────────────────────────────────────────────────────
-async function loadRecent() {
+window.loadRecent = async function() {
   try {
     const [todos,persons,notes] = await Promise.all([
       getDocs(collection(db,'plan_todos')),
@@ -1436,7 +1436,7 @@ async function loadRecent() {
 
 
 // ── CHAT ──────────────────────────────────────────────────────
-async function loadChat() {
+window.loadChat = async function() {
   const el = document.getElementById('chatMessages');
   if(!el) return;
   try {
@@ -1479,7 +1479,7 @@ window.quickPoll = async function() {
 };
 
 // ── OYLAMA ────────────────────────────────────────────────────
-async function loadOylama() {
+window.loadOylama = async function() {
   const el = document.getElementById('pollList');
   try {
     const snap = await getDocs(collection(db,'plan_polls'));
@@ -1557,7 +1557,7 @@ const NISHAN_ITEMS = [
   'Çiçek aranjmanı',
 ];
 
-async function loadNishan() {
+window.loadNishan = async function() {
   const el = document.getElementById('nishanList');
   try {
     const snap = await getDocs(collection(db,'plan_nishan'));
@@ -1594,7 +1594,7 @@ window.toggleNishan = async function(item, docId, isDone) {
 
 
 // ── HOME PROGRESS ─────────────────────────────────────────────
-async function updateHomeProgress() {
+window.updateHomeProgress = async function() {
   try {
     const snap = await getDocs(collection(db,'plan_todos'));
     const total = snap.size;
@@ -1607,11 +1607,11 @@ async function updateHomeProgress() {
   } catch(e){}
 }
 
-function loadAll() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
+window.loadAll = function() { loadRecent(); updateHomeProgress(); setTimeout(checkNotifications, 1000); }
 
 // ── LOGIN COUNTDOWN ──────────────────────────────────────────
 const CD_TARGET = new Date('2026-09-13T18:00:00+03:00'); // Türkiye saati
-function updateHomeCD() {
+window.updateHomeCD = function() {
   const now = new Date();
   const diff = CD_TARGET - now;
   if(diff <= 0) {
@@ -1627,7 +1627,7 @@ function updateHomeCD() {
   set('hcd-s', Math.floor(diff%6e4/1e3));
 }
 
-function updateLoginCD() {
+window.updateLoginCD = function() {
   const now = new Date();
   const diff = CD_TARGET - now;
   if(diff <= 0) {
